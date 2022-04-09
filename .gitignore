@@ -1,0 +1,8 @@
+.kile/
+*.aux
+*.idx
+*.ilg
+*.ind
+*.kilepr
+*.log
+*.toc
