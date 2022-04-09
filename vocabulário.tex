@@ -1,0 +1,857 @@
+﻿%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% XeTeX
+%
+% Vocabulário
+% Autor: Luiz Eduardo Roncato Cordeiro
+%
+% Licença:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper,10pt,twoside]{article}
+
+\usepackage{xltxtra}
+\usepackage[brazil]{babel}
+\usepackage{xeCJK}
+\usepackage{xpinyin}
+\usepackage{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{imakeidx}
+\usepackage{ifthen}
+\usepackage{tocloft}
+
+\setlength{\cftbeforesecskip}{2pt}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+\setCJKmainfont{AR PL UKai CN} % melhor fonte que encontrei :-)
+\setCJKsansfont{AR PL UMing CN}
+
+\makeindex[columns=3, title=Índice, intoc]
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.5em}
+
+\xpinyinsetup{ratio={.5},vsep={1.2em},multiple={\color{Sepia}}}
+
+% Headers & footers
+\fancyhead[L]{\textsf{\rightmark}} % Top left header
+\fancyhead[R]{\textsf{\leftmark}} % Top right header
+\renewcommand{\headrulewidth}{1.4pt} % Rule under the header
+\fancyfoot[C]{{\thepage}} % Bottom center footer
+\renewcommand{\footrulewidth}{1.4pt} % Rule under the header
+\pagestyle{fancy} % Use the custom headers and footers throughout the document
+
+\setlength{\headheight}{19.96pt}
+\addtolength{\topmargin}{-0.21pt}
+
+\newcommand{\entry}[3]{%
+\begin{minipage}[b]{\linewidth}
+{\Large{\xpinyin*{#1}}}\textit{(#2)}\newline%
+\textbullet{\small #3}\newline\hspace*{3mm}
+\end{minipage}%
+\markboth{\xpinyin*{#1}}{\xpinyin*{#1}}\index{\xpinyin*{#1}}\par%
+}
+
+\newcommand{\e}[1]{\textcolor{OliveGreen}{#1}}
+
+\title{O Minúsculo 词语 do Curso de Chinês}
+\author{羅學凱}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section*{Termos Gramaticais Chineses}
+\markboth{Termos Gramaticais Chineses}{}
+\addcontentsline{toc}{section}{Termos Gramaticais Chineses}
+
+\begin{tabular}{llll}
+    nome/substantivo       & \textbf{n.}        & \xpinyin*{名词} \\
+    palavra de lugar       & \textbf{p.d.l.}    & \xpinyin*{处所词} \\
+    palavra de localização & \textbf{p.l.}      & \xpinyin*{方位词} \\
+    palavra de tempo       & \textbf{p.t.}      & \xpinyin*{时间词} \\
+    verbo                  & \textbf{v.}        & \xpinyin*{动词} \\
+    verbo direcional       & \textbf{v.d.}      & \xpinyin*{趣向}\hspace{1em}\xpinyin*{动词} \\
+    verbo optativo         & \textbf{v.o.}      & \xpinyin*{能缘}\hspace{1em}\xpinyin*{动词} \\
+    adjetivo               & \textbf{adj.}      & \xpinyin*{形容词} \\
+    numeral                & \textbf{num.}      & \xpinyin*{数词} \\
+    palavra classificadora & \textbf{p.c.}      & \xpinyin*{两量词} \\
+    pronome                & \textbf{pron.}     & \xpinyin*{代词} \\
+    interrogativo          & \textbf{interr.}   & \xpinyin*{疑问词} \\
+    advérbio               & \textbf{adv.}      & \xpinyin*{副词} \\
+    preposição             & \textbf{prep.}     & \xpinyin*{介词} \\
+    conjunção              & \textbf{conj.}     & \xpinyin*{连词} \\
+    partícula              & \textbf{part.}     & \xpinyin*{助词} \\
+    sujeito                & \textbf{suj.}      & \xpinyin*{主语} \\
+    objeto                 & \textbf{obj.}      & \xpinyin*{宾语} \\
+    atributo               & \textbf{atrib.}    & \xpinyin*{定语} \\
+    adjunto adverbial      & \textbf{a.adv.}    & \xpinyin*{状语} \\
+    complemento            & \textbf{compl.}    & \xpinyin*{补语} \\
+    verbo + complemento    & \textbf{v.+compl.} & \xpinyin*{动宾式}\hspace{1em}\xpinyin*{离合词} \\
+\end{tabular}
+
+\newpage
+
+\section*{A}
+\addcontentsline{toc}{section}{A}
+\begin{multicols}{2}
+%%%
+%%% A
+%%%
+\entry{啊}{part.}{Partícula auxiliar}
+\entry{爱}{n./v.}{amor; amar}
+\end{multicols}
+
+\section*{B}
+\addcontentsline{toc}{section}{B}
+\begin{multicols}{2}
+%%%
+%%% B
+%%%
+\entry{八}{num.}{oito}
+\entry{\xpinyin{巴}{Ba1}西}{n.}{Brasil}
+\entry{爸\xpinyin{爸}{ba0}}{n.}{papai; pai}
+\entry{吧}{part.}{partícula usada para sugestão ou suposição}
+\entry{白}{adj.}{branco; branca}
+\entry{白色}{n.}{cor branca}
+\entry{白菜}{n.}{repolho chinês}
+\entry{百}{num.}{centena; cem; cento}
+\entry{半}{num.}{meio; meia}
+\entry{包}{p.c.}{pacote; saco}
+\entry{比萨饼}{n.}{pizza}
+\entry{比赛}{n.}{competição}
+\entry{杯子}{n.}{copo; caneca; xícara; taça}
+\entry{\xpinyin{北}{Bei3}京}{n.}{Beijing(Pequim)}
+\entry{被子}{n.}{colcha}
+\entry{本}{p.c.}{p.c. para livros, dicionários, etc}
+\entry{笔}{n.}{caneta; lápis}
+\entry{比较}{adv.}{comparativamente}
+\entry{别}{adv.}{não}
+\entry{别的}{pron.}{outro; outra}
+\entry{\xpinyin{不}{bu2}错}{adj.}{bom}
+\entry{\xpinyin{不}{bu2}客气}{}{de nada; não há de que}
+\entry{不}{adv.}{não}
+\entry{白天}{p.t.}{dia; de dia}
+\end{multicols}
+
+\section*{C}
+\addcontentsline{toc}{section}{C}
+\begin{multicols}{2}
+%%%
+%%% C
+%%%
+\entry{菜}{n.}{hortaliça; verdura; prato}
+\entry{草\xpinyin{地}{di4}}{n.}{relva}
+\entry{参加}{v.}{participar}
+\entry{磁带}{n.}{cassete}
+\entry{词典}{n.}{dicionário}
+\entry{磁盘}{n.}{disquete}
+\entry{茶}{n.}{chá}
+\entry{\xpinyin{长}{chang2}}{adj.}{comprido}
+\entry{常常}{adv.}{frequentemente}
+\entry{车}{n.}{carro; automóvel}
+\entry{车牌}{n.}{matrícula}
+\entry{橙色}{n.}{cor de laranja}
+\entry{橙汁}{n.}{suco de laranja}
+\entry{吃}{v.}{comer}
+\entry{从}{prep.}{de; desde}
+\entry{出口}{n./v.}{exportação; exportar}
+\entry{出租车}{n.}{táxi}
+\entry{传}{v.}{vestir}
+\entry{春天}{n.}{primavera}
+\entry{衬衫}{n.}{camisa}
+\entry{醋}{n.}{vinagre}
+\end{multicols}
+
+\section*{D}
+\addcontentsline{toc}{section}{D}
+\begin{multicols}{2}
+%%%
+%%% D
+%%%
+\entry{打}{v.}{jogar}
+\entry{打电话}{v.}{ligar; dar um telefonema}
+\entry{打算}{v.}{pretender}
+\entry{大}{adj.}{grande}
+\entry{大概}{adv.}{aproximadamente; por volta de}
+\entry{大海}{n.}{mar}
+\entry{大家}{pron.}{todos; todas}
+\entry{大学}{n.}{universidade}
+\entry{\xpinyin{大}{Da4}洋洲}{n.}{Oceania}
+\entry{带}{v.}{levar}
+\entry{戴}{v.}{usar; vestir}
+\entry{担心}{v.}{preocupar-se}
+\entry{蛋糕}{n.}{bolo}
+\entry{当然}{adv.}{claro; certamente; com certeza}
+\entry{到}{v.}{chegar}
+\entry{得}{v.}{ganhar; obter}
+\entry{\xpinyin{德}{De2}国}{n.}{Alemanha}
+\entry{的}{part.}{partícula utilizada em possessivos; partícula utilizada entre adjetivos e substantivos, opcional se substantivo possui apenas um caracter}
+\entry{地方}{n.}{lugar; local; sítio}
+\entry{等}{v.}{esperar}
+\entry{第}{num.}{prefixo para expressar números ordinais}
+\entry{弟\xpinyin{弟}{di0}}{n.}{irmão mais novo}
+\entry{\xpinyin{地}{di4}图}{n.}{mapa}
+\entry{点（钟）}{p.c.}{hora}
+\entry{（一）\xpinyin{点}{dianr3}\xpinyin{儿}{}}{p.c.}{um pouco}
+\entry{（商）店}{n.}{loja}
+\entry{电话}{n.}{telefone}
+\entry{电脑}{n.}{computador}
+\entry{电视}{n.}{televisor}
+\entry{电影}{n.}{cinema; filme}
+\entry{电子}{n.}{eletrônico; eletrônica)}
+\entry{电子邮件}{n.}{correio eletrônico; e-mail}
+\entry{东}{n.}{leste}
+\entry{\xpinyin{东}{Dong1}方}{n.}{Oriente}
+\entry{东天}{n.}{inverno}
+\entry{东\xpinyin{西}{xi0}}{n.}{coisa}
+\entry{都}{adv.}{todo; toda; todos; todas}
+\entry{读}{v.}{ler}
+\entry{度}{v.}{passar}
+\entry{锻炼}{v.}{fazer exercício físico}
+\entry{对}{adj.}{correto; sim}
+\entry{对不起}{}{desculpar; pedir desculpa; perdão}
+\entry{多}{adj.}{muito; muita; muitos; muitas}
+\entry{多大}{interr.}{quantos anos; que idade}
+\entry{多少}{interr.}{quanto; quanta; quantos; quantas}
+\entry{打算}{v./n.}{pensar; planear; plano}
+\entry{打球}{v.}{jogar à bola; jogar (futebol; basquetebol; handbol; etc)}
+\entry{冰球}{n.}{hóquei em gelo}
+\end{multicols}
+
+\section*{E}
+\addcontentsline{toc}{section}{E}
+\begin{multicols}{2}
+%%%
+%%% E
+%%%
+\entry{\xpinyin{俄}{e2}罗斯}{n.}{Rússia}
+\entry{儿子}{n.}{filho}
+\entry{二}{num.}{dois}
+\end{multicols}
+
+\section*{F}
+\addcontentsline{toc}{section}{F}
+\begin{multicols}{2}
+%%%
+%%% F
+%%%
+\entry{发}{v.}{enviar; mandar}
+\entry{\xpinyin{发}{Fa3}国}{n.}{França}
+\entry{法语}{n.}{françês; língua francesa}
+\entry{法文}{n.}{françês; língua francesa}
+\entry{饭店}{n.}{restaurante; hotel}
+\entry{非常}{adv.}{muito}
+\entry{飞机}{n.}{avião}
+\entry{\xpinyin{非}{Fei1}洲}{n.}{África}
+\entry{分}{p.c.}{centavo}
+\entry{分}{p.c.}{minuto}
+\entry{分钟}{n.}{minuto}
+\entry{分公司}{n.}{sucursal; filial de companhia}
+\entry{份}{p.c.}{dose}
+\entry{风}{n.}{vento}
+\entry{副}{p.c.}{par}
+\end{multicols}
+
+\section*{G}
+\addcontentsline{toc}{section}{G}
+\begin{multicols}{2}
+%%%
+%%% G
+%%%
+\entry{干}{v.}{fazer}
+\entry{高兴}{adj.}{feliz; alegre; contente}
+\entry{哥\xpinyin{哥}{ge0}}{n.}{irmão mais velho}
+\entry{个}{p.c.}{palavra classificadora de uso geral}
+\entry{给}{pre.}{a; para}
+\entry{给}{v.}{dar}
+\entry{跟}{prep.}{com}
+\entry{公司}{n.}{empresa; companhia}
+\entry{工作}{n./v.}{trabalho; trabalhar}
+\entry{狗}{n.}{cão; cachorro}
+\entry{刮（风）}{v.}{soprar (vento)}
+\entry{拐}{v.}{virar}
+\entry{光盘}{n.}{disco compacto}
+\entry{贵姓}{interr.}{nome}
+\entry{国}{n.}{país}
+\entry{果酱}{n.}{compota ou doce (de frutas)}
+\entry{过年}{v.}{festejar o Ano Novo Chinês}
+\entry{贵}{adj.}{caro}
+\entry{公克}{n.}{trabalho escolar; trabalho de casa}
+\entry{橄榄球}{n.}{rúgbi}
+\end{multicols}
+
+\section*{H}
+\addcontentsline{toc}{section}{H}
+\begin{multicols}{2}
+%%%
+%%% H
+%%%
+\entry{还}{adv.}{ainda; também}
+\entry{还是}{conj.}{ou, somente para frases interrogativas}
+\entry{孩子}{n.}{criança; filho; filha}
+\entry{海边}{n.}{praia}
+\entry{\xpinyin{汉}{Han2}国}{n.}{Coréia do Sul}
+\entry{汗葡词典}{n.}{dicionário chinês-português}
+\entry{汉语}{n.}{chinês; língua chinesa; mandarim}
+\entry{好}{adj.}{bom; boa; bem}
+\entry{号}{n.}{dia; número}
+\entry{号码}{n.}{número}
+\entry{喝}{v.}{beber}
+\entry{河}{n.}{rio}
+\entry{和}{conj.}{e, somente para palavras}
+\entry{盒}{p.c.}{caixa}
+\entry{黑板}{n.}{quadro preto}
+\entry{黑}{n.}{preto; preta}
+\entry{黑色}{n.}{cor preta}
+\entry{很}{adv.}{muito; mui}
+\entry{红}{adj.}{vermelho; vermelha}
+\entry{红色}{n.}{cor vermelha}
+\entry{后面}{p.l.}{atrás}
+\entry{后天}{p.t.}{depois de amanhã}
+\entry{华裔}{n.}{descendente de chinês}
+\entry{欢迎}{v.}{depois de amanhã}
+\entry{黄}{adj.}{amarelo; amarela}
+\entry{黄色}{n.}{cor amarela}
+\entry{黄油}{n.}{manteiga}
+\entry{回}{v.}{voltar; retornar}
+\entry{会}{v.}{saber; poder}
+\entry{好吃}{adj.}{delicioso; saboroso}
+\entry{红烧}{n.}{guisado em molho de soja}
+\end{multicols}
+
+%\section*{I}
+%\addcontentsline{toc}{section}{I}
+%\begin{multicols}{2}
+%%%
+%%% I
+%%%
+%\end{multicols}
+
+\section*{J}
+\addcontentsline{toc}{section}{J}
+\begin{multicols}{2}
+%%%
+%%% J
+%%%
+\entry{鸡蛋}{n.}{ovo}
+\entry{几}{interr.}{quantos; quantas; alguns; algumas}
+\entry{家}{n.}{família; casa}
+\entry{家里}{p.d.l.}{em casa}
+\entry{\xpinyin{加}{Jia1}拿大}{n.}{Canadá}
+\entry{检查}{v.}{examinar}
+\entry{件}{p.c.}{palavra classificadora para roupas}
+\entry{\xpinyin{教}{jiao1}}{v.}{ensinar}
+\entry{饺子}{n.}{jiaozi (uma espécie de ravióli)}
+\entry{叫}{v.}{chamar-se; chamar}
+\entry{教练}{n.}{treinador}
+\entry{教室}{n.}{sala de aula}
+\entry{节日}{n.}{festa}
+\entry{姐\xpinyin{姐}{jie0}}{n.}{irmã mais velha}
+\entry{今天}{p.t.}{hoje}
+\entry{进}{v.}{entrar}
+\entry{进出口}{n.}{importação e exportação}
+\entry{进口}{n./v.}{importação; importar}
+\entry{经常}{adv.}{frequentemente}
+\entry{九}{num.}{nove}
+\entry{举行}{v.}{realizar; ter lugar}
+\entry{觉得}{v.}{achar; sentir}
+\entry{角（毛）}{p.c.}{1 mao = 10 centavos}
+\entry{鸡}{n.}{galo; galinha}
+\entry{酒}{n.}{bebida alcoólica}
+\entry{见面}{v.}{encontar-se com alguém}
+\entry{接}{v.}{ir buscar (alguém); ir ao encontro de (alguém)}
+\end{multicols}
+
+\section*{K}
+\addcontentsline{toc}{section}{K}
+\begin{multicols}{2}
+%%%
+%%% K
+%%%
+\entry{咖啡}{n.}{café}
+\entry{咖啡馆}{n.}{café}
+\entry{开}{v.}{abrir; dirigir}
+\entry{开车}{v.}{conduzir; dirigir}
+\entry{看}{v.}{olhar; ver; assistir}
+\entry{看见}{v.}{encontrar; enxergar; ver}
+\entry{颗}{p.c.}{palavra classificadora para grãos e coisas semelhantes}
+\entry{可爱}{adj.}{querido(a); fofo(a)}
+\entry{可口可乐}{n.}{coca-cola}
+\entry{可能}{adv.}{provavelmente}
+\entry{可是}{conj.}{mas}
+\entry{可以}{v.o.}{poder}
+\entry{刻（钟）}{n.}{um quarto (de hora)}
+\entry{口}{p.c.}{palavra classificadora para membros da família}
+\entry{口香糖}{n.}{pastilha elástica; chiclete}
+\entry{块(元）}{p.c.}{unidade de Reminbi}
+\entry{快乐}{adj.}{feliz}
+\entry{裤子}{n.}{calças}
+\entry{\xpinyin{空}{kongr4}\xpinyin{儿}{}}{n.}{tempo livre}
+\end{multicols}
+
+\section*{L}
+\addcontentsline{toc}{section}{L}
+\begin{multicols}{2}
+%%%
+%%% L
+%%%
+\entry{拉拉队}{n.}{claque}
+\entry{来}{v.}{vir}
+\entry{蓝}{adj.}{azul}
+\entry{蓝色}{n.}{cor azul}
+\entry{篮球}{n.}{basquetebol}
+\entry{老板}{n.}{patrão; patroa}
+\entry{老师}{n.}{professor; professora}
+\entry{了}{part.}{partícula para denotar mudança}
+\entry{冷}{adj.}{frio}
+\entry{里}{p.l.}{em; dentro; interior}
+\entry{\xpinyin{里}{Li3}斯本}{n.}{Lisboa}
+\entry{礼物}{n.}{presente}
+\entry{凉快}{adj.}{fresco}
+\entry{两}{num.}{dois; duas (sempre usado antes de palavra classificadora)}
+\entry{辆}{p.c.}{palavra classificadora para automóveis}
+\entry{邻居}{n.}{vizinho}
+\entry{零}{num.}{zero}
+\entry{六}{num.}{seis}
+\entry{龙}{n.}{dragão}
+\entry{龙山}{n.}{Longshan}
+\entry{路口}{n.}{cruzamento}
+\entry{录像带}{n.}{video-cassete}
+\entry{录像机}{n.}{gravador de vídeo}
+\entry{录音机}{n.}{gravador}
+\entry{绿}{adj.}{verde}
+\entry{绿色}{n.}{cor verde}
+\entry{辣}{adj.}{picante}
+\end{multicols}
+
+\section*{M}
+\addcontentsline{toc}{section}{M}
+\begin{multicols}{2}
+%%%
+%%% M
+%%%
+\entry{妈\xpinyin{妈}{ma0}}{n.}{mamãe; mãe}
+\entry{马上}{adv.}{já; imediatamente}
+\entry{吗}{part.}{partícula interrogativa sim-não}
+\entry{买}{v.}{comprar}
+\entry{买东\xpinyin{西}{xi0}}{v.}{fazer compras}
+\entry{卖}{v.}{vender}
+\entry{忙}{adj.}{ocupado; ocupada}
+\entry{猫}{n.}{gato}
+\entry{没关\xpinyin{系}{xi0}}{}{não ter problema; não ter importância; não fazer mal}
+\entry{\xpinyin{美}{Mei2}国}{n.}{Estados Unidos da América}
+\entry{没有}{v.}{não há; não tem}
+\entry{每次}{}{todas as vezes; sempre}
+\entry{每天}{}{todos os dias}
+\entry{\xpinyin{美}{Mei3}洲}{n.}{América}
+\entry{妹\xpinyin{妹}{mei0}}{n.}{irmã mais nova}
+\entry{们}{sufixo}{sufixo para plural}
+\entry{米饭}{n.}{arroz cozido}
+\entry{面包}{n.}{pão}
+\entry{明天}{p.t.}{amanhã}
+\entry{名字}{n.}{nome}
+\entry{明恋}{adj.}{claro; clara}
+\entry{明年}{n.}{próximo ano}
+\entry{墨镜}{n.}{óculos escuros}
+\end{multicols}
+
+\section*{N}
+\addcontentsline{toc}{section}{N}
+\begin{multicols}{2}
+%%%
+%%% N
+%%%
+\entry{哪}{interr.}{que, qual}
+\entry{\xpinyin{哪}{nar3}\xpinyin{儿}{}}{interr.}{onde}
+\entry{哪国人}{interr.}{de qual país?}
+\entry{哪里}{interr.}{onde}
+\entry{那}{conj.}{nessa situação; nesse caso}
+\entry{那}{pron.}{aquele}
+\entry{\xpinyin{那}{nar4}\xpinyin{儿}{}}{pron.}{lá; ali}
+\entry{那里}{pron.}{lá; ali}
+\entry{奶\xpinyin{奶}{nai}}{n.}{avó(paterna)}
+\entry{男}{adj.}{masculino}
+\entry{男孩儿}{n.}{menino; rapaz}
+\entry{呢}{interr.}{partícula interrogativa enfática}
+\entry{能}{v.}{poder}
+\entry{你}{pron.}{você (informal); tu}
+\entry{你的}{pron.}{seu; sua}
+\entry{你们}{pron.}{vocês (informal); vós}
+\entry{你们的}{pron.}{seus; suas}
+\entry{年}{p.t.}{ano}
+\entry{年纪}{n.}{idade}
+\entry{年货}{n.}{compras especiais para o Ano Novo Chinês}
+\entry{您}{pron.}{você (formal); tu}
+\entry{牛奶}{n.}{leite}
+\entry{女}{adj.}{feminino}
+\entry{女儿}{n.}{filha}
+\entry{女孩儿}{n.}{menina; rapariga}
+\entry{牛}{n.}{boi; vaca}
+\entry{牛肉}{n.}{carne de vaca}
+\end{multicols}
+
+\section*{O}
+\addcontentsline{toc}{section}{O}
+\begin{multicols}{2}
+%%%
+%%% O
+%%%
+\entry{\xpinyin{欧}{Ou1}洲}{n.}{Europa}
+\end{multicols}
+
+\section*{P}
+\addcontentsline{toc}{section}{P}
+\begin{multicols}{2}
+%%%
+%%% P
+%%%
+\entry{爬}{v.}{escalar; trepar}
+\entry{排球}{n.}{voleibol}
+\entry{盘}{p.c.}{p.c. para cassete, video-cassete}
+\entry{跑步}{v.}{correr}
+\entry{配}{v.}{combinar}
+\entry{朋\xpinyin{友}{you0}}{n.}{amigo; amiga; namorado; namorada}
+\entry{漂\xpinyin{亮}{liang0}}{adj.}{linda; bonito/lindo para objetos inanimados}
+\entry{瓶}{n.}{garrafa}
+\entry{瓶}{p.c.}{palavra classificadora, garrafa}
+\entry{苹果}{n.}{maçã}
+oku\entry{葡汉词典}{n.}{dicionário português-chinês}
+\entry{\xpinyin{葡}{Pu2}萄牙}{n.}{Portugal}
+\entry{葡萄牙语}{n.}{português; língua portuguesa}
+\entry{葡语}{n.}{português; língua portuguesa}
+\entry{葡文}{n.}{português; língua portuguesa}
+\entry{普通话}{n.}{mandarim (lit. ``linguagem comum'')}
+\entry{便宜}{adj.}{barato}
+\entry{啤酒}{n.}{cerveja}
+\entry{乒乓球}{n.}{tênis de mesa; ping-pong}
+\end{multicols}
+
+\section*{Q}
+\addcontentsline{toc}{section}{Q}
+\begin{multicols}{2}
+%%%
+%%% Q
+%%%
+\entry{七}{num.}{sete}
+\entry{起床}{v.}{levantar-se}
+\entry{千}{num.}{mil}
+\entry{钱}{n.}{dinheiro}
+\entry{钱包}{n.}{carteira}
+\entry{前面}{p.l.}{em frente; na frente}
+\entry{巧克力}{n.}{chocolate}
+\entry{请}{v.}{fazer o favor}
+\entry{请问}{}{Desculpe...(para perguntar por qualquer coisa)}
+\entry{秋天}{s.}{outono}
+\entry{去}{v.}{ir}
+\entry{去年}{n.}{ano passado}
+\entry{裙子}{n.}{saia}
+\entry{球}{n.}{bola (futebol; basquetebol; handbol; etc)}
+\entry{前天}{p.t.}{anteontem}
+\entry{曲棍球}{n.}{hóquei em campo}
+\end{multicols}
+
+\section*{R}
+\addcontentsline{toc}{section}{R}
+\begin{multicols}{2}
+%%%
+%%% R
+%%%
+\entry{让}{v.}{deixar; permitir}
+\entry{热}{adj.}{calor; quente}
+\entry{热\xpinyin{闹}{nao0}}{adj.}{animado}
+\entry{人}{n.}{pessoa}
+\entry{认识}{v.}{conhecer}
+\entry{\xpinyin{日}{Ri4}本}{n.}{Japão}
+\entry{如果}{conj.}{se; caso}
+\entry{肉}{n.}{carne}
+\entry{人民币}{n.}{nome da moeda chinesa}
+\end{multicols}
+
+\section*{S}
+\addcontentsline{toc}{section}{S}
+\begin{multicols}{2}
+%%%
+%%% S
+%%%
+\entry{三}{num.}{três}
+\entry{山}{n.}{montanha; monte}
+\entry{山区}{n.}{área montanhosa}
+\entry{商店}{n.}{loja}
+\entry{上}{p.l.}{acima; em cima; subir}
+\entry{\xpinyin{上}{Shang4}海}{}{Shangai (Xangai)}
+\entry{上课}{}{ter aulas}
+\entry{上面}{n.}{parte de cima}
+\entry{上午}{p.t.}{manhã; de manhã; período antes do meio-dia}
+\entry{少}{adj.}{pouco; poucos}
+\entry{谁}{interr.}{quem}
+\entry{身体}{n.}{corpo}
+\entry{什么}{interr.}{que; o que}
+\entry{什么时\xpinyin{候}{hou}}{interr.}{quando; a que horas}
+\entry{生\xpinyin{日}{ri0}}{n.}{aniversário}
+\entry{\xpinyin{圣}{Sheng4}诞节}{n.}{Natal}
+\entry{十}{num.}{dez; dezena}
+\entry{时候}{interr.}{quando}
+\entry{时间}{n.}{tempo}
+\entry{事}{n.}{assunto}
+\entry{是}{v.}{ser}
+\entry{是的}{}{sim}
+\entry{收到}{}{receber}
+\entry{书}{n.}{livro}
+\entry{舒\xpinyin{服}{fu0}}{adj.}{bem disposto; (sentir-se) bem}
+\entry{暑假}{n.}{férias de verão}
+\entry{树木}{n.}{árvore}
+\entry{\xpinyin{谁}{shui2}}{pron.}{quem}
+\entry{睡觉}{v.}{ir para a cama; dormir}
+\entry{水}{n.}{água}
+\entry{水果}{n.}{fruta}
+\entry{睡\xpinyin{觉}{jiao4}}{v.}{dormir}
+\entry{说}{v.}{falar; dizer}
+\entry{四}{num.}{quatro}
+\entry{送}{v.}{distribuir; entregar}
+\entry{岁}{n.}{anos de idade}
+\entry{试}{v.}{experimentar; provar}
+\entry{酸}{adj.}{ácido; ácida; avinagrado; avinagrada}
+\entry{酸辣汤}{n.}{sopa avinagrada e picante}
+\entry{睡觉（饺子）}{n.}{raviólis chineses}
+\entry{时\xpinyin{候}{hou0}}{n.}{horas; tempo}
+\entry{上网}{v.}{acessar a Internet}
+\end{multicols}
+
+\section*{T}
+\addcontentsline{toc}{section}{T}
+\begin{multicols}{2}
+%%%
+%%% T
+%%%
+\entry{它}{pron.}{ele; ela}
+\entry{她}{pron.}{ela}
+\entry{他}{pron.}{ele}
+\entry{她的}{pron.}{dela}
+\entry{他的}{pron.}{dele}
+\entry{它们}{pron.}{eles; elas}
+\entry{她们}{pron.}{elas}
+\entry{他们}{pron.}{eles}
+\entry{她们的}{pron.}{delas}
+\entry{他们的}{pron.}{deles}
+\entry{台}{p.c.}{p.c. para computador, gravador, gravador de vídeo, etc}
+\entry{太}{adv.}{demais; muito}
+\entry{汤}{n.}{sopa; caldo}
+\entry{糖}{n.}{açúcar}
+\entry{太太}{n.}{esposa; mulher}
+\entry{天气}{n.}{clima; tempo}
+\entry{特别}{adv.}{especialmente}
+\entry{疼}{v.}{doer}
+\entry{踢}{v.}{jogar; dar pontapés em}
+\entry{天}{n.}{dia}
+\entry{天气}{n.}{tempo}
+\entry{听}{v.}{ouvir; escutar}
+\entry{同学}{n.}{aluno; colega de classe}
+\entry{头}{n.}{cabeça}
+\entry{头发}{n.}{cabelo}
+\entry{腿}{n.}{perna}
+\entry{条}{p.c.}{palavra classificadora para calças, saia, rio, peixe, etc}
+\entry{糖醋鱼}{n.}{peixe guisado em molho agridoce}
+\entry{甜}{adj.}{doce}
+\entry{踢}{v.}{jogar; pontapear}
+\end{multicols}
+
+%\section*{U}
+%\addcontentsline{toc}{section}{U}
+%\begin{multicols}{2}
+%%%
+%%% U
+%%%
+%\end{multicols}
+
+%\section*{V}
+%\addcontentsline{toc}{section}{V}
+%\begin{multicols}{2}
+%%%
+%%% V
+%%%
+%\end{multicols}
+
+\section*{W}
+\addcontentsline{toc}{section}{W}
+\begin{multicols}{2}
+%%%
+%%% W
+%%%
+\entry{外\xpinyin{面}{mian0}}{n.}{fora; exterior}
+\entry{玩}{v.}{brincar}
+\entry{\xpinyin{玩}{wanr2}\xpinyin{儿}{}}{v.}{divertir-se}
+\entry{碗}{p.c.}{palavra classificadora, tigela}
+\entry{晚上}{p.t.}{noite; à noite}
+\entry{万}{num.}{dez mil}
+\entry{网球}{n.}{tênis (esporte)}
+\entry{为}{prep.}{para}
+\entry{为什么}{interr.}{por que?}
+\entry{喂(\xpinyin{喂}{wei2})}{interjeição}{alô, chamar atenção (alô, telefone)}
+\entry{问}{v.}{perguntar}
+\entry{问题}{n.}{problema}
+\entry{我}{pron.}{eu}
+\entry{我的}{pron.}{meu(s); minha(s)}
+\entry{我们}{pron.}{nós}
+\entry{我们的}{pron.}{nosso(s); nossa(s)}
+\entry{五}{num.}{cinco}
+\entry{位}{p.c.}{palavra classificadora para pessoas (com cortesia)}
+\end{multicols}
+
+\section*{X}
+\addcontentsline{toc}{section}{X}
+\begin{multicols}{2}
+%%%
+%%% X
+%%%
+\entry{西部}{n.}{oeste}
+\entry{\xpinyin{西}{Xi1}方}{n.}{Ocidente}
+\entry{西语}{n.}{espanhol; língua espanhola}
+\entry{西文}{n.}{espanhol; língua espanhola}
+\entry{喜欢}{v.}{gostar}
+\entry{系}{n.}{faculdade da universidade}
+\entry{下}{p.l.}{abaixo; em baixo}
+\entry{下面}{p.l.}{parte de baixo}
+\entry{夏天}{n.}{verão}
+\entry{下午}{p.t.}{tarde; período logo após o meio-dia}
+\entry{下雨}{v.}{chover}
+\entry{先\xpinyin{生}{sheng0}}{n.}{senhor; marido}
+\entry{先生}{pron.}{senhor(a)}
+\entry{现在}{p.t.}{agora}
+\entry{想}{v.}{pensar; querer; achar}
+\entry{向}{prep.}{para}
+\entry{小}{adj.}{pequeno; pequena}
+\entry{小i\xpinyin{姐}{jie0}}{n.}{senhorita; empregada}
+\entry{小学}{n.}{escola ensino fundamental}
+\entry{校长}{n.}{diretor de escola; reitor (universidade)}
+\entry{些}{adv.}{uns; umas; alguns; algumas}
+\entry{写}{v.}{escrever}
+\entry{谢\xpinyin{谢}{xie}}{v.}{agradecer; obrigado; obrigada}
+\entry{新年}{n.}{Ano Novo}
+\entry{星期}{n.}{semana}
+\entry{行}{v.}{claro que sim; de acordo; está bem}
+\entry{姓}{v./n.}{ter o sobrenome; sobrenome}
+\entry{休\xpinyin{息}{xi0}}{v.}{descansar}
+\entry{学}{v.}{estudar}
+\entry{学\xpinyin{生}{sheng0}}{n.}{estudante; aluno; aluna}
+\entry{学习}{v.}{estudar; aprender}
+\entry{学校}{n.}{escola; instituição de ensino}
+\entry{学院}{n.}{instituto}
+\entry{咸}{adj.}{salgado; salgada}
+\entry{\xpinyin{事}{shir4}\xpinyin{儿}{}}{n.}{afazeres; assunto; coisa; matéria}
+\end{multicols}
+
+\section*{Y}
+\addcontentsline{toc}{section}{Y}
+\begin{multicols}{2}
+%%%
+%%% Y
+%%%
+\entry{压岁钱}{n.}{dinheiro dado às crianças como presente no Ano Novo Chinês}
+\entry{牙}{n.}{dente}
+\entry{\xpinyin{亚}{Ya4}洲}{n.}{Ásia}
+\entry{颜色}{n.}{cor}
+\entry{样子}{n.}{aparência; forma}
+\entry{药}{n.}{remédio}
+\entry{要}{v./v.o.}{querer; precisar}
+\entry{要是}{conj.}{se; caso}
+\entry{爷\xpinyin{爷}{ye0}}{n.}{avô (paterno)}
+\entry{也}{adv.}{também}
+\entry{一}{num.}{um; uma}
+\entry{衣\xpinyin{服}{fu0}}{n.}{roupa; vestiário}
+\entry{医生}{n.}{médico}
+\entry{\xpinyin{一}{yi2}共}{adv.}{tudo; no local}
+\entry{\xpinyin{一}{yi2}下}{}{rapidamente; em um curto tempo}
+\entry{以后}{n.}{depois}
+\entry{\xpinyin{一}{yi4}起}{adv.}{juntamente; em conjunto}
+\entry{亿}{num.}{cem milhões}
+\entry{意思}{n.}{interesse}
+\entry{因为}{conj.}{porque}
+\entry{音\xpinyin{乐}{yue4}}{n.}{música}
+\entry{饮料}{n.}{bebida}
+\entry{应该}{v.}{dever}
+\entry{\xpinyin{英}{Ying1}国}{n.}{Reino Unido}
+\entry{英语}{n.}{chinês; língua chinesa}
+\entry{英文}{n.}{inglês; língua inglesa}
+\entry{邮件}{n.}{correio}
+\entry{游泳}{v.}{nadar}
+\entry{游泳池}{n.}{piscina}
+\entry{有}{v.}{ter; haver}
+\entry{有的}{pron.}{algum; alguma; alguns; algumas}
+\entry{有\xpinyin{点}{dianr3}\xpinyin{儿}{}}{adv.}{um pouco}
+\entry{有意思}{adj.}{interessante}
+\entry{有用}{adj.}{útil}
+\entry{右}{n.}{direita}
+\entry{右\xpinyin{边}{bian}}{n.}{direita}
+\entry{用}{v.}{usar}
+\entry{雨伞}{n.}{guarda-chuva}
+\entry{雨衣}{n.}{impermeável}
+\entry{语言实验室}{n.}{laboratório de línguas}
+\entry{元}{p.c.}{palavra classificadora, unidade monetária da China}
+\entry{月}{n.}{mês}
+\entry{运动}{n.}{esporte; desporto}
+\entry{运动场}{n.}{campo desportivo; campo de jogos}
+\entry{运动会}{n.}{jogos desportivos}
+\entry{运动员}{n.}{jogador; jogadora; atleta}
+\entry{鱼}{n.}{peixe}
+\entry{颜色}{n.}{cor}
+\entry{星期六}{p.t.}{sábado}
+\entry{星期}{n.}{semana}
+\entry{约会}{n.}{compromisso; encontro marcado}
+\entry{羽毛球}{n.}{badminton}
+\entry{夜里}{p.t.}{noite}
+\end{multicols}
+
+\section*{Z}
+\addcontentsline{toc}{section}{Z}
+\begin{multicols}{2}
+%%%
+%%% Z
+%%%
+\entry{在}{v.}{estar; ficar}
+\entry{在}{prep.}{em}
+\entry{再见}{v.}{adeus; até à vista; até à próxima; até logo}
+\entry{糟糕}{adj.}{mau}
+\entry{早上}{p.t.}{manhã cedo; manhãzinha}
+\entry{怎么}{interr.}{como}
+\entry{怎么样}{interr.}{como; que tal}
+\entry{张}{p.c.}{palavra classificadora para folha de papéis, mapa, etc}
+\entry{找}{v.}{procurar; dar troco}
+\entry{这}{pron.}{este; esta; isto}
+\entry{\xpinyin{这}{zher4}\xpinyin{儿}{}}{pron.}{aqui}
+\entry{这里}{pron.}{aqui}
+\entry{真}{adv.}{que...tão...!; realmente}
+\entry{支}{p.c.}{p.c. para caneta, lápis, etc}
+\entry{知\xpinyin{道}{dao0}}{v.}{conhecer; saber}
+\entry{职员}{n.}{empregado(a)}
+\entry{只}{adv.}{apenas; só}
+\entry{\xpinyin{中}{Zhong1}国}{n.}{China}
+\entry{中文}{n.}{chinês; língua chinesa}
+\entry{中学}{n.}{escola ensino médio}
+\entry{中学生}{n.}{estudante da escola ensino médio}
+\entry{种}{p.c.}{palavra classificadora, tipo}
+\entry{住}{v.}{morar}
+\entry{祝}{v.}{desejar}
+\entry{紫色}{n.}{roxo}
+\entry{走}{v.}{andar; ir}
+\entry{足球}{n.}{futebol}
+\entry{最}{adv.}{o mais... de...; a mais... de... (grau superlativo relativo de superioridade)}
+\entry{最近}{adv.}{ultimamente; recentemente}
+\entry{昨天}{p.t.}{ontem}
+\entry{左}{n.}{esquerda}
+\entry{坐}{v.}{sentar-se}
+\entry{猪}{n.}{porco; porca}
+\entry{做}{v.}{fazer}
+\end{multicols}
+
+\printindex
+
+\end{document}
