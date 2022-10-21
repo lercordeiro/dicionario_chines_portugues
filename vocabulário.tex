@@ -1,4 +1,5 @@
-﻿%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+﻿
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % XeTeX
 %
 % Vocabulário
@@ -28,10 +29,8 @@
 \setlength{\cftbeforesecskip}{2pt}
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 
-%\setCJKmainfont{AR PL UKai CN}
-%\setCJKsansfont{AR PL UMing CN}
-\setCJKmainfont{FandolKai-Regular}
-\setCJKsansfont{FandolSong-Regular}
+\setCJKmainfont{AR PL UKai CN}
+\setCJKsansfont{AR PL UMing CN}
 
 \makeindex[columns=3, title=Índice, intoc]
 
@@ -51,13 +50,6 @@
 \setlength{\headheight}{19.96pt}
 \addtolength{\topmargin}{-0.21pt}
 
-% \newcommand{\entry}[3]{%
-% \begin{minipage}[b]{\linewidth}
-% {\Large{\xpinyin*{#1}}}\textit{(#2)}\newline%
-% \textbullet{\small #3}\newline\hspace*{3mm}
-% \end{minipage}%
-% \markboth{\xpinyin*{#1}}{\xpinyin*{#1}}\index{\xpinyin*{#1}}\par%
-% }
 \NewDocumentCommand\mylist{>{\SplitList{|}}m}
 {
     \begin{itemize}
