@@ -9,7 +9,8 @@
 % CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[a4paper,10pt,twoside]{article}
+%\documentclass[a4paper,10pt,twoside,openany,draft]{memoir}
+\documentclass[a4paper,10pt,twoside,openany]{memoir}
 
 \usepackage{xltxtra}
 \usepackage[brazil]{babel}
@@ -26,8 +27,8 @@
 \usepackage{tocloft}
 \usepackage{xparse}
 
-\setlength{\cftbeforesecskip}{2pt}
-\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+%\setlength{\cftbeforesecskip}{2pt}
+%\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 
 \setCJKmainfont{AR PL UKai CN}
 \setCJKsansfont{AR PL UMing CN}
@@ -59,8 +60,8 @@
 \newcommand\insertitem[1]{\item #1}
 
 \newcommand{\entry}[4]{%
-\begin{minipage}[b]{\linewidth}
-{\Large \textbf{#1}}%
+\begin{minipage}[t][][t]{\linewidth}
+{\Huge \textbf{#1}}\\[1ex]%
 \if\relax\detokenize{#2}\relax\else\ \textit{(#2)}\fi\ %
 «~\pinyin{#3}~»
 \small \mylist{#4}
@@ -70,20 +71,59 @@
 
 \newcommand{\e}[1]{\textcolor{OliveGreen}{#1}}
 
-\title{O Minúsculo 词语 do Curso de Chinês}
-\author{羅學凱}
-\date{\today}
+\makeatletter
+\let\old@makechapterhead\@makechapterhead
+% Taken from http://mirrors.ctan.org/macros/latex/unpacked/report.cls
+\def\fake@makechapterhead#1{%
+  \vspace*{50\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+        \huge\bfseries \strut%\@chapapp\space \thechapter
+        \par\nobreak
+        \vskip 20\p@
+    \fi
+    \interlinepenalty\@M
+    \Huge \bfseries #1\par\nobreak
+    \vskip 40\p@
+  }
+  \markboth{#1}{\thechapter}
+}
+\newcommand{\newchapterhead}{\let\@makechapterhead\fake@makechapterhead}
+\newcommand{\restorechapterhead}{\let\@makechapterhead\old@makechapterhead}
+\makeatother
+
+%%%
+%%% Documento começa aqui!
+%%%
 
 \begin{document}
-\maketitle
+
+\newchapterhead
+
+\begin{titlingpage} % Suppresses displaying the page number on the title page and the subsequent page counts as page 1
+	
+	\raggedleft % Right align the title page
+	
+	\rule{1pt}{\textheight} % Vertical line
+	\hspace{0.05\textwidth} % Whitespace between the vertical line and title page text
+	\parbox[b]{0.75\textwidth}{ % Paragraph box for holding the title page text, adjust the width to move the title page left or right on the page
+		
+		{\Huge\bfseries 汉葡词典}\\[2\baselineskip] % Title
+		{\large\textit{O Minúsculo Dicionário do Curso de Chinês}}\\[4\baselineskip] % Subtitle or further description
+		{\Large\textsc{罗学凯}} % Author name, lower case for consistent small caps
+		
+		\vspace{0.5\textheight} % Whitespace between the title block and the publisher
+		
+		{\noindent \today}\\[\baselineskip] % Publisher and logo
+	}
+
+\end{titlingpage}
 
 \tableofcontents
 
 \newpage
 
-\section*{Termos Gramaticais Chineses}
-\markboth{Termos Gramaticais Chineses}{}
-\addcontentsline{toc}{section}{Termos Gramaticais Chineses}
+\chapter{Termos Gramaticais Chineses}
 
 \begin{tabular}{llll}
     nome/substantivo       & \textbf{n.}        & \xpinyin*{名词} \\
@@ -95,7 +135,7 @@
     verbo optativo         & \textbf{v.o.}      & \xpinyin*{能缘}\hspace{1em}\xpinyin*{动词} \\
     adjetivo               & \textbf{adj.}      & \xpinyin*{形容词} \\
     numeral                & \textbf{num.}      & \xpinyin*{数词} \\
-    & \textbf{p.c.}      & \xpinyin*{两量词} \\
+    palavra classificadora  & \textbf{p.c.}      & \xpinyin*{两量词} \\
     pronome                & \textbf{pron.}     & \xpinyin*{代词} \\
     interrogativo          & \textbf{interr.}   & \xpinyin*{疑问词} \\
     advérbio               & \textbf{adv.}      & \xpinyin*{副词} \\
@@ -111,6 +151,8 @@
 \end{tabular}
 
 \newpage
+
+\chapter{汉葡词典}
 
 \include{entries/A.tex}
 \include{entries/B.tex}
