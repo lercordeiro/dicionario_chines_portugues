@@ -9,8 +9,8 @@
 % CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\documentclass[a4paper,10pt,twoside,openany,draft]{memoir}
-\documentclass[a4paper,10pt,twoside,openany]{memoir}
+%\documentclass[a4paper,12pt,twoside,openany,draft]{memoir}
+\documentclass[a4paper,12pt,twoside,openany]{memoir}
 
 \usepackage{xltxtra}
 \usepackage[brazil]{babel}
@@ -37,6 +37,7 @@
 
 \setlength{\parindent}{0em}
 \setlength{\parskip}{0.5em}
+\setlength{\columnseprule}{0.5pt}
 
 \xpinyinsetup{ratio={.5},vsep={1.2em},multiple={\color{Sepia}}}
 
@@ -48,25 +49,25 @@
 \renewcommand{\footrulewidth}{1.4pt} % Rule under the header
 \pagestyle{fancy} % Use the custom headers and footers throughout the document
 
-\setlength{\headheight}{19.96pt}
-\addtolength{\topmargin}{-0.21pt}
+\setlength{\headheight}{16pt}
+\addtolength{\topmargin}{-0.5pt}
 
 \NewDocumentCommand\mylist{>{\SplitList{|}}m}
 {
-    \begin{itemize}
-        \ProcessList{#1}{ \insertitem }
-    \end{itemize}
+\begin{itemize}
+  \ProcessList{#1}{ \insertitem }
+\end{itemize}
 }
 \newcommand\insertitem[1]{\item #1}
 
 \newcommand{\entry}[4]{%
 \begin{minipage}[t][][t]{\linewidth}
-{\Huge \textbf{#1}}\\[1ex]%
+{\Huge \textbf{#1}}\\%
 \if\relax\detokenize{#2}\relax\else\ \textit{(#2)}\fi\ %
-«~\pinyin{#3}~»
+«\pinyin{#3}»
 \small \mylist{#4}
 \end{minipage}
-\markboth{\xpinyin*{#1}}{\xpinyin*{#1}}\index{\xpinyin*{#1}}\par
+\markboth{#1«\pinyin{#3}»}{#1«\pinyin{#3}»}\index{#1«\pinyin{#3}»}\par
 }
 
 \newcommand{\e}[1]{\textcolor{OliveGreen}{#1}}
@@ -125,29 +126,29 @@
 
 \chapter{Termos Gramaticais Chineses}
 
-\begin{tabular}{llll}
-    nome/substantivo       & \textbf{n.}        & \xpinyin*{名词} \\
-    palavra de lugar       & \textbf{p.d.l.}    & \xpinyin*{处所词} \\
-    palavra de localização & \textbf{p.l.}      & \xpinyin*{方位词} \\
-    palavra de tempo       & \textbf{p.t.}      & \xpinyin*{时间词} \\
-    verbo                  & \textbf{v.}        & \xpinyin*{动词} \\
-    verbo direcional       & \textbf{v.d.}      & \xpinyin*{趣向}\hspace{1em}\xpinyin*{动词} \\
-    verbo optativo         & \textbf{v.o.}      & \xpinyin*{能缘}\hspace{1em}\xpinyin*{动词} \\
-    adjetivo               & \textbf{adj.}      & \xpinyin*{形容词} \\
-    numeral                & \textbf{num.}      & \xpinyin*{数词} \\
-    palavra classificadora  & \textbf{p.c.}      & \xpinyin*{两量词} \\
-    pronome                & \textbf{pron.}     & \xpinyin*{代词} \\
-    interrogativo          & \textbf{interr.}   & \xpinyin*{疑问词} \\
-    advérbio               & \textbf{adv.}      & \xpinyin*{副词} \\
-    preposição             & \textbf{prep.}     & \xpinyin*{介词} \\
-    conjunção              & \textbf{conj.}     & \xpinyin*{连词} \\
-    partícula              & \textbf{part.}     & \xpinyin*{助词} \\
-    sujeito                & \textbf{suj.}      & \xpinyin*{主语} \\
-    objeto                 & \textbf{obj.}      & \xpinyin*{宾语} \\
-    atributo               & \textbf{atrib.}    & \xpinyin*{定语} \\
-    adjunto adverbial      & \textbf{a.adv.}    & \xpinyin*{状语} \\
-    complemento            & \textbf{compl.}    & \xpinyin*{补语} \\
-    verbo + complemento    & \textbf{v.+compl.} & \xpinyin*{动宾式}\hspace{1em}\xpinyin*{离合词} \\
+\begin{tabular}{lll}
+nome/substantivo       & \textbf{n.}        & 名词 \\
+palavra de lugar       & \textbf{p.d.l.}    & 处所词 \\
+palavra de localização & \textbf{p.l.}      & 方位词 \\
+palavra de tempo       & \textbf{p.t.}      & 时间词 \\
+verbo                  & \textbf{v.}        & 动词 \\
+verbo direcional       & \textbf{v.d.}      & 趣向\hspace{1em}动词 \\
+verbo optativo         & \textbf{v.o.}      & 能缘\hspace{1em}动词 \\
+adjetivo               & \textbf{adj.}      & 形容词 \\
+numeral                & \textbf{num.}      & 数词 \\
+palavra classificadora & \textbf{p.c.}      & 两量词 \\
+pronome                & \textbf{pron.}     & 代词 \\
+interrogativo          & \textbf{interr.}   & 疑问词 \\
+advérbio               & \textbf{adv.}      & 副词 \\
+preposição             & \textbf{prep.}     & 介词 \\
+conjunção              & \textbf{conj.}     & 连词 \\
+partícula              & \textbf{part.}     & 助词 \\
+sujeito                & \textbf{suj.}      & 主语 \\
+objeto                 & \textbf{obj.}      & 宾语 \\
+atributo               & \textbf{atrib.}    & 定语 \\
+adjunto adverbial      & \textbf{a.adv.}    & 状语 \\
+complemento            & \textbf{compl.}    & 补语 \\
+verbo+complemento      & \textbf{v.+compl.} & 动宾式\hspace{1em}离合词 \\
 \end{tabular}
 
 \newpage
