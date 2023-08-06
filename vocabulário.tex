@@ -26,6 +26,7 @@
 \usepackage{ifthen}
 \usepackage{tocloft}
 \usepackage{xparse}
+\usepackage{enumitem}
 
 %\setlength{\cftbeforesecskip}{2pt}
 %\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
@@ -54,20 +55,26 @@
 
 \NewDocumentCommand\mylist{>{\SplitList{|}}m}
 {
-\begin{itemize}
+\setlength{\leftmargin}{0em}
+\begin{enumerate}[nosep,left=0em,label=\arabic*.]
   \ProcessList{#1}{ \insertitem }
-\end{itemize}
+\end{enumerate}
 }
 \newcommand\insertitem[1]{\item #1}
 
-\newcommand{\entry}[4]{%
-\begin{minipage}[t][][t]{\linewidth}
-{\Huge \textbf{#1}}\\%
-\if\relax\detokenize{#2}\relax\else\ \textit{(#2)}\fi\ %
-«\pinyin{#3}»
-\small \mylist{#4}
-\end{minipage}
-\markboth{#1«\pinyin{#3}»}{#1«\pinyin{#3}»}\index{#1«\pinyin{#3}»}\par
+\newenvironment{hanzi}[2][none]
+  {\vspace{1ex}
+  \markboth{#1«\pinyin{#2}»}{#1«\pinyin{#2}»}\index{#1«\pinyin{#2}»}
+  \begin{minipage}[t][][t]{\linewidth}
+  {\Huge \textbf{#1}} \\
+  }
+  {\end{minipage}
+  }
+
+\newcommand{\entry}[3]{%
+«\pinyin{#1}» (#2)%
+{\small \mylist{#3}}%
+\vspace{1ex}
 }
 
 \newcommand{\e}[1]{\textcolor{OliveGreen}{#1}}
@@ -157,30 +164,30 @@ verbo+complemento      & \textbf{v.+compl.} & 动宾式\hspace{1em}离合词 \\
 
 \include{entries/A.tex}
 \include{entries/B.tex}
-\include{entries/C.tex}
-\include{entries/D.tex}
-\include{entries/E.tex}
-\include{entries/F.tex}
-\include{entries/G.tex}
-\include{entries/H.tex}
-\include{entries/I.tex}
-\include{entries/J.tex}
-\include{entries/K.tex}
-\include{entries/L.tex}
-\include{entries/M.tex}
-\include{entries/N.tex}
-\include{entries/O.tex}
-\include{entries/P.tex}
-\include{entries/Q.tex}
-\include{entries/R.tex}
-\include{entries/S.tex}
-\include{entries/T.tex}
-\include{entries/U.tex}
-\include{entries/V.tex}
-\include{entries/W.tex}
-\include{entries/X.tex}
-\include{entries/Y.tex}
-\include{entries/Z.tex}
+%\include{entries/C.tex}
+%\include{entries/D.tex}
+%\include{entries/E.tex}
+%\include{entries/F.tex}
+%\include{entries/G.tex}
+%\include{entries/H.tex}
+%\include{entries/I.tex}
+%\include{entries/J.tex}
+%\include{entries/K.tex}
+%\include{entries/L.tex}
+%\include{entries/M.tex}
+%\include{entries/N.tex}
+%\include{entries/O.tex}
+%\include{entries/P.tex}
+%\include{entries/Q.tex}
+%\include{entries/R.tex}
+%\include{entries/S.tex}
+%\include{entries/T.tex}
+%\include{entries/U.tex}
+%\include{entries/V.tex}
+%\include{entries/W.tex}
+%\include{entries/X.tex}
+%\include{entries/Y.tex}
+%\include{entries/Z.tex}
 
 \printindex
 
