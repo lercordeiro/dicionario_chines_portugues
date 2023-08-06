@@ -72,12 +72,13 @@
   }
 
 \newcommand{\entry}[3]{%
-«\pinyin{#1}» (#2)%
+«\pinyin{#1}» \if\relax\detokenize{#2}\relax\else\ \textit{(#2)}\fi%
 {\small \mylist{#3}}%
 \vspace{1ex}
 }
 
 \newcommand{\e}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\pc}[1]{P.C.:#1}
 
 \makeatletter
 \let\old@makechapterhead\@makechapterhead
@@ -164,8 +165,8 @@ verbo+complemento      & \textbf{v.+compl.} & 动宾式\hspace{1em}离合词 \\
 
 \include{entries/A.tex}
 \include{entries/B.tex}
-%\include{entries/C.tex}
-%\include{entries/D.tex}
+\include{entries/C.tex}
+\include{entries/D.tex}
 %\include{entries/E.tex}
 %\include{entries/F.tex}
 %\include{entries/G.tex}
