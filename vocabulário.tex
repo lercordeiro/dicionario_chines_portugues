@@ -1,5 +1,4 @@
-﻿
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+﻿%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % XeTeX
 %
 % Vocabulário
@@ -32,7 +31,7 @@
 %\setlength{\cftbeforesecskip}{2pt}
 %\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 
-\setCJKmainfont{AR PL UKai CN}
+\setCJKmainfont{AR PL New Kai}
 \setCJKsansfont{AR PL UMing CN}
 
 \makeindex[columns=3, title=Índice, intoc]
@@ -57,9 +56,9 @@
 \NewDocumentCommand\mylist{>{\SplitList{|}}m}
 {
 \setlength{\leftmargin}{0em}
-\begin{enumerate}[nosep,left=0em,label=\arabic*.]
+\begin{itemize}[nosep,left=0em]
   \ProcessList{#1}{ \insertitem }
-\end{enumerate}
+\end{itemize}
 }
 \newcommand\insertitem[1]{\item #1}
 
