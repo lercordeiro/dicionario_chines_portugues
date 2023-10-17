@@ -1,16 +1,18 @@
 TEX = xelatex
-PRE = $(TEX) 
 BIB = bibtex
 PDFJAM = pdfjam --landscape --signature 20 --twoside --a4paper --suffix livreto
+DST = /var/www/ler.cordeiro.nom.br/repositório/Dicionário
+
+verbetes := $(wildcard verbetes/?.tex)
 
 .PHONY: all
 
 all : dicionario.pdf dicionario-livreto.pdf
 
-one : dicionario.tex verbetes/A.tex verbetes/B.tex verbetes/C.tex verbetes/D.tex verbetes/E.tex verbetes/F.tex verbetes/G.tex verbetes/H.tex verbetes/I.tex verbetes/J.tex verbetes/K.tex verbetes/L.tex verbetes/M.tex verbetes/N.tex verbetes/O.tex verbetes/P.tex verbetes/Q.tex verbetes/R.tex verbetes/S.tex verbetes/T.tex verbetes/U.tex verbetes/V.tex verbetes/W.tex verbetes/X.tex verbetes/Y.tex verbetes/Z.tex 
+one : dicionario.tex $(verbetes)
 	$(TEX) dicionario.tex
 
-dicionario.pdf : dicionario.tex verbetes/A.tex verbetes/B.tex verbetes/C.tex verbetes/D.tex verbetes/E.tex verbetes/F.tex verbetes/G.tex verbetes/H.tex verbetes/I.tex verbetes/J.tex verbetes/K.tex verbetes/L.tex verbetes/M.tex verbetes/N.tex verbetes/O.tex verbetes/P.tex verbetes/Q.tex verbetes/R.tex verbetes/S.tex verbetes/T.tex verbetes/U.tex verbetes/V.tex verbetes/W.tex verbetes/X.tex verbetes/Y.tex verbetes/Z.tex 
+dicionario.pdf : dicionario.tex $(verbetes)
 	$(TEX) dicionario.tex
 	$(TEX) dicionario.tex
 	$(TEX) dicionario.tex
@@ -18,3 +20,6 @@ dicionario.pdf : dicionario.tex verbetes/A.tex verbetes/B.tex verbetes/C.tex ver
 dicionario-livreto.pdf : dicionario.pdf
 	$(PDFJAM) dicionario.pdf
 
+deploy : dicionario.pdf dicionario-livreto.pdf
+	$(MV) dicionario.pdf         $(DST)
+	$(MV) dicionario-livreto.pdf $(DST)
