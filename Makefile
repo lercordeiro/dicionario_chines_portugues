@@ -21,5 +21,5 @@ dicionario-livreto.pdf : dicionario.pdf
 	$(PDFJAM) dicionario.pdf
 
 deploy : dicionario.pdf dicionario-livreto.pdf
-	$(MV) dicionario.pdf         $(DST)
-	$(MV) dicionario-livreto.pdf $(DST)
+	cp dicionario.pdf         $(DST)
+	cp dicionario-livreto.pdf $(DST)

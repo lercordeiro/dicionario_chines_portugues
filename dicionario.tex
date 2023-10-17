@@ -72,14 +72,14 @@
   {\end{minipage}
   }
 
-\newcommand{\significado}[3]{%
-«\pinyin{#1}» \if\relax\detokenize{#2}\relax\else\ (\textit{#2})\fi%
-{\small \mylist{#3}}%
+\newcommand{\significado}[4][]{%
+«\pinyin{#2}» \if\relax\detokenize{#3}\relax\else\ (\textit{#3})\fi\ifthenelse{\equal{#1}{}}{}{ [P.C.:#1]}%
+{\small \mylist{#4}}%
 \vspace{1ex}
 }
 
 \newcommand{\e}[1]{\textcolor{OliveGreen}{#1}}
-\newcommand{\pc}[1]{P.C.:#1}
+%\newcommand{\pc}[1]{P.C.:#1}
 
 \makeatletter
 \let\old@makechapterhead\@makechapterhead
@@ -101,6 +101,14 @@
 \newcommand{\newchapterhead}{\let\@makechapterhead\fake@makechapterhead}
 \newcommand{\restorechapterhead}{\let\@makechapterhead\old@makechapterhead}
 \makeatother
+
+\DeclareRobustCommand{\&}{%
+    \ifdim\fontdimen1\font>0pt
+        \textsl{\symbol{`\&}}%
+    \else
+        \symbol{`\&}%
+    \fi
+}
 
 %%%
 %%% Documento começa aqui!
