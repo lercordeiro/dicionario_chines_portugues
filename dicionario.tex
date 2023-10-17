@@ -1,7 +1,7 @@
 ﻿%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % XeTeX
 %
-% Vocabulário
+% Dicionário Chinês -> Português
 % Autor: Luiz Eduardo Roncato Cordeiro
 %
 % Licença:
@@ -56,9 +56,9 @@
 \NewDocumentCommand\mylist{>{\SplitList{|}}m}
 {
 \setlength{\leftmargin}{0em}
-\begin{itemize}[nosep,left=0em]
+\begin{enumerate}[nosep,left=0em]
   \ProcessList{#1}{ \insertitem }
-\end{itemize}
+\end{enumerate}
 }
 \newcommand\insertitem[1]{\item #1}
 
@@ -71,7 +71,7 @@
   {\end{minipage}
   }
 
-\newcommand{\entry}[3]{%
+\newcommand{\significado}[3]{%
 «\pinyin{#1}» \if\relax\detokenize{#2}\relax\else\ (\textit{#2})\fi%
 {\small \mylist{#3}}%
 \vspace{1ex}
@@ -118,8 +118,8 @@
 	\parbox[b]{0.75\textwidth}{ % Paragraph box for holding the title page text, adjust the width to move the title page left or right on the page
 		
 		{\Huge\bfseries 汉葡词典}\\[2\baselineskip] % Title
-		{\large\textit{O Minúsculo Dicionário do Curso de Chinês}}\\[4\baselineskip] % Subtitle or further description
-		{\Large\textsc{罗学凯}} % Author name, lower case for consistent small caps
+		{\large\textit{Dicionário Chinês-Português para o \\Curso de Chinês do Instituto Confúcio}}\\[4\baselineskip] % Subtitle or further description
+        {\Large\textsc{罗学凯}\\Luiz Eduardo Roncato Cordeiro} % Author name, lower case for consistent small caps
 		
 		\vspace{0.5\textheight} % Whitespace between the title block and the publisher
 		
@@ -169,32 +169,32 @@ verbo+complemento      & \textbf{v.+compl.} & 动宾式\hspace{1em}离合词 \\
 %%%      número de traços vem antes.
 %%%
 
-\include{verbete/A.tex}
-\include{verbete/B.tex}
-\include{verbete/C.tex}
-\include{verbete/D.tex}
-\include{verbete/E.tex}
-\include{verbete/F.tex}
-\include{verbete/G.tex}
-\include{verbete/H.tex}
-\include{verbete/I.tex}
-\include{verbete/J.tex}
-\include{verbete/K.tex}
-\include{verbete/L.tex}
-\include{verbete/M.tex}
-\include{verbete/N.tex}
-\include{verbete/O.tex}
-\include{verbete/P.tex}
-\include{verbete/Q.tex}
-\include{verbete/R.tex}
-\include{verbete/S.tex}
-\include{verbete/T.tex}
-\include{verbete/U.tex}
-\include{verbete/V.tex}
-\include{verbete/W.tex}
-\include{verbete/X.tex}
-\include{verbete/Y.tex}
-\include{verbete/Z.tex}
+\include{verbetes/A.tex}
+\include{verbetes/B.tex}
+\include{verbetes/C.tex}
+\include{verbetes/D.tex}
+\include{verbetes/E.tex}
+\include{verbetes/F.tex}
+\include{verbetes/G.tex}
+\include{verbetes/H.tex}
+\include{verbetes/I.tex}
+\include{verbetes/J.tex}
+\include{verbetes/K.tex}
+\include{verbetes/L.tex}
+\include{verbetes/M.tex}
+\include{verbetes/N.tex}
+\include{verbetes/O.tex}
+\include{verbetes/P.tex}
+\include{verbetes/Q.tex}
+\include{verbetes/R.tex}
+\include{verbetes/S.tex}
+\include{verbetes/T.tex}
+\include{verbetes/U.tex}
+\include{verbetes/V.tex}
+\include{verbetes/W.tex}
+\include{verbetes/X.tex}
+\include{verbetes/Y.tex}
+\include{verbetes/Z.tex}
 
 %\printindex
 
