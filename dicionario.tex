@@ -27,6 +27,7 @@
 \usepackage{xparse}
 \usepackage{enumitem}
 \usepackage{wasysym}
+\usepackage{zhnumber}
 
 %\setlength{\cftbeforesecskip}{2pt}
 %\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
@@ -38,7 +39,8 @@
 
 \setlength{\parindent}{0em}
 \setlength{\parskip}{0.5em}
-\setlength{\columnseprule}{0.5pt}
+\setlength{\columnsep}{1em}
+\setlength{\columnseprule}{0.2mm}
 
 \xpinyinsetup{ratio={.5},vsep={1.2em},multiple={\color{Sepia}}}
 
@@ -63,8 +65,7 @@
 \newcommand\insertitem[1]{\item #1}
 
 \newenvironment{verbete}[2][none]
-  {\vspace{1ex}
-  \markboth{#1«\pinyin{#2}»}{#1«\pinyin{#2}»}\index{#1«\pinyin{#2}»}
+  {\markboth{#1«\pinyin{#2}»}{#1«\pinyin{#2}»}\index{#1«\pinyin{#2}»}
   \begin{minipage}[t][][t]{\linewidth}
   {\Huge \textbf{#1}} \\
   }
@@ -118,12 +119,12 @@
 	\parbox[b]{0.75\textwidth}{ % Paragraph box for holding the title page text, adjust the width to move the title page left or right on the page
 		
 		{\Huge\bfseries 汉葡词典}\\[2\baselineskip] % Title
-		{\large\textit{Dicionário Chinês-Português para o \\Curso de Chinês do Instituto Confúcio}}\\[4\baselineskip] % Subtitle or further description
-        {\Large\textsc{罗学凯}\\Luiz Eduardo Roncato Cordeiro} % Author name, lower case for consistent small caps
+		{\large\textsc{Dicionário Chinês-Português para o \\Curso de Chinês do Instituto Confúcio}}\\[4\baselineskip] % Subtitle or further description
+        {\Large\textsc{罗学凯}\\\tiny Luiz Eduardo Roncato Cordeiro} % Author name, lower case for consistent small caps
 		
 		\vspace{0.5\textheight} % Whitespace between the title block and the publisher
 		
-		{\noindent \today}\\[\baselineskip] % Publisher and logo
+		{\noindent \zhtoday}\\[\baselineskip] % Publisher and logo
 	}
 
 \end{titlingpage}
@@ -196,6 +197,6 @@ verbo+complemento      & \textbf{v.+compl.} & 动宾式\hspace{1em}离合词 \\
 \include{verbetes/Y.tex}
 \include{verbetes/Z.tex}
 
-%\printindex
+\printindex
 
 \end{document}
