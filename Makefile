@@ -1,4 +1,4 @@
-TEX = xelatex
+TEX = xelatex -halt-on-error -papersize=A4 -8bit 
 BIB = bibtex
 PDFJAM = pdfjam --landscape --signature 20 --twoside --a4paper --suffix livreto
 DST = /var/www/ler.cordeiro.nom.br/repositório/Dicionário
@@ -23,3 +23,12 @@ dicionario-livreto.pdf : dicionario.pdf
 deploy : dicionario.pdf dicionario-livreto.pdf
 	cp dicionario.pdf         $(DST)
 	cp dicionario-livreto.pdf $(DST)
+
+clean:
+	rm dicionario.aux
+	rm dicionario.idx
+	rm dicionario.ilg
+	rm dicionario.ind
+	rm dicionario.log
+	rm dicionario.toc
+

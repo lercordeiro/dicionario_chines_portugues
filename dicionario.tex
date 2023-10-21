@@ -11,14 +11,15 @@
 %\documentclass[a4paper,12pt,twoside,openany,draft]{memoir}
 \documentclass[a4paper,12pt,twoside,openany]{memoir}
 
-\usepackage{xltxtra}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[utf8]{inputenc}
 \usepackage[brazil]{babel}
+\usepackage{fontspec}
+\usepackage{xltxtra}
 \usepackage{xeCJK}
 \usepackage{xpinyin}
-\usepackage{fontspec}
 \usepackage{xunicode}
 \usepackage{xltxtra}
-\usepackage[usenames,dvipsnames]{color}
 \usepackage{multicol}
 \usepackage{fancyhdr}
 \usepackage{imakeidx}
@@ -26,13 +27,10 @@
 \usepackage{tocloft}
 \usepackage{xparse}
 \usepackage{enumitem}
-\usepackage{wasysym}
 \usepackage{zhnumber}
+\usepackage{wasysym}
 
-%\setlength{\cftbeforesecskip}{2pt}
-%\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
-
-\setCJKmainfont{AR PL New Kai}
+\setCJKmainfont{AR PL UKai CN}
 \setCJKsansfont{AR PL UMing CN}
 
 \makeindex[columns=3, title=Índice, intoc]
@@ -42,13 +40,13 @@
 \setlength{\columnsep}{1em}
 \setlength{\columnseprule}{0.2mm}
 
-\xpinyinsetup{ratio={.5},vsep={1.2em},multiple={\color{Sepia}}}
+\xpinyinsetup{ratio={.5},vsep={1em},multiple={\color{Sepia}}}
 
 % Headers & footers
-\fancyhead[L]{\textsf{\rightmark}} % Top left header
-\fancyhead[R]{\textsf{\leftmark}} % Top right header
+\fancyhead[L]{\rightmark} % Top left header
+\fancyhead[R]{\leftmark}  % Top right header
 \renewcommand{\headrulewidth}{1.4pt} % Rule under the header
-\fancyfoot[C]{{\thepage}} % Bottom center footer
+\fancyfoot[C]{\thepage} % Bottom center footer
 \renewcommand{\footrulewidth}{1.4pt} % Rule under the header
 \pagestyle{fancy} % Use the custom headers and footers throughout the document
 
@@ -64,17 +62,31 @@
 }
 \newcommand\insertitem[1]{\item #1}
 
-\newenvironment{verbete}[2][none]
-  {\markboth{#1«\pinyin{#2}»}{#1«\pinyin{#2}»}\index{#1«\pinyin{#2}»}
+\newenvironment{verbete}[2][]
+  {\leavevmode
+  \ifthenelse{\equal{#1}{}}%
+    {\markboth{#2}{#2}\index{#2}}%
+    {\markboth{#2«\pinyin{#1}»}{#2«\pinyin{#1}»}\index{#2«\pinyin{#1}»}}
   \begin{minipage}[t][][t]{\linewidth}
-  {\Huge \textbf{#1}} \\
+  {\LARGE \textbf{#2}}
   }
-  {\end{minipage}
+  {
+  \end{minipage}
   }
 
-\newcommand{\significado}[4][]{%
-«\pinyin{#2}» \if\relax\detokenize{#3}\relax\else\ (\textit{#3})\fi\ifthenelse{\equal{#1}{}}{}{ [P.C.:#1]}%
-{\small \mylist{#4}}%
+%\newcommand{\entry}[4]{\markboth{#1}{#1}\textbf{#1}\ {(#2)}\ \textit{#3}\ $\bullet$\ {#4}}  
+% Defines the command to print each word on the page, \markboth{}{} prints the first word on the page in the top left header and the last word in the top right
+
+\newenvironment{pronuncia}[2][]
+  {\ifthenelse{\equal{#1}{}}{}{#1}%
+  «\pinyin{#2}»\\
+  }
+  {}
+
+\newcommand{\significado}[3][]{%
+\if\relax\detokenize{#2}\relax\else$\bullet$\ (\textit{#2})\fi%
+\ifthenelse{\equal{#1}{}}{}{ [P.C.:\xpinyin*{#1}]}%
+{\small \mylist{#3}}%
 \vspace{1ex}
 }
 
@@ -166,6 +178,7 @@ atributo               & \textbf{atrib.}    & 定语 \\
 adjunto adverbial      & \textbf{a.adv.}    & 状语 \\
 complemento            & \textbf{compl.}    & 补语 \\
 verbo+complemento      & \textbf{v.+compl.} & 动宾式\hspace{1em}离合词 \\
+expressão idiomática   & \textbf{expr.}     & \\
 \end{tabular}
 
 \newpage
@@ -178,32 +191,33 @@ verbo+complemento      & \textbf{v.+compl.} & 动宾式\hspace{1em}离合词 \\
 %%%      número de traços vem antes.
 %%%
 
-\include{verbetes/A.tex}
-\include{verbetes/B.tex}
-\include{verbetes/C.tex}
-\include{verbetes/D.tex}
-\include{verbetes/E.tex}
-\include{verbetes/F.tex}
-\include{verbetes/G.tex}
-\include{verbetes/H.tex}
-\include{verbetes/I.tex}
-\include{verbetes/J.tex}
-\include{verbetes/K.tex}
-\include{verbetes/L.tex}
-\include{verbetes/M.tex}
-\include{verbetes/N.tex}
-\include{verbetes/O.tex}
-\include{verbetes/P.tex}
-\include{verbetes/Q.tex}
-\include{verbetes/R.tex}
-\include{verbetes/S.tex}
-\include{verbetes/T.tex}
-\include{verbetes/U.tex}
-\include{verbetes/V.tex}
-\include{verbetes/W.tex}
-\include{verbetes/X.tex}
-\include{verbetes/Y.tex}
-\include{verbetes/Z.tex}
+\clearpage
+\input{verbetes/A.tex}
+\input{verbetes/B.tex}
+\input{verbetes/C.tex}
+\input{verbetes/D.tex}
+\input{verbetes/E.tex}
+\input{verbetes/F.tex}
+\input{verbetes/G.tex}
+\input{verbetes/H.tex}
+%\input{verbetes/I.tex} %%%%% Não tem palavras com pinyin iniciado em "I" em chinês
+\input{verbetes/J.tex}
+\input{verbetes/K.tex}
+\input{verbetes/L.tex}
+\input{verbetes/M.tex}
+\input{verbetes/N.tex}
+\input{verbetes/O.tex}
+\input{verbetes/P.tex}
+\input{verbetes/Q.tex}
+\input{verbetes/R.tex}
+\input{verbetes/S.tex}
+\input{verbetes/T.tex}
+%\input{verbetes/U.tex} %%%%% Não tem palavras com pinyin iniciado em "U" em chinês
+%\input{verbetes/V.tex} %%%%% Não tem palavras com pinyin iniciado em "V" em chinês
+\input{verbetes/W.tex}
+\input{verbetes/X.tex}
+\input{verbetes/Y.tex}
+\input{verbetes/Z.tex}
 
 \printindex
 
