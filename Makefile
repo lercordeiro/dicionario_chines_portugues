@@ -3,9 +3,9 @@ BIB = bibtex
 PDFJAM = pdfjam --landscape --signature 20 --twoside --a4paper --suffix livreto
 DST = /var/www/ler.cordeiro.nom.br/repositório/Dicionário
 
-verbetes := $(wildcard verbetes/?.tex)
+verbetes := $(wildcard verbetes/*.tex)
 
-.PHONY: all
+.PHONY: dicionario.pdf dicionario-livreto.pdf
 
 all : dicionario.pdf dicionario-livreto.pdf
 
@@ -31,4 +31,5 @@ clean:
 	rm dicionario.ind
 	rm dicionario.log
 	rm dicionario.toc
+	rm dicionario.pdf
 

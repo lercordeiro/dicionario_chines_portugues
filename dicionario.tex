@@ -74,9 +74,6 @@
   \end{minipage}
   }
 
-%\newcommand{\entry}[4]{\markboth{#1}{#1}\textbf{#1}\ {(#2)}\ \textit{#3}\ $\bullet$\ {#4}}  
-% Defines the command to print each word on the page, \markboth{}{} prints the first word on the page in the top left header and the last word in the top right
-
 \newenvironment{pronuncia}[2][]
   {\ifthenelse{\equal{#1}{}}{}{#1}%
   «\pinyin{#2}»\\
@@ -140,7 +137,7 @@
 		
 		{\Huge\bfseries 汉葡词典}\\[2\baselineskip] % Title
 		{\large\textsc{Dicionário Chinês-Português para o \\Curso de Chinês do Instituto Confúcio}}\\[4\baselineskip] % Subtitle or further description
-        {\Large\textsc{罗学凯}\\\tiny Luiz Eduardo Roncato Cordeiro} % Author name, lower case for consistent small caps
+    {\Large\textsc{罗学凯}\\\tiny Luiz Eduardo Roncato Cordeiro\\Aluno do Instituto Confúcio da UNESP} % Author name, lower case for consistent small caps
 		
 		\vspace{0.5\textheight} % Whitespace between the title block and the publisher
 		
@@ -179,6 +176,7 @@ adjunto adverbial      & \textbf{a.adv.}    & 状语 \\
 complemento            & \textbf{compl.}    & 补语 \\
 verbo+complemento      & \textbf{v.+compl.} & 动宾式\hspace{1em}离合词 \\
 expressão idiomática   & \textbf{expr.}     & \\
+interjeição            & \textbf{interj.}   & \\
 \end{tabular}
 
 \newpage
