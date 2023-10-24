@@ -29,9 +29,14 @@
 \usepackage{enumitem}
 \usepackage{zhnumber}
 \usepackage{wasysym}
+\usepackage{ragged2e}
+\usepackage{titlesec}
 
-\setCJKmainfont{AR PL UKai CN}
-\setCJKsansfont{AR PL UMing CN}
+\setCJKmainfont{Noto Serif CJK SC}
+\setCJKsansfont{Noto Sans Mono CJK SC}
+
+%\setCJKmainfont{AR PL UKai CN}
+%\setCJKsansfont{AR PL UMing CN}
 
 \makeindex[columns=3, title=Índice, intoc]
 
@@ -62,33 +67,39 @@
 }
 \newcommand\insertitem[1]{\item #1}
 
-\newenvironment{verbete}[2][]
-  {\leavevmode
-  \ifthenelse{\equal{#1}{}}%
+\newcounter{pronuncias}
+
+\DeclareDocumentEnvironment{verbete}{ o m }{%
+  \leavevmode%
+  \IfValueTF{#1}%
+    {\markboth{#2«\pinyin{#1}»}{#2«\pinyin{#1}»}\index{#2«\pinyin{#1}»}}%
     {\markboth{#2}{#2}\index{#2}}%
-    {\markboth{#2«\pinyin{#1}»}{#2«\pinyin{#1}»}\index{#2«\pinyin{#1}»}}
-  \begin{minipage}[t][][t]{\linewidth}
-  {\LARGE \textbf{#2}}
-  }
-  {
+  \vspace{1ex}
+  \setcounter{pronuncias}{0}
+  \begin{minipage}[t][][t]{\linewidth}%
+  \RaggedRight%
+  {\Large \textbf{#2}}
+}{%
   \end{minipage}
-  }
+}
 
-\newenvironment{pronuncia}[2][]
-  {\ifthenelse{\equal{#1}{}}{}{#1}%
-  «\pinyin{#2}»\\
-  }
-  {}
+\DeclareDocumentEnvironment{pronuncia}{ o m o }{%
+  \stepcounter{pronuncias}
+  \IfValueT{#1}{#1}%
+  \ifthenelse{\value{pronuncias} > 1}%
+    {$\bullet$ «\pinyin{#2}»}%
+    {«\pinyin{#2}»}%
+  \IfValueTF{#3}{ #3\\}{\\}%
+}{}
 
-\newcommand{\significado}[3][]{%
-\if\relax\detokenize{#2}\relax\else$\bullet$\ (\textit{#2})\fi%
-\ifthenelse{\equal{#1}{}}{}{ [P.C.:\xpinyin*{#1}]}%
-{\small \mylist{#3}}%
-\vspace{1ex}
+\DeclareDocumentCommand{\significado}{ o m m }{%
+  \vspace{.8ex}$\hookrightarrow$\ (\textit{#2})%
+  \IfValueT{#1}{\small [P.C.:\xpinyin*{#1}]}%
+  \vspace{.5ex}
+  {\small \mylist{#3}}%
 }
 
 \newcommand{\e}[1]{\textcolor{OliveGreen}{#1}}
-%\newcommand{\pc}[1]{P.C.:#1}
 
 \makeatletter
 \let\old@makechapterhead\@makechapterhead
@@ -119,6 +130,8 @@
     \fi
 }
 
+\titlespacing{\section}{12pc}{.5ex plus .1ex minus .2ex}{0pc}
+
 %%%
 %%% Documento começa aqui!
 %%%
@@ -127,21 +140,25 @@
 
 \newchapterhead
 
-\begin{titlingpage} % Suppresses displaying the page number on the title page and the subsequent page counts as page 1
+\begin{titlingpage}
 	
-	\raggedleft % Right align the title page
+	\raggedleft
 	
-	\rule{1pt}{\textheight} % Vertical line
-	\hspace{0.05\textwidth} % Whitespace between the vertical line and title page text
-	\parbox[b]{0.75\textwidth}{ % Paragraph box for holding the title page text, adjust the width to move the title page left or right on the page
+	\rule{1pt}{\textheight}
+	\hspace{0.05\textwidth}
+	\parbox[b]{0.75\textwidth}{
 		
 		{\Huge\bfseries 汉葡词典}\\[2\baselineskip] % Title
-		{\large\textsc{Dicionário Chinês-Português para o \\Curso de Chinês do Instituto Confúcio}}\\[4\baselineskip] % Subtitle or further description
-    {\Large\textsc{罗学凯}\\\tiny Luiz Eduardo Roncato Cordeiro\\Aluno do Instituto Confúcio da UNESP} % Author name, lower case for consistent small caps
+		{\large\textsc{Dicionário Chinês-Português para o\\%
+     Curso de Chinês do Instituto Confúcio}}\\%
+     [4\baselineskip]
+    {\Large\textsc{罗学凯}\\%
+     \tiny Luiz Eduardo Roncato Cordeiro\\%
+     Aluno do Instituto Confúcio da UNESP}
 		
-		\vspace{0.5\textheight} % Whitespace between the title block and the publisher
+		\vspace{0.5\textheight}
 		
-		{\noindent \zhtoday}\\[\baselineskip] % Publisher and logo
+		{\noindent \zhtoday}\\[\baselineskip]
 	}
 
 \end{titlingpage}
@@ -190,6 +207,7 @@ interjeição            & \textbf{interj.}   & \\
 %%%
 
 \clearpage
+\begin{multicols*}{2}
 \input{verbetes/A.tex}
 \input{verbetes/B.tex}
 \input{verbetes/C.tex}
@@ -216,6 +234,7 @@ interjeição            & \textbf{interj.}   & \\
 \input{verbetes/X.tex}
 \input{verbetes/Y.tex}
 \input{verbetes/Z.tex}
+\end{multicols*}
 
 \printindex
 
