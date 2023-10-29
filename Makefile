@@ -1,7 +1,7 @@
 TEX = xelatex -halt-on-error -papersize=A4 -8bit 
 BIB = bibtex
 PDFJAM = pdfjam --landscape --signature 20 --twoside --a4paper --suffix livreto
-DST = /var/www/ler.cordeiro.nom.br/repositório/Dicionário
+DSTS = /var/www/ler.cordeiro.nom.br/dicionário /var/www/ler.cordeiro.nom.br/Repositório/Dicionário
 
 verbetes := $(wildcard verbetes/*.tex)
 
@@ -21,8 +21,10 @@ dicionario-livreto.pdf : dicionario.pdf
 	$(PDFJAM) dicionario.pdf
 
 deploy : dicionario.pdf dicionario-livreto.pdf
-	cp dicionario.pdf         $(DST)
-	cp dicionario-livreto.pdf $(DST)
+.for D in $(DSTS)
+	cp dicionario.pdf         $(D)
+	cp dicionario-livreto.pdf $(D)
+.endfor
 
 clean:
 	rm dicionario.aux

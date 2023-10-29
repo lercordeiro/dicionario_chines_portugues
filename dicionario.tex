@@ -26,7 +26,7 @@
 \usepackage{ifthen}
 \usepackage{tocloft}
 \usepackage{xparse}
-\usepackage{enumitem}
+\usepackage[inline]{enumitem}
 \usepackage{zhnumber}
 \usepackage{wasysym}
 \usepackage{ragged2e}
@@ -45,7 +45,7 @@
 \setlength{\columnsep}{1em}
 \setlength{\columnseprule}{0.2mm}
 
-\xpinyinsetup{ratio={.5},vsep={1em},multiple={\color{Sepia}}}
+\xpinyinsetup{ratio={.8},vsep={1.2em},multiple={\color{Sepia}}}
 
 % Headers & footers
 \fancyhead[L]{\rightmark} % Top left header
@@ -58,27 +58,29 @@
 \setlength{\headheight}{16pt}
 \addtolength{\topmargin}{-0.5pt}
 
-\NewDocumentCommand\mylist{>{\SplitList{|}}m}
+\NewDocumentCommand\mylist{>{\SplitList{;}}m}
 {
 \setlength{\leftmargin}{0em}
-\begin{enumerate}[nosep,left=0em]
-  \ProcessList{#1}{ \insertitem }
-\end{enumerate}
+\begin{enumerate*}[mode=boxed,itemjoin={{; }},itemjoin*={{; e }}]
+\ProcessList{#1}{ \insertitem }
+\end{enumerate*}\\
 }
 \newcommand\insertitem[1]{\item #1}
 
 \newcounter{pronuncias}
 
-\DeclareDocumentEnvironment{verbete}{ o m }{%
+\DeclareDocumentEnvironment{verbete}{ o m o }{%
   \leavevmode%
   \IfValueTF{#1}%
     {\markboth{#2«\pinyin{#1}»}{#2«\pinyin{#1}»}\index{#2«\pinyin{#1}»}}%
     {\markboth{#2}{#2}\index{#2}}%
-  \vspace{1ex}
   \setcounter{pronuncias}{0}
   \begin{minipage}[t][][t]{\linewidth}%
   \RaggedRight%
-  {\Large \textbf{#2}}
+  {\Large \textbf{#2}%
+   \IfValueT{#3}%
+     {{\hspace{.5ex}\textsuperscript{\tiny(#3画)}}}%
+  }%
 }{%
   \end{minipage}
 }
@@ -89,16 +91,20 @@
   \ifthenelse{\value{pronuncias} > 1}%
     {$\bullet$ «\pinyin{#2}»}%
     {«\pinyin{#2}»}%
-  \IfValueTF{#3}{ #3\\}{\\}%
+  \IfValueT{#3}{ #3}\\%
 }{}
 
-\DeclareDocumentCommand{\significado}{ o m m }{%
-  \vspace{.8ex}$\hookrightarrow$\ (\textit{#2})%
-  \IfValueT{#1}{\small [P.C.:\xpinyin*{#1}]}%
-  \vspace{.5ex}
-  {\small \mylist{#3}}%
+\DeclareDocumentCommand{\significado}{ s o m m }{%
+  \vspace{.8ex}%
+  \IfBooleanTF{#1}
+    {$\hookrightarrow$\ Veja: #4\\}
+    {$\hookrightarrow$\ (\textit{#3})%
+       \IfValueT{#2}{{\tiny\ [P.C.:\xpinyin*{#2}]}}%
+     {\small \mylist{#4}}
+    }
 }
 
+\newcommand{\p}[1]{«\pinyin{#1}»}
 \newcommand{\e}[1]{\textcolor{OliveGreen}{#1}}
 
 \makeatletter
@@ -130,7 +136,7 @@
     \fi
 }
 
-\titlespacing{\section}{12pc}{.5ex plus .1ex minus .2ex}{0pc}
+\titlespacing{\section}{1pc}{.5ex plus .1ex minus .2ex}{0pc}
 
 %%%
 %%% Documento começa aqui!
@@ -170,7 +176,7 @@
 \chapter{Termos Gramaticais Chineses}
 
 \begin{tabular}{lll}
-nome/substantivo       & \textbf{n.}        & 名词 \\
+substantivo/nome       & \textbf{s.}        & 名词 \\
 palavra de lugar       & \textbf{p.d.l.}    & 处所词 \\
 palavra de localização & \textbf{p.l.}      & 方位词 \\
 palavra de tempo       & \textbf{p.t.}      & 时间词 \\
@@ -207,7 +213,7 @@ interjeição            & \textbf{interj.}   & \\
 %%%
 
 \clearpage
-\begin{multicols*}{2}
+\begin{multicols}{2}
 \input{verbetes/A.tex}
 \input{verbetes/B.tex}
 \input{verbetes/C.tex}
@@ -216,7 +222,7 @@ interjeição            & \textbf{interj.}   & \\
 \input{verbetes/F.tex}
 \input{verbetes/G.tex}
 \input{verbetes/H.tex}
-%\input{verbetes/I.tex} %%%%% Não tem palavras com pinyin iniciado em "I" em chinês
+%\input{verbetes/I.tex} %%%%% Não existem palavras com pinyin iniciado em "I"
 \input{verbetes/J.tex}
 \input{verbetes/K.tex}
 \input{verbetes/L.tex}
@@ -228,13 +234,13 @@ interjeição            & \textbf{interj.}   & \\
 \input{verbetes/R.tex}
 \input{verbetes/S.tex}
 \input{verbetes/T.tex}
-%\input{verbetes/U.tex} %%%%% Não tem palavras com pinyin iniciado em "U" em chinês
-%\input{verbetes/V.tex} %%%%% Não tem palavras com pinyin iniciado em "V" em chinês
+%\input{verbetes/U.tex} %%%%% Não existem palavras com pinyin iniciado em "U"
+%\input{verbetes/V.tex} %%%%% Não existem palavras com pinyin iniciado em "V"
 \input{verbetes/W.tex}
 \input{verbetes/X.tex}
 \input{verbetes/Y.tex}
 \input{verbetes/Z.tex}
-\end{multicols*}
+\end{multicols}
 
 \printindex
 
