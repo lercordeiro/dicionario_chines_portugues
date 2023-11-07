@@ -1,7 +1,7 @@
 TEX = xelatex -halt-on-error -papersize=A4 -8bit 
 BIB = bibtex
 PDFJAM = pdfjam --landscape --signature 20 --twoside --a4paper --suffix livreto
-DSTS = /var/www/ler.cordeiro.nom.br/dicionário /var/www/ler.cordeiro.nom.br/Repositório/Dicionário
+DSTS = /var/www/ler.cordeiro.nom.br/dicionário /var/www/ler.cordeiro.nom.br/repositório/Dicionário
 
 verbetes := $(wildcard verbetes/*.tex)
 
