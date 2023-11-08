@@ -61,7 +61,8 @@
 \NewDocumentCommand\mylist{>{\SplitList{;}}m}
 {
 \setlength{\leftmargin}{0em}
-\begin{enumerate*}[mode=boxed,itemjoin={{; }},itemjoin*={{; e }}]
+%\begin{enumerate*}[mode=boxed,itemjoin={{; }},itemjoin*={{; e }}]
+\begin{enumerate*}[mode=boxed,itemjoin={{; }}]
 \ProcessList{#1}{ \insertitem }
 \end{enumerate*}\\
 }
