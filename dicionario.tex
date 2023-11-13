@@ -32,9 +32,18 @@
 \usepackage{ragged2e}
 \usepackage[explicit]{titlesec}
 \usepackage{tikz}
+\usepackage[hyperindex,hidelinks]{hyperref}
+
+\hypersetup{
+linktoc=page,
+colorlinks=true,
+urlcolor=blue,
+linkcolor=blue,
+citecolor=red
+}
 
 \setCJKmainfont{Noto Serif CJK SC}
-\setCJKsansfont{Noto Sans Mono CJK SC}
+\setCJKsansfont{Noto Sans CJK SC}
 
 %\setCJKmainfont{AR PL UKai CN}
 %\setCJKsansfont{AR PL UMing CN}
@@ -67,7 +76,7 @@
 \newcommand\insertitem[1]{\item #1}
 
 \DeclareDocumentEnvironment{verbete}{ o m o m o }{%
-  \leavevmode%
+  \leavevmode\vspace{-2ex}%
   \markboth{#2{\small«\pinyin{#4}»}}{#2{\small«\pinyin{#4}»}}
   \index{#2«\pinyin{#4}»}
   \begin{minipage}[t][][t]{\linewidth}%
@@ -136,7 +145,7 @@
     \fi
 }
 
-\titlespacing{\section}{0pc}{0ex}{0pc}
+\titlespacing{\section}{0pc}{2ex}{-1ex}
 \titleformat{\section}[hang]{\Large\bfseries}{}{0pt}{%
   \tikz{%
     \node[draw,rounded corners=1mm,text depth=0.2ex,line width=1pt,    anchor=west]{\Large\bfseries#1};
