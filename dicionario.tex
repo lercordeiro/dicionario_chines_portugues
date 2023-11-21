@@ -222,8 +222,86 @@ interjeição            & \textbf{interj.}   & \\
 %%%
 %%% Estou ordenando as palavras em ordem alfabética por pinyin.
 %%% Obs: Para as palavras diferentes com o mesmo pinyin, a que tem o menor 
-%%%      número de traços vem antes.
+%%%      número de traços no primeiro hanzi vem antes.
 %%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Entrada de um verbete:
+%
+% \begin{verbete}[traços]{hanzi}[antes]{pronúncia}[depois]
+%   \significado[classificadores]{termo_gramatical}{lista_de_significados}
+%   \veja{hanzi}{pronúncia}
+% \end{verbete}
+%
+% Podem haver quantos '\significado' e '\veja' dentro de cada bloco de verbete. 
+%
+% Preferivelmente usar um comando '\significado' para cada termo gramatical ou
+%  se houver classificadores específicos para cada significado da palavra.
+%
+% Podem haver vários comandos '\veja', é aconselhável usar um comando para cada
+%  par de hanzy_pronúncia, o sistema cuida do texto e de colocar o número da
+%  página automaticamente.
+%
+%
+% Para o environment verbetes
+%   Campos Obrigatórios
+%     hanzi: Hanzi da palavra
+%     pronúncia: pinyin no formato: "ma0", "ma1", "ma2", "ma3", "ma4",
+%                os números correspondem aos tons
+%   Campos Opcionais
+%     traços: número de traços dos caracteres separados por ';'
+%     antes: texto adicionado antes do texto da pronúncia
+%            se adiciona um '\\' (pula linha) caso a pronúncia
+%            fique por cima do texto do número de caracteres,
+%            se usado o texto da pronúncia vai para baixo do Hanzi
+%     depois: texto adicionado depois do texto da pronúncia,
+%             se usado o texto da pronúncia vai para baixo do Hanzi
+%
+%
+% Para o comando \significado:
+%   Campos Obrigatórios
+%     termo_gramatical: abreviação dos termos, como 's.', 'v.', 'adj.',
+%                       'adv.', etc, conforme tabela acima
+%     lista_de_significados: significados da palavra separados por ';' ou ','.
+%                            Quando se usa ';' os significados são automaticamente
+%                            colocados em uma sequência numérica
+%   Campos Opcionais
+%     classificadores: quando há, lista de classificadores separados por ',',
+%                      o sistema adiciona o texto automaticamente
+%
+%
+% Para o comando \veja:
+%   Campos Obrigatórios
+%     hanzi: hanzi da palavra
+%     pronúncia: pinyin da pronúncia da palavra como em verbetes
+%
+% Alguns exemplos de alguns de entradas de verbetes:
+%
+% \begin{verbete}[4]{不}[\\]{bu2}[ (antes de quarto tom)]
+%   \significado{adv.}{não}
+%   \veja{不}{bu0}
+%   \veja{不}{bu4}
+% \end{verbete}
+%
+% \begin{verbete}[4;6;11]{飞机票}{fei1ji1piao4}
+%   \significado[张]{v.}{bilhete de avião}
+%   \veja{机票}{ji1piao4}
+% \end{verbete}
+%
+% \begin{verbete}[16;4]{餐厅}{can1ting1}
+%   \significado[家]{s.}{restaurante}
+%   \significado[间]{s.}{sala de jantar}
+% \end{verbete}
+%
+% \begin{verbete}[9]{重}{chong2}
+%   \significado{adv.}{de novo}
+%   \significado{p.c.}{camadas}
+%   \significado{s.}{repetição}
+%   \significado{v.}{repetir}
+%   \veja{重}{zhong4}
+% \end{verbete}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \clearpage
 \begin{multicols}{2}
