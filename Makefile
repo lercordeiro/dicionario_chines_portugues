@@ -33,5 +33,5 @@ clean:
 	rm dicionario.ind
 	rm dicionario.log
 	rm dicionario.toc
-	rm dicionario.pdf
+	rm dicionario.out
 
