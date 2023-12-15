@@ -48,7 +48,7 @@
 %\setCJKmainfont{Noto Serif CJK SC}
 %\setCJKsansfont{Noto Sans CJK SC}
 
-\setCJKmainfont{AR PL KaitiM GB}
+\setCJKmainfont{AR PL New Kai}
 \setCJKsansfont{AR PL SungtiL GB}
 
 \makeindex[columns=3, title=Índice, intoc]
@@ -79,10 +79,11 @@
 \newcommand\insertitem[1]{\item #1}
 
 \DeclareDocumentEnvironment{verbete}{ o m o m o }{%
-  \leavevmode\vspace{-2ex}%
+  \leavevmode\vspace{1ex}%
   \markboth{#2{\small«\pinyin{#4}»}}{#2{\small«\pinyin{#4}»}}
   \index{#2 «\pinyin{#4}»}
   \begin{minipage}[t][][t]{\linewidth}%
+  \begin{FlushLeft}%
   {\Large$\bullet$ \textbf{#2}}%
   \label{\mdfivesum{#2::#4}}%
   \IfValueTF{#3}{%
@@ -102,6 +103,7 @@
   }%
   \newline
 }{%
+  \end{FlushLeft}%
   \end{minipage}
 }
 
@@ -112,8 +114,14 @@
   \newline
 }
 
-\DeclareDocumentCommand{\veja}{ m m }{%
-  $\hookrightarrow$\ Veja: #1«\pinyin{#2}» (pág. \pageref{\mdfivesum{#1::#2}})\newline%
+\DeclareDocumentCommand{\veja}{ s m m }{%
+  \IfBooleanTF{#1}{%
+    \textsc{Veja:} #2{\footnotesize(pág. \pageref{\mdfivesum{#2::#3}})}\\%
+    \hspace{7ex}{\small«\pinyin{#3}»}%
+  }{%
+    \textsc{Veja:} #2{\small«\pinyin{#3}»} {\footnotesize(pág. \pageref{\mdfivesum{#2::#3}})}%
+  }%
+  \newline
 }
 
 \newcommand{\p}[1]{«\pinyin{#1}»}
@@ -278,6 +286,14 @@ interjeição            & \textbf{interj.}   & \\
 %   Campos Obrigatórios
 %     hanzi: hanzi da palavra
 %     pronúncia: pinyin da pronúncia da palavra como em verbetes
+%
+%
+% Para o comando \veja*:
+%   Campos Obrigatórios
+%     hanzi: hanzi da palavra
+%     pronúncia: pinyin da pronúncia da palavra como em verbetes
+%  Observação: Este comando joga o pinyin para a linha de baixo,
+%              para evitar quebra e deixar mais bonito.
 %
 % Alguns exemplos de alguns de entradas de verbetes:
 %
