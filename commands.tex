@@ -1,0 +1,105 @@
+%
+% Funções que uso no dicionario.tex
+%
+
+\NewDocumentCommand\mylist{>{\SplitList{;}}m}{
+  \begin{enumerate*}[left=0pt,mode=unboxed,itemjoin={{; }}]
+  \ProcessList{#1}{\insertitem}
+  \end{enumerate*}
+}
+\newcommand\insertitem[1]{\item #1}
+
+\newcommand{\padzeroes}[1]{%
+  \ifnum#1<10
+    000#1%
+  \else
+    \ifnum#1<100
+      00#1%
+    \else
+      \ifnum#1<1000
+        0#1%
+      \else
+        #1%
+  \fi\fi\fi
+}
+
+\newcommand\zeropad[2]{%
+  \ifnum#2<0\relax%
+    {\ensuremath-}\zeropadA{#1}{\the\numexpr#2*-1\relax}%
+  \else%
+    \zeropadA{#1}{#2}%
+  \fi%
+}
+
+\def\zeropadA#1#2{%
+  \ifnum1#2<1#1
+    \zeropadA{#1}{0#2}%
+  \else%
+    #2%
+  \fi%
+}
+
+\setsepchar{;}
+
+\NewDocumentEnvironment{verbete}{ o m o m o }{%
+  \leavevmode\vspace{1ex}%
+  \markboth{#2{\small«\pinyin{#4}»}}{#2{\small«\pinyin{#4}»}}
+  \IfValueTF{#1}{%
+      \readlist\listofstrokes{#1}
+      \index{\zeropad{000}{\listofstrokes[1]}#4@#2 «\pinyin{#4}»}
+    }{%
+      \index{\zeropad{000}{0}#4@#2 «\pinyin{#4}»}
+    }
+  \begin{minipage}[t][][t]{\linewidth}%
+  \begin{FlushLeft}%
+  {\Large$\bullet$ \textbf{#2}}%
+  \label{\mdfivesum{#2::#4}}%
+  \IfValueTF{#3}{%
+    \IfValueT{#1}{\hfill\textsuperscript{\tiny(#1画)}}%
+    \IfValueTF{#5}
+      { 
+        {#3}{«\pinyin{#4}»}{#5} 
+      }
+      { 
+        {#3}{«\pinyin{#4}»}
+      }
+  }{%
+    \IfValueTF{#5}{%
+      \IfValueT{#1}{\hfill\textsuperscript{\tiny(#1画)}}%
+      { «\pinyin{#4}»}{#5} }%
+      { { «\pinyin{#4}»}\IfValueT{#1}{\hfill\textsuperscript{\tiny(#1画)}}}%
+  }%
+  \newline
+}{%
+  \end{FlushLeft}%
+  \end{minipage}
+}
+
+\NewDocumentCommand{\significado}{ o m m }{%
+  $\hookrightarrow$\ (\textit{#2})%
+  \IfValueT{#1}{{\small[p.c.:#1]}}%
+  {\mylist{#3}}%
+  \newline
+}
+
+\NewDocumentCommand{\veja}{ s m m }{%
+  \IfBooleanTF{#1}{%
+    \textsc{Veja:} #2{\footnotesize(pág. \pageref{\mdfivesum{#2::#3}})}\\%
+    \hspace{7ex}{\small«\pinyin{#3}»}%
+  }{%
+    \textsc{Veja:} #2{\small«\pinyin{#3}»} {\footnotesize(pág. \pageref{\mdfivesum{#2::#3}})}%
+  }%
+  \newline
+}
+
+\newcommand{\p}[1]{«\pinyin{#1}»}
+\newcommand{\e}[1]{\textcolor{OliveGreen}{#1}}
+
+\DeclareRobustCommand{\&}{%
+    \ifdim\fontdimen1\font>0pt
+        \textsl{\symbol{`\&}}%
+    \else
+        \symbol{`\&}%
+    \fi
+}
+

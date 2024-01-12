@@ -2,17 +2,24 @@ TEX = xelatex -halt-on-error -papersize=A4 -8bit
 BIB = bibtex
 PDFJAM = pdfjam --landscape --signature 20 --twoside --a4paper --suffix livreto
 DSTS = /var/www/ler.cordeiro.nom.br/dicionário /var/www/ler.cordeiro.nom.br/repositório/Dicionário
+GENGRP = ./bin/gengroups.py
+GRPDIR = ./grupos
+VERBDIR = ./verbetes
 
-verbetes := $(wildcard verbetes/*.tex)
 
-.PHONY: dicionario.pdf dicionario-livreto.pdf
+$(VERBDIR)/%.tex:
+	echo "Verbetes"
 
-all : dicionario.pdf dicionario-livreto.pdf
+$(GRPDIR)/%.tex: $(VERBDIR)/%.tex
+	$(GENGRP) -r verbetes -w grupos
 
-one : dicionario.tex $(verbetes)
+one : dicionario.tex $(GRPDIR)/%.tex
 	$(TEX) dicionario.tex
 
-dicionario.pdf : dicionario.tex $(verbetes)
+grupos: $(VERBDIR)/%.tex
+	$(GENGRP) -r verbetes -w grupos
+
+dicionario.pdf : dicionario.tex $(GRPDIR)/%.tex
 	$(TEX) dicionario.tex
 	$(TEX) dicionario.tex
 	$(TEX) dicionario.tex
@@ -26,7 +33,10 @@ deploy : dicionario.pdf dicionario-livreto.pdf
 	cp dicionario-livreto.pdf $(D)
 .endfor
 
+all : dicionario.pdf dicionario-livreto.pdf
+
 clean:
+	rm $(GRPDIR)/*.tex
 	rm dicionario.aux
 	rm dicionario.idx
 	rm dicionario.ilg

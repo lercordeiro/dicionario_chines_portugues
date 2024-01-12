@@ -1,4 +1,5 @@
-﻿%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+﻿
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % XeTeX
 %
 % Dicionário Chinês -> Português
@@ -32,6 +33,8 @@
 \usepackage[explicit]{titlesec}
 \usepackage{tikz}
 \usepackage[hyperindex,hidelinks]{hyperref}
+\usepackage{listofitems}
+\usepackage{numprint}
 
 \hypersetup{
   linktoc=page,
@@ -45,13 +48,10 @@
   pdfkeywords={dicionário, chinês, português}
 }
 
-%\setCJKmainfont{Noto Serif CJK SC}
-%\setCJKsansfont{Noto Sans CJK SC}
-
 \setCJKmainfont{AR PL New Kai}
 \setCJKsansfont{AR PL SungtiL GB}
 
-\makeindex[columns=3, title=Índice, intoc]
+\makeindex[columns=3, title=指数/Índice, options=-l, intoc, columnseprule]
 
 \setlength{\parindent}{0em}
 \setlength{\parskip}{0.5em}
@@ -70,62 +70,6 @@
 
 \setlength{\headheight}{16pt}
 \addtolength{\topmargin}{-0.5pt}
-
-\NewDocumentCommand\mylist{>{\SplitList{;}}m}{
-  \begin{enumerate*}[left=0pt,mode=unboxed,itemjoin={{; }}]
-  \ProcessList{#1}{\insertitem}
-  \end{enumerate*}
-}
-\newcommand\insertitem[1]{\item #1}
-
-\DeclareDocumentEnvironment{verbete}{ o m o m o }{%
-  \leavevmode\vspace{1ex}%
-  \markboth{#2{\small«\pinyin{#4}»}}{#2{\small«\pinyin{#4}»}}
-  \index{#2 «\pinyin{#4}»}
-  \begin{minipage}[t][][t]{\linewidth}%
-  \begin{FlushLeft}%
-  {\Large$\bullet$ \textbf{#2}}%
-  \label{\mdfivesum{#2::#4}}%
-  \IfValueTF{#3}{%
-    \IfValueT{#1}{\hfill\textsuperscript{\tiny(#1画)}}%
-    \IfValueTF{#5}{%
-      {#3}{«\pinyin{#4}»}{#5}%
-    }{%
-      {#3}{«\pinyin{#4}»}%
-    }
-  }{%
-    \IfValueTF{#5}{%
-      \IfValueT{#1}{\hfill\textsuperscript{\tiny(#1画)}}%
-      { «\pinyin{#4}»}{#5}%
-    }{%
-      { «\pinyin{#4}»}\IfValueT{#1}{\hfill\textsuperscript{\tiny(#1画)}}%
-    }
-  }%
-  \newline
-}{%
-  \end{FlushLeft}%
-  \end{minipage}
-}
-
-\DeclareDocumentCommand{\significado}{ o m m }{%
-  $\hookrightarrow$\ (\textit{#2})%
-  \IfValueT{#1}{{ [p.c.:#1]}}%
-  {\mylist{#3}}%
-  \newline
-}
-
-\DeclareDocumentCommand{\veja}{ s m m }{%
-  \IfBooleanTF{#1}{%
-    \textsc{Veja:} #2{\footnotesize(pág. \pageref{\mdfivesum{#2::#3}})}\\%
-    \hspace{7ex}{\small«\pinyin{#3}»}%
-  }{%
-    \textsc{Veja:} #2{\small«\pinyin{#3}»} {\footnotesize(pág. \pageref{\mdfivesum{#2::#3}})}%
-  }%
-  \newline
-}
-
-\newcommand{\p}[1]{«\pinyin{#1}»}
-\newcommand{\e}[1]{\textcolor{OliveGreen}{#1}}
 
 \makeatletter
 \let\old@makechapterhead\@makechapterhead
@@ -148,20 +92,14 @@
 \newcommand{\restorechapterhead}{\let\@makechapterhead\old@makechapterhead}
 \makeatother
 
-\DeclareRobustCommand{\&}{%
-    \ifdim\fontdimen1\font>0pt
-        \textsl{\symbol{`\&}}%
-    \else
-        \symbol{`\&}%
-    \fi
-}
-
 \titlespacing{\section}{0pc}{2ex}{-1ex}
 \titleformat{\section}[hang]{\Large\bfseries}{}{0pt}{%
   \tikz{%
-    \node[draw,rounded corners=1mm,text depth=0.2ex,line width=1pt,    anchor=west]{\Large\bfseries#1};
+    \node[draw,rounded corners=1mm,text depth=0.2ex,line width=1pt, anchor=west]{\Large\bfseries#1};
   }%
 }
+
+\input{commands.tex}
 
 %%%
 %%% Documento começa aqui!
@@ -231,126 +169,43 @@ interjeição            & \textbf{interj.}   & \\
 
 \chapter{汉葡词典}
 
-%%%
-%%% Estou ordenando as palavras em ordem alfabética por pinyin.
-%%% Obs: Para as palavras diferentes com o mesmo pinyin, a que tem o menor 
-%%%      número de traços no primeiro hanzi vem antes.
-%%%
-
 %%%%%%%%%%%%%%%%%%%%%%%%
-% Entrada de um verbete:
 %
-% \begin{verbete}[traços]{hanzi}[antes]{pronúncia}[depois]
-%   \significado[classificadores]{termo_gramatical}{lista_de_significados}
-%   \veja{hanzi}{pronúncia}
-% \end{verbete}
+% Estou ordenando as palavras em ordem alfabética por pinyin, 
+% depois por número de traços e, finalmente, por UTF-8 do hanzi.
 %
-% Podem haver quantos '\significado' e '\veja' dentro de cada bloco de verbete. 
+% https://en.wikipedia.org/wiki/Chinese_character_orders
 %
-% Preferivelmente usar um comando '\significado' para cada termo gramatical ou
-%  se houver classificadores específicos para cada significado da palavra.
-%
-% Podem haver vários comandos '\veja', é aconselhável usar um comando para cada
-%  par de hanzy_pronúncia, o sistema cuida do texto e de colocar o número da
-%  página automaticamente.
-%
-%
-% Para o environment verbetes
-%   Campos Obrigatórios
-%     hanzi: Hanzi da palavra
-%     pronúncia: pinyin no formato: "ma0", "ma1", "ma2", "ma3", "ma4",
-%                os números correspondem aos tons
-%   Campos Opcionais
-%     traços: número de traços dos caracteres separados por ';'
-%     antes: texto adicionado antes do texto da pronúncia
-%            se adiciona um '\\' (pula linha) caso a pronúncia
-%            fique por cima do texto do número de caracteres,
-%            se usado o texto da pronúncia vai para baixo do Hanzi
-%     depois: texto adicionado depois do texto da pronúncia,
-%             se usado o texto da pronúncia vai para baixo do Hanzi
-%
-%
-% Para o comando \significado:
-%   Campos Obrigatórios
-%     termo_gramatical: abreviação dos termos, como 's.', 'v.', 'adj.',
-%                       'adv.', etc, conforme tabela acima
-%     lista_de_significados: significados da palavra separados por ';' ou ','.
-%                            Quando se usa ';' os significados são automaticamente
-%                            colocados em uma sequência numérica
-%   Campos Opcionais
-%     classificadores: quando há, lista de classificadores separados por ',',
-%                      o sistema adiciona o texto automaticamente
-%
-%
-% Para o comando \veja:
-%   Campos Obrigatórios
-%     hanzi: hanzi da palavra
-%     pronúncia: pinyin da pronúncia da palavra como em verbetes
-%
-%
-% Para o comando \veja*:
-%   Campos Obrigatórios
-%     hanzi: hanzi da palavra
-%     pronúncia: pinyin da pronúncia da palavra como em verbetes
-%  Observação: Este comando joga o pinyin para a linha de baixo,
-%              para evitar quebra e deixar mais bonito.
-%
-% Alguns exemplos de alguns de entradas de verbetes:
-%
-% \begin{verbete}[4]{不}[\\]{bu2}[ (antes de quarto tom)]
-%   \significado{adv.}{não}
-%   \veja{不}{bu0}
-%   \veja{不}{bu4}
-% \end{verbete}
-%
-% \begin{verbete}[4;6;11]{飞机票}{fei1ji1piao4}
-%   \significado[张]{v.}{bilhete de avião}
-%   \veja{机票}{ji1piao4}
-% \end{verbete}
-%
-% \begin{verbete}[16;4]{餐厅}{can1ting1}
-%   \significado[家]{s.}{restaurante}
-%   \significado[间]{s.}{sala de jantar}
-% \end{verbete}
-%
-% \begin{verbete}[9]{重}{chong2}
-%   \significado{adv.}{de novo}
-%   \significado{p.c.}{camadas}
-%   \significado{s.}{repetição}
-%   \significado{v.}{repetir}
-%   \veja{重}{zhong4}
-% \end{verbete}
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
 
 \clearpage
 \begin{multicols}{2}
-\input{verbetes/A.tex}
-\input{verbetes/B.tex}
-\input{verbetes/C.tex}
-\input{verbetes/D.tex}
-\input{verbetes/E.tex}
-\input{verbetes/F.tex}
-\input{verbetes/G.tex}
-\input{verbetes/H.tex}
-%%%%% Não existem palavras com pinyin iniciado em "I"
-\input{verbetes/J.tex}
-\input{verbetes/K.tex}
-\input{verbetes/L.tex}
-\input{verbetes/M.tex}
-\input{verbetes/N.tex}
-\input{verbetes/O.tex}
-\input{verbetes/P.tex}
-\input{verbetes/Q.tex}
-\input{verbetes/R.tex}
-\input{verbetes/S.tex}
-\input{verbetes/T.tex}
-%%%%% Não existem palavras com pinyin iniciado em "U"
-%%%%% Não existem palavras com pinyin iniciado em "V"
-\input{verbetes/W.tex}
-\input{verbetes/X.tex}
-\input{verbetes/Y.tex}
-\input{verbetes/Z.tex}
+\input{grupos/A.tex}
+\input{grupos/B.tex}
+\input{grupos/C.tex}
+\input{grupos/D.tex}
+\input{grupos/E.tex}
+\input{grupos/F.tex}
+\input{grupos/G.tex}
+\input{grupos/H.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "I"
+\input{grupos/J.tex}
+\input{grupos/K.tex}
+\input{grupos/L.tex}
+\input{grupos/M.tex}
+\input{grupos/N.tex}
+\input{grupos/O.tex}
+\input{grupos/P.tex}
+\input{grupos/Q.tex}
+\input{grupos/R.tex}
+\input{grupos/S.tex}
+\input{grupos/T.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "U"
+%%%%%%%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "V"
+\input{grupos/W.tex}
+\input{grupos/X.tex}
+\input{grupos/Y.tex}
+\input{grupos/Z.tex}
 \end{multicols}
 
 \printindex
