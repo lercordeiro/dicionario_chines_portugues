@@ -12,7 +12,7 @@
 %\documentclass[a4paper,12pt,twoside,openany,draft]{memoir}
 \documentclass[a4paper,12pt,twoside,openany]{memoir}
 
-\usepackage[usenames,dvipsnames]{color}
+\usepackage[dvipsnames]{xcolor}
 \usepackage[utf8]{inputenc}
 \usepackage[brazil]{babel}
 \usepackage{fontspec}
@@ -35,6 +35,7 @@
 \usepackage[hyperindex,hidelinks]{hyperref}
 \usepackage{listofitems}
 \usepackage{numprint}
+\usepackage{pifont}
 
 \hypersetup{
   linktoc=page,
@@ -208,6 +209,7 @@ interjeição            & \textbf{interj.}   & \\
 \input{grupos/Z.tex}
 \end{multicols}
 
+\indexprologue{Para diferenciação, os nomes próprios estão em cor diferente.}
 \printindex
 
 \end{document}
