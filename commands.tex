@@ -42,13 +42,16 @@
 \setsepchar{;}
 
 \NewDocumentEnvironment{verbete}{ o m o m o }{%
+  \StrSubstitute{#4}{r5}{r}[\result]
+  \StrSubstitute{\result}{t5}{t}[\pstr]
+  \edef\py{\pinyin{\pstr}}
   \leavevmode\vspace{1ex}%
-  \markboth{#2{\small«\pinyin{#4}»}}{#2{\small«\pinyin{#4}»}}
+  \markboth{#2{\small«\pinyin{\pstr}»}}{#2{\small«\py»}}
   \IfValueTF{#1}{%
     \readlist\listofstrokes{#1}
-    \index{\zeropad{000}{\listofstrokes[1]}#4@#2 «\pinyin{#4}»}
+    \index{\zeropad{000}{\listofstrokes[1]}#4@#2 «\py»}
   }{%
-    \index{\zeropad{000}{0}#4@#2 «\pinyin{#4}»}
+    \index{\zeropad{000}{0}#4@#2 «\py»}
   }
   \begin{minipage}[t][][t]{\linewidth}%
   \begin{FlushLeft}%
@@ -56,18 +59,11 @@
   \label{\mdfivesum{#2::#4}}%
   \IfValueTF{#3}{%
     \IfValueT{#1}{\hfill\textsuperscript{\tiny(#1画)}}%
-    \IfValueTF{#5}
-      { 
-        {#3}{«\pinyin{#4}»}{#5} 
-      }
-      { 
-        {#3}{«\pinyin{#4}»}
-      }
+    \IfValueTF{#5}{#3«\py»#5}{#3«\py»}
   }{%
-    \IfValueTF{#5}{%
-      \IfValueT{#1}{\hfill\textsuperscript{\tiny(#1画)}}%
-      { «\pinyin{#4}»}{#5} }%
-      { { «\pinyin{#4}»}\IfValueT{#1}{\hfill\textsuperscript{\tiny(#1画)}}}%
+    \IfValueTF{#5}
+      {\IfValueT{#1}{\hfill\textsuperscript{\tiny(#1画)}} «\py»#5 }%
+      {\hspace{1em}«\py»\IfValueT{#1}{\hfill\textsuperscript{\tiny(#1画)}}}%
   }%
   \newline
 }{%
@@ -81,27 +77,18 @@
   \IfValueTF{#1}{%
     \readlist\listofstrokes{#1}
     \index{\zeropad{000}{\listofstrokes[1]}#4@\textcolor{BrickRed}{#2} «\pinyin{#4}»}
-  }{%
-    \index{\zeropad{000}{0}#4@\textcolor{BrickRed}{#2} «\pinyin{#4}»}
-  }
+  }{\index{\zeropad{000}{0}#4@\textcolor{BrickRed}{#2} «\pinyin{#4}»}}
   \begin{minipage}[t][][t]{\linewidth}%
   \begin{FlushLeft}%
   {\tiny\ding{110}\Large \textbf{#2}}%
   \label{\mdfivesum{#2::#4}}%
   \IfValueTF{#3}{%
     \IfValueT{#1}{\hfill\textsuperscript{\tiny(#1画)}}%
-    \IfValueTF{#5}
-      { 
-        {#3}{«\pinyin{#4}»}{#5} 
-      }
-      { 
-        {#3}{«\pinyin{#4}»}
-      }
+    \IfValueTF{#5}{#3«\pinyin{#4}»#5}{#3«\pinyin{#4}»}
   }{%
-    \IfValueTF{#5}{%
-      \IfValueT{#1}{\hfill\textsuperscript{\tiny(#1画)}}%
-      { «\pinyin{#4}»}{#5} }%
-      { { «\pinyin{#4}»}\IfValueT{#1}{\hfill\textsuperscript{\tiny(#1画)}}}%
+    \IfValueTF{#5}
+      {\IfValueT{#1}{\hfill\textsuperscript{\tiny(#1画)}} «\pinyin{#4}»#5}%
+      {\ «\pinyin{#4}»\IfValueT{#1}{\hfill\textsuperscript{\tiny(#1画)}}}%
   }%
   \newline
 }{%
@@ -126,7 +113,6 @@
   \newline
 }
 
-\newcommand{\p}[1]{«\pinyin{#1}»}
 
 \DeclareRobustCommand{\&}{%
     \ifdim\fontdimen1\font>0pt

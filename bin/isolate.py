@@ -2,8 +2,9 @@
 
 import sys
 import argparse
+import re
 
-VERSION = "0.0.1"
+VERSION = "0.1.0"
 
 entries = {}
 
@@ -42,15 +43,45 @@ def read_entries(filename):
 
                 substrings = extract_strings_between_delimiters(
                     '[', ']', line)
-                nof_strokes = int(substrings[0].split(';')[0])
-
+                strokes = substrings[0].split(';')
                 substrings = extract_strings_between_delimiters(
                     '{', '}', line)
-                hanzi = substrings[1]
-                pinyin = substrings[2]
+                s = substrings[1]
+                s = s.replace("\ ", "")
+                s = s.replace("-", "")
+                s = s.replace("\u2026", "")
+                s = s.replace("（", "")
+                s = s.replace("）","")
+                s = s.replace("/〇","")
+                s = s.replace("\ ", "")
+                hanzis = list(s)
+                print(hanzis)
+                s = substrings[2].lower()
+                s = s.replace("\ ","")
+                s = s.replace("'","")
+                s = s.replace("-","")
+                s = s.replace(" ...", "")
+                s = s.replace("(", "")
+                s = s.replace(")","")
+                pinyin_str = s
+                print(pinyin_str)
+                pinyin_strs = re.split(r'([a-zA-Z]+[1-5])', pinyin_str)
+                print(pinyin_strs)
+                pinyins = [x for x in pinyin_strs if x != '']
+                print(pinyins)
                 
-                entry_filename = '{0}-{1:03d}-{2}.tex'.format(
-                    pinyin, nof_strokes, hanzi).lower().replace('\ ','')
+                if len(hanzis) != len(strokes):
+                    print(f'***** ERROR: in {filename}: number of hanzis and strokes are different: {len(hanzis)} != {len(strokes)}')
+                    sys.exit(1)
+                    
+                if len(hanzis) != len(pinyins):
+                    print(f'***** ERROR: in {filename}: number of hanzis and pinyins are different: {len(hanzis)} != {len(pinyins)}')
+                    sys.exit(1)
+                    
+                filename = ''
+                for i in range(len(hanzis)):
+                    filename += '{0}-{1:03d}-{2}-'.format(pinyins[i], int(strokes[i]), hanzis[i])
+                entry_filename = filename + '.tex'
                 
                 if entry_filename in entries:
                     print(f'***** ERROR: entry {entry_filename} exists')
@@ -69,7 +100,8 @@ def read_entries(filename):
                 continue
         
         file.close()
-            
+        
+        
 def write_entry_to_a_separate_file(write_flag):
     global entries
     
@@ -96,7 +128,6 @@ def write_entry_to_a_separate_file(write_flag):
             
             print('END ENTRY')
         
-
 
 def main():
     parser = argparse.ArgumentParser(description='''
