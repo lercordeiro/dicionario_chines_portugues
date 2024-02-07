@@ -13,7 +13,6 @@
 \documentclass[a4paper,12pt,twoside,openany]{memoir}
 
 \usepackage[dvipsnames]{xcolor}
-\usepackage[utf8]{inputenc}
 \usepackage[brazil]{babel}
 \usepackage{fontspec}
 \usepackage{xeCJK}
@@ -37,6 +36,7 @@
 \usepackage{numprint}
 \usepackage{pifont}
 \usepackage{xstring}
+\usepackage{xpatch}
 
 \hypersetup{
   linktoc=page,
@@ -53,14 +53,18 @@
 \setCJKmainfont{AR PL New Kai}
 \setCJKsansfont{AR PL SungtiL GB}
 
-\makeindex[columns=3, title=指数/Índice, options=-l, intoc, columnseprule]
+\makeindex[title=Índice por Pinyin,intoc=true,columns=3,columnsep=15pt,columnseprule=true,noautomatic=true,name=pinyin]
+\makeindex[title=Índice por Traço,intoc=true,columns=3,columnsep=15pt,columnseprule=true,noautomatic=true,name=stroke]
+\makeindex[title=Índice por Radical,intoc=true,columns=3,columnsep=15pt,columnseprule=true,noautomatic=true,name=radical]
+
+\indexsetup{level=\section*,toclevel=section,noclearpage}
 
 \setlength{\parindent}{0em}
 \setlength{\parskip}{0.5em}
 \setlength{\columnsep}{1em}
 \setlength{\columnseprule}{0.2mm}
 
-\xpinyinsetup{ratio={.6},vsep={1.2em}}
+\xpinyinsetup{ratio={.6},vsep={1em},pysep={\hspace{.5ex}}}
 
 % Headers & footers
 \fancyhead[L]{\rightmark} % Top left header
@@ -210,7 +214,12 @@ interjeição            & \textbf{interj.}   & \\
 \input{grupos/Z.tex}
 \end{multicols}
 
-\indexprologue{Para diferenciação, os nomes próprios estão em cor diferente.}
-\printindex
+\chapter{Índices Remissivos}
+
+Para diferenciação, os nomes próprios estão em cor diferente.
+
+\printindex[pinyin]
+\printindex[stroke]
+\printindex[radical]
 
 \end{document}

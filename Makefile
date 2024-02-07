@@ -1,10 +1,11 @@
-TEX = xelatex -halt-on-error -papersize=A4 -8bit 
+TEX = xelatex -halt-on-error -papersize=A4 -8bit # -interaction=batchmode
 BIB = bibtex
 PDFJAM = pdfjam --landscape --signature 20 --twoside --a4paper --suffix livreto
 DSTS = /var/www/ler.cordeiro.nom.br/dicionário /var/www/repo.ler.cordeiro.nom.br/Dicionário
 GENGRP = ./bin/gengroups.py
 GRPDIR = ./grupos
 VERBDIR = ./verbetes
+MKIDX = ~/.local/bin/zhmakeindex -s dicionario.ist 
 
 
 $(VERBDIR)/%.tex:
@@ -13,14 +14,16 @@ $(VERBDIR)/%.tex:
 $(GRPDIR)/%.tex: $(VERBDIR)/%.tex
 	$(GENGRP) -r verbetes -w grupos
 
-one : dicionario.tex $(GRPDIR)/%.tex
-	$(TEX) dicionario.tex
-
 grupos: $(VERBDIR)/%.tex
 	$(GENGRP) -r verbetes -w grupos
 
+dicionario: dicionario.pdf
+
 dicionario.pdf : dicionario.tex $(GRPDIR)/%.tex
 	$(TEX) dicionario.tex
+	$(MKIDX) -z pinyin pinyin
+	$(MKIDX) -z bihua stroke
+	$(MKIDX) -z bushou radical
 	$(TEX) dicionario.tex
 	$(TEX) dicionario.tex
 
@@ -37,6 +40,9 @@ all : dicionario.pdf dicionario-livreto.pdf
 
 clean:
 	rm $(GRPDIR)/*.tex
+	rm pinyin.*
+	rm stroke.*
+	rm radical.*
 	rm dicionario.aux
 	rm dicionario.idx
 	rm dicionario.ilg

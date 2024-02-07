@@ -41,11 +41,9 @@ def read_entries(filename):
             if 'begin' in line and 'verbete' in line:
                 begin_entry_found = True
 
-                substrings = extract_strings_between_delimiters(
-                    '[', ']', line)
+                substrings = extract_strings_between_delimiters('[', ']', line)
                 strokes = substrings[0].split(';')
-                substrings = extract_strings_between_delimiters(
-                    '{', '}', line)
+                substrings = extract_strings_between_delimiters('{', '}', line)
                 s = substrings[1]
                 s = s.replace("\ ", "")
                 s = s.replace("-", "")
@@ -80,8 +78,8 @@ def read_entries(filename):
                     
                 filename = ''
                 for i in range(len(hanzis)):
-                    filename += '{0}-{1:03d}-{2}-'.format(pinyins[i], int(strokes[i]), hanzis[i])
-                entry_filename = filename + '.tex'
+                    filename += '{0}~{1:03d}~{2}~'.format(pinyins[i], int(strokes[i]), hanzis[i])
+                entry_filename = filename.rstrip('~') + '.tex'
                 
                 if entry_filename in entries:
                     print(f'***** ERROR: entry {entry_filename} exists')
