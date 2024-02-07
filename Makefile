@@ -8,11 +8,14 @@ VERBDIR = ./verbetes
 MKIDX = ~/.local/bin/zhmakeindex -s dicionario.ist 
 
 
-$(VERBDIR)/%.tex:
-	echo "Verbetes"
+$(VERBDIR)/%.tex: verbetes.tar.gz
+	tar xvzf verbetes.tar.gz
 
-$(GRPDIR)/%.tex: $(VERBDIR)/%.tex
+$(GRPDIR)/%.tex: verbetes.tar.gz
 	$(GENGRP) -r verbetes -w grupos
+
+archive:
+	tar cvzf verbetes.tar.gz ./verbetes
 
 grupos: $(VERBDIR)/%.tex
 	$(GENGRP) -r verbetes -w grupos
@@ -40,14 +43,11 @@ all : dicionario.pdf dicionario-livreto.pdf
 
 clean:
 	rm $(GRPDIR)/*.tex
-	rm pinyin.*
-	rm stroke.*
-	rm radical.*
-	rm dicionario.aux
-	rm dicionario.idx
-	rm dicionario.ilg
-	rm dicionario.ind
-	rm dicionario.log
-	rm dicionario.toc
-	rm dicionario.out
+	rm *.aux
+	rm *.idx
+	rm *.ilg
+	rm *.ind
+	rm *.log
+	rm *.toc
+	rm *.out
 
