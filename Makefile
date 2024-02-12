@@ -11,7 +11,7 @@ MKIDX = ~/.local/bin/zhmakeindex -s dicionario.ist
 $(VERBDIR)/%.tex: verbetes.tar.gz
 	tar xvzf verbetes.tar.gz
 
-$(GRPDIR)/%.tex: verbetes.tar.gz
+$(GRPDIR)/%.tex: $(VERBDIR)/%.tex
 	$(GENGRP) -r verbetes -w grupos
 
 archive:
