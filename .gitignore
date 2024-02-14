@@ -2,6 +2,7 @@ verbetes.open/
 verbetes/
 grupos/
 tmp/
+novos/
 .kile/
 *.aux
 *.idx
