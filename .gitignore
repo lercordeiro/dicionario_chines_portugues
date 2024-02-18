@@ -1,8 +1,7 @@
-verbetes.open/
 verbetes/
 grupos/
 tmp/
-novos/
+work/
 .kile/
 *.aux
 *.idx
