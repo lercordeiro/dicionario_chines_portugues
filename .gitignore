@@ -3,6 +3,7 @@ grupos/
 tmp/
 work/
 .kile/
+*.done
 *.aux
 *.idx
 *.ilg

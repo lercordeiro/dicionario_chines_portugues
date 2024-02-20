@@ -8,21 +8,22 @@ VERBDIR = ./verbetes
 MKIDX = ~/.local/bin/zhmakeindex -s dicionario.ist 
 
 
-$(VERBDIR)/%.tex: verbetes.tar.gz
-	tar xvzf verbetes.tar.gz
-
-$(GRPDIR)/%.tex: $(VERBDIR)/%.tex
-	$(GENGRP) -r verbetes -w grupos
+all : dicionario.pdf dicionario-livreto.pdf
 
 archive:
-	tar cvzf verbetes.tar.gz ./verbetes
+	tar cvzf verbetes.tar.gz $(VERBDIR)
+	rm grupos.done
 
-grupos: $(VERBDIR)/%.tex
-	$(GENGRP) -r verbetes -w grupos
+grupos.done: verbetes.tar.gz
+	tar xvzf verbetes.tar.gz
+	$(GENGRP) -r $(VERBDIR) -w $(GRPDIR)
+	touch grupos.done
+
+grupos: grupos.done
 
 dicionario: dicionario.pdf
 
-dicionario.pdf : dicionario.tex $(GRPDIR)/%.tex
+dicionario.pdf : dicionario.tex grupos.done
 	$(TEX) dicionario.tex
 	$(MKIDX) -z pinyin pinyin
 	$(MKIDX) -z bihua stroke
@@ -39,9 +40,8 @@ deploy : dicionario.pdf dicionario-livreto.pdf
 	cp dicionario-livreto.pdf $(D)
 .endfor
 
-all : dicionario.pdf dicionario-livreto.pdf
-
 clean:
+	rm grupos.done
 	rm $(GRPDIR)/*.tex
 	rm *.aux
 	rm *.idx
