@@ -12,7 +12,7 @@ all : dicionario.pdf dicionario-livreto.pdf
 
 archive:
 	tar cvzf verbetes.tar.gz $(VERBDIR)
-	rm grupos.done
+	rm -f grupos.done
 
 grupos.done: verbetes.tar.gz
 	tar xvzf verbetes.tar.gz
@@ -30,6 +30,8 @@ dicionario.pdf : dicionario.tex grupos.done
 	$(MKIDX) -z bushou radical
 	$(TEX) dicionario.tex
 	$(TEX) dicionario.tex
+	echo -n "Verbetes: "
+	grep begin $(VERBDIR)/* | grep verbete | wc -l
 
 dicionario-livreto.pdf : dicionario.pdf
 	$(PDFJAM) dicionario.pdf
@@ -40,9 +42,13 @@ deploy : dicionario.pdf dicionario-livreto.pdf
 	cp dicionario-livreto.pdf $(D)
 .endfor
 
+compute:
+	echo -n "Verbetes: "
+	grep begin $(VERBDIR)/* | grep verbete | wc -l
+
 clean:
-	rm grupos.done
-	rm $(GRPDIR)/*.tex
+	rm -f grupos.done
+	rm -f $(GRPDIR)/*.tex
 	rm *.aux
 	rm *.idx
 	rm *.ilg

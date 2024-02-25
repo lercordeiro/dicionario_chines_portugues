@@ -9,11 +9,19 @@ VERSION = "0.0.1"
 
 entries = []
 
-def get_entries_from(readdir):
+def get_entries(readdir):
     global entries
     only_files = [ f for f in listdir(readdir) if isfile(join(readdir, f))]
     all_entries = list(map(lambda x: tuple(x.split('.', 1)[0].split('-')), only_files))
     entries = sorted(list(set(all_entries)))
+    
+def get_entry_and_write(filename, f):
+    with open(filename, 'r', encoding='utf-8') as file:
+        for line in file:
+            line = line.rstrip()
+            f.write(f'{line}\n')
+        f.write('\n')
+
            
 def write_groups(readdir, writedir):
     global entries
@@ -25,6 +33,7 @@ def write_groups(readdir, writedir):
     last_first_letter = ''
     
     for entry in entries:
+        print(f'Processing entry {entry}')
         first_letter = entry[0].upper()[0]
         if last_first_letter != first_letter:
             last_first_letter = first_letter
@@ -47,8 +56,7 @@ def write_groups(readdir, writedir):
             file.write(f'\\addcontentsline{{toc}}{{section}}{{{c}}}\n\n')
                                                               
             for e in group[c]:
-                f = readdir + '/' + e
-                file.write(f'\\input{{{f}}}\n')
+                get_entry_and_write(readdir + '/' + e, file)
                                                               
             file.write('\n%%%%% EOF %%%%%\n')
 
@@ -63,7 +71,7 @@ def main():
 
     args = parser.parse_args()
     
-    get_entries_from(args.read_dir)
+    get_entries(args.read_dir)
     write_groups(args.read_dir, args.write_dir)
 
     return 0;

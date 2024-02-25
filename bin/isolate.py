@@ -55,6 +55,7 @@ def read_entries(filename):
                 print(hanzis)
                 s = substrings[2].lower()
                 s = s.replace("\ ","")
+                s = s.replace("·","")
                 s = s.replace("'","")
                 s = s.replace("-","")
                 s = s.replace(" ...", "")

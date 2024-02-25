@@ -17,8 +17,8 @@
   \index[pinyin]{#2@«\py» #2}
   \index[stroke]{#2@#2 «\py»}
   \index[radical]{#2@#2 «\py»}
-  \leavevmode\vspace{1ex}%
-  \begin{minipage}[t][][t]{\linewidth}
+  \leavevmode%
+  \begin{minipage}[t][][t]{.475\textwidth}
   \begin{FlushLeft}
   \label{\mdfivesum{#2::#4}}
   {\tiny\ding{108}\Large\textbf{#2}}%
@@ -33,7 +33,7 @@
   \newline
 }{%
   \end{FlushLeft}
-  \end{minipage}
+  \end{minipage}\par
 }
 
 \NewDocumentEnvironment{verbete*}{ o m o m o }{%
@@ -44,11 +44,11 @@
   \index[pinyin]{#2@«\py» \textcolor{BrickRed}{#2}}
   \index[stroke]{#2@\textcolor{BrickRed}{#2} «\py»}
   \index[radical]{#2@\textcolor{BrickRed}{#2} «\py»}
-  \leavevmode\vspace{1ex}%
-  \begin{minipage}[t][][t]{\linewidth}
+  \leavevmode%
+  \begin{minipage}[t][][t]{.475\textwidth}
   \begin{FlushLeft}
-  \label{\mdfivesum{#2::#4}}
-  {\tiny\ding{110}\Large \textbf{#2}}%
+  \label{\mdfivesum{*#2::#4}}
+  {\tiny\ding{108}\Large \textbf{#2}}%
   \IfValueTF{#3}{%
     \IfValueT{#1}{\hfill\textsuperscript{\tiny(#1画)}}%
     \IfValueTF{#5}{#3«\py»#5}{#3«\py»}
@@ -58,14 +58,16 @@
       {\hspace{1ex}«\py»\IfValueT{#1}{\hfill\textsuperscript{\tiny(#1画)}}}
   }
   \newline
+  $\hookrightarrow$\ (\textit{Substantivo Próprio})
+  \newline
 }{%
   \end{FlushLeft}
-  \end{minipage}
+  \end{minipage}\par
 }
 
 \NewDocumentCommand{\significado}{ o m m }{%
   $\hookrightarrow$\ (\textit{#2})%
-  \IfValueT{#1}{{\small[p.c.:#1]}}%
+  \IfValueT{#1}{ {\small[p.c.: #1]}\\}%
   {\mylist{#3}}%
   \newline
 }
@@ -75,10 +77,10 @@
   \StrSubstitute{\result}{t5}{t}[\pstr]
   \edef\py{\pinyin{\pstr}}
   \IfBooleanTF{#1}{%
-    \textsc{Veja:} #2{\footnotesize(pág.\pageref{\mdfivesum{#2::#3}})}\\%
-    \hspace{7ex}{\small«\py»}%
+    \textit{Veja:} #2{\footnotesize(pág.\pageref{\mdfivesum{#2::#3}})}\\%
+    \hspace{6ex}{\small«\py»}%
   }{%
-    \textsc{Veja:} #2{\small«\py»} {\footnotesize(pág.\pageref{\mdfivesum{#2::#3}})}%
+    \textit{Veja:} #2{\small«\py»} {\footnotesize(pág.\pageref{\mdfivesum{#2::#3}})}%
   }%
   \newline
 }
