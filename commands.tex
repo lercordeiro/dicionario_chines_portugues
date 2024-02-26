@@ -13,11 +13,11 @@
   \StrSubstitute{#4}{r5}{r}[\result]
   \StrSubstitute{\result}{t5}{t}[\pstr]
   \edef\py{\pinyin{\pstr}}
+  \leavevmode%
   \markboth{#2{\small«\py»}}{#2{\small«\py»}}
   \index[pinyin]{#2@«\py» #2}
   \index[stroke]{#2@#2 «\py»}
   \index[radical]{#2@#2 «\py»}
-  \leavevmode%
   \begin{minipage}[t][][t]{.475\textwidth}
   \begin{FlushLeft}
   \label{\mdfivesum{#2::#4}}
@@ -40,14 +40,14 @@
   \StrSubstitute{#4}{r5}{r}[\result]
   \StrSubstitute{\result}{t5}{t}[\pstr]
   \edef\py{\pinyin{\pstr}}
+  \leavevmode%
   \markboth{#2{\small«\py»}}{#2{\small«\py»}}
   \index[pinyin]{#2@«\py» \textcolor{BrickRed}{#2}}
   \index[stroke]{#2@\textcolor{BrickRed}{#2} «\py»}
   \index[radical]{#2@\textcolor{BrickRed}{#2} «\py»}
-  \leavevmode%
   \begin{minipage}[t][][t]{.475\textwidth}
   \begin{FlushLeft}
-  \label{\mdfivesum{*#2::#4}}
+  \label{\mdfivesum{*::#2::#4}}
   {\tiny\ding{108}\Large \textbf{#2}}%
   \IfValueTF{#3}{%
     \IfValueT{#1}{\hfill\textsuperscript{\tiny(#1画)}}%
@@ -72,19 +72,38 @@
   \newline
 }
 
-\NewDocumentCommand{\veja}{ s m m }{%
+\NewDocumentCommand{\veja}{ s m m o }{%
   \StrSubstitute{#3}{r5}{r}[\result]
   \StrSubstitute{\result}{t5}{t}[\pstr]
   \edef\py{\pinyin{\pstr}}
   \IfBooleanTF{#1}{%
-    \textit{Veja:} #2{\footnotesize(pág.\pageref{\mdfivesum{#2::#3}})}\\%
+    \IfValueTF{#4}{%
+      \textit{Veja:} #2{\footnotesize(pág.\pageref{\mdfivesum{#4::#2::#3}})}\\%
+    }{%
+      \textit{Veja:} #2{\footnotesize(pág.\pageref{\mdfivesum{#2::#3}})}\\%
+    }%
     \hspace{6ex}{\small«\py»}%
   }{%
-    \textit{Veja:} #2{\small«\py»} {\footnotesize(pág.\pageref{\mdfivesum{#2::#3}})}%
+    \IfValueTF{#4}{%
+      \textit{Veja:} #2{\small«\py»} {\footnotesize(pág.\pageref{\mdfivesum{#4::#2::#3}})}
+    }{%
+      \textit{Veja:} #2{\small«\py»} {\footnotesize(pág.\pageref{\mdfivesum{#2::#3}})}
+    }%
   }%
   \newline
 }
 
+\NewDocumentCommand{\variante}{ m m o }{%
+  \StrSubstitute{#2}{r5}{r}[\result]
+  \StrSubstitute{\result}{t5}{t}[\pstr]
+  \edef\py{\pinyin{\pstr}}
+  \IfValueTF{#3}{%
+    $\hookrightarrow$\ variante de #1{\small«\py»} {\footnotesize(pág.\pageref{\mdfivesum{#3::#1::#2}})}
+  }{%
+    $\hookrightarrow$\ variante de #1{\small«\py»} {\footnotesize(pág.\pageref{\mdfivesum{#1::#2}})}
+  }%
+  \newline
+}
 
 \DeclareRobustCommand{\&}{%
     \ifdim\fontdimen1\font>0pt
