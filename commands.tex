@@ -47,7 +47,7 @@
   \index[radical]{#2@\textcolor{BrickRed}{#2} «\py»}
   \begin{minipage}[t][][t]{.475\textwidth}
   \begin{FlushLeft}
-  \label{\mdfivesum{*::#2::#4}}
+  \label{\mdfivesum{sp::#2::#4}}
   {\tiny\ding{108}\Large \textbf{#2}}%
   \IfValueTF{#3}{%
     \IfValueT{#1}{\hfill\textsuperscript{\tiny(#1画)}}%
@@ -98,9 +98,9 @@
   \StrSubstitute{\result}{t5}{t}[\pstr]
   \edef\py{\pinyin{\pstr}}
   \IfValueTF{#3}{%
-    $\hookrightarrow$\ variante de #1{\small«\py»} {\footnotesize(pág.\pageref{\mdfivesum{#3::#1::#2}})}
+    $\hookrightarrow$\ variante de #1 «\py» {\footnotesize(pág.\pageref{\mdfivesum{#3::#1::#2}})}
   }{%
-    $\hookrightarrow$\ variante de #1{\small«\py»} {\footnotesize(pág.\pageref{\mdfivesum{#1::#2}})}
+    $\hookrightarrow$\ variante de #1 «\py» {\footnotesize(pág.\pageref{\mdfivesum{#1::#2}})}
   }%
   \newline
 }
