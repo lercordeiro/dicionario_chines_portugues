@@ -37,8 +37,9 @@
 \usepackage{pifont}
 \usepackage{xstring}
 \usepackage{xpatch}
+\usepackage{tabularray}
 
-\input{commands.tex}
+\input{comandos.tex}
 
 \setCJKmainfont{Noto Serif CJK SC ExtraLight}
 \setCJKsansfont{Noto Sans CJK SC}
@@ -121,7 +122,6 @@
 \tableofcontents
 
 \newpage
-
 \chapter{汉葡词典}
 
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -164,40 +164,17 @@
 \end{multicols}
 
 \newpage
+\pagestyle{empty}
 \chapter{Termos Gramaticais Chineses}
+\input{termos.tex}
 
-\begin{tabular}{lll}
-substantivo/nome       & \textbf{s.}        & 名词 \\
-palavra de lugar       & \textbf{p.d.l.}    & 处所词 \\
-palavra de localização & \textbf{p.l.}      & 方位词 \\
-palavra de tempo       & \textbf{p.t.}      & 时间词 \\
-verbo                  & \textbf{v.}        & 动词 \\
-verbo direcional       & \textbf{v.d.}      & 趣向\hspace{1em}动词 \\
-verbo optativo         & \textbf{v.o.}      & 能缘\hspace{1em}动词 \\
-adjetivo               & \textbf{adj.}      & 形容词 \\
-numeral                & \textbf{num.}      & 数词 \\
-palavra classificadora & \textbf{p.c.}      & 两量词 \\
-pronome                & \textbf{pron.}     & 代词 \\
-interrogativo          & \textbf{interr.}   & 疑问词 \\
-advérbio               & \textbf{adv.}      & 副词 \\
-preposição             & \textbf{prep.}     & 介词 \\
-conjunção              & \textbf{conj.}     & 连词 \\
-partícula              & \textbf{part.}     & 助词 \\
-sujeito                & \textbf{suj.}      & 主语 \\
-objeto                 & \textbf{obj.}      & 宾语 \\
-atributo               & \textbf{atrib.}    & 定语 \\
-adjunto adverbial      & \textbf{a.adv.}    & 状语 \\
-complemento            & \textbf{compl.}    & 补语 \\
-verbo+complemento      & \textbf{v.+compl.} & 动宾式\hspace{1em}离合词 \\
-expressão idiomática   & \textbf{expr.}     & \\
-interjeição            & \textbf{interj.}   & \\
-\end{tabular}
+\newpage
+\chapter{Radicais Chineses}
+\input{radicais.tex}
 
-%\input{radicais.tex}
-
-%\printindex[stroke]
-%\printindex[radical]
-%\printindex[pinyin]
+\printindex[stroke]
+\printindex[radical]
+\printindex[pinyin]
 
 \end{document}
 
