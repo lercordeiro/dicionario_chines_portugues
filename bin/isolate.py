@@ -47,6 +47,7 @@ def read_entries(filename):
                 s = substrings[1]
                 s = s.replace("\ ", "")
                 s = s.replace("-", "")
+                s = s.replace("…", "")
                 s = s.replace("\u2026", "")
                 s = s.replace("（", "")
                 s = s.replace("）","")
@@ -58,7 +59,7 @@ def read_entries(filename):
                 s = s.replace("·","")
                 s = s.replace("'","")
                 s = s.replace("-","")
-                s = s.replace(" ...", "")
+                s = s.replace("...", "")
                 s = s.replace("(", "")
                 s = s.replace(")","")
                 pinyin_str = s
