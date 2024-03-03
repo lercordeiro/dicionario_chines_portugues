@@ -18,9 +18,9 @@ def get_entries(readdir):
 def get_entry_and_write(filename, f):
     with open(filename, 'r', encoding='utf-8') as file:
         for line in file:
-            line = line.rstrip()
-            f.write(f'{line}\n')
-        f.write('\n')
+            if line.strip():
+              line = line.rstrip()
+              f.write(f'{line}\n')
 
            
 def write_groups(readdir, writedir):

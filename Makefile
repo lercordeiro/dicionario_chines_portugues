@@ -1,7 +1,8 @@
 TEX = xelatex -halt-on-error -papersize=A4 -8bit # -interaction=batchmode
 BIB = bibtex
 PDFJAM = pdfjam --landscape --signature 20 --twoside --a4paper --suffix livreto
-DSTS = /var/www/ler.cordeiro.nom.br/dicionário /var/www/repo.ler.cordeiro.nom.br/Dicionário
+DST_SITE = /var/www/ler.cordeiro.nom.br/dicionário
+DST_REPO = /var/www/repo.ler.cordeiro.nom.br/Dicionário
 GENGRP = ./bin/gengroups.py
 GRPDIR = ./grupos
 VERBDIR = ./verbetes
@@ -21,7 +22,7 @@ grupos.done : verbetes.tar.gz
 
 grupos : grupos.done
 
-dicionario : dicionario.pdf
+dicionario : dicionario.pdf 
 
 dicionario.pdf : dicionario.tex comandos.tex termos.tex radicais.tex grupos.done
 	$(TEX) dicionario.tex
@@ -37,10 +38,10 @@ dicionario-livreto.pdf : dicionario.pdf
 	$(PDFJAM) dicionario.pdf
 
 deploy : dicionario.pdf dicionario-livreto.pdf
-.for D in $(DSTS)
-	cp dicionario.pdf         $(D)
-	cp dicionario-livreto.pdf $(D)
-.endfor
+	cp dicionario.pdf         $(DST_SITE)
+	cp dicionario.pdf         $(DST_REPO)
+	cp dicionario-livreto.pdf $(DST_SITE)
+	cp dicionario-livreto.pdf $(DST_REPO)
 
 verbetes :
 	echo -n "Verbetes: "

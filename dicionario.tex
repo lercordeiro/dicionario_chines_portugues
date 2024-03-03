@@ -9,8 +9,7 @@
 % CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\documentclass[a4paper,12pt,twoside,openany,draft]{memoir}
-\documentclass[a4paper,12pt,twoside,openany]{memoir}
+\documentclass[a4paper,10pt,twoside,openany]{memoir}
 
 \usepackage[dvipsnames]{xcolor}
 \usepackage[brazil]{babel}
@@ -23,12 +22,10 @@
 \usepackage{fancyhdr}
 \usepackage{imakeidx}
 \usepackage{ifthen}
-\usepackage{tocloft}
 \usepackage{xparse}
 \usepackage[inline]{enumitem}
 \usepackage{zhnumber}
 \usepackage{wasysym}
-\usepackage{ragged2e}
 \usepackage[explicit]{titlesec}
 \usepackage{tikz}
 \usepackage[hyperindex,hidelinks]{hyperref}
@@ -39,55 +36,66 @@
 \usepackage{xpatch}
 \usepackage{tabularray}
 
+% Meus Comandos
 \input{comandos.tex}
 
+% Ajuste das fontes... No Tofu do Google
 \setCJKmainfont{Noto Serif CJK SC ExtraLight}
 \setCJKsansfont{Noto Sans CJK SC}
 \setCJKmonofont{Noto Sans Mono CJK SC}
 
+% Ajustes do PDF
 \hypersetup{
   linktoc=page,
   colorlinks=true,
-  urlcolor=blue,
+  urlcolor=green,
   linkcolor=blue,
-  citecolor=red,
-  pdftitle={汉葡词典- Dicionário Chinês-Português},
+  citecolor=blue,
+  pdftitle={汉葡词典 - Dicionário Chinês-Português},
   pdfsubject={Dicionário Chinês-Português para o Curso de Chinês do Instituto Confúcio},
-  pdfauthor={Luiz Eduardo Roncato Cordeiro (罗学凯)},
-  pdfkeywords={dicionário, chinês, português}
+  pdfauthor={Luiz Eduardo Roncato Cordeiro AKA 罗学凯},
+  pdfkeywords={dicionário, chinês, português, instituto confúcio}
 }
 
+% Sumário
+%\renewcommand\cftchapteraftersnumb{\normalfont}
+\renewcommand\cftbeforechapterskip{5pt plus 1pt}
+
+% Índices Remissivos
 \makeindex[title=Índice Remissivo por Pinyin,intoc=true,columns=3,columnsep=15pt,columnseprule=true,noautomatic=true,name=pinyin]
 \makeindex[title=Índice Remissivo por Traço,intoc=true,columns=3,columnsep=15pt,columnseprule=true,noautomatic=true,name=stroke]
 \makeindex[title=Índice Remissivo por Radical,intoc=true,columns=3,columnsep=15pt,columnseprule=true,noautomatic=true,name=radical]
 \indexsetup{level=\chapter*,toclevel=chapter,headers={\indexname}{\indexname}}
 \indexprologue{Para diferenciação, os nomes próprios estão em cor diferente.}
 
+% Ajustes de espaçamento
 \setlength{\parindent}{0cm}
-\setlength{\parskip}{2mm}
+\setlength{\parskip}{-1.5mm}
 \setlength{\columnsep}{.5em}
 \setlength{\columnseprule}{0.2mm}
 
+% Ajustes do gerador de pinyin
 \xpinyinsetup{ratio={.6},vsep={1em},pysep={\hspace{.2ex}}}
 
-% Headers & footers
+% Headers & Footers
 \fancyhead[L]{\rightmark} % Top left header
 \fancyhead[R]{\leftmark}  % Top right header
-\renewcommand{\headrulewidth}{1.4pt} % Rule under the header
+\renewcommand{\headrulewidth}{1pt} % Rule under the header
 \fancyfoot[C]{\thepage} % Bottom center footer
-\renewcommand{\footrulewidth}{1.4pt} % Rule under the header
-\pagestyle{fancy} % Use the custom headers and footers throughout the document
-
+\renewcommand{\footrulewidth}{1pt} % Rule under the header
 \setlength{\headheight}{16pt}
 \addtolength{\topmargin}{-0.5pt}
+\pagestyle{fancy} % Use the custom headers and footers throughout the document
 
-\titlespacing{\section}{0pc}{2ex}{-1ex}
+% Seções têm uma caixa arredondada em volta do nome, para o A-Z dos pinyin.
+\titlespacing{\section}{0pc}{2ex}{1ex}
 \titleformat{\section}[hang]{\Large\bfseries}{}{0pt}{%
   \tikz{%
     \node[draw,rounded corners=1mm,text depth=0.2ex,line width=1pt, anchor=west]{\Large\bfseries#1};
   }%
 }
 
+% Até agora o melhor estilo para capítulos
 \chapterstyle{verville}
 
 %%%
@@ -97,28 +105,25 @@
 \begin{document}
 
 \begin{titlingpage}
-	
-	\raggedleft
-	
-	\rule{1pt}{\textheight}
-	\hspace{0.05\textwidth}
-	\parbox[b]{0.75\textwidth}{
-		
-		{\Huge\bfseries 汉葡词典}\\[2\baselineskip] % Title
-		{\large\textsc{Dicionário Chinês-Português para o\\%
-     			Curso de Chinês do Instituto Confúcio}}\\%
-		[4\baselineskip]
-    		{\Large\textsc{罗学凯}\\%
-     		\tiny Luiz Eduardo Roncato Cordeiro\\%
- 			Aluno do Instituto Confúcio da UNESP}
-		
-		\vspace{0.5\textheight}
-		
-		{\noindent \zhtoday}\\[\baselineskip]
-	}
+  \raggedleft
+  \rule{1pt}{\textheight}
+  \hspace{0.05\textwidth}
+  \parbox[b]{0.75\textwidth}{
+    {\Huge\bfseries 汉葡词典}\\[2\baselineskip] % Title
+    {\large\textsc{Dicionário Chinês-Português para o\\%
+                   Curso de Chinês do Instituto Confúcio}}\\%
+    [4\baselineskip]
+    {\Large\textsc{罗学凯}\\%
+      \tiny Luiz Eduardo Roncato Cordeiro\\%
+            Aluno do Instituto Confúcio da UNESP}
 
+      \vspace{0.5\textheight}
+
+      {\noindent \zhtoday}\\[\baselineskip]
+    }
 \end{titlingpage}
 
+\newpage
 \tableofcontents
 
 \newpage
@@ -133,7 +138,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-\clearpage
+\newpage
 \begin{multicols}{2}
 \input{grupos/A.tex}
 \input{grupos/B.tex}
