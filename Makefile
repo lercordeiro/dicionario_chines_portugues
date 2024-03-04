@@ -1,12 +1,12 @@
 TEX = xelatex -halt-on-error -papersize=A4 -8bit # -interaction=batchmode
 BIB = bibtex
-PDFJAM = pdfjam --landscape --signature 20 --twoside --a4paper --suffix livreto
 DST_SITE = /var/www/ler.cordeiro.nom.br/dicionário
 DST_REPO = /var/www/repo.ler.cordeiro.nom.br/Dicionário
 GENGRP = ./bin/gengroups.py
 GRPDIR = ./grupos
 VERBDIR = ./verbetes
 MKIDX = ~/.local/bin/zhmakeindex -s dicionario.ist 
+BOOK = pdfbook2 --no-crop --signature=20 --paper=a4paper
 
 
 all: dicionario.pdf dicionario-livreto.pdf
@@ -34,8 +34,11 @@ dicionario.pdf : dicionario.tex comandos.tex termos.tex radicais.tex grupos.done
 	echo -n "Verbetes: "
 	grep begin $(VERBDIR)/* | grep verbete | wc -l
 
-dicionario-livreto.pdf : dicionario.pdf
-	$(PDFJAM) dicionario.pdf
+dicionario-book.pdf : dicionario.pdf
+	$(BOOK) dicionario.pdf
+
+dicionario-livreto.pdf : dicionario-book.pdf
+	cp dicionario-book.pdf dicionario-livreto.pdf
 
 deploy : dicionario.pdf dicionario-livreto.pdf
 	cp dicionario.pdf         $(DST_SITE)

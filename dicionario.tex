@@ -81,10 +81,16 @@
 \fancyhead[L]{\rightmark} % Top left header
 \fancyhead[R]{\leftmark}  % Top right header
 \renewcommand{\headrulewidth}{1pt} % Rule under the header
-\fancyfoot[C]{\thepage} % Bottom center footer
+\fancyfoot[LE,RO]{\thepage} % Bottom left footer
+\fancyfoot[C]{汉葡词典} % Bottom center footer
 \renewcommand{\footrulewidth}{1pt} % Rule under the header
 \setlength{\headheight}{16pt}
 \addtolength{\topmargin}{-0.5pt}
+\fancypagestyle{plain}{% 
+  \fancyhead{} % clear all header and footer fields
+  \fancyfoot[LE,RO]{\thepage}
+  \fancyfoot[C]{汉葡词典}
+}
 \pagestyle{fancy} % Use the custom headers and footers throughout the document
 
 % Seções têm uma caixa arredondada em volta do nome, para o A-Z dos pinyin.
@@ -148,7 +154,7 @@
 \input{grupos/F.tex}
 \input{grupos/G.tex}
 \input{grupos/H.tex}
-%%%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "I"
+%%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "I"
 \input{grupos/J.tex}
 \input{grupos/K.tex}
 \input{grupos/L.tex}
@@ -160,8 +166,8 @@
 \input{grupos/R.tex}
 \input{grupos/S.tex}
 \input{grupos/T.tex}
-%%%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "U"
-%%%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "V"
+%%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "U"
+%%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "V"
 \input{grupos/W.tex}
 \input{grupos/X.tex}
 \input{grupos/Y.tex}
@@ -169,7 +175,7 @@
 \end{multicols}
 
 \newpage
-\pagestyle{empty}
+\pagestyle{plain}
 \chapter{Termos Gramaticais Chineses}
 \input{termos.tex}
 
