@@ -8,6 +8,7 @@ VERBDIR = ./verbetes
 MKIDX = ~/.local/bin/zhmakeindex -s dicionario.ist 
 BOOK = pdfbook2 --no-crop --signature=20 --paper=a4paper
 
+.PHONY: verbetes
 
 all: dicionario.pdf dicionario-livreto.pdf
 
@@ -24,7 +25,7 @@ grupos : grupos.done
 
 dicionario : dicionario.pdf 
 
-dicionario.pdf : dicionario.tex comandos.tex termos.tex radicais.tex grupos.done
+dicionario.pdf : dicionario.tex capa.tex comandos.tex termos.tex radicais.tex grupos.done
 	$(TEX) dicionario.tex
 	$(MKIDX) -z pinyin pinyin
 	$(MKIDX) -z bihua stroke
@@ -47,8 +48,8 @@ deploy : dicionario.pdf dicionario-livreto.pdf
 	cp dicionario-livreto.pdf $(DST_REPO)
 
 verbetes :
-	echo -n "Verbetes: "
-	grep begin $(VERBDIR)/* | grep verbete | wc -l
+	@echo -n "***** Verbetes: "
+	@grep begin $(VERBDIR)/* | grep verbete | wc -l
 
 clean :
 	rm -f grupos.done $(GRPDIR)/*.tex *.aux *.idx *.ilg *.ind *.log *.toc *.out

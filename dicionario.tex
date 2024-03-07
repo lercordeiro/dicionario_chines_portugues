@@ -48,12 +48,12 @@
 \hypersetup{
   linktoc=page,
   colorlinks=true,
-  urlcolor=green,
+  urlcolor=blue,
   linkcolor=blue,
   citecolor=blue,
   pdftitle={汉葡词典 - Dicionário Chinês-Português},
-  pdfsubject={Dicionário Chinês-Português para o Curso de Chinês do Instituto Confúcio},
-  pdfauthor={Luiz Eduardo Roncato Cordeiro AKA 罗学凯},
+  pdfsubject={Dicionário Chinês-Português -- Curso de Chinês do Instituto Confúcio},
+  pdfauthor={Luiz Eduardo Roncato Cordeiro, AKA 罗学凯},
   pdfkeywords={dicionário, chinês, português, instituto confúcio}
 }
 
@@ -104,30 +104,17 @@
 % Até agora o melhor estilo para capítulos
 \chapterstyle{verville}
 
+% Página de Rosto
+\newcommand*{\titleGM}{
+}
+
 %%%
 %%% Documento começa aqui!
 %%%
 
 \begin{document}
 
-\begin{titlingpage}
-  \raggedleft
-  \rule{1pt}{\textheight}
-  \hspace{0.05\textwidth}
-  \parbox[b]{0.75\textwidth}{
-    {\Huge\bfseries 汉葡词典}\\[2\baselineskip] % Title
-    {\large\textsc{Dicionário Chinês-Português para o\\%
-                   Curso de Chinês do Instituto Confúcio}}\\%
-    [4\baselineskip]
-    {\Large\textsc{罗学凯}\\%
-      \tiny Luiz Eduardo Roncato Cordeiro\\%
-            Aluno do Instituto Confúcio da UNESP}
-
-      \vspace{0.5\textheight}
-
-      {\noindent \zhtoday}\\[\baselineskip]
-    }
-\end{titlingpage}
+\input{capa.tex}
 
 \newpage
 \tableofcontents

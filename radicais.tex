@@ -1,27 +1,16 @@
 \DefTblrTemplate{caption}{default}{}
-\DefTblrTemplate{capcont}{default}{
-  \UseTblrTemplate{conthead-text}{default}
-}
+\DefTblrTemplate{capcont}{default}{ \UseTblrTemplate{conthead-text}{default} }
 \DefTblrTemplate{contfoot-text}{default}{Continua na próxima página.}
 \DefTblrTemplate{conthead-text}{default}{(Continuação)}
-\DefTblrTemplate{firsthead}{default}{
-  \UseTblrTemplate{caption}{default}
-}
-\DefTblrTemplate{middlehead,lasthead}{default}{
-  \UseTblrTemplate{conthead}{default}
-}
-\DefTblrTemplate{firstfoot,middlefoot}{default}{
-  \UseTblrTemplate{contfoot}{default}
-}
-\DefTblrTemplate{lastfoot}{default}{
-  \UseTblrTemplate{note}{default}
-  \UseTblrTemplate{remark}{default}
-}
+\DefTblrTemplate{firsthead}{default}{ \UseTblrTemplate{caption}{default} }
+\DefTblrTemplate{middlehead,lasthead}{default}{ \UseTblrTemplate{conthead}{default} }
+\DefTblrTemplate{firstfoot,middlefoot}{default}{ \UseTblrTemplate{contfoot}{default} }
+\DefTblrTemplate{lastfoot}{default}{ \UseTblrTemplate{note}{default} \UseTblrTemplate{remark}{default} }
 
 \begin{longtblr}
 {
   colspec = {|r|cc|j|j|}, hlines,
-  width = 0.95\linewidth,
+  width = 1\linewidth,
   rowhead = 1, rowfoot = 0,
   row{1} = {font=\bfseries, fg=white, bg=black},
   row{2-Z} = {font=\normalfont},
