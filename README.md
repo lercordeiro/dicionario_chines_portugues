@@ -1,3 +1,6 @@
+Dicionário Chinês-Português
+===========================
+
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
 [![GitHub version](https://img.shields.io/github/release/lercordeiro/dicionario_chines_portugues/all.svg)](https://github.com/lercordeiro/dicionario_chines_portugues/releases)
@@ -7,9 +10,6 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/lercordeiro/dicionario_chines_portugues)
 
 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/lercordeiro/dicionario_chines_portugues/total)
-
-Dicionário Chinês-Português
-===========================
 
 Dicionário, ou um apanhado de palavras que fui descobrindo,
 para me auxiliar no curso de Chinês do Instituto Confúcio.
