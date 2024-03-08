@@ -1,3 +1,9 @@
+[![GitHub version](https://img.shields.io/github/release/lercordeiro/dicionario-chines-portugues/all.svg)](https://github.com/lercordeiro/dicionario-chines-portugues/releases)
+![GitHub Release Date](https://img.shields.io/github/release-date/lercordeiro/dicionario-chines-portugues)
+![GitHub last commit](https://img.shields.io/github/last-commit/lercordeiro/dicionario-chines-portugues)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/lercordeiro/dicionario-chines-portugues)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/lercordeiro/dicionario-chines-portugues/total)
+
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
 Dicionário Chinês-Português
