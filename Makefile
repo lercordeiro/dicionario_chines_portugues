@@ -1,6 +1,6 @@
 TEX = xelatex -halt-on-error -papersize=A4 -8bit # -interaction=batchmode
 BIB = bibtex
-DST_SITE = /var/www/ler.cordeiro.nom.br/dicionário
+DST_SITE = /var/www/ler.cordeiro.nom.br/dicionario
 DST_REPO = /var/www/repo.ler.cordeiro.nom.br/Dicionário
 GENGRP = ./bin/gengroups.py
 GRPDIR = ./grupos
