@@ -15,11 +15,11 @@
 \usepackage[brazil]{babel}
 \usepackage{fontspec}
 \usepackage{xeCJK}
+\usepackage{xeCJKfntef}
 \usepackage{xpinyin}
 \usepackage{xunicode}
 \usepackage{xltxtra}
 \usepackage{multicol}
-\usepackage{fancyhdr}
 \usepackage{imakeidx}
 \usepackage{ifthen}
 \usepackage{xparse}
@@ -78,20 +78,15 @@
 \xpinyinsetup{ratio={.6},vsep={1em},pysep={\hspace{.2ex}}}
 
 % Headers & Footers
-\fancyhead[L]{\rightmark} % Top left header
-\fancyhead[R]{\leftmark}  % Top right header
-\renewcommand{\headrulewidth}{1pt} % Rule under the header
-\fancyfoot[LE,RO]{\thepage} % Bottom left footer
-\fancyfoot[C]{汉葡词典} % Bottom center footer
-\renewcommand{\footrulewidth}{1pt} % Rule under the header
-\setlength{\headheight}{16pt}
-\addtolength{\topmargin}{-0.5pt}
-\fancypagestyle{plain}{% 
-  \fancyhead{} % clear all header and footer fields
-  \fancyfoot[LE,RO]{\thepage}
-  \fancyfoot[C]{汉葡词典}
-}
-\pagestyle{fancy} % Use the custom headers and footers throughout the document
+\setheadfoot{14pt}{28pt}
+\makepagestyle{dicionario}
+\makeevenhead{dicionario}{\rightmark}{}{\leftmark}
+\makeoddhead{dicionario}{\rightmark}{}{\leftmark}
+\makeevenfoot{dicionario}{\thepage}{汉葡词典}{}
+\makeoddfoot{dicionario}{}{汉葡词典}{\thepage}
+\makeheadrule{dicionario}{\textwidth}{\normalrulethickness}
+\makefootrule{dicionario}{\textwidth}{\normalrulethickness}{4pt}
+
 
 % Seções têm uma caixa arredondada em volta do nome, para o A-Z dos pinyin.
 \titlespacing{\section}{0pc}{2ex}{1ex}
@@ -116,10 +111,12 @@
 
 \input{capa.tex}
 
-\newpage
+\clearpage
+\pagestyle{empty}
 \tableofcontents
 
-\newpage
+\clearpage
+\pagestyle{empty}
 \chapter{汉葡词典}
 
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -131,7 +128,8 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-\newpage
+\clearpage
+\pagestyle{dicionario}
 \begin{multicols}{2}
 \input{grupos/A.tex}
 \input{grupos/B.tex}
@@ -161,12 +159,13 @@
 \input{grupos/Z.tex}
 \end{multicols}
 
-\newpage
+\clearpage
 \pagestyle{plain}
 \chapter{Termos Gramaticais Chineses}
 \input{termos.tex}
 
-\newpage
+\clearpage
+\pagestyle{plain}
 \chapter{Radicais Chineses}
 \input{radicais.tex}
 

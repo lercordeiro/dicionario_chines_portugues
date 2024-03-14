@@ -41,8 +41,6 @@ def read_entries(filename):
             if 'begin' in line and 'verbete' in line:
                 begin_entry_found = True
 
-                substrings = extract_strings_between_delimiters('[', ']', line)
-                strokes = substrings[0].split(';')
                 substrings = extract_strings_between_delimiters('{', '}', line)
                 s = substrings[1]
                 s = s.replace("\ ", "")
@@ -68,6 +66,8 @@ def read_entries(filename):
                 print(pinyin_strs)
                 pinyins = [x for x in pinyin_strs if x != '']
                 print(pinyins)
+                strokes = substrings[3].split(';')
+                print(strokes)
                 
                 if len(hanzis) != len(strokes):
                     print(f'***** ERROR: in {filename}: number of hanzis and strokes are different: {len(hanzis)} != {len(strokes)}')

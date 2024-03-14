@@ -12,60 +12,67 @@
   \fi
 }
 
-\NewDocumentCommand{\mypinyin}{ m }{«\pinyin{#1}»}
+\NewDocumentCommand{\mypinyin}{m}{«\pinyin{#1}»}
 
-\NewDocumentCommand{\dictpy}{ m }{%
+\NewDocumentCommand{\dictpy}{m}{%
   \StrSubstitute{#1}{r5}{r}[\rA]%
   \StrSubstitute{\rA}{t5}{t}[\rZ]%
   \edef\py{\mypinyin{\rZ}}%
   \py
 }
 
-\NewDocumentCommand{\mylist}{>{\SplitList{;}}m}{
+\NewDocumentCommand{\myenumerate}{>{\SplitList{;}}m}{
   \begin{enumerate*}[left=0pt,mode=unboxed,itemjoin={{; }}]
   \ProcessList{#1}{\insertitem}
   \end{enumerate*}
 }
-\NewDocumentCommand{\insertitem}{ m }{\item #1}
+\NewDocumentCommand{\insertitem}{m}{\item #1}
 
-\NewDocumentEnvironment{verbete}{ o m o m o }{%
+\ExplSyntaxOn
+
+\NewDocumentEnvironment{verbete}{momom}{%
   \leavevmode%
-  \markboth{#2{\small\dictpy{#4}}}{#2{\small\dictpy{#4}}}
-  \index[pinyin]{#2@\dictpy{#4} #2}
-  \index[stroke]{#2@#2 \dictpy{#4}}
-  \index[radical]{#2@#2 \dictpy{#4}}
+  \markboth{#1{\small\dictpy{#3}}}{#1{\small\dictpy{#3}}}
+  \index[pinyin]{#1@\dictpy{#3} #1}
+  \index[stroke]{#1@#1 \dictpy{#3}}
+  \index[radical]{#1@#1 \dictpy{#3}}
+  \tl_set:Nn \l_hanzy_tl {#1}
+  \tl_set:Nn \l_pinyin_tl {#3}
+  \tl_set:Nn \l_strokes_tl {#5}
   \begin{minipage}[t][][t]{.475\textwidth}
   \begin{flushleft}
-  \label{\mdfivesum{#2::#4}}
-  {\tiny\ding{108}\ }{\Large\textbf{#2}}%
-  \IfValueT{#1}{\hfill\textsuperscript{\tiny(#1画)}}%
+  \label{\mdfivesum{#1::#3}}
+  {\tiny\ding{108}\ }{\Large\textbf{#1}\hfill\textsuperscript{\tiny(#5画)}}%
   \newline
-  \IfValueTF{#3}{
-    \IfValueTF{#5}{\small#3\dictpy{#4}#5}{\small#3\dictpy{#4}}%
+  \IfValueTF{#2}{
+    \IfValueTF{#4}{\small#2\dictpy{#3}#4}{\small#2\dictpy{#3}}%
   }{%
-    \IfValueTF{#5}{\small\dictpy{#4}#5}{\small\dictpy{#4}}}%
+    \IfValueTF{#4}{\small\dictpy{#3}#4}{\small\dictpy{#3}}}%
   \newline%
 }{%
   \end{flushleft}
   \end{minipage}\par
 }
 
-\NewDocumentEnvironment{verbeteextragrande}{ o m o m o }{%
+\NewDocumentEnvironment{extragrande}{momom}{%
   \leavevmode%
-  \markboth{#2{\small\dictpy{#4}}}{#2{\small\dictpy{#4}}}
-  \index[pinyin]{#2@\dictpy{#4} #2}
-  \index[stroke]{#2@#2 \dictpy{#4}}
-  \index[radical]{#2@#2 \dictpy{#4}}
+  \markboth{#1{\small\dictpy{#3}}}{#1{\small\dictpy{#3}}}
+  \index[pinyin]{#1@\dictpy{#3} #1}
+  \index[stroke]{#1@#1 \dictpy{#3}}
+  \index[radical]{#1@#1 \dictpy{#3}}
+  \tl_set:Nn \l_hanzy_tl {#1}
+  \tl_set:Nn \l_pinyin_tl {#3}
+  \tl_set:Nn \l_strokes_tl {#5}
   \begin{minipage}[t][][t]{.475\textwidth}
   \begin{flushleft}
-  \label{\mdfivesum{#2::#4}}
-  {\tiny\ding{108}\ }{\Large\textbf{#2}}\newline%
-  \IfValueT{#1}{\hspace*{\fill}\textsuperscript{\tiny(#1画)}}%
+  \label{\mdfivesum{#1::#3}}
+  {\tiny\ding{108}\ }{\Large\textbf{#1}}\newline%
+  {\hspace*{\fill}\textsuperscript{\tiny(#5画)}}%
   \newline
-  \IfValueTF{#3}{%
-    \IfValueTF{#5}{\small#3\dictpy{#4}#5}{\small#3\dictpy{#4}}
+  \IfValueTF{#2}{%
+    \IfValueTF{#4}{\small#2\dictpy{#3}#4}{\small#2\dictpy{#3}}
   }{%
-    \IfValueTF{#5}{\small\dictpy{#4}#5}{\small\dictpy{#4}}
+    \IfValueTF{#4}{\small\dictpy{#3}#4}{\small\dictpy{#3}}
   }
   \newline
 }{%
@@ -73,97 +80,46 @@
   \end{minipage}\par
 }
 
-\NewDocumentEnvironment{verbete*}{ o m o m o }{%
-  \leavevmode%
-  \markboth{#2{\small\dictpy{#4}}}{#2{\small\dictpy{#4}}}
-  \index[pinyin]{#2@\dictpy{#4} \textcolor{BrickRed}{#2}}
-  \index[stroke]{#2@\textcolor{BrickRed}{#2} \dictpy{#4}}
-  \index[radical]{#2@\textcolor{BrickRed}{#2} \dictpy{#4}}
-  \begin{minipage}[t][][t]{.475\textwidth}
-  \begin{flushleft}
-  \label{\mdfivesum{sp::#2::#4}}
-  {\tiny\ding{108}\ }{\Large \textbf{#2}}%
-  \IfValueT{#1}{\hfill\textsuperscript{\tiny(#1画)}}%
-  \newline
-  \IfValueTF{#3}{%
-    \IfValueTF{#5}{\small#3\dictpy{#4}#5}{\small#3\dictpy{#4}}
+\NewDocumentCommand{\significado}{somm}{%
+  \IfBooleanTF{#1}{% Substantivo Próprio
+    \index[pinyin]{@\dictpy{\l_pinyin_tl} \textcolor{BrickRed}{\l_hanzy_tl}}
+    \index[stroke]{\l_hanzy_tl@\textcolor{BrickRed}{\l_hanzy_tl} \dictpy{\l_pinyin_tl}}
+    \index[radical]{\l_hanzy_tl@\textcolor{BrickRed}{\l_hanzy_tl} \dictpy{\l_pinyin_tl}}
+    $\hookrightarrow$\ (\textit{#3})\ \textsl{(Substantivo\ Próprio)}\\%
+    \IfValueT{#2}{[p.c.: #2]\\}%
+    {\myenumerate{#4}}%
   }{%
-    \IfValueTF{#5}{\small\dictpy{#4}#5}{\small\dictpy{#4}}
+    $\hookrightarrow$\ (\textit{#3})%
+    \IfValueT{#2}{[p.c.: #2]\\}%
+    {\myenumerate{#4}}%
   }
   \newline
-  \textsl{(Substantivo Próprio)}
-  \newline
-}{%
-  \end{flushleft}
-  \end{minipage}\par
 }
 
-\NewDocumentEnvironment{verbeteextragrande*}{ o m o m o }{%
-  \leavevmode%
-  \markboth{#2{\small\dictpy{#4}}}{#2{\small\dictpy{#4}}}
-  \index[pinyin]{#2@\dictpy{#4} \textcolor{BrickRed}{#2}}
-  \index[stroke]{#2@\textcolor{BrickRed}{#2} \dictpy{#4}}
-  \index[radical]{#2@\textcolor{BrickRed}{#2} \dictpy{#4}}
-  \begin{minipage}[t][][t]{.475\textwidth}
-  \begin{flushleft}
-  \label{\mdfivesum{sp::#2::#4}}
-  {\tiny\ding{108}\ }{\Large \textbf{#2}}\newline%
-  \IfValueT{#1}{\hspace*{\fill}\textsuperscript{\tiny(#1画)}\newline}%
-  \IfValueTF{#3}{%
-    \IfValueTF{#5}{\small#3\dictpy{#4}#5}{\small#3\dictpy{#4}}
-  }{%
-    \IfValueTF{#5}{\small\dictpy{#4}#5}{\small\hspace{1ex}\dictpy{#4}}
-  }
-  \newline
-  \textsl{(Substantivo Próprio)}
-  \newline
-}{%
-  \end{flushleft}
-  \end{minipage}\par
-}
-
-\NewDocumentCommand{\significado}{ o m m }{%
-  $\hookrightarrow$\ (\textit{#2})%
-  \IfValueT{#1}{\ [p.c.: #1]\\}%
-  {\mylist{#3}}%
-  \newline
-}
-
-\NewDocumentCommand{\veja}{ s m m o }{%
+\NewDocumentCommand{\veja}{smm}{%
   \IfBooleanTF{#1}{%
-    \IfValueTF{#4}{%
-      \textit{Veja:} #2{\footnotesize(pág.~\pageref{\mdfivesum{#4::#2::#3}})}\\%
-    }{%
-      \textit{Veja:} #2{\footnotesize(pág.~\pageref{\mdfivesum{#2::#3}})}\\%
-    }%
+    \textit{Veja:} #2 {\footnotesize(pág.~\pageref{\mdfivesum{#2::#3}})}\\%
     \hspace{6ex}{\small\dictpy{#3}}%
   }{%
-    \IfValueTF{#4}{%
-      \textit{Veja:} #2{\small\dictpy{#3}} {\footnotesize(pág.~\pageref{\mdfivesum{#4::#2::#3}})}
-    }{%
-      \textit{Veja:} #2{\small\dictpy{#3}} {\footnotesize(pág.~\pageref{\mdfivesum{#2::#3}})}
-    }%
+    \textit{Veja:} #2 {\small\dictpy{#3}} {\footnotesize(pág.~\pageref{\mdfivesum{#2::#3}})}
   }%
   \newline
 }
 
-\NewDocumentCommand{\variante}{ s m m o }{%
+\NewDocumentCommand{\variante}{smm}{%
   \IfBooleanTF{#1}{%
-    \IfValueTF{#4}{%
-      $\hookrightarrow$\ variante de #2 {\footnotesize(pág.~\pageref{\mdfivesum{#4::#2::#3}})}\\
-
-    }{%
-      $\hookrightarrow$\ variante de #2 {\footnotesize(pág.~\pageref{\mdfivesum{#2::#3}})}\\
-    }%
+    $\hookrightarrow$\ variante de #2 {\footnotesize(pág.~\pageref{\mdfivesum{#2::#3}})}\\
     \hspace{1.5em}{\small\dictpy{#3}}
-    }{%
-    \IfValueTF{#4}{%
-      $\hookrightarrow$\ variante de #2 {\small\dictpy{#3}} {\footnotesize(pág.~\pageref{\mdfivesum{#4::#2::#3}})}
-    }{%
-      $\hookrightarrow$\ variante de #2 {\small\dictpy{#3}} {\footnotesize(pág.~\pageref{\mdfivesum{#2::#3}})}
-    }%
+  }{%
+    $\hookrightarrow$\ variante de #2 {\small\dictpy{#3}} {\footnotesize(pág.~\pageref{\mdfivesum{#2::#3}})}
   }%
   \newline
 }
 
+\NewDocumentCommand{\exemplo}{mmmm}{%
+  \textit{Ex.:} #1\CJKunderdot{#2}#3
+  \hspace{3ex} (#4)
+  \newline
+}
 
+\ExplSyntaxOff
