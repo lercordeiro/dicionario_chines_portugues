@@ -32,6 +32,7 @@
 
 \NewDocumentEnvironment{verbete}{momom}{%
   \leavevmode%
+  \label{\mdfivesum{#1::#3}}
   \markboth{#1{\small\dictpy{#3}}}{#1{\small\dictpy{#3}}}
   \index[pinyin]{#1@\dictpy{#3} #1}
   \index[stroke]{#1@#1 \dictpy{#3}}
@@ -41,13 +42,12 @@
   \tl_set:Nn \l_strokes_tl {#5}
   \begin{minipage}[t][][t]{.475\textwidth}
   \begin{flushleft}
-  \label{\mdfivesum{#1::#3}}
-  {\tiny\ding{108}\ }{\Large\textbf{#1}\hfill\textsuperscript{\tiny(#5画)}}%
-  \newline
+  {\tiny\ding{108}}\hspace{1ex}{\Large\textbf{#1}}\hfill\textsuperscript{\tiny(#5画)}\\
   \IfValueTF{#2}{
     \IfValueTF{#4}{\small#2\dictpy{#3}#4}{\small#2\dictpy{#3}}%
   }{%
-    \IfValueTF{#4}{\small\dictpy{#3}#4}{\small\dictpy{#3}}}%
+    \IfValueTF{#4}{\small\dictpy{#3}#4}{\small\dictpy{#3}}%
+  }
   \newline%
 }{%
   \end{flushleft}
@@ -56,6 +56,7 @@
 
 \NewDocumentEnvironment{extragrande}{momom}{%
   \leavevmode%
+  \label{\mdfivesum{#1::#3}}
   \markboth{#1{\small\dictpy{#3}}}{#1{\small\dictpy{#3}}}
   \index[pinyin]{#1@\dictpy{#3} #1}
   \index[stroke]{#1@#1 \dictpy{#3}}
@@ -65,10 +66,8 @@
   \tl_set:Nn \l_strokes_tl {#5}
   \begin{minipage}[t][][t]{.475\textwidth}
   \begin{flushleft}
-  \label{\mdfivesum{#1::#3}}
-  {\tiny\ding{108}\ }{\Large\textbf{#1}}\newline%
-  {\hspace*{\fill}\textsuperscript{\tiny(#5画)}}%
-  \newline
+  {\tiny\ding{108}}\hspace{1ex}{\Large\textbf{#1}}\\%
+  {\hspace*{\fill}\textsuperscript{\tiny(#5画)}}\\%
   \IfValueTF{#2}{%
     \IfValueTF{#4}{\small#2\dictpy{#3}#4}{\small#2\dictpy{#3}}
   }{%
@@ -98,27 +97,27 @@
 
 \NewDocumentCommand{\veja}{smm}{%
   \IfBooleanTF{#1}{%
-    \textit{Veja:} #2 {\footnotesize(pág.~\pageref{\mdfivesum{#2::#3}})}\\%
+    \textit{Veja:} #2\ {\footnotesize(pág.~\pageref{\mdfivesum{#2::#3}})}\\%
     \hspace{6ex}{\small\dictpy{#3}}%
   }{%
-    \textit{Veja:} #2 {\small\dictpy{#3}} {\footnotesize(pág.~\pageref{\mdfivesum{#2::#3}})}
+    \textit{Veja:} #2 {\small\dictpy{#3}}\ {\footnotesize(pág.~\pageref{\mdfivesum{#2::#3}})}
   }%
   \newline
 }
 
 \NewDocumentCommand{\variante}{smm}{%
   \IfBooleanTF{#1}{%
-    $\hookrightarrow$\ variante de #2 {\footnotesize(pág.~\pageref{\mdfivesum{#2::#3}})}\\
+    $\hookrightarrow$\ variante\ de #2 {\footnotesize(pág.~\pageref{\mdfivesum{#2::#3}})}\\
     \hspace{1.5em}{\small\dictpy{#3}}
   }{%
-    $\hookrightarrow$\ variante de #2 {\small\dictpy{#3}} {\footnotesize(pág.~\pageref{\mdfivesum{#2::#3}})}
+    $\hookrightarrow$\ variante\ de #2 {\small\dictpy{#3}}\ {\footnotesize(pág.~\pageref{\mdfivesum{#2::#3}})}
   }%
   \newline
 }
 
-\NewDocumentCommand{\exemplo}{mmmm}{%
-  \textit{Ex.:} #1\CJKunderdot{#2}#3
-  \hspace{3ex} (#4)
+\NewDocumentCommand{\exemplo}{mmm}{%
+  \textit{Ex.:} #1\CJKunderdot{\l_hanzy_tl}#2\\
+  \hspace{5ex} (#3)
   \newline
 }
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%
 % Entrada de um verbete:
 %
-% \begin{verbete}[traços]{hanzi}[antes]{pronúncia}[depois]
+% \begin{verbete}{hanzi}[antes]{pronúncia}[depois]{traços}
 %   \significado[classificadores]{termo_gramatical}{lista_de_significados}
 %   \veja{hanzi}{pronúncia}
 % \end{verbete}
@@ -11,6 +11,9 @@
 %
 % Preferivelmente usar um comando '\significado' para cada termo gramatical ou
 %  se houver classificadores específicos para cada significado da palavra.
+%
+% Existe o comando '\significado*' que deve ser utilizado só e somente só para
+%  substantivos prórios.
 %
 % Podem haver vários comandos '\veja', é aconselhável usar um comando para cada
 %  par de hanzy+pronúncia, o sistema cuida do texto e de colocar o número da
@@ -23,8 +26,8 @@
 %     pronúncia: pinyin no formato: "ma1", "ma2", "ma3", "ma4", "ma5" 
 %                os números correspondem aos tons 
 %                "ma" == "ma0" == "ma5" (utilizar "5" para tom neutro)
-%   Campos Opcionais
 %     traços: número de traços dos caracteres separados por ';'
+%   Campos Opcionais
 %     antes: texto adicionado antes do texto da pronúncia
 %            se adiciona um '\\' (pula linha) caso a pronúncia
 %            fique por cima do texto do número de caracteres,
@@ -44,6 +47,20 @@
 %     classificadores: quando há, lista de classificadores separados por ',',
 %                      o sistema adiciona o texto automaticamente
 %
+% Para o comando \significado*:
+%   Campos Obrigatórios
+%     termo_gramatical: abreviação dos termos, como 's.', 'v.', 'adj.',
+%                       'adv.', etc, conforme tabela acima
+%     lista_de_significados: significados da palavra separados por ';' ou ','.
+%                            Quando se usa ';' os significados são automaticamente
+%                            colocados em uma sequência numérica
+%   Campos Opcionais
+%     classificadores: quando há, lista de classificadores separados por ',',
+%                      o sistema adiciona o texto automaticamente
+%
+%   Observação: Este comando deve ser utilizado para identificar substantivos
+%               próprios, ele adiciona o texto (Substantivo Próprio) na descrição
+%               do significado e uma entrada de outra cor nos índices remissivos).
 %
 % Para o comando \veja:
 %   Campos Obrigatórios
@@ -55,28 +72,28 @@
 %   Campos Obrigatórios
 %     hanzi: hanzi da palavra
 %     pronúncia: pinyin da pronúncia da palavra como em verbetes
-%  Observação: Este comando joga o pinyin para a linha de baixo,
-%              para evitar quebra e deixar mais bonito.
+%   Observação: Este comando joga o pinyin para a linha de baixo,
+%               para evitar quebra e deixar mais bonito.
 %
 % Alguns exemplos de alguns de entradas de verbetes:
 %
-% \begin{verbete}[4]{不}[\\]{bu2}[ (antes de quarto tom)]
+% \begin{verbete}[4]{不}[\\]{bu2}[ (antes de quarto tom)]{4}
 %   \significado{adv.}{não}
 %   \veja{不}{bu0}
 %   \veja{不}{bu4}
 % \end{verbete}
 %
-% \begin{verbete}[4;6;11]{飞机票}{fei1ji1piao4}
+% \begin{verbete}{飞机票}{fei1ji1piao4}{4;6;11}
 %   \significado[张]{v.}{bilhete de avião}
 %   \veja{机票}{ji1piao4}
 % \end{verbete}
 %
-% \begin{verbete}[16;4]{餐厅}{can1ting1}
+% \begin{verbete}{餐厅}{can1ting1}{16;4}
 %   \significado[家]{s.}{restaurante}
 %   \significado[间]{s.}{sala de jantar}
 % \end{verbete}
 %
-% \begin{verbete}[9]{重}{chong2}
+% \begin{verbete}{重}{chong2}{9}
 %   \significado{adv.}{de novo}
 %   \significado{p.c.}{camadas}
 %   \significado{s.}{repetição}
@@ -86,7 +103,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{verbete}[__strokes__]{__hanzi__}{__pinyin__}
+\begin{verbete}{__hanzi__}{__pinyin__}{__strokes__}
   \significado[__classificador__]{__class__}{__significado__}
   \veja{__hanzi__}{__pinyin__}
 \end{verbete}

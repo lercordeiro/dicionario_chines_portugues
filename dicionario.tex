@@ -13,27 +13,18 @@
 
 \usepackage[dvipsnames]{xcolor}
 \usepackage[brazil]{babel}
-\usepackage{fontspec}
 \usepackage{xeCJK}
 \usepackage{xeCJKfntef}
 \usepackage{xpinyin}
-\usepackage{xunicode}
-\usepackage{xltxtra}
 \usepackage{multicol}
 \usepackage{imakeidx}
-\usepackage{ifthen}
 \usepackage{xparse}
 \usepackage[inline]{enumitem}
 \usepackage{zhnumber}
-\usepackage{wasysym}
-\usepackage[explicit]{titlesec}
 \usepackage{tikz}
 \usepackage[hyperindex,hidelinks]{hyperref}
-\usepackage{listofitems}
-\usepackage{numprint}
 \usepackage{pifont}
 \usepackage{xstring}
-\usepackage{xpatch}
 \usepackage{tabularray}
 
 % Meus Comandos
@@ -58,7 +49,10 @@
 }
 
 % Sumário
-%\renewcommand\cftchapteraftersnumb{\normalfont}
+\makeatletter
+\renewcommand{\@pnumwidth}{2em} 
+\renewcommand{\@tocrmarg}{4em}
+\makeatother
 \renewcommand\cftbeforechapterskip{5pt plus 1pt}
 
 % Índices Remissivos
@@ -79,6 +73,9 @@
 
 % Headers & Footers
 \setheadfoot{14pt}{28pt}
+\makeevenfoot{plain}{\thepage}{汉葡词典}{}
+\makeoddfoot{plain}{}{汉葡词典}{\thepage}
+\makefootrule{plain}{\textwidth}{\normalrulethickness}{4pt}
 \makepagestyle{dicionario}
 \makeevenhead{dicionario}{\rightmark}{}{\leftmark}
 \makeoddhead{dicionario}{\rightmark}{}{\leftmark}
@@ -87,21 +84,19 @@
 \makeheadrule{dicionario}{\textwidth}{\normalrulethickness}
 \makefootrule{dicionario}{\textwidth}{\normalrulethickness}{4pt}
 
-
 % Seções têm uma caixa arredondada em volta do nome, para o A-Z dos pinyin.
-\titlespacing{\section}{0pc}{2ex}{1ex}
-\titleformat{\section}[hang]{\Large\bfseries}{}{0pt}{%
-  \tikz{%
+\newcommand{\boxedsec}[1]{%
+  \tikz{
     \node[draw,rounded corners=1mm,text depth=0.2ex,line width=1pt, anchor=west]{\Large\bfseries#1};
-  }%
+  }
 }
+\setsecheadstyle{\boxedsec}
+\setbeforesecskip{2ex}
+\setaftersecskip{1.5ex}
 
 % Até agora o melhor estilo para capítulos
 \chapterstyle{verville}
 
-% Página de Rosto
-\newcommand*{\titleGM}{
-}
 
 %%%
 %%% Documento começa aqui!
