@@ -37,7 +37,7 @@
   \index[pinyin]{#1@\dictpy{#3} #1}
   \index[stroke]{#1@#1 \dictpy{#3}}
   \index[radical]{#1@#1 \dictpy{#3}}
-  \tl_set:Nn \l_hanzy_tl {#1}
+  \tl_set:Nn \l_hanzi_tl {#1}
   \tl_set:Nn \l_pinyin_tl {#3}
   \tl_set:Nn \l_strokes_tl {#5}
   \begin{minipage}[t][][t]{.475\textwidth}
@@ -61,7 +61,7 @@
   \index[pinyin]{#1@\dictpy{#3}\ #1}
   \index[stroke]{#1@#1 \dictpy{#3}}
   \index[radical]{#1@#1 \dictpy{#3}}
-  \tl_set:Nn \l_hanzy_tl {#1}
+  \tl_set:Nn \l_hanzi_tl {#1}
   \tl_set:Nn \l_pinyin_tl {#3}
   \tl_set:Nn \l_strokes_tl {#5}
   \begin{minipage}[t][][t]{.475\textwidth}
@@ -81,9 +81,6 @@
 
 \NewDocumentCommand{\significado}{somm}{%
   \IfBooleanTF{#1}{% Substantivo Próprio
-    \index[pinyin]{\l_hanzy_tl@\dictpy{\l_pinyin_tl}\ \textcolor{BrickRed}{\l_hanzy_tl}}
-    \index[stroke]{\l_hanzy_tl@\textcolor{BrickRed}{\l_hanzy_tl}\ \dictpy{\l_pinyin_tl}}
-    \index[radical]{\l_hanzy_tl@\textcolor{BrickRed}{\l_hanzy_tl}\ \dictpy{\l_pinyin_tl}}
     $\hookrightarrow$\ (\textit{#3})\ \textsl{(Substantivo\ Próprio)}\\%
     \IfValueT{#2}{[p.c.: #2]\\}%
     {\myenumerate{#4}} %
@@ -115,9 +112,12 @@
   \newline
 }
 
-\NewDocumentCommand{\exemplo}{mmm}{%
-  \textit{Ex.:} #1\CJKunderdot{\l_hanzy_tl}#2\\
-  \hspace{5ex} (#3)
+\NewDocumentCommand{\exemplo}{mo}{%
+  \IfSubStr[1]{#1}{\l_hanzi_tl}{%
+    \textit{Ex.:}\ \StrSubstitute{#1}{\l_hanzi_tl}{\CJKunderdot{\l_hanzi_tl}}\IfValueT{#2}{(#2)}%
+  }{%
+    \textit{ERRO:}\ Não\ há\ \l_hanzi_tl\ em\\``#1''.
+  }
   \newline
 }
 

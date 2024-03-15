@@ -8,8 +8,6 @@ VERBDIR = ./verbetes
 MKIDX = ~/.local/bin/zhmakeindex -s dicionario.ist 
 BOOK = pdfbook2 --no-crop --signature=20 --paper=a4paper
 
-.PHONY: verbetes
-
 all: dicionario.pdf dicionario-livreto.pdf
 
 arquivo :
