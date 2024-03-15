@@ -58,7 +58,7 @@
   \leavevmode%
   \label{\mdfivesum{#1::#3}}
   \markboth{#1{\small\dictpy{#3}}}{#1{\small\dictpy{#3}}}
-  \index[pinyin]{#1@\dictpy{#3} #1}
+  \index[pinyin]{#1@\dictpy{#3}\ #1}
   \index[stroke]{#1@#1 \dictpy{#3}}
   \index[radical]{#1@#1 \dictpy{#3}}
   \tl_set:Nn \l_hanzy_tl {#1}
@@ -81,12 +81,12 @@
 
 \NewDocumentCommand{\significado}{somm}{%
   \IfBooleanTF{#1}{% Substantivo Próprio
-    \index[pinyin]{@\dictpy{\l_pinyin_tl} \textcolor{BrickRed}{\l_hanzy_tl}}
-    \index[stroke]{\l_hanzy_tl@\textcolor{BrickRed}{\l_hanzy_tl} \dictpy{\l_pinyin_tl}}
-    \index[radical]{\l_hanzy_tl@\textcolor{BrickRed}{\l_hanzy_tl} \dictpy{\l_pinyin_tl}}
+    \index[pinyin]{\l_hanzy_tl@\dictpy{\l_pinyin_tl}\ \textcolor{BrickRed}{\l_hanzy_tl}}
+    \index[stroke]{\l_hanzy_tl@\textcolor{BrickRed}{\l_hanzy_tl}\ \dictpy{\l_pinyin_tl}}
+    \index[radical]{\l_hanzy_tl@\textcolor{BrickRed}{\l_hanzy_tl}\ \dictpy{\l_pinyin_tl}}
     $\hookrightarrow$\ (\textit{#3})\ \textsl{(Substantivo\ Próprio)}\\%
     \IfValueT{#2}{[p.c.: #2]\\}%
-    {\myenumerate{#4}}%
+    {\myenumerate{#4}} %
   }{%
     $\hookrightarrow$\ (\textit{#3})%
     \IfValueT{#2}{[p.c.: #2]\\}%
