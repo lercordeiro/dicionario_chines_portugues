@@ -6,7 +6,7 @@ GENGRP = ./bin/gengroups.py
 GRPDIR = ./grupos
 INCDIR = ./include
 VERBDIR = ./verbetes
-MKIDX = ~/.local/bin/zhmakeindex -s dicionario.ist 
+MKIDX = ~/.local/bin/zhmakeindex -s main.ist 
 BOOK = pdfbook2 --no-crop --signature=20 --paper=a4paper
 
 all: dicionario.pdf dicionario-livreto.pdf

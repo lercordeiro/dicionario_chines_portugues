@@ -1,0 +1,22 @@
+radical_prefix "部"
+radical_suffix ""
+
+preamble "\\begin{theindex}
+  \\def\\seename{Veja}
+  \\def\\alsoname{Veja também}
+  \\providecommand*\\indexgroup[1]{%
+    \\indexspace
+    \\item \\textbf{#1}\\nopagebreak}\n"
+
+postamble "\n\n\\end{theindex}\n"
+
+group_skip "\n\n  \\indexspace\n\n"
+
+headings_flag 1
+heading_prefix "  %\n  \\indexgroup{{\\tiny\\ding{108}} "
+heading_suffix "}\n  %\n"
+
+numhead_positive "Números"
+numhead_negative "Números"
+symhead_positive "Símbolos"
+symhead_negative "Símbolos"
