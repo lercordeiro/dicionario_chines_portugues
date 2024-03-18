@@ -8,6 +8,7 @@ main.pdf
 *.idx
 *.ilg
 *.ind
+*.ist
 *.kilepr
 *.log
 *.toc
