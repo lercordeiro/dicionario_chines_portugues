@@ -1,9 +1,10 @@
-TEX = xelatex -halt-on-error -papersize=A4 -8bit # -interaction=batchmode
+TEX = xelatex -halt-on-error -papersize=A4 -8bit -interaction=batchmode
 BIB = bibtex
 DST_SITE = /var/www/ler.cordeiro.nom.br/dicionario
 DST_REPO = /var/www/repo.ler.cordeiro.nom.br/Dicionário
 GENGRP = ./bin/gengroups.py
 GRPDIR = ./grupos
+INCDIR = ./include
 VERBDIR = ./verbetes
 MKIDX = ~/.local/bin/zhmakeindex -s dicionario.ist 
 BOOK = pdfbook2 --no-crop --signature=20 --paper=a4paper
@@ -21,23 +22,29 @@ grupos.done : verbetes.tar.gz
 
 grupos : grupos.done
 
-dicionario : dicionario.pdf 
+main : main.pdf 
 
-dicionario.pdf : dicionario.tex capa.tex comandos.tex termos.tex radicais.tex grupos.done
-	$(TEX) dicionario.tex
+main.pdf : main.tex $(INCDIR)/*.tex grupos.done
+	$(TEX) main.tex
 	$(MKIDX) -z pinyin pinyin
 	$(MKIDX) -z bihua stroke
 	$(MKIDX) -z bushou radical
-	$(TEX) dicionario.tex
-	$(TEX) dicionario.tex
+	$(TEX) main.tex
+	$(TEX) main.tex
 	echo -n "Verbetes: "
 	grep begin $(VERBDIR)/* | grep verbete | wc -l
 
-dicionario-book.pdf : dicionario.pdf
-	$(BOOK) dicionario.pdf
+main-book.pdf : main.pdf
+	$(BOOK) main.pdf
 
-dicionario-livreto.pdf : dicionario-book.pdf
-	cp dicionario-book.pdf dicionario-livreto.pdf
+main-livreto.pdf : main-book.pdf
+	cp main-book.pdf main-livreto.pdf
+
+dicionario.pdf: main.pdf
+	cp main.pdf dicionario.pdf
+
+dicionario-livreto.pdf: main.pdf
+	cp main.pdf dicionario-livreto.pdf
 
 deploy : dicionario.pdf dicionario-livreto.pdf
 	cp dicionario.pdf         $(DST_SITE)

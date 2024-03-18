@@ -1,8 +1,8 @@
 dicionario-book.pdf
 verbetes/
 tmp/
-work/
 .kile/
+main.pdf
 *.done
 *.aux
 *.idx
