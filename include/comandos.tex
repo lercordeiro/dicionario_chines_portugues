@@ -35,7 +35,7 @@
 
 \NewDocumentEnvironment{verbete}{mO{}mO{}m}{%
   \leavevmode%
-  \markboth{#1{\footnotesize\dictpy{#3}}}{#1{\footnotesize\dictpy{#3}}}
+  \markboth{#1{\tiny\dictpy{#3}}}{#1{\tiny\dictpy{#3}}}
   \tl_set:Nn \l_hanzi_tl {#1}
   \tl_set:Nn \l_pinyin_tl {#3}
   \tl_set:Nn \l_strokes_tl {#5}
@@ -44,18 +44,19 @@
   \index[pinyin]{#1@\dictpy{#3} #1}
   \index[stroke]{#1@#1 \dictpy{#3}}
   \index[radical]{#1@#1 \dictpy{#3}}
-  \begin{flushleft}
+  \begin{FlushLeft}
   {\tiny\ding{108}}\hspace{1ex}\addstackgap{\stackunder{\textbf{\Large#1}}{\footnotesize#2\dictpy{#3}#4}}%
   \hfill\textsuperscript{\tiny(#5画)}
   \newline
 }{%
-  \end{flushleft}
-  \end{minipage}\par
+  \end{FlushLeft}
+  \end{minipage}
+  \vspace{1.25ex}\par
 }
 
 \NewDocumentEnvironment{extragrande}{mO{}mO{}m}{%
   \leavevmode%
-  \markboth{#1{\footnotesize\dictpy{#3}}}{#1{\footnotesize\dictpy{#3}}}
+  \markboth{#1{\tiny\dictpy{#3}}}{#1{\tiny\dictpy{#3}}}
   \tl_set:Nn \l_hanzi_tl {#1}
   \tl_set:Nn \l_pinyin_tl {#3}
   \tl_set:Nn \l_strokes_tl {#5}
@@ -64,14 +65,14 @@
   \index[pinyin]{#1@\dictpy{#3}\ #1}
   \index[stroke]{#1@#1 \dictpy{#3}}
   \index[radical]{#1@#1 \dictpy{#3}}
-  \begin{flushleft}
-  {\tiny\ding{108}}\hspace{1ex}\textbf{\Large#1}\\
-  \hspace*{\fill}{\tiny(#5画)}\\
-  \hspace{2ex}{\footnotesize#2\dictpy{#3}#4}
+  \begin{FlushLeft}
+  {\tiny\ding{108}}\hspace{1ex}\addstackgap{\stackunder{\textbf{\Large#1}}{\footnotesize#2\dictpy{#3}#4}}\\
+  \hspace*{\fill}{\tiny(#5画)}
   \newline
 }{%
-  \end{flushleft}
-  \end{minipage}\par
+  \end{FlushLeft}
+  \end{minipage}
+  \vspace{1.25ex}\par
 }
 
 \NewDocumentCommand{\significado}{somm}{%
@@ -86,14 +87,24 @@
 }
 
 \NewDocumentCommand{\veja}{smm}{%
-  \textit{Veja}:\ \addstackgap{\stackunder{#2}{\tiny\dictpy{#3}}}%
-  \IfBooleanTF{#1}{\\\hspace{6ex}}{\ }(pág.~\pageref{\mdfivesum{#2::#3}})
+  \IfBooleanTF{#1}{% Palavra Grande
+    \textit{Veja}:\ \addstackgap{\stackunder{#2}{\tiny\dictpy{#3}}}\\%
+    \hspace*{5.5ex}(pág.~\pageref{\mdfivesum{#2::#3}})
+  }{%
+    \textit{Veja}:\ \addstackgap{\stackunder{#2}{\tiny\dictpy{#3}}}%
+    \ (pág.~\pageref{\mdfivesum{#2::#3}})
+  }
   \newline
 }
 
 \NewDocumentCommand{\variante}{smm}{%
-  $\hookrightarrow$\ variante\ de\ \addstackgap{\stackunder{#2}{\tiny\dictpy{#3}}}%
-  \IfBooleanTF{#1}{\\\hspace{3ex}}{\ }(pág.~\pageref{\mdfivesum{#2::#3}})
+  \IfBooleanTF{#1}{% Palavra Grande
+    $\hookrightarrow$\ variante\ de\ \addstackgap{\stackunder{#2}{\tiny\dictpy{#3}}}\\%
+    \hspace*{3ex}(pág.~\pageref{\mdfivesum{#2::#3}})
+  }{%
+    $\hookrightarrow$\ variante\ de\ \addstackgap{\stackunder{#2}{\tiny\dictpy{#3}}}%
+    \ (pág.~\pageref{\mdfivesum{#2::#3}})
+  }
   \newline
 }
 

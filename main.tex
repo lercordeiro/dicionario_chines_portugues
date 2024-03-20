@@ -12,7 +12,9 @@
 \documentclass[a4paper,10pt,twoside,openany]{memoir}
 
 \usepackage[dvipsnames]{xcolor}
-\usepackage[brazil]{babel}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\usepackage{microtype}
 \usepackage{xeCJK}
 \usepackage{xeCJKfntef}
 \usepackage{xpinyin}
@@ -27,6 +29,7 @@
 \usepackage{xstring}
 \usepackage{tabularray}
 \usepackage{stackengine}
+\usepackage{ragged2e}
 
 % Meus Comandos
 \input{include/comandos.tex}
@@ -66,7 +69,7 @@
 \setlength{\parindent}{0cm}
 \setlength{\parskip}{-1.5mm}
 \setlength{\columnsep}{.5em}
-\setlength{\columnseprule}{0.2mm}
+\setlength{\columnseprule}{0.1mm}
 
 % Ajustes do gerador de pinyin
 \xpinyinsetup{ratio={.6},vsep={1em},pysep={\hspace{.2ex}}}
@@ -92,11 +95,14 @@
 }
 \setsecheadstyle{\boxedsec}
 \setbeforesecskip{2ex}
-\setaftersecskip{1.5ex}
+\setaftersecskip{1ex}
 
 % Até agora o melhor estilo para capítulos
 \chapterstyle{verville}
 
+% Linguagem default
+\setdefaultlanguage[variant=brazilian]{portuguese}
+\setotherlanguages{chinese,english}
 
 %%%
 %%% Documento começa aqui!
