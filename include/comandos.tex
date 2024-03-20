@@ -3,6 +3,9 @@
 %
 
 \newcommand{\sectionbreak}{\phantomsection}
+\renewcommand\stacktype{S}
+\renewcommand\stackalignment{l}
+\setstackgap{S}{2.5pt}
 
 \DeclareRobustCommand{\&}{%
   \ifdim\fontdimen1\font>0pt
@@ -30,49 +33,41 @@
 
 \ExplSyntaxOn
 
-\NewDocumentEnvironment{verbete}{momom}{%
+\NewDocumentEnvironment{verbete}{mO{}mO{}m}{%
   \leavevmode%
-  \label{\mdfivesum{#1::#3}}
-  \markboth{#1{\small\dictpy{#3}}}{#1{\small\dictpy{#3}}}
-  \index[pinyin]{#1@\dictpy{#3} #1}
-  \index[stroke]{#1@#1 \dictpy{#3}}
-  \index[radical]{#1@#1 \dictpy{#3}}
+  \markboth{#1{\footnotesize\dictpy{#3}}}{#1{\footnotesize\dictpy{#3}}}
   \tl_set:Nn \l_hanzi_tl {#1}
   \tl_set:Nn \l_pinyin_tl {#3}
   \tl_set:Nn \l_strokes_tl {#5}
   \begin{minipage}[t][][t]{.475\textwidth}
+  \label{\mdfivesum{#1::#3}}
+  \index[pinyin]{#1@\dictpy{#3} #1}
+  \index[stroke]{#1@#1 \dictpy{#3}}
+  \index[radical]{#1@#1 \dictpy{#3}}
   \begin{flushleft}
-  {\tiny\ding{108}}\hspace{1ex}{\Large\textbf{#1}}\hfill\textsuperscript{\tiny(#5画)}\\
-  \IfValueTF{#2}{
-    \IfValueTF{#4}{\small#2\dictpy{#3}#4}{\small#2\dictpy{#3}}%
-  }{%
-    \IfValueTF{#4}{\small\dictpy{#3}#4}{\small\dictpy{#3}}%
-  }
-  \newline%
+  {\tiny\ding{108}}\hspace{1ex}\addstackgap{\stackunder{\textbf{\Large#1}}{\footnotesize#2\dictpy{#3}#4}}%
+  \hfill\textsuperscript{\tiny(#5画)}
+  \newline
 }{%
   \end{flushleft}
   \end{minipage}\par
 }
 
-\NewDocumentEnvironment{extragrande}{momom}{%
+\NewDocumentEnvironment{extragrande}{mO{}mO{}m}{%
   \leavevmode%
-  \label{\mdfivesum{#1::#3}}
-  \markboth{#1{\small\dictpy{#3}}}{#1{\small\dictpy{#3}}}
-  \index[pinyin]{#1@\dictpy{#3}\ #1}
-  \index[stroke]{#1@#1 \dictpy{#3}}
-  \index[radical]{#1@#1 \dictpy{#3}}
+  \markboth{#1{\footnotesize\dictpy{#3}}}{#1{\footnotesize\dictpy{#3}}}
   \tl_set:Nn \l_hanzi_tl {#1}
   \tl_set:Nn \l_pinyin_tl {#3}
   \tl_set:Nn \l_strokes_tl {#5}
   \begin{minipage}[t][][t]{.475\textwidth}
+  \label{\mdfivesum{#1::#3}}
+  \index[pinyin]{#1@\dictpy{#3}\ #1}
+  \index[stroke]{#1@#1 \dictpy{#3}}
+  \index[radical]{#1@#1 \dictpy{#3}}
   \begin{flushleft}
-  {\tiny\ding{108}}\hspace{1ex}{\Large\textbf{#1}}\\%
-  {\hspace*{\fill}\textsuperscript{\tiny(#5画)}}\\%
-  \IfValueTF{#2}{%
-    \IfValueTF{#4}{\small#2\dictpy{#3}#4}{\small#2\dictpy{#3}}
-  }{%
-    \IfValueTF{#4}{\small\dictpy{#3}#4}{\small\dictpy{#3}}
-  }
+  {\tiny\ding{108}}\hspace{1ex}\textbf{\Large#1}\\
+  \hspace*{\fill}{\tiny(#5画)}\\
+  \hspace{2ex}{\footnotesize#2\dictpy{#3}#4}
   \newline
 }{%
   \end{flushleft}
@@ -81,40 +76,34 @@
 
 \NewDocumentCommand{\significado}{somm}{%
   \IfBooleanTF{#1}{% Substantivo Próprio
-    $\hookrightarrow$\ (\textit{#3})\ \textsl{(Substantivo\ Próprio)}\\%
-    \IfValueT{#2}{[p.c.: #2]\\}%
-    {\myenumerate{#4}} %
+    $\hookrightarrow$\ (\textit{#3})\ (\textit{Substantivo\ Próprio})\\
+    \IfValueT{#2}{[p.c.:~#2]}{\myenumerate{#4}} %
   }{%
-    $\hookrightarrow$\ (\textit{#3})%
-    \IfValueT{#2}{[p.c.: #2]\\}%
+    $\hookrightarrow$\ (\textit{#3})\IfValueT{#2}{ [p.c.: #2]}%
     {\myenumerate{#4}}%
   }
   \newline
 }
 
 \NewDocumentCommand{\veja}{smm}{%
-  \IfBooleanTF{#1}{%
-    \textit{Veja:} #2\ {\footnotesize(pág.~\pageref{\mdfivesum{#2::#3}})}\\%
-    \hspace{6ex}{\small\dictpy{#3}}%
-  }{%
-    \textit{Veja:} #2 {\small\dictpy{#3}}\ {\footnotesize(pág.~\pageref{\mdfivesum{#2::#3}})}
-  }%
+  \textit{Veja}:\ \addstackgap{\stackunder{#2}{\tiny\dictpy{#3}}}%
+  \IfBooleanTF{#1}{\\\hspace{6ex}}{\ }(pág.~\pageref{\mdfivesum{#2::#3}})
   \newline
 }
 
 \NewDocumentCommand{\variante}{smm}{%
-  \IfBooleanTF{#1}{%
-    $\hookrightarrow$\ variante\ de #2 {\footnotesize(pág.~\pageref{\mdfivesum{#2::#3}})}\\
-    \hspace{1.5em}{\small\dictpy{#3}}
-  }{%
-    $\hookrightarrow$\ variante\ de #2 {\small\dictpy{#3}}\ {\footnotesize(pág.~\pageref{\mdfivesum{#2::#3}})}
-  }%
+  $\hookrightarrow$\ variante\ de\ \addstackgap{\stackunder{#2}{\tiny\dictpy{#3}}}%
+  \IfBooleanTF{#1}{\\\hspace{3ex}}{\ }(pág.~\pageref{\mdfivesum{#2::#3}})
   \newline
 }
 
 \NewDocumentCommand{\exemplo}{mo}{%
   \IfSubStr[1]{#1}{\l_hanzi_tl}{%
-    \textit{Ex.:}\ \StrSubstitute{#1}{\l_hanzi_tl}{\CJKunderdot{\l_hanzi_tl}}\IfValueT{#2}{(#2)}%
+    \IfValueTF{#2}{%
+      \textit{Ex.:}\ \addstackgap{\stackunder{\StrSubstitute{#1}{\l_hanzi_tl}{\CJKunderdot{\l_hanzi_tl}}}{\scriptsize(#2)}}
+    }{%
+      \textit{Ex.:}\ \StrSubstitute{#1}{\l_hanzi_tl}{\CJKunderdot{\l_hanzi_tl}}
+    }%
   }{%
     \textit{ERRO:}\ Não\ há\ \l_hanzi_tl\ em\\``#1''.
   }

@@ -23,42 +23,45 @@ def get_entry_and_write(filename, f):
               f.write(f'{line}\n')
 
            
-def write_groups(readdir, writedir):
+def write_groups(readdir, writedir, alldir):
     global entries
-    
     nof_entries = len(entries)
     print(f'NofEntries = {nof_entries}')
-    
+    allentries = []
     group = {}
     last_first_letter = ''
-    
     for entry in entries:
         print(f'Processing entry {entry}')
+        filename = '-'.join(list(entry)) + '.tex'
+        allentries.append(filename)
         first_letter = entry[0].upper()[0]
         if last_first_letter != first_letter:
             last_first_letter = first_letter
             print(f'Genenerating Group {first_letter}')
-        filename = '-'.join(list(entry)) + '.tex'
         if first_letter not in group:
             group[first_letter] = list()
-
         group[first_letter].append(filename)
-            
     for c in group.keys():
         filename = writedir + '/' + c + '.tex'
         print(f'Writting Group {filename}')
-        
         with open(filename, 'w', encoding='utf-8') as file:
             file.write('%%%\n')
             file.write(f'%%% {c}\n')
             file.write('%%%\n')
             file.write(f'\\section*{{{c}}}\n')
             file.write(f'\\addcontentsline{{toc}}{{section}}{{{c}}}\n\n')
-                                                              
             for e in group[c]:
                 get_entry_and_write(readdir + '/' + e, file)
-                                                              
             file.write('\n%%%%% EOF %%%%%\n')
+    filename = alldir + '/verbetes.tex'
+    print(f'Writting All {filename}')
+    with open(filename, 'w', encoding='utf-8') as file:
+        file.write('%%%\n')
+        file.write(f'%%% Todos os Verbetes\n')
+        file.write('%%%\n')
+        for e in allentries:
+            get_entry_and_write(readdir + '/' + e, file)
+        file.write('%%%%% EOF %%%%%\n')
 
 def main():
     parser = argparse.ArgumentParser(description='''
@@ -68,12 +71,10 @@ def main():
         version=f'%(prog)s v{VERSION}')
     parser.add_argument('--read', '--readdir', '-r', dest='read_dir', action='store')
     parser.add_argument('--write', '--writedir', '-w', dest='write_dir', action='store')
-
+    parser.add_argument('--all', '--alldir', '-a', dest='all_dir', action='store')
     args = parser.parse_args()
-    
     get_entries(args.read_dir)
-    write_groups(args.read_dir, args.write_dir)
-
+    write_groups(args.read_dir, args.write_dir, args.all_dir)
     return 0;
     
 if __name__ == "__main__":

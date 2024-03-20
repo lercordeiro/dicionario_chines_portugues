@@ -1,9 +1,10 @@
-TEX = xelatex -halt-on-error -papersize=A4 -8bit -interaction=batchmode
+TEX = xelatex -halt-on-error -papersize=A4 -8bit #-interaction=batchmode
 BIB = bibtex
 DST_SITE = /var/www/ler.cordeiro.nom.br/dicionario
 DST_REPO = /var/www/repo.ler.cordeiro.nom.br/Dicionário
 GENGRP = ./bin/gengroups.py
 GRPDIR = ./grupos
+ALLDIR = ./todos_os_verbetes
 INCDIR = ./include
 VERBDIR = ./verbetes
 MKIDX = ~/.local/bin/zhmakeindex -s ./config/main.ist 
@@ -17,7 +18,7 @@ arquivo :
 
 grupos.done : verbetes.tar.gz
 	tar xvzf verbetes.tar.gz
-	$(GENGRP) -r $(VERBDIR) -w $(GRPDIR)
+	$(GENGRP) -r $(VERBDIR) -w $(GRPDIR) -a $(ALLDIR)
 	touch grupos.done
 
 grupos : grupos.done
