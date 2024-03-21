@@ -1,4 +1,4 @@
-#!/usr/bin/env /usr/local/bin/python3.9
+#!/usr/bin/env /usr/local/bin/python
 
 import sys
 import argparse
