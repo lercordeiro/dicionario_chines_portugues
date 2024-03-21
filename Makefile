@@ -44,8 +44,8 @@ main-livreto.pdf : main-book.pdf
 dicionario.pdf: main.pdf
 	cp main.pdf dicionario.pdf
 
-dicionario-livreto.pdf: main.pdf
-	cp main.pdf dicionario-livreto.pdf
+dicionario-livreto.pdf: main-livreto.pdf
+	cp main-livreto.pdf dicionario-livreto.pdf
 
 deploy : dicionario.pdf dicionario-livreto.pdf
 	cp dicionario.pdf         $(DST_SITE)

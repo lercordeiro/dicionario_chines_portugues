@@ -3,6 +3,8 @@ verbetes/
 tmp/
 .kile/
 main.pdf
+main-book.pdf
+main-livreto.pdf
 *.done
 *.aux
 *.idx
