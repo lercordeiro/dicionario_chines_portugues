@@ -53,11 +53,9 @@ def read_entries(filename):
                 hanzis = list(s)
                 print(hanzis)
                 s = substrings[2].lower()
-                s = s.replace("\ ","")
                 s = s.replace("·","")
                 s = s.replace("'","")
                 s = s.replace("-","")
-                s = s.replace("...", "")
                 s = s.replace("(", "")
                 s = s.replace(")","")
                 pinyin_str = s
@@ -101,32 +99,20 @@ def read_entries(filename):
         file.close()
         
         
-def write_entry_to_a_separate_file(write_flag):
+def write_entry_to_a_separate_file(write_dir):
     global entries
     
     nof_entries = len(entries)
     print(f'NofEntries = {nof_entries}')
     
-    print(f'WriteFlag = {write_flag}')
+    print(f'WriteDir = {write_dir}')
     
     for entry in entries:
         print(f'Entry = {entry}')
-        if write_flag:
-            entry_text = entries[entry]
-            with open(entry, 'w', encoding='utf-8') as file:
-                for line in entry_text:
-                    file.write(line + '\n')
-            file.close()
-
-        else:
-            print('BEGIN ENTRY')
-            entry_text = entries[entry]
-            
+        entry_text = entries[entry]
+        with open(write_dir + '/' + entry, 'w', encoding='utf-8') as file:
             for line in entry_text:
-                print (f'ENTRY: {line}')
-            
-            print('END ENTRY')
-        
+                file.write(line + '\n')
 
 def main():
     parser = argparse.ArgumentParser(description='''
@@ -134,13 +120,13 @@ def main():
         separa cada verbete em arquivo próprio''')
     parser.add_argument('--version', '-V', action='version', 
         version=f'%(prog)s v{VERSION}')
-    parser.add_argument('--write', '-w', dest='write_flag',     
-        action='store_true')
+    parser.add_argument('--write-dir', '-w', dest='write_dir',     
+        action='store')
     parser.add_argument('filename')
     args = parser.parse_args()
     
     read_entries(args.filename)
-    write_entry_to_a_separate_file(args.write_flag)
+    write_entry_to_a_separate_file(args.write_dir)
     
     return 0;
     

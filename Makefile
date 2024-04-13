@@ -1,31 +1,41 @@
 TEX = xelatex -halt-on-error -papersize=A4 -8bit #-interaction=batchmode
 BIB = bibtex
-DST_SITE = /var/www/ler.cordeiro.nom.br/dicionario
-DST_REPO = /var/www/repo.ler.cordeiro.nom.br/Dicionário
+DSTSITE = /var/www/ler.cordeiro.nom.br/dicionario
+DSTREPO = /var/www/repo.ler.cordeiro.nom.br/Dicionário
 GENGRP = ./bin/gengroups.py
 GRPDIR = ./grupos
-ALLDIR = ./todos
 INCDIR = ./include
 VERBDIR = ./verbetes
+VERBTAR = ~/Documentos/Chinês/DCP/verbetes.tar.gz
 MKIDX = ~/.local/bin/zhmakeindex -s ./config/main.ist 
 BOOK = pdfbook2 --no-crop --signature=20 --paper=a4paper
+TIMESTAMP = $(shell date "+%FT%T%z")
 
 all: dicionario.pdf dicionario-livreto.pdf
 
-arquivo :
-	tar cvzf verbetes.tar.gz $(VERBDIR)
-	rm -f grupos.done
+$(VERBTAR) : 
+	echo Already done...
 
-grupos.done : verbetes.tar.gz
+verbetes.tar.gz : $(VERBTAR)
+	cp verbetes.tar.gz backup/verbetes.tar.gz.$(TIMESTAMP)
+	cp main.pdf backup/main.pdf.$(TIMESTAMP)
+	cp $(VERBTAR) .
+	rm -f verbetes/* grupos/*
+
+verbetes : verbetes.tar.gz
+	
+$(VERBDIR)/%.tex : verbetes.tar.gz
 	tar xvzf verbetes.tar.gz
-	$(GENGRP) -r $(VERBDIR) -w $(GRPDIR) -a $(ALLDIR)
-	touch grupos.done
 
-grupos : grupos.done
+$(GRPDIR)/%.tex : $(VERBDIR)/%.tex
+	$(GENGRP) -r $(VERBDIR) -w $(GRPDIR)
 
-main : main.pdf 
+$(INCDIR)/%.tex :
+	echo Already done...
+ 
+main : main.pdf
 
-main.pdf : main.tex $(INCDIR)/*.tex grupos.done
+main.pdf : main.tex $(INCDIR)/%.tex $(GRPDIR)/%.tex
 	$(TEX) main.tex
 	$(MKIDX) -z pinyin pinyin
 	$(MKIDX) -z bihua stroke
@@ -48,12 +58,12 @@ dicionario-livreto.pdf: main-livreto.pdf
 	cp main-livreto.pdf dicionario-livreto.pdf
 
 deploy : dicionario.pdf dicionario-livreto.pdf
-	cp dicionario.pdf         $(DST_SITE)
-	cp dicionario.pdf         $(DST_REPO)
-	cp dicionario-livreto.pdf $(DST_SITE)
-	cp dicionario-livreto.pdf $(DST_REPO)
+	cp dicionario.pdf         $(DSTSITE)
+	cp dicionario.pdf         $(DSTREPO)
+	cp dicionario-livreto.pdf $(DSTSITE)
+	cp dicionario-livreto.pdf $(DSTREPO)
 
-verbetes :
+total :
 	@echo -n "***** Verbetes: "
 	@grep begin $(VERBDIR)/* | grep verbete | wc -l
 

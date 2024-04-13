@@ -1,5 +1,5 @@
 %
-% Funções que uso no dicionario.tex
+% Dictionary environment and functions
 %
 
 \newcommand{\sectionbreak}{\phantomsection}
@@ -51,10 +51,10 @@
 }{%
   \end{FlushLeft}
   \end{minipage}
-  \vspace{1.25ex}\par
+  \vspace{1.5ex}\par
 }
 
-\NewDocumentEnvironment{extragrande}{mO{}mO{}m}{%
+\NewDocumentEnvironment{verbete*}{mO{}mO{}m}{%
   \leavevmode%
   \markboth{#1{\tiny\dictpy{#3}}}{#1{\tiny\dictpy{#3}}}
   \tl_set:Nn \l_hanzi_tl {#1}
@@ -72,11 +72,11 @@
 }{%
   \end{FlushLeft}
   \end{minipage}
-  \vspace{1.25ex}\par
+  \vspace{1.5ex}\par
 }
 
 \NewDocumentCommand{\significado}{somm}{%
-  \IfBooleanTF{#1}{% Substantivo Próprio
+  \IfBooleanTF{#1}{% Proper Name
     $\hookrightarrow$\ (\textit{#3})\ (\textit{Substantivo\ Próprio})\\
     \IfValueT{#2}{[p.c.:~#2]}{\myenumerate{#4}} %
   }{%
