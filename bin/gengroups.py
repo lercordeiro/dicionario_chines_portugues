@@ -49,7 +49,7 @@ def write_groups(readdir, writedir):
             file.write('%%%\n')
             file.write(f'%%% {c}\n')
             file.write('%%%\n')
-            file.write(f'\\section*{{{c}}}\n')
+            file.write(f'%\\section*{{{c}}}\n')
             file.write(f'\\addcontentsline{{toc}}{{section}}{{{c}}}\n\n')
             for e in group[c]:
                 get_entry_and_write(readdir + '/' + e, file)

@@ -1,124 +1,252 @@
 %
 % Dictionary environment and functions
 %
-
+\newbool{veja}
+\newbool{exemplo}
 \newcommand{\sectionbreak}{\phantomsection}
 \renewcommand\stacktype{S}
 \renewcommand\stackalignment{l}
 \setstackgap{S}{2.5pt}
 
-\DeclareRobustCommand{\&}{%
-  \ifdim\fontdimen1\font>0pt
-    \textsl{\symbol{`\&}}%
-  \else
-    \symbol{`\&}%
-  \fi
+\DeclareRobustCommand{\&}%
+{
+    \ifdim\fontdimen1\font>0pt
+        \textsl{\symbol{`\&}}%
+    \else
+        \symbol{`\&}%
+    \fi
 }
 
-\NewDocumentCommand{\mypinyin}{m}{«\pinyin{#1}»}
+\NewDocumentCommand{\dictpinyin}{m}{\guillemotleft\pinyin{#1}\guillemotright} 
 
-\NewDocumentCommand{\dictpy}{m}{%
-  \StrSubstitute{#1}{r5}{r}[\rA]%
-  \StrSubstitute{\rA}{t5}{t}[\rZ]%
-  \edef\py{\mypinyin{\rZ}}%
-  \py
+\NewDocumentCommand{\dpy}{m}%
+{%
+    \StrSubstitute{#1}{r5}{r}[\rA]%
+    \StrSubstitute{\rA}{t5}{t}[\rZ]%
+    \edef\py{\dictpinyin{\rZ}}%
+    \mbox{}\py
 }
 
-\NewDocumentCommand{\myenumerate}{>{\SplitList{;}}m}{
-  \begin{enumerate*}[left=0pt,mode=unboxed,itemjoin={{; }}]
-  \ProcessList{#1}{\insertitem}
-  \end{enumerate*}
+\NewDocumentCommand{\dictenumerate}{>{\SplitList{;}}m}
+{%
+    \begin{enumerate*}[left=0pt,mode=unboxed,itemjoin={{; }}]
+        \ProcessList{#1}{\insertitem}
+    \end{enumerate*}
 }
 \NewDocumentCommand{\insertitem}{m}{\item #1}
 
+% Lista Veja
+\newenvironment{listaveja}%
+{\list{}% empty label
+    {
+        \setlength{\topsep}{0ex}
+        \setlength{\itemsep}{0ex}
+        \setlength{\leftmargin}{0ex}
+        \setlength{\labelsep}{0ex}
+        \setlength{\parsep}{0pt}
+        \setlength{\partopsep}{0pt}
+        \setlength{\rightmargin}{0ex}
+        \setlength{\listparindent}{0em}
+        \setlength{\itemindent}{0ex}
+        \setlength{\labelwidth}{0ex}
+    }%
+}%
+{\endlist}
+\newcommand{\vejaitem}[2]{\item[\addstackgap{\stackunder{#1}{\tiny\dpy{#2}}}]}
+
 \ExplSyntaxOn
 
-\NewDocumentEnvironment{verbete}{mO{}mO{}m}{%
-  \leavevmode%
-  \markboth{#1{\tiny\dictpy{#3}}}{#1{\tiny\dictpy{#3}}}
-  \tl_set:Nn \l_hanzi_tl {#1}
-  \tl_set:Nn \l_pinyin_tl {#3}
-  \tl_set:Nn \l_strokes_tl {#5}
-  \begin{minipage}[t][][t]{.475\textwidth}
-  \label{\mdfivesum{#1::#3}}
-  \index[pinyin]{#1@\dictpy{#3} #1}
-  \index[stroke]{#1@#1 \dictpy{#3}}
-  \index[radical]{#1@#1 \dictpy{#3}}
-  \begin{FlushLeft}
-  {\tiny\ding{108}}\hspace{1ex}\addstackgap{\stackunder{\textbf{\Large#1}}{\footnotesize#2\dictpy{#3}#4}}%
-  \hfill\textsuperscript{\tiny(#5画)}
-  \newline
+\newcommand\vejalst{}
+\newcommand\exemplolst{}
+
+\listadd{\vejalst}{}% Initialize list
+\listadd{\exemplolst}{}% Initialize list
+
+\NewDocumentEnvironment{verbete}{mO{}mO{}mo}%
+{
+    \leavevmode%
+    \markboth{#1{\tiny\dpy{#3}}}{#1{\tiny\dpy{#3}}}
+    \tl_set:Nn \l_hanzi_tl {#1}
+    \tl_set:Nn \l_pinyin_tl {#3}
+    \tl_set:Nn \l_strokes_tl {#5}
+    \boolfalse{veja} \renewcommand\vejalst{} \listadd{\vejalst}{}% Initialize list
+    \boolfalse{exemplo} \renewcommand\exemplolst{} \listadd{\exemplolst}{}% Initialize list
+    \begin{minipage}[t][][t]{.485\textwidth}
+        \baselineskip=1.1\baselineskip
+        \label{#1:#3}
+        \index[pinyin]{#1@\dpy{#3} #1}
+        \index[stroke]{#1@#1 \dpy{#3}}
+        \index[radical]{#1@#1 \dpy{#3}}
+        \begin{flushleft}
+            \begin{tcolorbox}[colframe=black,colback=white,boxrule=1pt,left=0mm,right=0mm,top=0mm,bottom=0mm]
+                \textbf{\Large#1}\hfill\textsuperscript{\tiny(#5画)}\\
+                {\footnotesize#2\dpy{#3}#4}\IfValueT{#6}{\hfill{\tiny[Kangxi\ #6]}}
+            \end{tcolorbox}
 }{%
-  \end{FlushLeft}
-  \end{minipage}
-  \vspace{1.5ex}\par
+    \ifbool{exemplo}%
+    {% Há exemplos
+        \renewcommand*{\do}[1]%
+        {%
+            \IfSubStr{##1}{::::}%
+            {% Com tradução
+                \StrCut{##1}{::::}{\sE}{\sT}%
+                {\small\addstackgap{\stackunder{\StrSubstitute{\sE}{\l_hanzi_tl}{\CJKunderdot{\l_hanzi_tl}}}{\scriptsize(\sT)}}}\\%
+            }%
+            {%
+                \IfSubStr{##1}{ERRO}{##1}%
+                {% Sem tradução
+                    {\small\StrSubstitute{##1}{\l_hanzi_tl}{\CJKunderdot{\l_hanzi_tl}}}\\%
+                }%
+            }%
+        }%
+            \par\vspace{1ex}
+            \ding{46}\ \textit{Exemplos:}\linebreak
+            \dolistloop{\exemplolst}
+    }{}% DNGN
+    \ifbool{veja}%
+    {% Há 'vejas'
+        \renewcommand*{\do}[1]%
+        {%
+            \IfBeginWith{##1}{eg:}
+            {%
+                \StrBehind{##1}{eg:}[\sHP]%
+                \StrCut{\sHP}{:}{\sH}{\sP}%
+                \vejaitem{\sH}{\sP}\mbox{}\linebreak%
+                \mbox{}\dotfill(pág.~\pageref{\sHP})%
+            }{%
+                \StrCut{##1}{:}\sH\sP %
+                \vejaitem{\sH}{\sP}\dotfill(pág.~\pageref{##1})%
+            }%
+        }
+            \par\vspace{1ex}
+            \ding{43}\ \textit{Veja\ também}:%
+            \begin{listaveja}
+                \dolistloop{\vejalst}
+            \end{listaveja}
+    }{}% DNGN
+            \mbox{}\vspace{1ex}
+        \end{flushleft}
+    \end{minipage}\par
 }
 
-\NewDocumentEnvironment{verbete*}{mO{}mO{}m}{%
-  \leavevmode%
-  \markboth{#1{\tiny\dictpy{#3}}}{#1{\tiny\dictpy{#3}}}
-  \tl_set:Nn \l_hanzi_tl {#1}
-  \tl_set:Nn \l_pinyin_tl {#3}
-  \tl_set:Nn \l_strokes_tl {#5}
-  \begin{minipage}[t][][t]{.475\textwidth}
-  \label{\mdfivesum{#1::#3}}
-  \index[pinyin]{#1@\dictpy{#3}\ #1}
-  \index[stroke]{#1@#1 \dictpy{#3}}
-  \index[radical]{#1@#1 \dictpy{#3}}
-  \begin{FlushLeft}
-  {\tiny\ding{108}}\hspace{1ex}\addstackgap{\stackunder{\textbf{\Large#1}}{\footnotesize#2\dictpy{#3}#4}}\\
-  \hspace*{\fill}{\tiny(#5画)}
-  \newline
+\NewDocumentEnvironment{verbete*}{mO{}mO{}mo}
+{%
+    \leavevmode%
+    \markboth{#1{\tiny\dpy{#3}}}{#1{\tiny\dpy{#3}}}
+    \tl_set:Nn \l_hanzi_tl {#1}
+    \tl_set:Nn \l_pinyin_tl {#3}
+    \tl_set:Nn \l_strokes_tl {#5}
+    \boolfalse{veja}
+    \renewcommand\vejalst{}
+    \listadd{\vejalst}{}% Initialize list
+    \boolfalse{exemplo}
+    \renewcommand\exemplolst{}
+    \begin{minipage}[t][][t]{.485\textwidth}
+        \baselineskip=1.1\baselineskip
+        \label{#1:#3}
+        \index[pinyin]{#1@\dpy{#3}\ #1}
+        \index[stroke]{#1@#1 \dpy{#3}}
+        \index[radical]{#1@#1 \dpy{#3}}
+        \begin{flushleft}
+            \begin{tcolorbox}[colframe=black,colback=white,boxrule=1pt,left=0mm,right=0mm,top=0mm,bottom=0mm]
+                \mbox{}\hfill\textsuperscript{\tiny(#5画)}\\
+                \textbf{\Large#1}\\%
+                {\footnotesize#2\dpy{#3}#4}%
+                \IfValueT{#6}{\mbox{}\hfill{\tiny[Kangxi\ #6]}}
+            \end{tcolorbox}
 }{%
-  \end{FlushLeft}
-  \end{minipage}
-  \vspace{1.5ex}\par
+    \ifbool{exemplo}
+    {%
+        \renewcommand*{\do}[1]%
+        {%
+            \IfSubStr{##1}{::::}%
+            {% Com tradução
+                \StrCut{##1}{::::}{\sE}{\sT}%
+                {\small\addstackgap{\stackunder{\StrSubstitute{\sE}{\l_hanzi_tl}{\CJKunderdot{\l_hanzi_tl}}}{\scriptsize(\sT)}}}\\%
+            }{%
+                \IfSubStr{##1}{ERRO}{##1}%
+                {% Sem tradução
+                    {\small\StrSubstitute{##1}{\l_hanzi_tl}{\CJKunderdot{\l_hanzi_tl}}}\\%
+                }
+            }
+        }
+            \par\vspace{1ex}
+            \ding{46}\ \textit{Exemplos:}\linebreak
+            \dolistloop{\exemplolst}
+        }{}% DNGN
+    \ifbool{veja}
+    {%
+        \renewcommand*{\do}[1]%
+        {%
+            \IfBeginWith{##1}{eg:}%
+            {%
+                \StrBehind{##1}{eg:}[\sHP]%
+                \StrCut{\sHP}{:}{\sH}{\sP}%
+                \vejaitem{\sH}{\sP}\mbox{}\linebreak%
+                \mbox{}\dotfill(pág.~\pageref{\sHP})%
+            }{%
+                \StrCut{##1}{:}\sH\sP%
+                \vejaitem{\sH}{\sP}\dotfill(pág.~\pageref{##1})%
+            }%
+        }
+            \par\vspace{1ex}
+            \ding{43}\ \textit{Veja\ também}:\\%
+            \begin{listaveja}
+                \dolistloop{\vejalst}
+            \end{listaveja}
+    }{}% DNGN
+            \mbox{}\vspace{1ex}
+        \end{flushleft}
+    \end{minipage}\par
 }
 
-\NewDocumentCommand{\significado}{somm}{%
-  \IfBooleanTF{#1}{% Proper Name
-    $\hookrightarrow$\ (\textit{#3})\ (\textit{Substantivo\ Próprio})\\
-    \IfValueT{#2}{[p.c.:~#2]}{\myenumerate{#4}} %
-  }{%
-    $\hookrightarrow$\ (\textit{#3})\IfValueT{#2}{ [p.c.: #2]}%
-    {\myenumerate{#4}}%
-  }
-  \newline
-}
-
-\NewDocumentCommand{\veja}{smm}{%
-  \IfBooleanTF{#1}{% Palavra Grande
-    \textit{Veja}:\ \addstackgap{\stackunder{#2}{\tiny\dictpy{#3}}}\\%
-    \hspace*{5.5ex}(pág.~\pageref{\mdfivesum{#2::#3}})
-  }{%
-    \textit{Veja}:\ \addstackgap{\stackunder{#2}{\tiny\dictpy{#3}}}%
-    \ (pág.~\pageref{\mdfivesum{#2::#3}})
-  }
-  \newline
-}
-
-\NewDocumentCommand{\variante}{smm}{%
-  \IfBooleanTF{#1}{% Palavra Grande
-    $\hookrightarrow$\ variante\ de\ \addstackgap{\stackunder{#2}{\tiny\dictpy{#3}}}\\%
-    \hspace*{3ex}(pág.~\pageref{\mdfivesum{#2::#3}})
-  }{%
-    $\hookrightarrow$\ variante\ de\ \addstackgap{\stackunder{#2}{\tiny\dictpy{#3}}}%
-    \ (pág.~\pageref{\mdfivesum{#2::#3}})
-  }
-  \newline
-}
-
-\NewDocumentCommand{\exemplo}{mo}{%
-  \IfSubStr[1]{#1}{\l_hanzi_tl}{%
-    \IfValueTF{#2}{%
-      \textit{Ex.:}\ \addstackgap{\stackunder{\StrSubstitute{#1}{\l_hanzi_tl}{\CJKunderdot{\l_hanzi_tl}}}{\scriptsize(#2)}}
+\NewDocumentCommand{\significado}{somm}%
+{%
+    \IfBooleanTF{#1}%
+    {% Proper Name
+        (\textit{Substantivo\ Próprio})\IfValueT{#2}{\ [p.c.:~#2]}{\ \dictenumerate{#4}}\\%
     }{%
-      \textit{Ex.:}\ \StrSubstitute{#1}{\l_hanzi_tl}{\CJKunderdot{\l_hanzi_tl}}
+        (\textit{#3})\IfValueT{#2}{\ [p.c.: #2]}{\ \dictenumerate{#4}}\\%
     }%
-  }{%
-    \textit{ERRO:}\ Não\ há\ \l_hanzi_tl\ em\\``#1''.
-  }
-  \newline
+}
+
+\NewDocumentCommand{\variante}{smm}%
+{%
+    \IfBooleanTF{#1}%
+    {% Palavra Grande
+        \ding{43}\ Variante\ de\ \addstackgap{\stackunder{#2}{\tiny\dpy{#3}}}\\%
+        \hspace*{3ex}(pág.~\pageref{#2:#3})\\%
+    }{%
+        \ding{43}\ Variante\ de\ \addstackgap{\stackunder{#2}{\tiny\dpy{#3}}}\ (pág.~\pageref{#2:#3})\\%
+    }%
+}
+
+\NewDocumentCommand{\exemplo}{mo}%
+{%
+    \booltrue{exemplo}
+    \IfSubStr[1]{#1}{\l_hanzi_tl}%
+    {%
+        \IfValueTF{#2}%
+        {% Com tradução
+            \listgadd{\exemplolst}{#1::::#2}%
+        }{% Sem tradução
+            \listgadd{\exemplolst}{#1}%
+        }%
+    }{% Sem a palavra (hanzi)
+       \listgadd{\exemplolst}{\textit{ERRO}: Não há \l_hanzi_tl\ em ``#1''.}%
+    }%
+}
+
+\NewDocumentCommand{\veja}{smm}%
+{%
+    \booltrue{veja}
+    \IfBooleanTF{#1}
+    {% Veja extra grande
+        \listgadd{\vejalst}{eg:#2:#3}%
+    }{%
+        \listgadd{\vejalst}{#2:#3}%
+    }%
 }
 
 \ExplSyntaxOff
+

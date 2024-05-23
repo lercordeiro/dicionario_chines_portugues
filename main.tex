@@ -9,7 +9,7 @@
 % CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[a4paper,10pt,twoside,openany]{memoir}
+\documentclass[a4paper,9pt,twoside,openany]{memoir}
 
 \usepackage[dvipsnames]{xcolor}
 \usepackage{fontspec}
@@ -22,6 +22,7 @@
 \usepackage{imakeidx}
 \usepackage{xparse}
 \usepackage[inline]{enumitem}
+\usepackage{tasks}
 \usepackage{zhnumber}
 \usepackage{tikz}
 \usepackage[hyperindex,hidelinks]{hyperref}
@@ -29,10 +30,21 @@
 \usepackage{xstring}
 \usepackage{tabularray}
 \usepackage{stackengine}
-\usepackage{ragged2e}
+\usepackage{etoolbox}
+\usepackage{tcolorbox}
 
 % Meus Comandos
 \input{include/comandos.tex}
+
+% Ajuste das margens
+\setlrmarginsandblock{3.5cm}{2.5cm}{*}
+\setulmarginsandblock{2.5cm}{*}{1}
+\checkandfixthelayout 
+
+% Linguagem principal
+\setmainlanguage[variant=brazilian]{portuguese}
+\setotherlanguages{chinese,english}
+\input{include/hyphenation.tex}
 
 % Ajuste das fontes... No Tofu do Google
 \setCJKmainfont{Noto Serif CJK SC ExtraLight}
@@ -68,11 +80,11 @@
 % Ajustes de espaçamento
 \setlength{\parindent}{0cm}
 \setlength{\parskip}{-1.5mm}
-\setlength{\columnsep}{.5em}
+\setlength{\columnsep}{.8em}
 \setlength{\columnseprule}{0.1mm}
 
 % Ajustes do gerador de pinyin
-\xpinyinsetup{ratio={.6},vsep={1em},pysep={\hspace{.2ex}}}
+\xpinyinsetup{ratio={.6},vsep={1em},pysep={\hspace{.5ex}}}
 
 % Headers & Footers
 \setheadfoot{14pt}{28pt}
@@ -88,21 +100,17 @@
 \makefootrule{dicionario}{\textwidth}{\normalrulethickness}{4pt}
 
 % Seções têm uma caixa arredondada em volta do nome, para o A-Z dos pinyin.
-\newcommand{\boxedsec}[1]{%
-  \tikz{
-    \node[draw,rounded corners=1mm,text depth=0.2ex,line width=1pt, anchor=west]{\Large\bfseries#1};
-  }
-}
-\setsecheadstyle{\boxedsec}
-\setbeforesecskip{2ex}
-\setaftersecskip{1ex}
+%\newcommand{\boxedsec}[1]{%
+%  \tikz{
+%    \node[draw,rounded corners=1mm,text depth=0.2ex,line width=1pt, anchor=west]{\Large\bfseries#1};
+%  }
+%}
+%\setsecheadstyle{\boxedsec}
+%\setbeforesecskip{2ex}
+%\setaftersecskip{1ex}
 
 % Até agora o melhor estilo para capítulos
 \chapterstyle{verville}
-
-% Linguagem default
-\setdefaultlanguage[variant=brazilian]{portuguese}
-\setotherlanguages{english}
 
 %%%
 %%% Documento começa aqui!
@@ -167,7 +175,7 @@
 
 \clearpage
 \pagestyle{plain}
-\chapter{Radicais Chineses}
+\chapter{Radicais Kangxi}
 \input{include/radicais.tex}
 
 \printindex[stroke]
