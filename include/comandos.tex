@@ -18,12 +18,14 @@
 }
 
 \NewDocumentCommand{\dictpinyin}{m}{\guillemotleft\pinyin{#1}\guillemotright} 
+\NewDocumentCommand{\dud}{m}{\CJKunderdot{#1}}
 
 \NewDocumentCommand{\dpy}{m}%
 {%
     \StrSubstitute{#1}{r5}{r}[\rA]%
-    \StrSubstitute{\rA}{t5}{t}[\rZ]%
-    \edef\py{\dictpinyin{\rZ}}%
+    \StrSubstitute{\rA}{t5}{t}[\rB]%
+    \StrSubstitute{\rB}{ }{␣}[\rC]%
+    \edef\py{\dictpinyin{\rC}}%
     \mbox{}\py
 }
 
@@ -82,27 +84,43 @@
                 \textbf{\Large#1}\hfill\textsuperscript{\tiny(#5画)}\\
                 {\footnotesize#2\dpy{#3}#4}\IfValueT{#6}{\hfill{\tiny[Kangxi\ #6]}}
             \end{tcolorbox}
-}{%
+}%
+{%
     \ifbool{exemplo}%
     {% Há exemplos
         \renewcommand*{\do}[1]%
         {%
-            \IfSubStr{##1}{::::}%
-            {% Com tradução
-                \StrCut{##1}{::::}{\sE}{\sT}%
-                {\small\addstackgap{\stackunder{\StrSubstitute{\sE}{\l_hanzi_tl}{\CJKunderdot{\l_hanzi_tl}}}{\scriptsize(\sT)}}}\\%
+            \IfSubStr{##1}{manual::::}%
+            {% Under Dot Manual
+                \StrBehind{##1}{manual::::}[\sM]%
+                \IfSubStr{\sM}{::::}%
+                {% Com tradução
+                    \StrCut{\sM}{::::}{\sE}{\sT}%
+                    {\small\addstackgap{\stackunder{\sE}{\scriptsize(\sT)}}}\\%
+                }%
+                {%
+                    {\small\sM}\\%
+                }%
             }%
             {%
-                \IfSubStr{##1}{ERRO}{##1}%
-                {% Sem tradução
-                    {\small\StrSubstitute{##1}{\l_hanzi_tl}{\CJKunderdot{\l_hanzi_tl}}}\\%
+                \IfSubStr{##1}{::::}%
+                {% Com tradução
+                    \StrCut{##1}{::::}{\sE}{\sT}%
+                    {\small\addstackgap{\stackunder{\StrSubstitute{\sE}{\l_hanzi_tl}{\CJKunderdot{\l_hanzi_tl}}}{\scriptsize(\sT)}}}\\%
+                }%
+                {%
+                    \IfSubStr{##1}{ERRO}{##1}%
+                    {% Sem tradução
+                        {\small\StrSubstitute{##1}{\l_hanzi_tl}{\CJKunderdot{\l_hanzi_tl}}}\\%
+                    }%
                 }%
             }%
         }%
             \par\vspace{1ex}
             \ding{46}\ \textit{Exemplos:}\linebreak
             \dolistloop{\exemplolst}
-    }{}% DNGN
+    }%
+    {}% DNGN
     \ifbool{veja}%
     {% Há 'vejas'
         \renewcommand*{\do}[1]%
@@ -113,7 +131,8 @@
                 \StrCut{\sHP}{:}{\sH}{\sP}%
                 \vejaitem{\sH}{\sP}\mbox{}\linebreak%
                 \mbox{}\dotfill(pág.~\pageref{\sHP})%
-            }{%
+            }%
+            {%
                 \StrCut{##1}{:}\sH\sP %
                 \vejaitem{\sH}{\sP}\dotfill(pág.~\pageref{##1})%
             }%
@@ -123,7 +142,8 @@
             \begin{listaveja}
                 \dolistloop{\vejalst}
             \end{listaveja}
-    }{}% DNGN
+    }%
+    {}% DNGN
             \mbox{}\vspace{1ex}
         \end{flushleft}
     \end{minipage}\par
@@ -154,28 +174,45 @@
                 {\footnotesize#2\dpy{#3}#4}%
                 \IfValueT{#6}{\mbox{}\hfill{\tiny[Kangxi\ #6]}}
             \end{tcolorbox}
-}{%
+}%
+{%
     \ifbool{exemplo}
-    {%
+    {% Há exemplos
         \renewcommand*{\do}[1]%
         {%
-            \IfSubStr{##1}{::::}%
-            {% Com tradução
-                \StrCut{##1}{::::}{\sE}{\sT}%
-                {\small\addstackgap{\stackunder{\StrSubstitute{\sE}{\l_hanzi_tl}{\CJKunderdot{\l_hanzi_tl}}}{\scriptsize(\sT)}}}\\%
-            }{%
-                \IfSubStr{##1}{ERRO}{##1}%
-                {% Sem tradução
-                    {\small\StrSubstitute{##1}{\l_hanzi_tl}{\CJKunderdot{\l_hanzi_tl}}}\\%
-                }
-            }
-        }
+            \IfSubStr{##1}{manual::::}%
+            {% Under Dot Manual
+                \StrBehind{##1}{manual::::}[\sM]%
+                \IfSubStr{\sM}{::::}%
+                {% Com tradução
+                    \StrCut{\sM}{::::}{\sE}{\sT}%
+                    {\small\addstackgap{\stackunder{\sE}{\scriptsize(\sT)}}}\\%
+                }%
+                {%
+                    {\small\sM}\\%
+                }%
+            }%
+            {%
+                \IfSubStr{##1}{::::}%
+                {% Com tradução
+                    \StrCut{##1}{::::}{\sE}{\sT}%
+                    {\small\addstackgap{\stackunder{\StrSubstitute{\sE}{\l_hanzi_tl}{\CJKunderdot{\l_hanzi_tl}}}{\scriptsize(\sT)}}}\\%
+                }%
+                {%
+                    \IfSubStr{##1}{ERRO}{##1}%
+                    {% Sem tradução
+                        {\small\StrSubstitute{##1}{\l_hanzi_tl}{\CJKunderdot{\l_hanzi_tl}}}\\%
+                    }%
+                }%
+            }%
+        }%
             \par\vspace{1ex}
             \ding{46}\ \textit{Exemplos:}\linebreak
             \dolistloop{\exemplolst}
-        }{}% DNGN
+    }%
+    {}% DNGN
     \ifbool{veja}
-    {%
+    {% Há 'vejas'
         \renewcommand*{\do}[1]%
         {%
             \IfBeginWith{##1}{eg:}%
@@ -184,7 +221,8 @@
                 \StrCut{\sHP}{:}{\sH}{\sP}%
                 \vejaitem{\sH}{\sP}\mbox{}\linebreak%
                 \mbox{}\dotfill(pág.~\pageref{\sHP})%
-            }{%
+            }%
+            {%
                 \StrCut{##1}{:}\sH\sP%
                 \vejaitem{\sH}{\sP}\dotfill(pág.~\pageref{##1})%
             }%
@@ -194,7 +232,8 @@
             \begin{listaveja}
                 \dolistloop{\vejalst}
             \end{listaveja}
-    }{}% DNGN
+    }%
+    {}% DNGN
             \mbox{}\vspace{1ex}
         \end{flushleft}
     \end{minipage}\par
@@ -205,7 +244,8 @@
     \IfBooleanTF{#1}%
     {% Proper Name
         (\textit{Substantivo\ Próprio})\IfValueT{#2}{\ [p.c.:~#2]}{\ \dictenumerate{#4}}\\%
-    }{%
+    }%
+    {%
         (\textit{#3})\IfValueT{#2}{\ [p.c.: #2]}{\ \dictenumerate{#4}}\\%
     }%
 }
@@ -216,25 +256,40 @@
     {% Palavra Grande
         \ding{43}\ Variante\ de\ \addstackgap{\stackunder{#2}{\tiny\dpy{#3}}}\\%
         \hspace*{3ex}(pág.~\pageref{#2:#3})\\%
-    }{%
+    }%
+    {%
         \ding{43}\ Variante\ de\ \addstackgap{\stackunder{#2}{\tiny\dpy{#3}}}\ (pág.~\pageref{#2:#3})\\%
     }%
 }
 
-\NewDocumentCommand{\exemplo}{mo}%
+\NewDocumentCommand{\exemplo}{smo}%
 {%
     \booltrue{exemplo}
-    \IfSubStr[1]{#1}{\l_hanzi_tl}%
-    {%
-        \IfValueTF{#2}%
+    \IfBooleanTF{#1}%
+    {% Under Dot Manual 
+        \IfValueTF{#3}%
         {% Com tradução
-            \listgadd{\exemplolst}{#1::::#2}%
-        }{% Sem tradução
-            \listgadd{\exemplolst}{#1}%
+             \listgadd{\exemplolst}{manual::::#2::::#3}%
         }%
-    }{% Sem a palavra (hanzi)
-       \listgadd{\exemplolst}{\textit{ERRO}: Não há \l_hanzi_tl\ em ``#1''.}%
+        {% Sem tradução
+            \listgadd{\exemplolst}{manual::::#2}%
+        }%
     }%
+    {%
+        \IfSubStr[1]{#2}{\l_hanzi_tl}%
+        {%
+            \IfValueTF{#3}%
+            {% Com tradução
+                \listgadd{\exemplolst}{#2::::#3}%
+            }%
+            {% Sem tradução
+                \listgadd{\exemplolst}{#2}%
+            }%
+        }%
+        {% Sem a palavra (hanzi)
+           \listgadd{\exemplolst}{\textit{ERRO}: Não há \l_hanzi_tl\ em ``#2''.}%
+        }%
+    }
 }
 
 \NewDocumentCommand{\veja}{smm}%
@@ -243,7 +298,8 @@
     \IfBooleanTF{#1}
     {% Veja extra grande
         \listgadd{\vejalst}{eg:#2:#3}%
-    }{%
+    }%
+    {%
         \listgadd{\vejalst}{#2:#3}%
     }%
 }
