@@ -1,4 +1,4 @@
-TEX = xelatex -halt-on-error -8bit # -papersize=A4 -interaction=batchmode
+TEX = lualatex -halt-on-error -8bit # -papersize=A4 -interaction=batchmode
 BIB = bibtex
 DSTSITE = /var/www/ler.cordeiro.nom.br/dicionario
 DSTREPO = /var/www/repo.ler.cordeiro.nom.br/Dicionário
@@ -8,7 +8,7 @@ INCDIR = ./include
 VERBDIR = ./verbetes
 VERBTAR = ~/Documentos/Chinês/DCP/verbetes.tar.gz
 MKIDX = ~/.local/bin/zhmakeindex -s ./config/main.ist 
-BOOK = pdfbook2 --no-crop --signature=20 --paper=a4paper
+BOOK = pdfjam --landscape --signature 20 --twoside --a4paper --suffix livreto 
 TIMESTAMP != date "+%FT%T%z"
 
 all: dicionario.pdf dicionario-livreto.pdf
@@ -37,7 +37,6 @@ main : main.pdf
 
 main.pdf : main.tex $(INCDIR)/%.tex $(GRPDIR)/%.tex
 	$(TEX) main.tex
-	$(MKIDX) -z pinyin pinyin
 	$(MKIDX) -z bihua stroke
 	$(MKIDX) -z bushou radical
 	$(TEX) main.tex
@@ -45,11 +44,8 @@ main.pdf : main.tex $(INCDIR)/%.tex $(GRPDIR)/%.tex
 	echo -n "Verbetes: "
 	grep begin $(VERBDIR)/* | grep verbete | wc -l
 
-main-book.pdf : main.pdf
+main-livreto.pdf : main.pdf
 	$(BOOK) main.pdf
-
-main-livreto.pdf : main-book.pdf
-	cp main-book.pdf main-livreto.pdf
 
 dicionario.pdf: main.pdf
 	cp main.pdf dicionario.pdf

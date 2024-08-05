@@ -1,6 +1,6 @@
 ﻿
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% XeTeX
+% LuaLaTex
 %
 % Dicionário Chinês -> Português
 % Autor: Luiz Eduardo Roncato Cordeiro
@@ -12,15 +12,10 @@
 \documentclass[a4paper,9pt,twoside,openany]{memoir}
 
 \usepackage[dvipsnames]{xcolor}
-\usepackage{fontspec}
 \usepackage{polyglossia}
-\usepackage{microtype}
-\usepackage{xeCJK}
-\usepackage{xeCJKfntef}
-\usepackage{xpinyin}
+\usepackage{fontspec}
 \usepackage{multicol}
 \usepackage{imakeidx}
-\usepackage{xparse}
 \usepackage[inline]{enumitem}
 \usepackage{tasks}
 \usepackage{zhnumber}
@@ -30,15 +25,15 @@
 \usepackage{xstring}
 \usepackage{tabularray}
 \usepackage{stackengine}
-\usepackage{etoolbox}
 \usepackage{tcolorbox}
+\usepackage{luacode}
 
 % Meus Comandos
 \input{include/comandos.tex}
 
 % Ajuste das margens
-\setlrmarginsandblock{3.5cm}{2.5cm}{*}
-\setulmarginsandblock{2.5cm}{*}{1}
+\setlrmarginsandblock{3cm}{2cm}{*}
+\setulmarginsandblock{2cm}{*}{1}
 \checkandfixthelayout 
 
 % Linguagem principal
@@ -47,9 +42,9 @@
 \input{include/hyphenation.tex}
 
 % Ajuste das fontes... No Tofu do Google
-\setCJKmainfont{Noto Serif CJK SC ExtraLight}
-\setCJKsansfont{Noto Sans CJK SC}
-\setCJKmonofont{Noto Sans Mono CJK SC}
+\setmainfont{Noto Serif CJK SC Light}
+\setsansfont{Noto Sans CJK SC}
+\setmonofont{Noto Sans Mono CJK SC}
 
 % Ajustes do PDF
 \hypersetup{
@@ -84,7 +79,7 @@
 \setlength{\columnseprule}{0.1mm}
 
 % Ajustes do gerador de pinyin
-\xpinyinsetup{ratio={.6},vsep={1em},pysep={\hspace{.25ex}}}
+%\xpinyinsetup{ratio={.6},vsep={1em},pysep={\hspace{.25ex}}}
 
 % Headers & Footers
 \setheadfoot{14pt}{28pt}
@@ -117,6 +112,7 @@
 %%%
 
 \begin{document}
+\addfontfeatures{CharacterWidth=Proportional}
 
 \input{include/capa.tex}
 
@@ -180,7 +176,6 @@
 
 \printindex[stroke]
 \printindex[radical]
-\printindex[pinyin]
 
 \end{document}
 

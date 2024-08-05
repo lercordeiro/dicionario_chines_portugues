@@ -8,6 +8,14 @@
 \renewcommand\stackalignment{l}
 \setstackgap{S}{2.5pt}
 
+\directlua{dofile "include/tex-sx-pinyin-tonemarks.lua"}
+
+%% wrap converter in a TeX macro
+\protected\def\pinyin#1{%
+  %% switch to appropriate hyphenation pattern goes here
+  \directlua{packagedata.pinyintones.convert ([==[#1]==])}%
+}
+
 \DeclareRobustCommand{\&}%
 {
     \ifdim\fontdimen1\font>0pt
@@ -18,14 +26,15 @@
 }
 
 \NewDocumentCommand{\dictpinyin}{m}{\guillemotleft\pinyin{#1}\guillemotright} 
-\NewDocumentCommand{\dud}{m}{\CJKunderdot{#1}}
+\NewDocumentCommand{\dul}{m}{\underline{#1}}
 
 \NewDocumentCommand{\dpy}{m}%
 {%
     \StrSubstitute{#1}{r5}{r}[\rA]%
     \StrSubstitute{\rA}{t5}{t}[\rB]%
-    \StrSubstitute{\rB}{ }{␣}[\rC]%
-    \edef\py{\dictpinyin{\rC}}%
+    \StrSubstitute{\rB}{v}{ü}[\rC]%
+    \StrSubstitute{\rC}{V}{Ü}[\rD]%
+    \edef\py{\dictpinyin{\rD}}%
     \mbox{}\py
 }
 
@@ -76,7 +85,6 @@
     \begin{minipage}[t][][t]{.485\textwidth}
         \baselineskip=1.1\baselineskip
         \label{#1:#3}
-        \index[pinyin]{#1@\dpy{#3} #1}
         \index[stroke]{#1@#1 \dpy{#3}}
         \index[radical]{#1@#1 \dpy{#3}}
         \begin{flushleft}
@@ -106,12 +114,12 @@
                 \IfSubStr{##1}{::::}%
                 {% Com tradução
                     \StrCut{##1}{::::}{\sE}{\sT}%
-                    {\small\addstackgap{\stackunder{\StrSubstitute{\sE}{\l_hanzi_tl}{\CJKunderdot{\l_hanzi_tl}}}{\scriptsize(\sT)}}}\\%
+                    {\small\addstackgap{\stackunder{\StrSubstitute{\sE}{\l_hanzi_tl}{\underline{\l_hanzi_tl}}}{\scriptsize(\sT)}}}\\%
                 }%
                 {%
                     \IfSubStr{##1}{ERRO}{##1}%
                     {% Sem tradução
-                        {\small\StrSubstitute{##1}{\l_hanzi_tl}{\CJKunderdot{\l_hanzi_tl}}}\\%
+                        {\small\StrSubstitute{##1}{\l_hanzi_tl}{\underline{\l_hanzi_tl}}}\\%
                     }%
                 }%
             }%
@@ -164,7 +172,6 @@
     \begin{minipage}[t][][t]{.485\textwidth}
         \baselineskip=1.1\baselineskip
         \label{#1:#3}
-        \index[pinyin]{#1@\dpy{#3}\ #1}
         \index[stroke]{#1@#1 \dpy{#3}}
         \index[radical]{#1@#1 \dpy{#3}}
         \begin{flushleft}
@@ -243,22 +250,22 @@
 {%
     \IfBooleanTF{#1}%
     {% Proper Name
-        (\textit{Substantivo\ Próprio})\IfValueT{#2}{\ [p.c.:~#2]}{\ \dictenumerate{#4}}\\%
+        {\footnotesize\ding{108}\ }(\textit{Substantivo\ Próprio})\IfValueT{#2}{\ [p.c.:~#2]}{\ \dictenumerate{#4}}\\%
     }%
     {%
-        (\textit{#3})\IfValueT{#2}{\ [p.c.: #2]}{\ \dictenumerate{#4}}\\%
+        {\footnotesize\ding{108}\ }(\textit{#3})\IfValueT{#2}{\ [p.c.: #2]}{\ \dictenumerate{#4}}\\%
     }%
 }
 
-\NewDocumentCommand{\variante}{smm}%
+\NewDocumentCommand{\variante}{sm}%
 {%
     \IfBooleanTF{#1}%
     {% Palavra Grande
-        \ding{43}\ Variante\ de\ \addstackgap{\stackunder{#2}{\tiny\dpy{#3}}}\\%
-        \hspace*{3ex}(pág.~\pageref{#2:#3})\\%
+        \ding{43}\ Variante\ de\ #2\\%
+        \hspace*{3ex}(pág.~\pageref{#2:\l_pinyin_tl})\\%
     }%
     {%
-        \ding{43}\ Variante\ de\ \addstackgap{\stackunder{#2}{\tiny\dpy{#3}}}\ (pág.~\pageref{#2:#3})\\%
+        \ding{43}\ Variante\ de\ #2\ (pág.~\pageref{#2:\l_pinyin_tl})\\%
     }%
 }
 
