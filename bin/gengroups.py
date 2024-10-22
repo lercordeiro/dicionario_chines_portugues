@@ -23,7 +23,6 @@ def get_entry_and_write(filename, f):
               f.write(f'{line}\n')
         f.write('\n')
 
-           
 def write_groups(readdir, writedir):
     global entries
     nof_entries = len(entries)

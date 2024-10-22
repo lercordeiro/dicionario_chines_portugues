@@ -61,15 +61,15 @@ def read_entries(filename):
                 s = s.replace(")","")
                 pinyin_str = s
                 print(pinyin_str)
-                pinyin_strs = re.split(r'([a-zA-Z]+[1-5])', pinyin_str)
+                pinyin_strs = re.split(r'(?:\[(.*)\]|([a-zA-Z]+[1-5]))', pinyin_str)
                 print(pinyin_strs)
-                pinyins = [x for x in pinyin_strs if x != '']
+                pinyins = [x for x in pinyin_strs if x != '' and x != None ]
                 print(pinyins)
                 strokes = substrings[3].split(';')
                 print(strokes)
                 
                 if len(hanzis) != len(strokes):
-                    print(f'***** ERROR: in {filename}: number of hanzis and strokes are different: {len(hanzis)} != {len(strokes)}')
+                    print(f'***** ERROR: in {hanzis}: number of hanzis and strokes are different: {len(hanzis)} != {len(strokes)}')
                     sys.exit(1)
                     
                 if len(hanzis) != len(pinyins):

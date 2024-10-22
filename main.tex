@@ -11,9 +11,9 @@
 
 \documentclass[a4paper,9pt,twoside,openany]{memoir}
 
+\usepackage{fontspec}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{polyglossia}
-\usepackage{fontspec}
 \usepackage{multicol}
 \usepackage{imakeidx}
 \usepackage[inline]{enumitem}
@@ -42,9 +42,16 @@
 \input{include/hyphenation.tex}
 
 % Ajuste das fontes... No Tofu do Google
-\setmainfont{Noto Serif CJK SC Light}
-\setsansfont{Noto Sans CJK SC}
-\setmonofont{Noto Sans Mono CJK SC}
+\setmainfont[
+  Ligatures=TeX,
+  BoldFont={NotoSerifCJKsc-SemiBold},
+  BoldSlantedFont={NotoSerifCJKsc-SemiBold},
+  AutoFakeSlant=0.25,
+  SlantedFeatures={FakeSlant=0.25},
+  BoldSlantedFeatures={FakeSlant=0.25}]
+{NotoSerifCJKsc-ExtraLight}
+\setsansfont[Ligatures=TeX]{NotoSansCJKsc-DemiLight}
+\setmonofont[Ligatures=TeX]{NotoSansMonoCJKsc-Regular}
 
 % Ajustes do PDF
 \hypersetup{

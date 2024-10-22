@@ -31,10 +31,9 @@
 \NewDocumentCommand{\dpy}{m}%
 {%
     \StrSubstitute{#1}{r5}{r}[\rA]%
-    \StrSubstitute{\rA}{t5}{t}[\rB]%
-    \StrSubstitute{\rB}{v}{ü}[\rC]%
-    \StrSubstitute{\rC}{V}{Ü}[\rD]%
-    \edef\py{\dictpinyin{\rD}}%
+    \StrSubstitute{\rA}{v}{ü}[\rB]%
+    \StrSubstitute{\rB}{V}{Ü}[\rC]%
+    \edef\py{\dictpinyin{\rC}}%
     \mbox{}\py
 }
 
@@ -89,7 +88,7 @@
         \index[radical]{#1@#1 \dpy{#3}}
         \begin{flushleft}
             \begin{tcolorbox}[colframe=black,colback=white,boxrule=1pt,left=0mm,right=0mm,top=0mm,bottom=0mm]
-                \textbf{\Large#1}\hfill\textsuperscript{\tiny(#5画)}\\
+                {\LARGE#1}\hfill\textsuperscript{\tiny(#5画)}\\
                 {\footnotesize#2\dpy{#3}#4}%
                 \IfValueT{#6}{\mbox{}\hfill{\tiny#6}}{}%
                 \IfValueT{#7}{\mbox{}\hfill{\tiny#7}}{}%
@@ -176,7 +175,7 @@
         \begin{flushleft}
             \begin{tcolorbox}[colframe=black,colback=white,boxrule=1pt,left=0mm,right=0mm,top=0mm,bottom=0mm]
                 \mbox{}\hfill\textsuperscript{\tiny(#5画)}\\
-                \textbf{\Large#1}\\%
+                {\LARGE#1}\\%
                 {\footnotesize#2\dpy{#3}#4}%
                 \IfValueT{#6}{\mbox{}\hfill{\tiny#3}}{}
             \end{tcolorbox}
