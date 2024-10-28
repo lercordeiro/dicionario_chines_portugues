@@ -65,7 +65,7 @@ def read_entries(filename):
                 print(pinyin_strs)
                 pinyins = [x for x in pinyin_strs if x != '' and x != None ]
                 print(pinyins)
-                strokes = substrings[3].split(';')
+                strokes = substrings[3].split(',')
                 print(strokes)
                 
                 if len(hanzis) != len(strokes):

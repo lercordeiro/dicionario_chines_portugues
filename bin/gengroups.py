@@ -65,7 +65,7 @@ def main():
     args = parser.parse_args()
     get_entries(args.read_dir)
     write_groups(args.read_dir, args.write_dir)
-    return 0;
+    return 0
     
 if __name__ == "__main__":
     errno = main()

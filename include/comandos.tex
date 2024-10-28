@@ -37,9 +37,9 @@
     \mbox{}\py
 }
 
-\NewDocumentCommand{\dictenumerate}{>{\SplitList{;}}m}
+\NewDocumentCommand{\dictenumerate}{>{\SplitList{|}}m}
 {%
-    \begin{enumerate*}[left=0pt,mode=unboxed,itemjoin={{; }}]
+    \begin{enumerate*}[left=0pt,mode=unboxed,font=\bfseries]
         \ProcessList{#1}{\insertitem}
     \end{enumerate*}
 }
@@ -246,10 +246,10 @@
 {%
     \IfBooleanTF{#1}%
     {% Proper Name
-        {\footnotesize\ding{108}\ }(\textit{Substantivo\ Próprio})\IfValueT{#2}{\ [p.c.:~#2]}{\ \dictenumerate{#4}}\\%
+        {\footnotesize\ding{108}\ }(\textit{Substantivo\ Próprio})\IfValueT{#2}{\ [clas.:~#2]}{\ \dictenumerate{#4}}\\%
     }%
     {%
-        {\footnotesize\ding{108}\ }(\textit{#3})\IfValueT{#2}{\ [p.c.: #2]}{\ \dictenumerate{#4}}\\%
+        {\footnotesize\ding{108}\ }(\textit{#3})\IfValueT{#2}{\ [clas.: #2]}{\ \dictenumerate{#4}}\\%
     }%
 }
 
