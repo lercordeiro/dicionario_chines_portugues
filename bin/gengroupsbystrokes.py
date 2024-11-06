@@ -12,7 +12,7 @@ entries = []
 def get_entries(readdir):
     global entries
     only_files = [ f for f in listdir(readdir) if isfile(join(readdir, f))]
-    all_entries = list(map(lambda x: tuple(x.split('.', 1)[0].split('-')), only_files))
+    all_entries = list(map(lambda x: tuple(x.split('.', 1)[0].split('~')), only_files))
     entries = sorted(list(set(all_entries)))
     
 def get_entry_and_write(filename, f):
@@ -21,50 +21,53 @@ def get_entry_and_write(filename, f):
             if line.strip():
               line = line.rstrip()
               f.write(f'{line}\n')
-        f.write('\n')
 
-def write_groups(readdir, writedir):
+def write_strokes(readdir, writedir):
     global entries
     nof_entries = len(entries)
     print(f'NofEntries = {nof_entries}')
     allentries = []
-    group = {}
-    last_first_letter = ''
+    strokes = {}
+    last_strokes = ''
     for entry in entries:
         print(f'Processing entry {entry[0]}')
-        filename = '-'.join(list(entry)) + '.tex'
+        filename = '~'.join(list(entry)) + '.tex'
         allentries.append(filename)
-        first_letter = entry[0].upper()[0]
-        if last_first_letter != first_letter:
-            last_first_letter = first_letter
-            print(f'Genenerating Group {first_letter}')
-        if first_letter not in group:
-            group[first_letter] = list()
-        group[first_letter].append(filename)
-    for c in group.keys():
-        filename = writedir + '/' + c + '.tex'
-        print(f'Writting Group {filename}')
+        first_strokes = entry[0]
+        if last_strokes != first_strokes:
+            last_strokes = first_strokes
+            print(f'Genenerating Strokes {first_strokes}')
+        if first_strokes not in strokes:
+            strokes[first_strokes] = list()
+        strokes[first_strokes].append(filename)
+    for s in strokes.keys():
+        filename = writedir + '/' + s + '.tex'
+        print(f'Writting Strokes {filename}')
         with open(filename, 'w', encoding='utf-8') as file:
+            s_as_int = int(s)
             file.write('%%%\n')
-            file.write(f'%%% {c}\n')
-            file.write('%%%\n')
-            file.write(f'%\\section*{{{c}}}\n')
-            file.write(f'\\addcontentsline{{toc}}{{section}}{{{c}}}\n\n')
-            for e in group[c]:
+            file.write(f'%%% {s_as_int:d}画\n')
+            file.write('%%%\n\n')
+            file.write(f'\\section*{{{s_as_int:d}画}}')
+            file.write(f'\\addcontentsline{{toc}}{{section}}{{{s_as_int:d}画}}\n\n')
+
+            for e in strokes[s]:
                 get_entry_and_write(readdir + '/' + e, file)
-            file.write('%%%%% EOF %%%%%\n')
+                file.write('\n')
+            file.write('%%%%% EOF %%%%%\n\n')
 
 def main():
     parser = argparse.ArgumentParser(description='''
         Processa arquivos verbete e                                                
-        separa cada verbete em arquivo próprio''')
+        separa cada verbete em arquivo próprio, 
+        pelo número de traços''')
     parser.add_argument('--version', '-V', action='version', 
         version=f'%(prog)s v{VERSION}')
     parser.add_argument('--read', '--readdir', '-r', dest='read_dir', action='store')
     parser.add_argument('--write', '--writedir', '-w', dest='write_dir', action='store')
     args = parser.parse_args()
     get_entries(args.read_dir)
-    write_groups(args.read_dir, args.write_dir)
+    write_strokes(args.read_dir, args.write_dir)
     return 0
     
 if __name__ == "__main__":

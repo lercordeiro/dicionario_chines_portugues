@@ -1,0 +1,241 @@
+%
+% Dictionary environment and functions
+%
+\ExplSyntaxOn
+
+\NewDocumentEnvironment{verbete}{mO{}mO{}mooo}%
+{
+    \leavevmode%
+    \markboth{#1{\tiny\dpy{#3}}}{#1{\tiny\dpy{#3}}}
+    \tl_set:Nn \l_hanzi_tl {#1}
+    \tl_set:Nn \l_pinyin_tl {#3}
+    \tl_set:Nn \l_strokes_tl {#5}
+    \boolfalse{f_veja} \renewcommand\vejalst{} \listadd{\vejalst}{}% Initialize list
+    \boolfalse{f_exemplo} \renewcommand\exemplolst{} \listadd{\exemplolst}{}% Initialize list
+    \begin{minipage}[t][][t]{.485\textwidth}
+        \baselineskip=1.1\baselineskip
+        \label{#1:#3}
+        \index[pstroke]{#1@#1 \dpy{#3}}
+        \index[pradical]{#1@#1 \dpy{#3}}
+        \begin{flushleft}
+            \begin{tcolorbox}[colframe=black,colback=white,boxrule=1pt,left=0mm,right=0mm,top=0mm,bottom=0mm]
+                {\LARGE#1}\hfill\textsuperscript{\tiny(#5画)}\\
+                {\footnotesize#2\dpy{#3}#4}%
+                \IfValueT{#6}{\mbox{}\hfill{\tiny#6}}{}%
+                \IfValueT{#7}{\mbox{}\hfill{\tiny#7}}{}%
+                \IfValueT{#8}{\mbox{}\hfill{\tiny#8}}{}%
+            \end{tcolorbox}
+}%
+{%
+    \ifbool{f_exemplo}%
+    {% Há exemplos
+        \renewcommand*{\do}[1]%
+        {%
+            \IfSubStr{##1}{manual::::}%
+            {% Under Dot Manual
+                \StrBehind{##1}{manual::::}[\sM]%
+                \IfSubStr{\sM}{::::}%
+                {% Com tradução
+                    \StrCut{\sM}{::::}{\sE}{\sT}%
+                    {\small\addstackgap{\stackunder{\sE}{\scriptsize(\sT)}}}\\%
+                }%
+                {%
+                    {\small\sM}\\%
+                }%
+            }%
+            {%
+                \IfSubStr{##1}{::::}%
+                {% Com tradução
+                    \StrCut{##1}{::::}{\sE}{\sT}%
+                    {\small\addstackgap{\stackunder{\StrSubstitute{\sE}{\l_hanzi_tl}{\underline{\l_hanzi_tl}}}{\scriptsize(\sT)}}}\\%
+                }%
+                {%
+                    \IfSubStr{##1}{ERRO}{##1}%
+                    {% Sem tradução
+                        {\small\StrSubstitute{##1}{\l_hanzi_tl}{\underline{\l_hanzi_tl}}}\\%
+                    }%
+                }%
+            }%
+        }%
+            \par\vspace{1ex}
+            \ding{46}\ \textit{Exemplos:}\linebreak
+            \dolistloop{\exemplolst}
+    }{}%
+    \ifbool{f_veja}%
+    {% Há 'vejas'
+        \renewcommand*{\do}[1]%
+        {%
+            \IfBeginWith{##1}{eg:}
+            {%
+                \StrBehind{##1}{eg:}[\sHP]%
+                \StrCut{\sHP}{:}{\sH}{\sP}%
+                \vejaitem{\sH}{\sP}\mbox{}\linebreak%
+                \mbox{}\dotfill(pág.~\pageref{\sHP})%
+            }%
+            {%
+                \StrCut{##1}{:}\sH\sP %
+                \vejaitem{\sH}{\sP}\dotfill(pág.~\pageref{##1})%
+            }%
+        }
+            \par\vspace{1ex}
+            \ding{43}\ \textit{Veja\ também}:%
+            \begin{listaveja}
+                \dolistloop{\vejalst}
+            \end{listaveja}
+    }{}%
+            \mbox{}\vspace{1ex}
+        \end{flushleft}
+    \end{minipage}\par
+}
+
+\NewDocumentEnvironment{verbete*}{mO{}mO{}mo}
+{%
+    \leavevmode%
+    \markboth{#1{\tiny\dpy{#3}}}{#1{\tiny\dpy{#3}}}
+    \tl_set:Nn \l_hanzi_tl {#1}
+    \tl_set:Nn \l_pinyin_tl {#3}
+    \tl_set:Nn \l_strokes_tl {#5}
+    \boolfalse{f_veja} \renewcommand\vejalst{} \listadd{\vejalst}{}% Initialize list
+    \boolfalse{f_exemplo} \renewcommand\exemplolst{} \listadd{\exemplolst}{}% Initialize list
+    \begin{minipage}[t][][t]{.485\textwidth}
+        \baselineskip=1.1\baselineskip
+        \label{#1:#3}
+        \index[pstroke]{#1@#1 \dpy{#3}}
+        \index[pradical]{#1@#1 \dpy{#3}}
+        \begin{flushleft}
+            \begin{tcolorbox}[colframe=black,colback=white,boxrule=1pt,left=0mm,right=0mm,top=0mm,bottom=0mm]
+                \mbox{}\hfill\textsuperscript{\tiny(#5画)}\\
+                {\LARGE#1}\\%
+                {\footnotesize#2\dpy{#3}#4}%
+                \IfValueT{#6}{\mbox{}\hfill{\tiny#3}}{}
+            \end{tcolorbox}
+}%
+{%
+    \ifbool{f_exemplo}
+    {% Há exemplos
+        \renewcommand*{\do}[1]%
+        {%
+            \IfSubStr{##1}{manual::::}%
+            {% Under Dot Manual
+                \StrBehind{##1}{manual::::}[\sM]%
+                \IfSubStr{\sM}{::::}%
+                {% Com tradução
+                    \StrCut{\sM}{::::}{\sE}{\sT}%
+                    {\small\addstackgap{\stackunder{\sE}{\scriptsize(\sT)}}}\\%
+                }%
+                {%
+                    {\small\sM}\\%
+                }%
+            }%
+            {%
+                \IfSubStr{##1}{::::}%
+                {% Com tradução
+                    \StrCut{##1}{::::}{\sE}{\sT}%
+                    {\small\addstackgap{\stackunder{\StrSubstitute{\sE}{\l_hanzi_tl}{\CJKunderdot{\l_hanzi_tl}}}{\scriptsize(\sT)}}}\\%
+                }%
+                {%
+                    \IfSubStr{##1}{ERRO}{##1}%
+                    {% Sem tradução
+                        {\small\StrSubstitute{##1}{\l_hanzi_tl}{\CJKunderdot{\l_hanzi_tl}}}\\%
+                    }%
+                }%
+            }%
+        }%
+            \par\vspace{1ex}
+            \ding{46}\ \textit{Exemplos:}\linebreak
+            \dolistloop{\exemplolst}
+    }{}%
+    \ifbool{f_veja}
+    {% Há 'vejas'
+        \renewcommand*{\do}[1]%
+        {%
+            \IfBeginWith{##1}{eg:}%
+            {%
+                \StrBehind{##1}{eg:}[\sHP]%
+                \StrCut{\sHP}{:}{\sH}{\sP}%
+                \vejaitem{\sH}{\sP}\mbox{}\linebreak%
+                \mbox{}\dotfill(pág.~\pageref{\sHP})%
+            }%
+            {%
+                \StrCut{##1}{:}\sH\sP%
+                \vejaitem{\sH}{\sP}\dotfill(pág.~\pageref{##1})%
+            }%
+        }
+            \par\vspace{1ex}
+            \ding{43}\ \textit{Veja\ também}:\\%
+            \begin{listaveja}
+                \dolistloop{\vejalst}
+            \end{listaveja}
+    }{}%
+            \mbox{}\vspace{1ex}
+        \end{flushleft}
+    \end{minipage}\par
+}
+
+\NewDocumentCommand{\significado}{somm}%
+{%
+    \IfBooleanTF{#1}%
+    {% Proper Name
+        {\footnotesize\ding{108}\ }(\textit{Substantivo\ Próprio})\IfValueT{#2}{\ [clas.:~#2]}{\ \dictenumerate{#4}}\\%
+    }%
+    {%
+        {\footnotesize\ding{108}\ }(\textit{#3})\IfValueT{#2}{\ [clas.: #2]}{\ \dictenumerate{#4}}\\%
+    }%
+}
+
+\NewDocumentCommand{\variante}{sm}%
+{%
+    \IfBooleanTF{#1}%
+    {% Palavra Grande
+        \ding{43}\ Variante\ de\ #2\\%
+        \hspace*{3ex}(pág.~\pageref{#2:\l_pinyin_tl})\\%
+    }%
+    {%
+        \ding{43}\ Variante\ de\ #2\ (pág.~\pageref{#2:\l_pinyin_tl})\\%
+    }%
+}
+
+\NewDocumentCommand{\exemplo}{smo}%
+{%
+    \booltrue{f_exemplo}
+    \IfBooleanTF{#1}%
+    {% Under Dot Manual 
+        \IfValueTF{#3}%
+        {% Com tradução
+             \listgadd{\exemplolst}{manual::::#2::::#3}%
+        }%
+        {% Sem tradução
+            \listgadd{\exemplolst}{manual::::#2}%
+        }%
+    }%
+    {%
+        \IfSubStr[1]{#2}{\l_hanzi_tl}%
+        {%
+            \IfValueTF{#3}%
+            {% Com tradução
+                \listgadd{\exemplolst}{#2::::#3}%
+            }%
+            {% Sem tradução
+                \listgadd{\exemplolst}{#2}%
+            }%
+        }%
+        {% Sem a palavra (hanzi)
+           \listgadd{\exemplolst}{\textit{ERRO}: Não há \l_hanzi_tl\ em ``#2''.}%
+        }%
+    }
+}
+
+\NewDocumentCommand{\veja}{smm}%
+{%
+    \booltrue{f_veja}
+    \IfBooleanTF{#1}
+    {% Veja extra grande
+        \listgadd{\vejalst}{eg:#2:#3}%
+    }%
+    {%
+        \listgadd{\vejalst}{#2:#3}%
+    }%
+}
+
+\ExplSyntaxOff
+
