@@ -2,45 +2,60 @@
 % Dictionary functions
 %
 
-% Até agora o melhor estilo para capítulos
+% Best chapter style
 \chapterstyle{verville}
 
-% Ajuste das margens                                                                                                     
+% No indentation
+\setlength\parindent{0pt}
+\setlength\parindent{0pt}
+
+% Set margins
 \setlrmarginsandblock{3cm}{2cm}{*}
 \setulmarginsandblock{2cm}{*}{1}
 \checkandfixthelayout
 
-% Linguagem principal
-\setmainlanguage[variant=brazilian]{portuguese}
-\setotherlanguages{chinese,english}
-\input{include/hyphenation.tex}
+% To avoid willows and orfans
+\clubpenalty=10000
+\widowpenalty=10000
+\raggedbottom
 
-% Ajuste das fontes... No Tofu do Google
-\setmainfont[
-    Ligatures=TeX,
-    BoldFont={NotoSerifCJKsc-SemiBold},
-    BoldSlantedFont={NotoSerifCJKsc-SemiBold},
-    AutoFakeSlant=0.25,
-    SlantedFeatures={FakeSlant=0.25},
-    BoldSlantedFeatures={FakeSlant=0.25}]
-    {NotoSerifCJKsc-ExtraLight}
-\setsansfont[Ligatures=TeX]{NotoSansCJKsc-DemiLight}
-\setmonofont[Ligatures=TeX]{NotoSansMonoCJKsc-Regular}
+% Set spacing
+\OnehalfSpacing
+%\setSingleSpace{1.8}
 
-% Sumário
+% Set fonts Google's NoTofu
+\babelfont{rm}[
+ Renderer=Node,
+ Ligatures=TeX,
+ BoldFont={NotoSerifCJKsc-SemiBold},
+ BoldSlantedFont={NotoSerifCJKsc-SemiBold},
+ AutoFakeSlant=0.25,
+ SlantedFeatures={FakeSlant=0.25},
+ BoldSlantedFeatures={FakeSlant=0.25}]
+ {Noto Serif CJK SC Light}
+\babelfont{sf}[Renderer=Harfbuzz,Ligatures=TeX]{Noto Sans CJK SC DemiLight}
+\babelfont{tt}[Renderer=Harfbuzz,Ligatures=TeX]{Noto Sans Mono CJK SC}
+
+% Babel Hyphenation
+\babelhyphenation
+ {%
+  a-bre-vi-a-ção per-ple-xo cons-tan-te-men-te so-bre-no-me nor-des-te
+  ca-na-dá in-clu-in-do a-mé-ri-ca eu-ro-pa a-ten-ção a-tu-a-li-za-ção
+  a-lis-tar a-bre-vi-a-tu-ra
+ }    
+
+% Index
 \makeatletter
 \renewcommand{\@pnumwidth}{2em} 
 \renewcommand{\@tocrmarg}{4em}
 \makeatother
 \renewcommand\cftbeforechapterskip{5pt plus 1pt}
 
-% Ajustes de espaçamento
-\setlength{\parindent}{0cm}
-\setlength{\parskip}{-1.5mm}                                                                                             
+% Set spacing
 \setlength{\columnsep}{.8em}
 \setlength{\columnseprule}{0.1mm}
 
-% Headers & Footers
+% Set Headers & Footers
 \setheadfoot{14pt}{28pt}
 \makeevenfoot{plain}{\thepage}{汉葡词典}{}
 \makeoddfoot{plain}{}{汉葡词典}{\thepage}
@@ -52,98 +67,78 @@
 \makeoddfoot{dicionario}{}{汉葡词典}{\thepage}
 \makeheadrule{dicionario}{\textwidth}{\normalrulethickness}
 
-% Seções têm uma caixa arredondada em volta do nome, para o A-Z dos pinyin.
-\newcommand{\boxedsec}[1]{%
-    \begin{tcolorbox}[%
-        nobeforeafter,
-        colframe=black,%
-        colback=black!5!white,%
-        boxrule=2pt,%
-        leftrule=3mm,%
-        left=0mm,%
-        right=0mm,%
-        top=0mm,%
-        bottom=0mm]
-    \Large\bfseries#1
-    \end{tcolorbox}
-}
+% Section style
+\newcommand{\boxedsec}[1]
+ {%
+  \begin{tcolorbox}%
+   [%
+    %hbox,
+    before skip=3sp plus 1sp minus 1sp,
+    after skip=2sp plus 1sp minus 1sp,
+    colframe=black,%
+    colback=black!5!white,%
+    boxrule=2pt,%
+    leftrule=2mm,%
+    left=0mm,%
+    right=0mm,%
+    top=0mm,%
+    bottom=0mm%
+   ]
+   \LARGE\bfseries#1
+  \end{tcolorbox}
+ }
 \setsecheadstyle{\boxedsec}
-\setbeforesecskip{2sp}
-\setaftersecskip{1sp}
-\newcommand{\sectionbreak}{\phantomsection}%this is global effect
+\newcommand{\sectionbreak}{\phantomsection}
 
-% Comandos
-\newbool{f_veja}
-\newbool{f_exemplo}
-\renewcommand\stacktype{S}
-\renewcommand\stackalignment{l}
-\setstackgap{S}{2.5pt}
+% Commands and booleans
+\newbool{f_example}
+\newbool{f_see}
+\newbool{f_seealso}
 
-% Programa para converter pinyins numéricos para pinyins com acentos
+% Convert numeric pinyins to accented ones
 \directlua{dofile "include/tex-sx-pinyin-tonemarks.lua"}
 
-%% wrap converter in a TeX macro
+% Wrap converter in a TeX macro
 \protected\def\pinyin#1{%
-    %% switch to appropriate hyphenation pattern goes here
-    \directlua{packagedata.pinyintones.convert ([==[#1]==])}%
+ % switch to appropriate hyphenation pattern goes here
+ \directlua{packagedata.pinyintones.convert ([==[#1]==])}%
 }
 
-% comando \&
+% Command \&
 \DeclareRobustCommand{\&}%
-{
-    \ifdim\fontdimen1\font>0pt
-        \textsl{\symbol{`\&}}%
-    \else
-        \symbol{`\&}%
-    \fi
+{%
+ \ifdim\fontdimen1\font>0pt%
+  \textsl{\symbol{`\&}}%
+ \else%
+  \symbol{`\&}%
+ \fi%
 }
 
-% comando \dul{texto} --- underline
+% Command \dul{text} -> underlined text
 \NewDocumentCommand{\dul}{m}{\underline{#1}}
 
-% comandos \dictpinyin{pin1yin1} e \dpy{pin1yin1}
+% Commands \dictpinyin{pin1yin1} and \dpy{pin1yin1}
 \NewDocumentCommand{\dictpinyin}{m}{\guillemotleft\pinyin{#1}\guillemotright} 
 \NewDocumentCommand{\dpy}{m}%
 {%
-    \StrSubstitute{#1}{r5}{r}[\rA]%
-    \StrSubstitute{\rA}{v}{ü}[\rB]%
-    \StrSubstitute{\rB}{V}{Ü}[\rC]%
-    \edef\py{\dictpinyin{\rC}}%
-    \mbox{}\py
+ \StrSubstitute{#1}{r5}{r}[\rA]%
+ \StrSubstitute{\rA}{v}{ü}[\rB]%
+ \StrSubstitute{\rB}{V}{Ü}[\rC]%
+ \edef\py{\dictpinyin{\rC}}%
+ \mbox{}\py
 }
 
-% enumerate para as definições do dicionário
-\NewDocumentCommand{\dictenumerate}{>{\SplitList{|}}m}
+% Dictionary definition special enumerate (inline)
+\NewDocumentCommand{\dictenumerate}{>{\SplitList{|}} >{\TrimSpaces} m}
 {%
-    \begin{enumerate*}[left=0pt,mode=unboxed,font=\bfseries]
-        \ProcessList{#1}{\insertitem}
-    \end{enumerate*}
+ \begin{enumerate*}[label=(\arabic*),left=0pt,mode=unboxed,font=\bfseries]
+  \ProcessList{#1}{\insertitem}
+ \end{enumerate*}
 }
 \NewDocumentCommand{\insertitem}{m}{\item #1}
 
-% Lista Veja
-\newenvironment{listaveja}%
-{\list{}% empty label
-    {
-        \setlength{\topsep}{0ex}
-        \setlength{\itemsep}{0ex}
-        \setlength{\leftmargin}{0ex}
-        \setlength{\labelsep}{0ex}
-        \setlength{\parsep}{0pt}
-        \setlength{\partopsep}{0pt}
-        \setlength{\rightmargin}{0ex}
-        \setlength{\listparindent}{0em}
-        \setlength{\itemindent}{0ex}
-        \setlength{\labelwidth}{0ex}
-    }%
-}%
-{\endlist}
-\newcommand{\vejaitem}[2]{\item[\addstackgap{\stackunder{#1}{\tiny\dpy{#2}}}]}
+% stackengine settings
+\renewcommand\stacktype{S}
+\renewcommand\stackalignment{l}
 
-\newcommand\vejalst{}
-\newcommand\exemplolst{}
-
-\listadd{\vejalst}{}% Initialize list
-\listadd{\exemplolst}{}% Initialize list
-
-%%% EOF
+%%%%% EOF %%%%%

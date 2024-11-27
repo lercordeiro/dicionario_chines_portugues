@@ -1,0 +1,88 @@
+%
+% Dictionary environment and functions
+%
+
+\ExplSyntaxOn
+
+\newcommand\examplel{}
+\listadd{\examplel}{}% Initialize list
+
+\newcommand\seerefl{}
+\listadd{\seerefl}{}% Initialize list
+
+\newcommand\seealsorefl{}
+\listadd{\seealsorefl}{}% Initialize list
+
+% Lista Veja
+\newcommand{\seeitem}[2]{\addstackgap{\stackunder{\small#1}{\footnotesize\dpy{#2}}}\ (p.~\pageref{#1:#2})}
+
+\NewDocumentCommand{\definition}{somm}
+ {%
+  \IfBooleanTF{#1}
+   {% Proper Name
+    {\small\ding{108}}\ (\textit{Substantivo\ Próprio})\IfValueT{#2}{\ [clas.:~#2]}{\ \dictenumerate{#4}}\par
+   }%
+   {%
+    {\small\ding{108}}\ (\textit{#3})\IfValueT{#2}{\ [clas.: #2]}{\ \dictenumerate{#4}}\par
+   }%
+ }
+
+\NewDocumentCommand{\variantof}{sm}
+ {%
+  \IfBooleanTF{#1}
+   {% Palavra Grande
+    {\small\ding{108}}\ Variante\ de\ #2\ (p.~\pageref{#2:\l_pinyin_tl})\par
+   }%
+   {%
+    {\small\ding{108}}\ Variante\ de\ #2\ (p.~\pageref{#2:\l_pinyin_tl})\par
+   }%
+ }
+
+\NewDocumentCommand{\example}{smo}
+ {%
+  \booltrue{f_example}
+  \IfBooleanTF{#1}
+   {% Manual underline
+    \IfValueTF{#3}
+     {% With translation
+      \listgadd{\examplel}{manual::::#2::::#3}
+     }%
+     {% Without translation
+      \listgadd{\examplel}{manual::::#2}
+     }%
+   }%
+   {%
+    \IfSubStr[1]{#2}{\l_hanzi_tl}
+     {%
+      \IfValueTF{#3}
+       {% With translation
+        \listgadd{\examplel}{#2::::#3}
+       }%
+       {% Without translation
+        \listgadd{\examplel}{#2}
+       }%
+     }%
+     {% Without the entry word (hanzi)
+       \listgadd{\examplel}{\textit{ERRO}: Não há \l_hanzi_tl\ em ``#2''.}
+     }%
+   }
+ }
+
+% See Command
+\NewDocumentCommand{\seeref}{mm}
+ {%
+  \booltrue{f_see}
+  \listgadd{\seerefl}{#1:#2}
+ }
+
+
+% See Also Command
+\NewDocumentCommand{\seealsoref}{mm}
+ {%
+  \booltrue{f_seealso}
+  \listgadd{\seealsorefl}{#1:#2}
+ }
+
+\ExplSyntaxOff
+
+%%%%% EOF %%%%%

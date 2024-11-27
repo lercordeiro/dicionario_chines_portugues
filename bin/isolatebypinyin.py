@@ -38,7 +38,7 @@ def read_entries(filename):
         for line in file:
             line = line.rstrip()
             
-            if 'begin' in line and 'verbete' in line:
+            if '\\begin' in line and 'entry' in line:
                 begin_entry_found = True
 
                 substrings = extract_strings_between_delimiters('{', '}', line)
@@ -87,7 +87,7 @@ def read_entries(filename):
                 else:
                     entries[entry_filename] = [ line ]
                 
-            elif 'end' in line and 'verbete' in line:
+            elif '\\end' in line and 'entry' in line:
                 begin_entry_found = False
                 entries[entry_filename].append(line)
 

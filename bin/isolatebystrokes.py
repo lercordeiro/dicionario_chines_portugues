@@ -38,7 +38,7 @@ def read_entries(filename):
         for line in file:
             line = line.rstrip()
             
-            if 'begin' in line and 'verbete' in line:
+            if '\\begin' in line and 'entry' in line:
                 begin_entry_found = True
 
                 substrings = extract_strings_between_delimiters('{', '}', line)
@@ -52,33 +52,16 @@ def read_entries(filename):
                 s = s.replace("/〇","")
                 hanzis = list(s)
                 print(hanzis)
-                s = substrings[2].lower()
-                s = s.replace(" ","")
-                s = s.replace("·","")
-                s = s.replace("'","")
-                s = s.replace("-","")
-                s = s.replace("(", "")
-                s = s.replace(")","")
-                pinyin_str = s
-                print(pinyin_str)
-                pinyin_strs = re.split(r'(?:\[(.*)\]|([a-zA-Z]+[1-5]))', pinyin_str)
-                print(pinyin_strs)
-                pinyins = [x for x in pinyin_strs if x != '' and x != None ]
-                print(pinyins)
-                strokes = substrings[3].split(',')
+                strokes = substrings[2].split(',')
                 print(strokes)
                 
                 if len(hanzis) != len(strokes):
                     print(f'***** ERROR: in {hanzis}: number of hanzis and strokes are different: {len(hanzis)} != {len(strokes)}')
                     sys.exit(1)
 
-                if len(hanzis) != len(pinyins):
-                    print(f'***** ERROR: in {filename}: number of hanzis and pinyins are different: {len(hanzis)} != {len(pinyins)}')
-                    sys.exit(1)
-                   
                 filename = ''
                 for i in range(len(hanzis)):
-                    filename += '{0:03d}~{1}~{2}~'.format(int(strokes[i]), pinyins[i], hanzis[i])
+                    filename += '{0:03d}~{1}~'.format(int(strokes[i]), hanzis[i])
                 entry_filename = filename.rstrip('~') + '.tex'
                 
                 if entry_filename in entries:
@@ -87,7 +70,7 @@ def read_entries(filename):
                 else:
                     entries[entry_filename] = [ line ]
                 
-            elif 'end' in line and 'verbete' in line:
+            elif '\\end' in line and 'entry' in line:
                 begin_entry_found = False
                 entries[entry_filename].append(line)
 
