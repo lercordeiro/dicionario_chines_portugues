@@ -27,11 +27,12 @@
 \usepackage{luacode}
 \usepackage{parskip}
 \usepackage{stackengine}
+\usepackage{import}
 
 % Meus Comandos
-\input{include/cmd.tex}
-\input{include/genericcmd.tex}
-\input{include/pinyincmd.tex}
+\import{include/}{cmd.tex}
+\import{include/}{genericcmd.tex}
+\import{include/}{pinyincmd.tex}
 
 % Ajustes do PDF
 \hypersetup{
@@ -42,7 +43,7 @@
   citecolor=blue,
   pdftitle={汉葡词典 - Dicionário Chinês-Português},
   pdfsubject={Dicionário Chinês-Português -- Ordenado por Pinyin},
-  pdfauthor={Luiz Eduardo Roncato Cordeiro, AKA 罗学凯},
+  pdfauthor={罗学凯, AKA Luiz Eduardo Roncato Cordeiro},
   pdfkeywords={dicionário, chinês, português, instituto confúcio}
 }
 
@@ -81,43 +82,63 @@ caracter na tabela UTF-8.
 \clearpage
 \pagestyle{dicionario}
 \begin{multicols}{2}
-\input{groups_by_pinyin/A.tex}
-\input{groups_by_pinyin/B.tex}
-\input{groups_by_pinyin/C.tex}
-\input{groups_by_pinyin/D.tex}
-\input{groups_by_pinyin/E.tex}
-\input{groups_by_pinyin/F.tex}
-\input{groups_by_pinyin/G.tex}
-\input{groups_by_pinyin/H.tex}
+\import{groups_by_pinyin/}{A.tex}
+\import{groups_by_pinyin/}{B.tex}
+\import{groups_by_pinyin/}{C.tex}
+\import{groups_by_pinyin/}{D.tex}
+\import{groups_by_pinyin/}{E.tex}
+\import{groups_by_pinyin/}{F.tex}
+\import{groups_by_pinyin/}{G.tex}
+\import{groups_by_pinyin/}{H.tex}
 %%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "I"
-\input{groups_by_pinyin/J.tex}
-\input{groups_by_pinyin/K.tex}
-\input{groups_by_pinyin/L.tex}
-\input{groups_by_pinyin/M.tex}
-\input{groups_by_pinyin/N.tex}
-\input{groups_by_pinyin/O.tex}
-\input{groups_by_pinyin/P.tex}
-\input{groups_by_pinyin/Q.tex}
-\input{groups_by_pinyin/R.tex}
-\input{groups_by_pinyin/S.tex}
-\input{groups_by_pinyin/T.tex}
+\import{groups_by_pinyin/}{J.tex}
+\import{groups_by_pinyin/}{K.tex}
+\import{groups_by_pinyin/}{L.tex}
+\import{groups_by_pinyin/}{M.tex}
+\import{groups_by_pinyin/}{N.tex}
+\import{groups_by_pinyin/}{O.tex}
+\import{groups_by_pinyin/}{P.tex}
+\import{groups_by_pinyin/}{Q.tex}
+\import{groups_by_pinyin/}{R.tex}
+\import{groups_by_pinyin/}{S.tex}
+\import{groups_by_pinyin/}{T.tex}
 %%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "U"
 %%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "V"
-\input{groups_by_pinyin/W.tex}
-\input{groups_by_pinyin/X.tex}
-\input{groups_by_pinyin/Y.tex}
-\input{groups_by_pinyin/Z.tex}
+\import{groups_by_pinyin/}{W.tex}
+\import{groups_by_pinyin/}{X.tex}
+\import{groups_by_pinyin/}{Y.tex}
+\import{groups_by_pinyin/}{Z.tex}
 \end{multicols}
 
 \clearpage
 \pagestyle{plain}
 \chapter{Termos Gramaticais Chineses}
-\input{include/termos.tex}
+\input{include/termos_gramaticais.tex}
+
+\clearpage
+\pagestyle{plain}
+\chapter{Classificadores Nominais}
+\input{include/classificadores_nominais.tex}
+
+\clearpage
+\pagestyle{plain}
+\chapter{Classificadores Verbais}
+\input{include/classificadores_verbais.tex}
+
+\clearpage
+\pagestyle{plain}
+\chapter{Verbos Direcionais}
+\input{include/verbos_direcionais.tex}
+
+\clearpage
+\pagestyle{plain}
+\chapter{Locativos}
+\input{include/locativos.tex}
 
 \clearpage
 \pagestyle{plain}
 \chapter{Radicais Kangxi}
-\input{include/radicais.tex}
+\input{include/radicais_kangxi.tex}
 
 \printindex[pstroke]
 \printindex[pradical]

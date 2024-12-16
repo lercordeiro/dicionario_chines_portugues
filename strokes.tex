@@ -27,11 +27,12 @@
 \usepackage{luacode}
 \usepackage{parskip}
 \usepackage{stackengine}
+\usepackage{import}
 
 % Meus Comandos
-\input{include/cmd.tex}
-\input{include/genericcmd.tex}
-\input{include/strokescmd.tex}
+\import{include/}{cmd.tex}
+\import{include/}{genericcmd.tex}
+\import{include/}{strokescmd.tex}
 
 % Ajustes do PDF
 \hypersetup{
@@ -42,7 +43,7 @@
   citecolor=blue,
   pdftitle={汉葡词典 - Dicionário Chinês-Português},
   pdfsubject={Dicionário Chinês-Português -- Ordenado por Número de Traços},
-  pdfauthor={Luiz Eduardo Roncato Cordeiro, AKA 罗学凯},
+  pdfauthor={罗学凯 AKA Luiz Eduardo Roncato Cordeiro},
   pdfkeywords={dicionário, chinês, português, instituto confúcio}
 }
 
@@ -80,44 +81,68 @@ As definilções são ordenadas e agrupadas pelo pinyin em cada verbete.
 \clearpage
 \pagestyle{dicionario}
 \begin{multicols}{2}
-\input{groups_by_strokes/000.tex}
-\input{groups_by_strokes/001.tex}
-\input{groups_by_strokes/002.tex}
-\input{groups_by_strokes/003.tex}
-\input{groups_by_strokes/004.tex}
-\input{groups_by_strokes/005.tex}
-\input{groups_by_strokes/006.tex}
-\input{groups_by_strokes/007.tex}
-\input{groups_by_strokes/008.tex}
-\input{groups_by_strokes/009.tex}
-\input{groups_by_strokes/010.tex}
-\input{groups_by_strokes/011.tex}
-\input{groups_by_strokes/012.tex}
-\input{groups_by_strokes/013.tex}
-\input{groups_by_strokes/014.tex}
-\input{groups_by_strokes/015.tex}
-\input{groups_by_strokes/016.tex}
-\input{groups_by_strokes/017.tex}
-\input{groups_by_strokes/018.tex}
-\input{groups_by_strokes/019.tex}
-\input{groups_by_strokes/020.tex}
-\input{groups_by_strokes/021.tex}
-%\input{groups_by_strokes/022.tex}
-%\input{groups_by_strokes/023.tex}
-%\input{groups_by_strokes/024.tex}
-%\input{groups_by_strokes/025.tex}
-%\input{groups_by_strokes/026.tex}
+\import{groups_by_strokes/}{000.tex}
+\import{groups_by_strokes/}{001.tex}
+\import{groups_by_strokes/}{002.tex}
+\import{groups_by_strokes/}{003.tex}
+\import{groups_by_strokes/}{004.tex}
+\import{groups_by_strokes/}{005.tex}
+\import{groups_by_strokes/}{006.tex}
+\import{groups_by_strokes/}{007.tex}
+\import{groups_by_strokes/}{008.tex}
+\import{groups_by_strokes/}{009.tex}
+\import{groups_by_strokes/}{010.tex}
+\import{groups_by_strokes/}{011.tex}
+\import{groups_by_strokes/}{012.tex}
+\import{groups_by_strokes/}{013.tex}
+\import{groups_by_strokes/}{014.tex}
+\import{groups_by_strokes/}{015.tex}
+\import{groups_by_strokes/}{016.tex}
+\import{groups_by_strokes/}{017.tex}
+\import{groups_by_strokes/}{018.tex}
+\import{groups_by_strokes/}{019.tex}
+\import{groups_by_strokes/}{020.tex}
+\import{groups_by_strokes/}{021.tex}
+%\import{groups_by_strokes/}{022.tex}
+%\import{groups_by_strokes/}{023.tex}
+%\import{groups_by_strokes/}{024.tex}
+%\import{groups_by_strokes/}{025.tex}
+%\import{groups_by_strokes/}{026.tex}
+%\import{groups_by_strokes/}{027.tex}
+%\import{groups_by_strokes/}{028.tex}
+%\import{groups_by_strokes/}{029.tex}
+%\import{groups_by_strokes/}{030.tex}
 \end{multicols}
 
 \clearpage
 \pagestyle{plain}
 \chapter{Termos Gramaticais Chineses}
-\input{include/termos.tex}
+\input{include/termos_gramaticais.tex}
+
+\clearpage
+\pagestyle{plain}
+\chapter{Classificadores Nominais}
+\input{include/classificadores_nominais.tex}
+
+\clearpage
+\pagestyle{plain}
+\chapter{Classificadores Verbais}
+\input{include/classificadores_verbais.tex}
+
+\clearpage
+\pagestyle{plain}
+\chapter{Verbos Direcionais}
+\input{include/verbos_direcionais.tex}
+
+\clearpage
+\pagestyle{plain}
+\chapter{Locativos}
+\input{include/locativos.tex}
 
 \clearpage
 \pagestyle{plain}
 \chapter{Radicais Kangxi}
-\input{include/radicais.tex}
+\input{include/radicais_kangxi.tex}
 
 \printindex[sradical]
 
