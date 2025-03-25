@@ -9,18 +9,22 @@ VERSION = "0.0.1"
 
 entries = []
 
+
 def get_entries(readdir):
     global entries
-    only_files = [ f for f in listdir(readdir) if isfile(join(readdir, f))]
-    all_entries = list(map(lambda x: tuple(x.split('.', 1)[0].split('~')), only_files))
+    only_files = [f for f in listdir(readdir) if isfile(join(readdir, f))]
+    all_entries = list(
+            map(lambda x: tuple(x.split('.', 1)[0].split('~')), only_files))
     entries = sorted(list(set(all_entries)))
-    
+
+
 def get_entry_and_write(filename, f):
     with open(filename, 'r', encoding='utf-8') as file:
         for line in file:
             if line.strip():
-              line = line.rstrip()
-              f.write(f'{line}\n')
+                line = line.rstrip()
+                f.write(f'{line}\n')
+
 
 def write_strokes(readdir, writedir):
     global entries
@@ -49,27 +53,32 @@ def write_strokes(readdir, writedir):
             file.write(f'%%% {s_as_int:d}画\n')
             file.write('%%%\n\n')
             file.write(f'\\section*{{{s_as_int:d}画}}')
-            file.write(f'\\addcontentsline{{toc}}{{section}}{{{s_as_int:d}画}}\n\n')
+            file.write(
+                f'\\addcontentsline{{toc}}{{section}}{{{s_as_int:d}画}}\n\n')
 
             for e in strokes[s]:
                 get_entry_and_write(readdir + '/' + e, file)
                 file.write('\n')
             file.write('%%%%% EOF %%%%%\n\n')
 
+
 def main():
     parser = argparse.ArgumentParser(description='''
-        Processa arquivos verbete e                                                
-        separa cada verbete em arquivo próprio, 
+        Processa arquivos verbete e
+        separa cada verbete em arquivo próprio,
         pelo número de traços''')
-    parser.add_argument('--version', '-V', action='version', 
-        version=f'%(prog)s v{VERSION}')
-    parser.add_argument('--read', '--readdir', '-r', dest='read_dir', action='store')
-    parser.add_argument('--write', '--writedir', '-w', dest='write_dir', action='store')
+    parser.add_argument('--version', '-V',
+                        action='version', version=f'%(prog)s v{VERSION}')
+    parser.add_argument('--read', '--readdir', '-r',
+                        dest='read_dir', action='store')
+    parser.add_argument('--write', '--writedir', '-w',
+                        dest='write_dir', action='store')
     args = parser.parse_args()
     get_entries(args.read_dir)
     write_strokes(args.read_dir, args.write_dir)
     return 0
-    
+
+
 if __name__ == "__main__":
     errno = main()
     sys.exit(errno)

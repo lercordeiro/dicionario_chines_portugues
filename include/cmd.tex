@@ -37,12 +37,12 @@
 \babelfont{tt}[Renderer=Harfbuzz,Ligatures=TeX]{Noto Sans Mono CJK SC}
 
 % Babel Hyphenation
-\babelhyphenation
- {%
-  a-bre-vi-a-ção per-ple-xo cons-tan-te-men-te so-bre-no-me nor-des-te
-  ca-na-dá in-clu-in-do a-mé-ri-ca eu-ro-pa a-ten-ção a-tu-a-li-za-ção
-  a-lis-tar a-bre-vi-a-tu-ra
- }    
+%\babelhyphenation
+% {%
+%  a-bre-vi-a-ção per-ple-xo cons-tan-te-men-te so-bre-no-me nor-des-te
+%  ca-na-dá in-clu-in-do a-mé-ri-ca eu-ro-pa a-ten-ção a-tu-a-li-za-ção
+%  a-lis-tar a-bre-vi-a-tu-ra
+% }    
 
 % Index
 \makeatletter
@@ -73,8 +73,8 @@
   \begin{tcolorbox}%
    [%
     %hbox,
-    before skip=3sp plus 1sp minus 1sp,
-    after skip=2sp plus 1sp minus 1sp,
+    %before skip=2sp plus 1sp minus 1sp,
+    %after skip=2sp plus 1sp minus 1sp,
     colframe=black,%
     colback=black!5!white,%
     boxrule=2pt,%
@@ -84,10 +84,12 @@
     top=0mm,%
     bottom=0mm%
    ]
-   \LARGE\bfseries#1
+   \hfill\LARGE\bfseries#1
   \end{tcolorbox}
  }
 \setsecheadstyle{\boxedsec}
+\setbeforesecskip{-3ex plus -1ex minus -.25ex}
+\setaftersecskip{.5ex plus .25ex}
 \newcommand{\sectionbreak}{\phantomsection}
 
 % Commands and booleans
