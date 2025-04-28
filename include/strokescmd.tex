@@ -1,18 +1,22 @@
-%%%%%                         %%%%%
-%%%%% Dictionary environments %%%%%
-%%%%%                         %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%                                                                     %%%%%
+%%%%% strokescmd.tex:                                                     %%%%%
+%%%%% Ambientes para o Dicionário ordenado por traços.                    %%%%%
+%%%%%                                                                     %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \ExplSyntaxOn
 
-%%%%% "entry" environment
+%%% Ambiente "entry", para os verbetes
 \NewDocumentEnvironment{entry}{mmooo}%
  {%
-  \leavevmode%
+  \leavevmode
   \markboth{#1{\tiny(#2画)}}{#1{\tiny(#2画)}}
   \tl_set:Nn \l_hanzi_tl {#1}
   \tl_set:Nn \l_strokes_tl {#2}
   \begin{minipage}[t][][t]{.49\textwidth}
-   \vspace{2sp}
    \begin{tcolorbox}[size=title,colframe=black,colback=white,boxrule=1pt,toprule=2pt,left=0mm,right=0mm,top=0mm,bottom=0mm]
     {\LARGE#1}\hfill\textsuperscript{\tiny(#2画)}\\
     \IfValueT{#3}{\mbox{}\hfill{\tiny#3}}{}%
@@ -22,17 +26,17 @@
  }%
  {%
   \end{minipage}
+  \vspace{2mm}
  }
 
-%%%%% "entry*" environment
+%%% Ambiente "entry*", para os verbetes muito compridos
 \NewDocumentEnvironment{entry*}{mmooo}%
  {%
-  \leavevmode%
+  \leavevmode
   \markboth{#1{\tiny(#2画)}}{#1{\tiny(#2画)}}
   \tl_set:Nn \l_hanzi_tl {#1}
   \tl_set:Nn \l_strokes_tl {#2}
   \begin{minipage}[t][][t]{.49\textwidth}
-   \vspace{2sp}
    \begin{tcolorbox}[size=title,colframe=black,colback=white,boxrule=1pt,toprule=2pt,left=0mm,right=0mm,top=0mm,bottom=0mm]
     \mbox{}\hfill\textsuperscript{\tiny(#2画)}\\
     {\LARGE#1}\\
@@ -43,55 +47,19 @@
  }%
  {%
   \end{minipage}
+  \vspace{2mm}
  }
 
-%%%%% "phonetics" environment
+%%% Ambiente "phonetics", para as diversas entradas de fonética da palavra
 \NewDocumentEnvironment{phonetics}{mO{}mO{}O{}}%
  {%
   \tl_set:Nn \l_pinyin_tl {#3}
-  \boolfalse{f_example} \renewcommand\examplel{} \listadd{\examplel}{}% Initialize list
   \boolfalse{f_see} \renewcommand\seerefl{} \listadd{\seerefl}{}% Initialize list
   \boolfalse{f_seealso} \renewcommand\seealsorefl{} \listadd{\seealsorefl}{}% Initialize list
   \label{#1:#3}
-  \index[sradical]{\l_hanzi_tl@\l_hanzi_tl \dpy{#3}}
   \ding{93}\ #2\ \dpy{#3}\ #4\ \ding{93}\hfill #5\\
  }
  {%  
-  \ifbool{f_example}%
-   {% Process "examples"
-    \RenewDocumentCommand\do{m}%                                                                                                
-     {%
-      \IfSubStr{##1}{manual::::}%
-       {% Manual underline
-        \StrBehind{##1}{manual::::}[\sM]%
-        \IfSubStr{\sM}{::::}%
-         {% With translation
-          \StrCut{\sM}{::::}{\sE}{\sT}%
-          \mbox{}\enskip\sE\\
-          \mbox{}\enskip$\hookrightarrow$\ \sT\\
-         }%
-         {% Without translation
-          \mbox{}\enskip\sM\\
-         }%
-       }%
-       {%
-        \IfSubStr{##1}{::::}%
-         {% With translation
-          \StrCut{##1}{::::}{\sE}{\sT}%
-          \mbox{}\enskip\StrSubstitute{\sE}{\l_hanzi_tl}{\underline{\l_hanzi_tl}}\\
-          \mbox{}\enskip$\hookrightarrow$\ \sT\\
-         }
-         {%
-          \IfSubStr{##1}{ERRO}{##1}%
-           {% There aren't entry words in text
-            \mbox{}\enskip\StrSubstitute{##1}{\l_hanzi_tl}{\underline{\l_hanzi_tl}}\\
-           }%
-         }%
-       }%
-     }%
-    \textbf{Exemplos:}\\
-    \dolistloop{\examplel}
-   }{}%
   \ifbool{f_see}%
    {% Process "see" references
     \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \seeitem ##1}

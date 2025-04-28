@@ -1,3 +1,13 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%                                                                     %%%%%
+%%%%% classificadores_nominais.tex:                                       %%%%%
+%%%%% Tabela com as palavras classificadoras para substantivos            %%%%%
+%%%%%                                                                     %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Ajustes para a tabela
 \DefTblrTemplate{caption}{default}{}
 \DefTblrTemplate{capcont}{default}{ \UseTblrTemplate{conthead-text}{default} }
 \DefTblrTemplate{contfoot-text}{default}{Continua na próxima página.}
@@ -7,124 +17,127 @@
 \DefTblrTemplate{firstfoot,middlefoot}{default}{ \UseTblrTemplate{contfoot}{default} }
 \DefTblrTemplate{lastfoot}{default}{ \UseTblrTemplate{note}{default} \UseTblrTemplate{remark}{default} }
 
+%%% Tabela
 \begin{longtblr}
 {
-  colspec = {|c|c|X|X|}, hlines,
-  width = 1\linewidth,
-  rowhead = 1, rowfoot = 0,
-  row{1} = {font=\bfseries, fg=white, bg=black},
+ colspec = {|c|c|X|X|}, hlines,
+ width = 1\linewidth,
+ rowhead = 1, rowfoot = 0,
+ row{1} = {font=\bfseries, fg=white, bg=black},
 }
 \textbf{Hanzi} & \textbf{Pinyin} & \textbf{Descrição} & \textbf{Exemplos}\\
-    把 & \dpy{ba3}     & mão cheia --- objetos que podem ser segurados, objetos relativamente longos e planos & faca, tesoura, espada, chave, guarda-chuva, leque, escova de dentes, colher, garfo, martelo, cadeado, pistola, rifle, carne, punhado de arroz, punhado de areia, ramo de flores, punhado de sementes, ramo de pauzinhos, esqueleto, fogo, bule\\
-    班 & \dpy{ban1}    & serviços programados (trens, aviões, etc), grupos de pessoas, uma classe como em alunos & \\
-    包 & \dpy{bao1}    & pacote & doces, cigarros, açúcar, biscoitos\\
-    杯 & \dpy{bei1}    & copo --- bebidas & chá, vinho, álcool, água, leite, suco de fruta, refrigerante\\
-    本 & \dpy{ben3}    & volume --- material impresso encadernado & livro, revista, romance, escritura, dicionário, bloco de notas, livro didático\\
-    笔 & \dpy{bi3}     & traços de caracteres; grandes quantidades de dinheiro & \\
-    部 & \dpy{bu4}     & máquinas, veículos; produções & celular, telefone, carro, jogo, romance, filme/imagem em movimento, ópera, obra literária\\
-    册 & \dpy{ce4}     & volumes de livros & \\
-    层 & \dpy{ceng2}   & andar, piso; camada & andares (em um prédio); camada de poeira, bolo, tinta\\
-    场 & \dpy{chang3}  & evento de curta duração; precipitação & espetáculo público, jogo, crise, guerra, catástrofe, uma doença, performance, jogo, chuva, queda de neve\\
-    串 & \dpy{chuan4}  & conjuntos de números & telefone celular/número de celular\\
-    床 & \dpy{chuang4} & cama & cobertores, lençóis\\
-    次 & \dpy{ci4}     & tempo, repetições --- oportunidades, acidentes & \\
-    出 & \dpy{chu1}    & atuação em uma peça & \\
-    打 & \dpy{da2}     & dúzia & lápis, ovos\\
-    贷 & \dpy{dai4}    & sacos ou bolsos cheios & açúcar, farinha, arroz\\
-    道 & \dpy{dao4}    & projeções lineares (raios de luz, etc.); ordem dada por uma figura de autoridade; pergunta, memorando; curso (de comida); coisas longas e tortas (cume da montanha, relâmpago) & \\
-    滴 & \dpy{di1}     & gotículas de água, sangue, outros fluidos semelhantes & \\
-    点 & \dpy{dian3}   & ideias, sugestões; um pouco/algum (somente com 一) & \\
-    碟 & \dpy{die2}    & pires (molho de soja) & \\
-    顶 & \dpy{ding3}   & objetos com topo saliente, algo para colocar sobre a cabeça & chapéu, barraca, mosquiteiro\\
-    栋 & \dpy{dong4}   & pilar (edifício menor, casa) & \\
-    堵 & \dpy{du3}     & luminárias abrangentes (parede sem teto) & \\
-    段 & \dpy{duan4}   & comprimento adjacente --- cabos, estradas, pedaço de giz, parte de uma música & \\
-    对 & \dpy{dui4}    & casal, par combinado (para certas coisas), dísticos & casal, brincos, vasos\\
-    顿 & \dpy{dun4}    & ações de curta duração & refeição, conflito, espancamento, briga, repreensão\\
-    朵 & \dpy{duo3}    & coisas parecidas com flores & flor, nuvem, cogumelo\\
-    发 & \dpy{fa1}     & coisas redondas & bala, munição\\
-    方 & \dpy{fang4}   & coisas quadradas & pedra de tinta, bacon\\
-    份 & \dpy{fen4}    & porções, documentos de várias páginas & porção de comida, jornal, emprego\\
-    封 & \dpy{feng1}   & coisas que podem ser seladas & carta, correio, telegrama\\
-    峰 & \dpy{feng1}   & animais com corcundas & camelo\\
-    幅 & \dpy{fu2}     & objetos semelhantes a imagens & foto, pintura, desenho, banner, obra de arte, quadro, cartaz\\
-    服 & \dpy{fu4}     & dose (de remédio)\\
-    副 & \dpy{fu4}     & objetos que vêm em pares (luvas, óculos, etc.), baralhos, mahjong & \\
-    个 & {\dpy{ge5}\\ \dpy{ge4}} & coisas individuais, pessoas, classificador de uso geral (o uso desse classificador em conjunto com qualquer substantivo é geralmente aceito se a pessoa não souber o classificador adequado) & pessoa, irmão mais velho, estudante, parente, modo de pensar, sugestão, pergunta, nação\\
-    根 & \dpy{gen1}    & objetos finos e esguios; fios finos e flexíveis & agulha, pilar, banana, palito de massa frita, coxa de frango frita, picolé, pirulito, pauzinho, vela, incenso, cabelo, linha, barbante\\
-    股 & \dpy{gu3}     & fluxos (de ar, cheiro, influência, etc.) & \\
-    挂 & \dpy{gua4}    & coisas multi-componentes & cavalo e carroça \\
-    罐 & \dpy{guan4}   & lata pequena a média & refrigerante, suco, comida, feijão, óleo, doce\\
-    行 & \dpy{hang2}   & objetos que formam linhas (palavras, etc.) & \\
-    盒 & \dpy{he2}     & caixa pequena & fita, comida, bolo, doces, chocolate, brinquedos, livros, cigarros, detergente, roupas\\
-    户 & \dpy{hu4}     & famílias & \\
-    伙 & \dpy{huo3}    & classificador geralmente depreciativo para bandos de pessoas, como gangues ou bandidos & \\
-    家 & \dpy{jia1}    & reunião de pessoas, estabelecimentos & famílias, empresas, lojas, restaurantes\\
-    架 & \dpy{jia4}    & maquinário, veículo & aeronave, avião, piano, máquinas, computadores\\
-    间 & \dpy{jian1}   & quartos, espaços & quarto, dormitório, cozinha, sala de aula, casa, escola, empresa, capela\\
-    件 & \dpy{jian4}   & assuntos, roupas (tops), móveis & roupa (top), camiseta, camisa, casaco, lençol, bagagem, presente, questão/matéria/coisa\\
-    讲 & \dpy{jiang3}  & longos períodos de aula & \\
-    节 & \dpy{jie2}    & seção (de bambu, período curto de aula) & \\
-    届 & \dpy{jie4}    & sessões ou reuniões agendadas regularmente, grupos de anos em uma escola (por exemplo, Turma de 2025) & \\
-    句 & \dpy{ju4}     & linhas de poemas, frases & \\
-    棵 & \dpy{ke1}     & árvores ou outra flora semelhante & pinheiro, rosa\\
-    颗 & \dpy{ke1}     & pequenos objetos, objetos que parecem pequenos & corações, pérolas, dentes, diamantes, sementes, estrelas distantes, planetas distantes\\
-    课 & \dpy{ke4}     & lições em um texto & \\
-    口 & \dpy{kou3}    & população de aldeias (número inferior a 100), familiares, poços, bocados de comida & \\
-    块 & \dpy{kuai4}   & pedaço de forma irregular & terra, pedra, tofu, sabonete, pedaço/fatia de bolo, pão (não fatias), melancia, carne, queijo, pizza, chiclete, toalha de mesa, relógio de pulso, bloco de incenso\\
-    类 & \dpy{lei4}    & objetos do mesmo tipo ou natureza & \\
-    粒 & \dpy{li4}     & grão & um (único) amendoim, uva, arroz cru, semenete, doce, bala, chocolate\\
-    辆 & \dpy{liang4}  & veículos com rodas (não trens) & automóvel, bicicleta, carro\\
-    列 & \dpy{lie4}    & trens & \\
-    轮 & \dpy{lun2}    & lua & \\
-    枚 & \dpy{mei2}    & medalhas, pequenas coisas planas como selos, cascas de banana, anéis, distintivos, foguetes, mísseis & \\
-    门 & \dpy{men2}    & objetos pertencentes a acadêmicos (cursos, disciplinas, etc.); artilharia (canhão) & \\
-    面 & \dpy{mian4}   & objetos planos e lisos & espelho, bandeira, parede com telhado, escudo\\
-    名 & \dpy{ming4}   & pessoas de alto escalão (médicos, advogados, políticos, realeza, etc.), membros; em linguagem formal pode ser utilizado para qualquer pessoa não necessariamente de alto escalão & \\
-    排 & \dpy{pai2}    & linhas --- objetos agrupados em linhas & cadeiras, assentos, mesas, filas de pessoas\\
-    盘 & \dpy{pan2}    & objetos planos ou bobinas & cassete de vídeo ou áudio, pratinho, bobina de incenso\\
-    批 & \dpy{pi1}     & pessoas, bens, etc. & \\
-    匹 & \dpy{pi3}     & cavalos e outras montarias; rolos/pedaços de panos & cavalo, lobo\\
-    篇 & \dpy{pian1}   & escritos & papel, artigo, ensaio, relatório\\
-    片 & \dpy{pian4}   & fatia - objetos finos, planos, às vezes irregulares & cartão, lábio, nuvem, praia, chiclete, fatia de pão, fatia de carne, biscoito, queijo, fatia de melancia, folha, pétala de flor, campo, lago, pílula (comprimido de remédio), DVD\\
-    瓶 & \dpy{ping2}   & garrafa & álcool, água, óleo, cerveja, bebida, vinho, refrigerante, leite, shampoo\\
-    期 & \dpy{qi1}     & revistas & \\
-    群 & \dpy{qun2}    & grupo (incl. pessoas), rebanho, multidão, enxame, etc. & pessoas, rebanho de gado, bando de pássaros, bando de cães, enxame de mosquitos, colônia de abelhas/formigas\\
-    任 & \dpy{ren4}    & mandato (presidente, senador, deputado, etc.) & \\
-    扇 & \dpy{shan4}   & coisas que abrem e fecham com dobradiças & janela, porta\\
-    首 & \dpy{shou1}   & coisas com versos & canção, poema \\
-    束 & \dpy{shu4}    & cachos & flores, uvas \\
-    双 & \dpy{shuang1} & par de objetos que naturalmente vêm em pares & pauzinhos, sapatos, luvas, olhos\\
-    艘 & \dpy{sou1}    & navios & \\
-    所 & \dpy{suo3}    & pequenos edifícios, instituições & universidade, casa independente\\
-    台 & \dpy{tai2}    & objetos pesados, especialmente máquinas; apresentações & TV, computador, piano, aparelho, avião, trem, carro, elevador; apresentação de teatro, jogo\\
-    躺 & \dpy{tang2}   & períodos de aulas, suítes de imóveis & aulas, lições, leituras\\
-    趟 & \dpy{tang4}   & viagens, serviços de transportes programados & \\
-    套 & \dpy{tao4}    & conjuntos & livros, revistas, colecionáveis, roupas, casas/apartamentos com vários cômodos, suítes, selos, móveis, quartos, ternos\\
-    题 & \dpy{ti2}     & classificador de perguntas & \\
-    条 & \dpy{tiao2}   & objetos longos, estreitos e flexíveis & peixe, cobra, dragão, minhoca, cachorro, cachecol, estrada, fita, rio, raiz, caule, corda, edredom, toalha, fio dental, calças, gravata, saia, sofá/banco, pessoa heróica, barco pequeno\\
-    帖 & \dpy{tie4}    & bandagens adesivas & \\
-    通 & \dpy{tong1}   & conversa, palestra & \\
-    桶 & \dpy{tong3}   & jarro, balde, barril & jarro de leite, barril de óleo\\
-    头 & \dpy{tou2}    & cabeça de gado & porco, vaca, bois, iaques, ovelhas, burros, mulas, leopardos, dinossauros\\
-    团 & \dpy{tuan2}   & bola --- objetos redondos e enrolados & bola de lã, etc. \\
-    碗 & \dpy{wan3}    & tigela & de arroz, de macarrão, de sopa\\
-    位 & \dpy{wei4}    & classificador educado e respeitoso para pessoas & professor, cliente, colega\\
-    项 & \dpy{xiang4}  & projetos & \\
-    些 & \dpy{xie1}    & alguns & somente com 一，这，那，哪\\
-    样 & \dpy{yang4}   & itens gerais de diferentes atributos & \\
-    页 & \dpy{ye4}     & página & \\
-    则 & \dpy{ze2}     & diário, registro do dia & \\
-    扎 & \dpy{zha1}    & jarra, caneca --- usado em cantonês no lugar de 束 \dpy{shu4} (por exemplo, um pacote de flores) & bebidas como cerveja, refrigerante, suco, etc. (pint/jar: empréstimo linguístico do inglês, pode ser considerado informal ou gíria)\\
-    盏 & \dpy{zhan3}   & luminárias (geralmente lâmpadas), bule de chá, etc. & \\
-    站 & \dpy{zhan4}   & paradas (de ônibus ou trens) & \\
-    张 & \dpy{zhang1}  & folha --- objetos planos ou de papel & papel, mesa, cama, cartão, sofá, CD/DVD, guardanapo, fotografia, ingresso, pintura, constelação, rosto, boca, arco\\
-    阵 & \dpy{zhen4}   & rajada, estouro --- eventos com duração curtas & tempestades com raios, rajadas de vento, ocorrência de chuva\\
-    支 & \dpy{zhi1}    & objetos bastante longos, semelhantes a bastões & caneta, lápis, pauzinho, canudo, bambu, rosa, rifle, flecha, lança, projétil de artilharia, míssil, cantigas\\
-    只 & \dpy{zhi1}    & um de um par; animais & mão, dedo, olho, pé, cabeça, meia, luva, sapato, brinco, óculos; pássaro, frango, gato, tigre, cachorro, macaco, elefante, ovelha, rato, borboleta, rã, inseto\\
-    种 & \dpy{zhong3}  & tipos & de coisas, de livros, de pessoas\\
-    株 & \dpy{zhu1}    & árvores/plantas menores & arbusto, planta de arroz, planta de trigo\\
-    幢 & \dpy{zhuang2} & edifício de vários andares & \\
-    组 & \dpy{zu3}     & conjuntos, linhas, séries, baterias (militares) & \\
-    座 & \dpy{zuo4}    & montanha, edifício & montanha, colina, estrutura, grande edifício, cidade, ponte, vila, arranha-céu, torre, templo, bloco de apartamentos\\
+ 把 & \dpy{ba3}     & mão cheia --- objetos que podem ser segurados, objetos relativamente longos e planos & faca, tesoura, espada, chave, guarda-chuva, leque, escova de dentes, colher, garfo, martelo, cadeado, pistola, rifle, carne, punhado de arroz, punhado de areia, ramo de flores, punhado de sementes, ramo de pauzinhos, esqueleto, fogo, bule\\
+ 班 & \dpy{ban1}    & serviços programados (trens, aviões, etc), grupos de pessoas, uma classe como em alunos & \\
+ 包 & \dpy{bao1}    & pacote & doces, cigarros, açúcar, biscoitos\\
+ 杯 & \dpy{bei1}    & copo --- bebidas & chá, vinho, álcool, água, leite, suco de fruta, refrigerante\\
+ 本 & \dpy{ben3}    & volume --- material impresso encadernado & livro, revista, romance, escritura, dicionário, bloco de notas, livro didático\\
+ 笔 & \dpy{bi3}     & traços de caracteres; grandes quantidades de dinheiro & \\
+ 部 & \dpy{bu4}     & máquinas, veículos; produções & celular, telefone, carro, jogo, romance, filme/imagem em movimento, ópera, obra literária\\
+ 册 & \dpy{ce4}     & volumes de livros & \\
+ 层 & \dpy{ceng2}   & andar, piso; camada & andares (em um prédio); camada de poeira, bolo, tinta\\
+ 场 & \dpy{chang3}  & evento de curta duração; precipitação & espetáculo público, jogo, crise, guerra, catástrofe, uma doença, performance, jogo, chuva, queda de neve\\
+ 串 & \dpy{chuan4}  & conjuntos de números & telefone celular/número de celular\\
+ 床 & \dpy{chuang4} & cama & cobertores, lençóis\\
+ 次 & \dpy{ci4}     & tempo, repetições --- oportunidades, acidentes & \\
+ 出 & \dpy{chu1}    & atuação em uma peça & \\
+ 打 & \dpy{da2}     & dúzia & lápis, ovos\\
+ 贷 & \dpy{dai4}    & sacos ou bolsos cheios & açúcar, farinha, arroz\\
+ 道 & \dpy{dao4}    & projeções lineares (raios de luz, etc.); ordem dada por uma figura de autoridade; pergunta, memorando; curso (de comida); coisas longas e tortas (cume da montanha, relâmpago) & \\
+ 滴 & \dpy{di1}     & gotículas de água, sangue, outros fluidos semelhantes & \\
+ 点 & \dpy{dian3}   & ideias, sugestões; um pouco/algum (somente com 一) & \\
+ 碟 & \dpy{die2}    & pires (molho de soja) & \\
+ 顶 & \dpy{ding3}   & objetos com topo saliente, algo para colocar sobre a cabeça & chapéu, barraca, mosquiteiro\\
+ 栋 & \dpy{dong4}   & pilar (edifício menor, casa) & \\
+ 堵 & \dpy{du3}     & luminárias abrangentes (parede sem teto) & \\
+ 段 & \dpy{duan4}   & comprimento adjacente --- cabos, estradas, pedaço de giz, parte de uma música & \\
+ 对 & \dpy{dui4}    & casal, par combinado (para certas coisas), dísticos & casal, brincos, vasos\\
+ 顿 & \dpy{dun4}    & ações de curta duração & refeição, conflito, espancamento, briga, repreensão\\
+ 朵 & \dpy{duo3}    & coisas parecidas com flores & flor, nuvem, cogumelo\\
+ 发 & \dpy{fa1}     & coisas redondas & bala, munição\\
+ 方 & \dpy{fang4}   & coisas quadradas & pedra de tinta, bacon\\
+ 份 & \dpy{fen4}    & porções, documentos de várias páginas & porção de comida, jornal, emprego\\
+ 封 & \dpy{feng1}   & coisas que podem ser seladas & carta, correio, telegrama\\
+ 峰 & \dpy{feng1}   & animais com corcundas & camelo\\
+ 幅 & \dpy{fu2}     & objetos semelhantes a imagens & foto, pintura, desenho, banner, obra de arte, quadro, cartaz\\
+ 服 & \dpy{fu4}     & dose (de remédio)\\
+ 副 & \dpy{fu4}     & objetos que vêm em pares (luvas, óculos, etc.), baralhos, mahjong & \\
+ 个 & {\dpy{ge5}\\ \dpy{ge4}} & coisas individuais, pessoas, classificador de uso geral (o uso desse classificador em conjunto com qualquer substantivo é geralmente aceito se a pessoa não souber o classificador adequado) & pessoa, irmão mais velho, estudante, parente, modo de pensar, sugestão, pergunta, nação\\
+ 根 & \dpy{gen1}    & objetos finos e esguios; fios finos e flexíveis & agulha, pilar, banana, palito de massa frita, coxa de frango frita, picolé, pirulito, pauzinho, vela, incenso, cabelo, linha, barbante\\
+ 股 & \dpy{gu3}     & fluxos (de ar, cheiro, influência, etc.) & \\
+ 挂 & \dpy{gua4}    & coisas multi-componentes & cavalo e carroça \\
+ 罐 & \dpy{guan4}   & lata pequena a média & refrigerante, suco, comida, feijão, óleo, doce\\
+ 行 & \dpy{hang2}   & objetos que formam linhas (palavras, etc.) & \\
+ 盒 & \dpy{he2}     & caixa pequena & fita, comida, bolo, doces, chocolate, brinquedos, livros, cigarros, detergente, roupas\\
+ 户 & \dpy{hu4}     & famílias & \\
+ 伙 & \dpy{huo3}    & classificador geralmente depreciativo para bandos de pessoas, como gangues ou bandidos & \\
+ 家 & \dpy{jia1}    & reunião de pessoas, estabelecimentos & famílias, empresas, lojas, restaurantes\\
+ 架 & \dpy{jia4}    & maquinário, veículo & aeronave, avião, piano, máquinas, computadores\\
+ 间 & \dpy{jian1}   & quartos, espaços & quarto, dormitório, cozinha, sala de aula, casa, escola, empresa, capela\\
+ 件 & \dpy{jian4}   & assuntos, roupas (tops), móveis & roupa (top), camiseta, camisa, casaco, lençol, bagagem, presente, questão/matéria/coisa\\
+ 讲 & \dpy{jiang3}  & longos períodos de aula & \\
+ 节 & \dpy{jie2}    & seção (de bambu, período curto de aula) & \\
+ 届 & \dpy{jie4}    & sessões ou reuniões agendadas regularmente, grupos de anos em uma escola (por exemplo, Turma de 2025) & \\
+ 句 & \dpy{ju4}     & linhas de poemas, frases & \\
+ 棵 & \dpy{ke1}     & árvores ou outra flora semelhante & pinheiro, rosa\\
+ 颗 & \dpy{ke1}     & pequenos objetos, objetos que parecem pequenos & corações, pérolas, dentes, diamantes, sementes, estrelas distantes, planetas distantes\\
+ 课 & \dpy{ke4}     & lições em um texto & \\
+ 口 & \dpy{kou3}    & população de aldeias (número inferior a 100), familiares, poços, bocados de comida & \\
+ 块 & \dpy{kuai4}   & pedaço de forma irregular & terra, pedra, tofu, sabonete, pedaço/fatia de bolo, pão (não fatias), melancia, carne, queijo, pizza, chiclete, toalha de mesa, relógio de pulso, bloco de incenso\\
+ 类 & \dpy{lei4}    & objetos do mesmo tipo ou natureza & \\
+ 粒 & \dpy{li4}     & grão & um (único) amendoim, uva, arroz cru, semenete, doce, bala, chocolate\\
+ 辆 & \dpy{liang4}  & veículos com rodas (não trens) & automóvel, bicicleta, carro\\
+ 列 & \dpy{lie4}    & trens & \\
+ 轮 & \dpy{lun2}    & lua & \\
+ 枚 & \dpy{mei2}    & medalhas, pequenas coisas planas como selos, cascas de banana, anéis, distintivos, foguetes, mísseis & \\
+ 门 & \dpy{men2}    & objetos pertencentes a acadêmicos (cursos, disciplinas, etc.); artilharia (canhão) & \\
+ 面 & \dpy{mian4}   & objetos planos e lisos & espelho, bandeira, parede com telhado, escudo\\
+ 名 & \dpy{ming4}   & pessoas de alto escalão (médicos, advogados, políticos, realeza, etc.), membros; em linguagem formal pode ser utilizado para qualquer pessoa não necessariamente de alto escalão & \\
+ 排 & \dpy{pai2}    & linhas --- objetos agrupados em linhas & cadeiras, assentos, mesas, filas de pessoas\\
+ 盘 & \dpy{pan2}    & objetos planos ou bobinas & cassete de vídeo ou áudio, pratinho, bobina de incenso\\
+ 批 & \dpy{pi1}     & pessoas, bens, etc. & \\
+ 匹 & \dpy{pi3}     & cavalos e outras montarias; rolos/pedaços de panos & cavalo, lobo\\
+ 篇 & \dpy{pian1}   & escritos & papel, artigo, ensaio, relatório\\
+ 片 & \dpy{pian4}   & fatia - objetos finos, planos, às vezes irregulares & cartão, lábio, nuvem, praia, chiclete, fatia de pão, fatia de carne, biscoito, queijo, fatia de melancia, folha, pétala de flor, campo, lago, pílula (comprimido de remédio), DVD\\
+ 瓶 & \dpy{ping2}   & garrafa & álcool, água, óleo, cerveja, bebida, vinho, refrigerante, leite, shampoo\\
+ 期 & \dpy{qi1}     & revistas & \\
+ 群 & \dpy{qun2}    & grupo (incl. pessoas), rebanho, multidão, enxame, etc. & pessoas, rebanho de gado, bando de pássaros, bando de cães, enxame de mosquitos, colônia de abelhas/formigas\\
+ 任 & \dpy{ren4}    & mandato (presidente, senador, deputado, etc.) & \\
+ 扇 & \dpy{shan4}   & coisas que abrem e fecham com dobradiças & janela, porta\\
+ 首 & \dpy{shou1}   & coisas com versos & canção, poema \\
+ 束 & \dpy{shu4}    & cachos & flores, uvas \\
+ 双 & \dpy{shuang1} & par de objetos que naturalmente vêm em pares & pauzinhos, sapatos, luvas, olhos\\
+ 艘 & \dpy{sou1}    & navios & \\
+ 所 & \dpy{suo3}    & pequenos edifícios, instituições & universidade, casa independente\\
+ 台 & \dpy{tai2}    & objetos pesados, especialmente máquinas; apresentações & TV, computador, piano, aparelho, avião, trem, carro, elevador; apresentação de teatro, jogo\\
+ 躺 & \dpy{tang2}   & períodos de aulas, suítes de imóveis & aulas, lições, leituras\\
+ 趟 & \dpy{tang4}   & viagens, serviços de transportes programados & \\
+ 套 & \dpy{tao4}    & conjuntos & livros, revistas, colecionáveis, roupas, casas/apartamentos com vários cômodos, suítes, selos, móveis, quartos, ternos\\
+ 题 & \dpy{ti2}     & classificador de perguntas & \\
+ 条 & \dpy{tiao2}   & objetos longos, estreitos e flexíveis & peixe, cobra, dragão, minhoca, cachorro, cachecol, estrada, fita, rio, raiz, caule, corda, edredom, toalha, fio dental, calças, gravata, saia, sofá/banco, pessoa heróica, barco pequeno\\
+ 帖 & \dpy{tie4}    & bandagens adesivas & \\
+ 通 & \dpy{tong1}   & conversa, palestra & \\
+ 桶 & \dpy{tong3}   & jarro, balde, barril & jarro de leite, barril de óleo\\
+ 头 & \dpy{tou2}    & cabeça de gado & porco, vaca, bois, iaques, ovelhas, burros, mulas, leopardos, dinossauros\\
+ 团 & \dpy{tuan2}   & bola --- objetos redondos e enrolados & bola de lã, etc. \\
+ 碗 & \dpy{wan3}    & tigela & de arroz, de macarrão, de sopa\\
+ 位 & \dpy{wei4}    & classificador educado e respeitoso para pessoas & professor, cliente, colega\\
+ 项 & \dpy{xiang4}  & projetos & \\
+ 些 & \dpy{xie1}    & alguns & somente com 一，这，那，哪\\
+ 样 & \dpy{yang4}   & itens gerais de diferentes atributos & \\
+ 页 & \dpy{ye4}     & página & \\
+ 则 & \dpy{ze2}     & diário, registro do dia & \\
+ 扎 & \dpy{zha1}    & jarra, caneca --- usado em cantonês no lugar de 束 \dpy{shu4} (por exemplo, um pacote de flores) & bebidas como cerveja, refrigerante, suco, etc. (pint/jar: empréstimo linguístico do inglês, pode ser considerado informal ou gíria)\\
+ 盏 & \dpy{zhan3}   & luminárias (geralmente lâmpadas), bule de chá, etc. & \\
+ 站 & \dpy{zhan4}   & paradas (de ônibus ou trens) & \\
+ 张 & \dpy{zhang1}  & folha --- objetos planos ou de papel & papel, mesa, cama, cartão, sofá, CD/DVD, guardanapo, fotografia, ingresso, pintura, constelação, rosto, boca, arco\\
+ 阵 & \dpy{zhen4}   & rajada, estouro --- eventos com duração curtas & tempestades com raios, rajadas de vento, ocorrência de chuva\\
+ 支 & \dpy{zhi1}    & objetos bastante longos, semelhantes a bastões & caneta, lápis, pauzinho, canudo, bambu, rosa, rifle, flecha, lança, projétil de artilharia, míssil, cantigas\\
+ 只 & \dpy{zhi1}    & um de um par; animais & mão, dedo, olho, pé, cabeça, meia, luva, sapato, brinco, óculos; pássaro, frango, gato, tigre, cachorro, macaco, elefante, ovelha, rato, borboleta, rã, inseto\\
+ 种 & \dpy{zhong3}  & tipos & de coisas, de livros, de pessoas\\
+ 株 & \dpy{zhu1}    & árvores/plantas menores & arbusto, planta de arroz, planta de trigo\\
+ 幢 & \dpy{zhuang2} & edifício de vários andares & \\
+ 组 & \dpy{zu3}     & conjuntos, linhas, séries, baterias (militares) & \\
+ 座 & \dpy{zuo4}    & montanha, edifício & montanha, colina, estrutura, grande edifício, cidade, ponte, vila, arranha-céu, torre, templo, bloco de apartamentos\\
 \end{longtblr}
+
+%%%%% EOF %%%%%

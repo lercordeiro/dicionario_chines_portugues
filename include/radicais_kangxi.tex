@@ -1,3 +1,13 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%                                                                     %%%%%
+%%%%% radicais_kangxi.tex:                                                %%%%%
+%%%%% Lista dos 214 radicais Kangxi utilizados nos caracteres chineses.   %%%%%
+%%%%%                                                                     %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Ajustes para a tabela
 \DefTblrTemplate{caption}{default}{}
 \DefTblrTemplate{capcont}{default}{ \UseTblrTemplate{conthead-text}{default} }
 \DefTblrTemplate{contfoot-text}{default}{Continua na próxima página.}
@@ -7,6 +17,7 @@
 \DefTblrTemplate{firstfoot,middlefoot}{default}{ \UseTblrTemplate{contfoot}{default} }
 \DefTblrTemplate{lastfoot}{default}{ \UseTblrTemplate{note}{default} \UseTblrTemplate{remark}{default} }
 
+%%% Tabela
 \begin{longtblr}
 {
   colspec = {|r|XX|X|X|}, hlines,
@@ -15,7 +26,6 @@
   row{1} = {font=\bfseries, fg=white, bg=black},
   row{2-Z} = {font=\normalfont},
 }
-
 \textbf{Nº} & \SetCell[c=2]{c}\textbf{Radical e Variantes} & 2-2 & \textbf{Tradução} & \textbf{Pinyin} \\
   1  & 一 &          & um                     & \dictpinyin{yi1}                  \\
   2  & 丨 &          & linha                  & \dictpinyin{shu4}                 \\
@@ -232,3 +242,5 @@
 213  & 龜 & 龟       & tartaruga              & \dictpinyin{gui1}                 \\
 214  & 龠 &          & flauta                 & \dictpinyin{yue4}                 \\
 \end{longtblr}
+
+%%%%% EOF %%%%%

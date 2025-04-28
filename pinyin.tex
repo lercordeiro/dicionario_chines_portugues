@@ -9,12 +9,11 @@
 % CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[a4paper,9pt,twoside,openany]{memoir}
+\documentclass[a4paper,9pt,twoside,openright,book]{memoir}
 
 \usepackage[brazilian]{babel}
 \usepackage{fontspec}
 \usepackage[dvipsnames]{xcolor}
-\usepackage{multicol}
 \usepackage{imakeidx}
 \usepackage[inline]{enumitem}
 \usepackage{zhnumber}
@@ -27,12 +26,6 @@
 \usepackage{luacode}
 \usepackage{parskip}
 \usepackage{stackengine}
-\usepackage{import}
-
-% Meus Comandos
-\import{include/}{cmd.tex}
-\import{include/}{genericcmd.tex}
-\import{include/}{pinyincmd.tex}
 
 % Ajustes do PDF
 \hypersetup{
@@ -47,10 +40,10 @@
   pdfkeywords={dicionário, chinês, português, instituto confúcio}
 }
 
-% Índices Remissivos
-\makeindex[title=Índice Remissivo por Traço,intoc=true,columns=3,columnsep=15pt,columnseprule=true,noautomatic=true,name=pstroke]
-\makeindex[title=Índice Remissivo por Radical,intoc=true,columns=3,columnsep=15pt,columnseprule=true,noautomatic=true,name=pradical]
-\indexsetup{level=\chapter*,toclevel=chapter,headers={\indexname}{\indexname}}
+% Meus Comandos
+\input{include/cmd.tex}
+\input{include/genericcmd.tex}
+\input{include/pinyincmd.tex}
 
 %%%
 %%% Documento começa aqui!
@@ -80,35 +73,35 @@ caracter, depois pelo número de traços e, finalmente, pela ordem do
 caracter na tabela UTF-8.
 
 \clearpage
-\pagestyle{dicionario}
-\begin{multicols}{2}
-\import{groups_by_pinyin/}{A.tex}
-\import{groups_by_pinyin/}{B.tex}
-\import{groups_by_pinyin/}{C.tex}
-\import{groups_by_pinyin/}{D.tex}
-\import{groups_by_pinyin/}{E.tex}
-\import{groups_by_pinyin/}{F.tex}
-\import{groups_by_pinyin/}{G.tex}
-\import{groups_by_pinyin/}{H.tex}
-%%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "I"
-\import{groups_by_pinyin/}{J.tex}
-\import{groups_by_pinyin/}{K.tex}
-\import{groups_by_pinyin/}{L.tex}
-\import{groups_by_pinyin/}{M.tex}
-\import{groups_by_pinyin/}{N.tex}
-\import{groups_by_pinyin/}{O.tex}
-\import{groups_by_pinyin/}{P.tex}
-\import{groups_by_pinyin/}{Q.tex}
-\import{groups_by_pinyin/}{R.tex}
-\import{groups_by_pinyin/}{S.tex}
-\import{groups_by_pinyin/}{T.tex}
-%%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "U"
-%%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "V"
-\import{groups_by_pinyin/}{W.tex}
-\import{groups_by_pinyin/}{X.tex}
-\import{groups_by_pinyin/}{Y.tex}
-\import{groups_by_pinyin/}{Z.tex}
-\end{multicols}
+\pagestyle{dictionary}
+\twocolumn
+\input{groups_by_pinyin/A.tex}
+\input{groups_by_pinyin/B.tex}
+\input{groups_by_pinyin/C.tex}
+\input{groups_by_pinyin/D.tex}
+\input{groups_by_pinyin/E.tex}
+\input{groups_by_pinyin/F.tex}
+\input{groups_by_pinyin/G.tex}
+\input{groups_by_pinyin/H.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "I"
+\input{groups_by_pinyin/J.tex}
+\input{groups_by_pinyin/K.tex}
+\input{groups_by_pinyin/L.tex}
+\input{groups_by_pinyin/M.tex}
+\input{groups_by_pinyin/N.tex}
+\input{groups_by_pinyin/O.tex}
+\input{groups_by_pinyin/P.tex}
+\input{groups_by_pinyin/Q.tex}
+\input{groups_by_pinyin/R.tex}
+\input{groups_by_pinyin/S.tex}
+\input{groups_by_pinyin/T.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "U"
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "V"
+\input{groups_by_pinyin/W.tex}
+\input{groups_by_pinyin/X.tex}
+\input{groups_by_pinyin/Y.tex}
+\input{groups_by_pinyin/Z.tex}
+\onecolumn
 
 \clearpage
 \pagestyle{plain}
@@ -139,9 +132,6 @@ caracter na tabela UTF-8.
 \pagestyle{plain}
 \chapter{Radicais Kangxi}
 \input{include/radicais_kangxi.tex}
-
-\printindex[pstroke]
-\printindex[pradical]
 
 \end{document}
 

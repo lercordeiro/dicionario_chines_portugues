@@ -1,3 +1,13 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%                                                                     %%%%%
+%%%%% locativos.tex:                                                      %%%%%
+%%%%% Tabela com os locativos chineses                                    %%%%%
+%%%%%                                                                     %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Ajustes para a tabela
 \DefTblrTemplate{caption}{default}{}
 \DefTblrTemplate{capcont}{default}{ \UseTblrTemplate{conthead-text}{default} }
 \DefTblrTemplate{contfoot-text}{default}{Continua na próxima página.}
@@ -7,24 +17,25 @@
 \DefTblrTemplate{firstfoot,middlefoot}{default}{ \UseTblrTemplate{contfoot}{default} }
 \DefTblrTemplate{lastfoot}{default}{ \UseTblrTemplate{note}{default} \UseTblrTemplate{remark}{default} }
 
+%%% Tabela
 \begin{longtblr}
 {
-  colspec = {cccccc},
-  width = 1\linewidth,
-  hlines = {white},
-  vlines = {white},
-  rowhead = 1, rowfoot = 0,
-  row{1} = {font=\bfseries, bg=black, fg=white},
-  column{1} = {font=\bfseries, bg=black, fg=white},
-  cell{1}{1} = {bg=white},
-  cell{2-Z}{2-Z} = {bg=lightgray},
-  cell{6}{5-6} = {bg=white},
-  cell{7}{2-4} = {bg=white},
-  cell{9}{2-5} = {bg=white},
-  cell{10}{3-6} = {bg=white},
-  cell{11}{2-5} = {bg=white},
-  cell{12}{4-6} = {bg=white},
-  cell{13}{4-6} = {bg=white},
+ colspec = {cccccc},
+ width = 1\linewidth,
+ hlines = {white},
+ vlines = {white},
+ rowhead = 1, rowfoot = 0,
+ row{1} = {font=\bfseries, bg=gray8, fg=black},
+ column{1} = {font=\bfseries, bg=gray8, fg=black},
+ cell{1}{1} = {bg=white},
+ cell{2-Z}{2-Z} = {bg=gray9},
+ cell{6}{5-6} = {bg=white},
+ cell{7}{2-4} = {bg=white},
+ cell{9}{2-5} = {bg=white},
+ cell{10}{3-6} = {bg=white},
+ cell{11}{2-5} = {bg=white},
+ cell{12}{4-6} = {bg=white},
+ cell{13}{4-6} = {bg=white},
 }
                                            & {边\\   \normalsize\dpy{bian1}}        & {面\\   \normalsize\dpy{mian4}}        & {头\\   \normalsize\dpy{tou5}}        & {以\\   \normalsize\dpy{yi3}}        & {之\\   \normalsize\dpy{zhi1}}        \\
 {上\\ \normalsize\dpy{shang4}\\ sobre}     & {上边\\ \normalsize\dpy{shang4 bian1}} & {上面\\ \normalsize\dpy{shang4 mian4}} & {上头\\ \normalsize\dpy{shang4 tou5}} & {以上\\ \normalsize\dpy{yi3 shang4}} & {之上\\ \normalsize\dpy{zhi1 shang4}} \\
@@ -45,3 +56,5 @@
 {西\\ \normalsize\dpy{xi1}\\ no oeste}     & {西边\\ \normalsize\dpy{xi1 bian1}}    & {西面\\ \normalsize\dpy{xi1 mian4}}    & {西头\\ \normalsize\dpy{xi1 tou5}}    & {以西\\ \normalsize\dpy{yi3 xi1}}    & {之西\\ \normalsize\dpy{zhi1 xi1}}    \\
 {北\\ \normalsize\dpy{bei3}\\ n norte}     & {北边\\ \normalsize\dpy{bei3 bian1}}   & {北面\\ \normalsize\dpy{bei3 mian4}}   & {北头\\ \normalsize\dpy{bei3 tou5}}   & {以北\\ \normalsize\dpy{yi3 bei3}}   & {之北\\ \normalsize\dpy{zhi1 bei3}}   \\
 \end{longtblr}
+
+%%%%% EOF %%%%%

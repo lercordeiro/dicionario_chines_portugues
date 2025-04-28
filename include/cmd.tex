@@ -1,29 +1,31 @@
-%
-% Dictionary functions
-%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%                                                                     %%%%%
+%%%%% Funções e Ajustes dos Documentos do Dicionário                      %%%%%
+%%%%%                                                                     %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Best chapter style
+%%% Estilo do capítulo, o melhor que encontrei
 \chapterstyle{verville}
 
-% No indentation
-\setlength\parindent{0pt}
+%%% Sem identação
 \setlength\parindent{0pt}
 
-% Set margins
+%%% Ajuste das margens do documento
 \setlrmarginsandblock{3cm}{2cm}{*}
 \setulmarginsandblock{2cm}{*}{1}
 \checkandfixthelayout
 
-% To avoid willows and orfans
-%\clubpenalty=10000
-%widowpenalty=10000
+%%% Pra evitar viúvas e órfãs
+\clubpenalty=10000
+\widowpenalty=10000
 \raggedbottom
 
-% Set spacing
+%%% Espaçamento das linhas, 1 e meio
 \OnehalfSpacing
-%\setSingleSpace{1.8}
 
-% Set fonts Google's NoTofu
+%%% Usando a fonte NoTofu do Google.
 \babelfont{rm}[
  Renderer=Node,
  Ligatures=TeX,
@@ -36,38 +38,39 @@
 \babelfont{sf}[Renderer=Harfbuzz,Ligatures=TeX]{Noto Sans CJK SC DemiLight}
 \babelfont{tt}[Renderer=Harfbuzz,Ligatures=TeX]{Noto Sans Mono CJK SC}
 
-% Babel Hyphenation
-%\babelhyphenation
-% {%
-%  a-bre-vi-a-ção per-ple-xo cons-tan-te-men-te so-bre-no-me nor-des-te
-%  ca-na-dá in-clu-in-do a-mé-ri-ca eu-ro-pa a-ten-ção a-tu-a-li-za-ção
-%  a-lis-tar a-bre-vi-a-tu-ra
-% }    
-
-% Index
+%%% Ajustes do Sumário
 \makeatletter
 \renewcommand{\@pnumwidth}{2em} 
 \renewcommand{\@tocrmarg}{4em}
 \makeatother
 \renewcommand\cftbeforechapterskip{5pt plus 1pt}
 
-% Set spacing
+%%% Ajustes da separação das colunas quando em modo texto de 2 colunas
 \setlength{\columnsep}{.8em}
 \setlength{\columnseprule}{0.1mm}
 
-% Set Headers & Footers
+%%% Ajustes para o "stackengine"
+\renewcommand\stacktype{S}
+\renewcommand\stackalignment{c}
+
+%%% Ajustes de Cabeçalhos e Rodapés
 \setheadfoot{14pt}{28pt}
+
+% Estilo "plain"
 \makeevenfoot{plain}{\thepage}{汉葡词典}{}
 \makeoddfoot{plain}{}{汉葡词典}{\thepage}
-\makefootrule{plain}{\textwidth}{\normalrulethickness}{4pt}
-\makepagestyle{dicionario}
-\makeevenhead{dicionario}{\rightmark}{}{\leftmark}
-\makeoddhead{dicionario}{\rightmark}{}{\leftmark}
-\makeevenfoot{dicionario}{\thepage}{汉葡词典}{}
-\makeoddfoot{dicionario}{}{汉葡词典}{\thepage}
-\makeheadrule{dicionario}{\textwidth}{\normalrulethickness}
+\makefootrule{plain}{\textwidth}{\normalrulethickness}{2pt}
 
-% Section style
+% Estilo "dictionary"
+\makepagestyle{dictionary}
+\makeheadrule{dictionary}{\textwidth}{\normalrulethickness}
+\makefootrule{dictionary}{\textwidth}{\normalrulethickness}{2pt}
+\makeevenhead{dictionary}{\rightmark}{}{\leftmark}
+\makeoddhead{dictionary}{\rightmark}{}{\leftmark}
+\makeevenfoot{dictionary}{\thepage}{汉葡词典}{}
+\makeoddfoot{dictionary}{}{汉葡词典}{\thepage}
+
+%%% Estilo das Seções
 \newcommand{\boxedsec}[1]
  {%
   \begin{tcolorbox}%
@@ -88,39 +91,28 @@
   \end{tcolorbox}
  }
 \setsecheadstyle{\boxedsec}
-\setbeforesecskip{-3ex plus -1ex minus -.25ex}
+\setbeforesecskip{-2ex plus -.5ex minus -.25ex}
 \setaftersecskip{.5ex plus .25ex}
 \newcommand{\sectionbreak}{\phantomsection}
 
-% Commands and booleans
-\newbool{f_example}
+%%% Variáveis tipo "bool" para dizer se tem ou não os campos
+%%% "Veja" e "Veja também" nas definições dos verbetes
 \newbool{f_see}
 \newbool{f_seealso}
 
-% Convert numeric pinyins to accented ones
+%%% Converte os pinyins numéricos em pinyins com marcação de tom
 \directlua{dofile "include/tex-sx-pinyin-tonemarks.lua"}
 
-% Wrap converter in a TeX macro
+% Função "\pinyin" faz a conversão
 \protected\def\pinyin#1{%
- % switch to appropriate hyphenation pattern goes here
  \directlua{packagedata.pinyintones.convert ([==[#1]==])}%
 }
 
-% Command \&
-\DeclareRobustCommand{\&}%
-{%
- \ifdim\fontdimen1\font>0pt%
-  \textsl{\symbol{`\&}}%
- \else%
-  \symbol{`\&}%
- \fi%
-}
-
-% Command \dul{text} -> underlined text
-\NewDocumentCommand{\dul}{m}{\underline{#1}}
-
-% Commands \dictpinyin{pin1yin1} and \dpy{pin1yin1}
+% Comando "\dictpinyin", coloca o pinyin entre «»
 \NewDocumentCommand{\dictpinyin}{m}{\guillemotleft\pinyin{#1}\guillemotright} 
+
+% Comando "\dpy", gera a string do pinyin utilizada no Dicionário
+% Este comando realiza uma série de substituições antes
 \NewDocumentCommand{\dpy}{m}%
 {%
  \StrSubstitute{#1}{r5}{r}[\rA]%
@@ -130,7 +122,23 @@
  \mbox{}\py
 }
 
-% Dictionary definition special enumerate (inline)
+%%% Comandos genéricos usados no Dicionário
+
+% Comando "\&", insere o caracgter "&"
+\DeclareRobustCommand{\&}%
+{%
+ \ifdim\fontdimen1\font>0pt%
+  \textsl{\symbol{`\&}}%
+ \else%
+  \symbol{`\&}%
+ \fi%
+}
+
+% Comando "\dul{text}", sublinha o texto dado
+\NewDocumentCommand{\dul}{m}{\underline{#1}}
+
+% Ambiente "enumerate" especial utilizado no dicionário, coloca as definições 
+% do verbete em uma lista numerada em linha
 \NewDocumentCommand{\dictenumerate}{>{\SplitList{|}} >{\TrimSpaces} m}
 {%
  \begin{enumerate*}[label=(\arabic*),left=0pt,mode=unboxed,font=\bfseries]
@@ -139,8 +147,25 @@
 }
 \NewDocumentCommand{\insertitem}{m}{\item #1}
 
-% stackengine settings
-\renewcommand\stacktype{S}
-\renewcommand\stackalignment{c}
+% Ambiente "enumerate" especial utilizado no dicionário, coloca os exemplos
+% das definições do verbete em uma lista numerada em linha, utilizando
+% algarismos romanos
+\NewDocumentCommand{\dictexamples}{>{\SplitList{|}} >{\TrimSpaces} m}
+{%
+ \begin{enumerate}[label=(\roman*),left=0pt,mode=unboxed,font=\bfseries]
+  \ProcessList{#1}{\exampleitem}
+ \end{enumerate}
+}
+\NewDocumentCommand{\exampleitem}{m}
+{%
+ \IfSubStr{#1}{mud::::}%
+  {% Manual Underline
+   \StrBehind{#1}{mud::::}[\string]%
+   \item \string
+  }%
+  {% Automatic Underline
+   \item \StrSubstitute{#1}{\l_hanzi_tl}{\underline{\l_hanzi_tl}}
+  }%
+}
 
 %%%%% EOF %%%%%

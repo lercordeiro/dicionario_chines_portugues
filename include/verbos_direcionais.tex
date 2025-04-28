@@ -1,3 +1,13 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%                                                                     %%%%%
+%%%%% verbos_direcionais.tex:                                             %%%%%
+%%%%% Tabela com os verbos direcionais chineses.                          %%%%%
+%%%%%                                                                     %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Ajustes para a tabela
 \DefTblrTemplate{caption}{default}{}
 \DefTblrTemplate{capcont}{default}{ \UseTblrTemplate{conthead-text}{default} }
 \DefTblrTemplate{contfoot-text}{default}{Continua na próxima página.}
@@ -7,6 +17,7 @@
 \DefTblrTemplate{firstfoot,middlefoot}{default}{ \UseTblrTemplate{contfoot}{default} }
 \DefTblrTemplate{lastfoot}{default}{ \UseTblrTemplate{note}{default} \UseTblrTemplate{remark}{default} }
 
+%%% Tabela
 \begin{longtblr}
 {
   colspec = {cccccccc},
@@ -14,13 +25,15 @@
   hlines = {white},
   vlines = {white},
   rowhead = 1, rowfoot = 0,
-  row{1} = {font=\bfseries, bg=black, fg=white},
-  column{1} = {font=\bfseries, bg=black, fg=white},
+  row{1} = {font=\bfseries, bg=gray8, fg=black},
+  column{1} = {font=\bfseries, bg=gray8, fg=black},
   cell{1}{1} = {bg=white},
-  cell{2-Z}{2-Z} = {bg=lightgray},
+  cell{2-Z}{2-Z} = {bg=gray9},
   cell{3}{8} = {bg=white},
 }
                         & {上\\ \normalsize descer} & {下\\ \normalsize subir} & {进\\ \normalsize entrar} & {出\\ \normalsize sair} & {回\\ \normalsize retornar} & {过\\ \normalsize atravessar} & {起\\ \normalsize levantar} \\
 {来\\ \normalsize vir}  &  上来                     &  下来                    &  进来                     &  出来                   &  回来                       &  过来                         &  起来                       \\
 {去\\ \normalsize ir }  &  上去                     &  下去                    &  进去                     &  出去                   &  回去                       &  过去                         &                             \\ 
 \end{longtblr}
+
+%%%%% EOF %%%%%

@@ -1,7 +1,6 @@
 TIMESTAMP != date "+%FT%T%z"
 
 TEX = lualatex -halt-on-error -8bit # -papersize=A4 -interaction=batchmode
-MKIDX = ~/.local/bin/zhmakeindex -s ./config/dicionario.ist
 BOOK = pdfjam --landscape --signature 20 --twoside --a4paper --suffix booklet
 
 INCDIR = ./include
@@ -64,16 +63,11 @@ $(SGRPDIR)/%.tex : $(SVERBDIR)/%.tex
 
 pinyin.pdf : pinyin.tex $(INCDIR)/%.tex $(PGRPDIR)/%.tex
 	$(TEX) pinyin.tex
-	$(MKIDX) -z bihua pstroke
-	$(MKIDX) -z bushou pradical
-	$(TEX) pinyin.tex
 	$(TEX) pinyin.tex
 	echo -n "Verbetes: "
 	@grep begin $(PVERBDIR)/* | grep entries | wc -l
 
 strokes.pdf : strokes.tex $(INCDIR)/%.tex $(SGRPDIR)/%.tex
-	$(TEX) strokes.tex
-	$(MKIDX) -z bushou sradical
 	$(TEX) strokes.tex
 	$(TEX) strokes.tex
 	echo -n "Verbetes: "

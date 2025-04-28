@@ -1,22 +1,28 @@
-%
-% Dictionary environment and functions
-%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%                                                                     %%%%%
+%%%%% genericcmd.tex:                                                     %%%%%
+%%%%% Arquivo com as definições da Capa do Dicionário                     %%%%%
+%%%%%                                                                     %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \ExplSyntaxOn
 
-\newcommand\examplel{}
-\listadd{\examplel}{}% Initialize list
-
+%%% Cria e inicializa a lista "\seerefl", "Veja"
 \newcommand\seerefl{}
 \listadd{\seerefl}{}% Initialize list
 
+%%% Cria e inicializa a lista "\seealsorefl", "Veja também"
 \newcommand\seealsorefl{}
 \listadd{\seealsorefl}{}% Initialize list
 
-% Lista Veja
+%%% Comando "\seeitem", adiciona um item "Veja" ou "Veja também" na lista,
+%%% com os pinyins abaixo dos caracteres
 \newcommand{\seeitem}[2]{\addstackgap{\stackunder{\small#1}{\footnotesize\dpy{#2}}}\ (p.~\pageref{#1:#2})}
 
-\NewDocumentCommand{\definition}{somm}
+%%% Comando "\definition", gera o texto da definição
+\NewDocumentCommand{\definition}{sommo}
  {%
   \IfBooleanTF{#1}
    {% Proper Name
@@ -25,8 +31,12 @@
    {%
     {\small\ding{108}}\ (\textit{#3})\IfValueT{#2}{\ [clas.: #2]}{\ \dictenumerate{#4}}\par
    }%
+  \IfValueT{#5}{%
+   \IfSubStr{#5}{|}{\textbf{Exemplos:}}{\textbf{Exemplo:}}%
+   \ \dictexamples{#5}}
  }
 
+%%% Comando "Variante de"
 \NewDocumentCommand{\variantof}{sm}
  {%
   \IfBooleanTF{#1}
@@ -38,37 +48,7 @@
    }%
  }
 
-\NewDocumentCommand{\example}{smo}
- {%
-  \booltrue{f_example}
-  \IfBooleanTF{#1}
-   {% Manual underline
-    \IfValueTF{#3}
-     {% With translation
-      \listgadd{\examplel}{manual::::#2::::#3}
-     }%
-     {% Without translation
-      \listgadd{\examplel}{manual::::#2}
-     }%
-   }%
-   {%
-    \IfSubStr[1]{#2}{\l_hanzi_tl}
-     {%
-      \IfValueTF{#3}
-       {% With translation
-        \listgadd{\examplel}{#2::::#3}
-       }%
-       {% Without translation
-        \listgadd{\examplel}{#2}
-       }%
-     }%
-     {% Without the entry word (hanzi)
-       \listgadd{\examplel}{\textit{ERRO}: Não há \l_hanzi_tl\ em ``#2''.}
-     }%
-   }
- }
-
-% See Command
+%%% Comando "Veja"
 \NewDocumentCommand{\seeref}{mm}
  {%
   \booltrue{f_see}
@@ -76,7 +56,7 @@
  }
 
 
-% See Also Command
+%%% Comando "Veja também"
 \NewDocumentCommand{\seealsoref}{mm}
  {%
   \booltrue{f_seealso}

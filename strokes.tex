@@ -9,12 +9,11 @@
 % CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[a4paper,9pt,twoside,openany]{memoir}
+\documentclass[a4paper,9pt,twoside,openright,book]{memoir}
 
 \usepackage[brazilian]{babel}
 \usepackage{fontspec}
 \usepackage[dvipsnames]{xcolor}
-\usepackage{multicol}
 \usepackage{imakeidx}
 \usepackage[inline]{enumitem}
 \usepackage{zhnumber}
@@ -27,12 +26,6 @@
 \usepackage{luacode}
 \usepackage{parskip}
 \usepackage{stackengine}
-\usepackage{import}
-
-% Meus Comandos
-\import{include/}{cmd.tex}
-\import{include/}{genericcmd.tex}
-\import{include/}{strokescmd.tex}
 
 % Ajustes do PDF
 \hypersetup{
@@ -47,9 +40,11 @@
   pdfkeywords={dicionário, chinês, português, instituto confúcio}
 }
 
-% Índices Remissivos
-\makeindex[title=Índice Remissivo por Radical,intoc=true,columns=3,columnsep=15pt,columnseprule=true,noautomatic=true,name=sradical]
-\indexsetup{level=\chapter*,toclevel=chapter,headers={\indexname}{\indexname}}
+% Meus Comandos
+\input{include/cmd.tex}
+\input{include/genericcmd.tex}
+\input{include/strokescmd.tex}
+
 
 %%%
 %%% Documento começa aqui!
@@ -57,6 +52,7 @@
 
 \begin{document}
 \addfontfeatures{CharacterWidth=Proportional}
+\let\clearforchapter\par % saves some space
 
 \input{include/capa.tex}
 
@@ -79,39 +75,39 @@ depois pela ordem do caracter na tabela UTF-8.  As definições são
 agrupadas e ordenadas pelo pinyin em cada verbete.
 
 \clearpage
-\pagestyle{dicionario}
-\begin{multicols}{2}
-\import{groups_by_strokes/}{001.tex}
-\import{groups_by_strokes/}{002.tex}
-\import{groups_by_strokes/}{003.tex}
-\import{groups_by_strokes/}{004.tex}
-\import{groups_by_strokes/}{005.tex}
-\import{groups_by_strokes/}{006.tex}
-\import{groups_by_strokes/}{007.tex}
-\import{groups_by_strokes/}{008.tex}
-\import{groups_by_strokes/}{009.tex}
-\import{groups_by_strokes/}{010.tex}
-\import{groups_by_strokes/}{011.tex}
-\import{groups_by_strokes/}{012.tex}
-\import{groups_by_strokes/}{013.tex}
-\import{groups_by_strokes/}{014.tex}
-\import{groups_by_strokes/}{015.tex}
-\import{groups_by_strokes/}{016.tex}
-\import{groups_by_strokes/}{017.tex}
-\import{groups_by_strokes/}{018.tex}
-\import{groups_by_strokes/}{019.tex}
-\import{groups_by_strokes/}{020.tex}
-\import{groups_by_strokes/}{021.tex}
-%\import{groups_by_strokes/}{022.tex}
-%\import{groups_by_strokes/}{023.tex}
-%\import{groups_by_strokes/}{024.tex}
-%\import{groups_by_strokes/}{025.tex}
-%\import{groups_by_strokes/}{026.tex}
-%\import{groups_by_strokes/}{027.tex}
-%\import{groups_by_strokes/}{028.tex}
-%\import{groups_by_strokes/}{029.tex}
-%\import{groups_by_strokes/}{030.tex}
-\end{multicols}
+\pagestyle{dictionary}
+\twocolumn
+\input{groups_by_strokes/001.tex}
+\input{groups_by_strokes/002.tex}
+\input{groups_by_strokes/003.tex}
+\input{groups_by_strokes/004.tex}
+\input{groups_by_strokes/005.tex}
+\input{groups_by_strokes/006.tex}
+\input{groups_by_strokes/007.tex}
+\input{groups_by_strokes/008.tex}
+\input{groups_by_strokes/009.tex}
+\input{groups_by_strokes/010.tex}
+\input{groups_by_strokes/011.tex}
+\input{groups_by_strokes/012.tex}
+\input{groups_by_strokes/013.tex}
+\input{groups_by_strokes/014.tex}
+\input{groups_by_strokes/015.tex}
+\input{groups_by_strokes/016.tex}
+\input{groups_by_strokes/017.tex}
+\input{groups_by_strokes/018.tex}
+\input{groups_by_strokes/019.tex}
+\input{groups_by_strokes/020.tex}
+\input{groups_by_strokes/021.tex}
+%\input{groups_by_strokes/022.tex}
+%\input{groups_by_strokes/023.tex}
+%\input{groups_by_strokes/024.tex}
+%\input{groups_by_strokes/025.tex}
+%\input{groups_by_strokes/026.tex}
+%\input{groups_by_strokes/027.tex}
+%\input{groups_by_strokes/028.tex}
+%\input{groups_by_strokes/029.tex}
+%\input{groups_by_strokes/030.tex}
+\onecolumn
 
 \clearpage
 \pagestyle{plain}
@@ -142,8 +138,6 @@ agrupadas e ordenadas pelo pinyin em cada verbete.
 \pagestyle{plain}
 \chapter{Radicais Kangxi}
 \input{include/radicais_kangxi.tex}
-
-\printindex[sradical]
 
 \end{document}
 
