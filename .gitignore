@@ -1,12 +1,16 @@
 backup/
 entries_by_pinyin/
 entries_by_strokes/
+entries_by_radicals/
 log/
 tmp/
 .kile/
 pinyin.pdf
 pinyin-book.pdf
 pinyin-booklet.pdf
+radicals.pdf
+radicals-book.pdf
+radicals-booklet.pdf
 strokes.pdf
 strokes-book.pdf
 strokes-booklet.pdf

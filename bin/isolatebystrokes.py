@@ -10,17 +10,17 @@ entries = {}
 
 #: Character code ranges for pertinent CJK ideograph Unicode blocks.
 characters = (
-    "\u3007" # Ideographic number zero, see issue #17
-    "\u4E00-\u9FFF" # CJK Unified Ideographs
-    "\u3400-\u4DBF" # CJK Unified Ideographs Extension A
-    "\uF900-\uFAFF" # CJK Compatibility Ideographs
+    "\u3007"  # Ideographic number zero, see issue #17
+    "\u4E00-\u9FFF"  # CJK Unified Ideographs
+    "\u3400-\u4DBF"  # CJK Unified Ideographs Extension A
+    "\uF900-\uFAFF"  # CJK Compatibility Ideographs
 )
 if sys.maxunicode > 0xFFFF:
     characters += (
-        "\U00020000-\U0002A6DF" # CJK Unified Ideographs Extension B
-        "\U0002A700-\U0002B73F" # CJK Unified Ideographs Extension C
-        "\U0002B740-\U0002B81F" # CJK Unified Ideographs Extension D
-        "\U0002F800-\U0002FA1F" # CJK Compatibility Ideographs Supplement
+        "\U00020000-\U0002A6DF"  # CJK Unified Ideographs Extension B
+        "\U0002A700-\U0002B73F"  # CJK Unified Ideographs Extension C
+        "\U0002B740-\U0002B81F"  # CJK Unified Ideographs Extension D
+        "\U0002F800-\U0002FA1F"  # CJK Compatibility Ideographs Supplement
     )
 
 
@@ -68,11 +68,19 @@ def read_entries(filename):
                 print(hanzis)
                 strokes = substrings[2].split(',')
                 print(strokes)
+                radicals = substrings[3].split('、')
+                print(radicals)
 
                 if len(hanzis) != len(strokes):
                     print(f'***** ERROR: in {hanzis}: ' +
                           'number of hanzis and strokes are different: ' +
                           f'{len(hanzis)} != {len(strokes)}')
+                    sys.exit(1)
+
+                if len(hanzis) != len(radicals):
+                    print(f'***** ERROR: in {hanzis}: ' +
+                          'number of hanzis and radicals are different: ' +
+                          f'{len(hanzis)} != {len(radicals)}')
                     sys.exit(1)
 
                 filename = ''

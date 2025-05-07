@@ -6,6 +6,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%% Hyperref em modo 'draft' não gera os hiperlinks
+\hypersetup{final}
+
+%%% Largura da entrada do verbete
+\def\entrywidth{.49\textwidth}
+
 %%% Estilo do capítulo, o melhor que encontrei
 \chapterstyle{verville}
 
@@ -35,7 +41,7 @@
  SlantedFeatures={FakeSlant=0.25},
  BoldSlantedFeatures={FakeSlant=0.25}]
  {Noto Serif CJK SC Light}
-\babelfont{sf}[Renderer=Harfbuzz,Ligatures=TeX]{Noto Sans CJK SC DemiLight}
+\babelfont{sf}[Renderer=Harfbuzz,Ligatures=TeX]{Noto Sans CJK SC Light}
 \babelfont{tt}[Renderer=Harfbuzz,Ligatures=TeX]{Noto Sans Mono CJK SC}
 
 %%% Ajustes do Sumário
@@ -57,18 +63,30 @@
 \setheadfoot{14pt}{28pt}
 
 % Estilo "plain"
-\makeevenfoot{plain}{\thepage}{汉葡词典}{}
-\makeoddfoot{plain}{}{汉葡词典}{\thepage}
 \makefootrule{plain}{\textwidth}{\normalrulethickness}{2pt}
+\ifdraftdoc
+ \makeevenfoot{plain}{\thepage}{汉葡词典}{Draft}
+ \makeoddfoot{plain}{Draft}{汉葡词典}{\thepage}
+\else
+ \makeevenfoot{plain}{\thepage}{汉葡词典}{}
+ \makeoddfoot{plain}{}{汉葡词典}{\thepage}
+\fi
 
 % Estilo "dictionary"
 \makepagestyle{dictionary}
 \makeheadrule{dictionary}{\textwidth}{\normalrulethickness}
 \makefootrule{dictionary}{\textwidth}{\normalrulethickness}{2pt}
-\makeevenhead{dictionary}{\rightmark}{}{\leftmark}
-\makeoddhead{dictionary}{\rightmark}{}{\leftmark}
-\makeevenfoot{dictionary}{\thepage}{汉葡词典}{}
-\makeoddfoot{dictionary}{}{汉葡词典}{\thepage}
+\ifdraftdoc
+ \makeevenhead{dictionary}{\rightmark}{Draft}{\leftmark}
+ \makeoddhead{dictionary}{\rightmark}{Draft}{\leftmark}
+ \makeevenfoot{dictionary}{\thepage}{汉葡词典}{Draft}
+ \makeoddfoot{dictionary}{Draft}{汉葡词典}{\thepage}
+\else
+ \makeevenhead{dictionary}{\rightmark}{}{\leftmark}
+ \makeoddhead{dictionary}{\rightmark}{}{\leftmark}
+ \makeevenfoot{dictionary}{\thepage}{汉葡词典}{}
+ \makeoddfoot{dictionary}{}{汉葡词典}{\thepage}
+\fi
 
 %%% Estilo das Seções
 \newcommand{\boxedsec}[1]
@@ -114,58 +132,60 @@
 % Comando "\dpy", gera a string do pinyin utilizada no Dicionário
 % Este comando realiza uma série de substituições antes
 \NewDocumentCommand{\dpy}{m}%
-{%
- \StrSubstitute{#1}{r5}{r}[\rA]%
- \StrSubstitute{\rA}{v}{ü}[\rB]%
- \StrSubstitute{\rB}{V}{Ü}[\rC]%
- \edef\py{\dictpinyin{\rC}}%
- \mbox{}\py
-}
+ {%
+  \StrSubstitute{#1}{r5}{r}[\result]%
+  \StrSubstitute{\result}{v}{ü}[\result]%
+  \StrSubstitute{\result}{V}{Ü}[\result]%
+  \edef\py{\dictpinyin{\result}}%
+  \mbox{}\py
+ }
 
 %%% Comandos genéricos usados no Dicionário
 
 % Comando "\&", insere o caracgter "&"
 \DeclareRobustCommand{\&}%
-{%
- \ifdim\fontdimen1\font>0pt%
-  \textsl{\symbol{`\&}}%
- \else%
-  \symbol{`\&}%
- \fi%
-}
+ {%
+  \ifdim\fontdimen1\font>0pt%
+   \textsl{\symbol{`\&}}%
+  \else%
+   \symbol{`\&}%
+  \fi%
+ }
 
 % Comando "\dul{text}", sublinha o texto dado
 \NewDocumentCommand{\dul}{m}{\underline{#1}}
 
 % Ambiente "enumerate" especial utilizado no dicionário, coloca as definições 
 % do verbete em uma lista numerada em linha
-\NewDocumentCommand{\dictenumerate}{>{\SplitList{|}} >{\TrimSpaces} m}
-{%
- \begin{enumerate*}[label=(\arabic*),left=0pt,mode=unboxed,font=\bfseries]
-  \ProcessList{#1}{\insertitem}
- \end{enumerate*}
-}
-\NewDocumentCommand{\insertitem}{m}{\item #1}
+\NewDocumentCommand{\dictenumerate}{>{\SplitList{|}}m}
+ {%
+  \begin{enumerate*}[nosep,label=(\arabic*),left=0pt,mode=unboxed,font=\bfseries]
+   \ProcessList{#1}{\insertitem}
+  \end{enumerate*}
+ }
+\NewDocumentCommand{\insertitem}{>{\TrimSpaces}m}{\item #1}
 
 % Ambiente "enumerate" especial utilizado no dicionário, coloca os exemplos
 % das definições do verbete em uma lista numerada em linha, utilizando
 % algarismos romanos
-\NewDocumentCommand{\dictexamples}{>{\SplitList{|}} >{\TrimSpaces} m}
-{%
- \begin{enumerate}[label=(\roman*),left=0pt,mode=unboxed,font=\bfseries]
-  \ProcessList{#1}{\exampleitem}
- \end{enumerate}
-}
-\NewDocumentCommand{\exampleitem}{m}
-{%
- \IfSubStr{#1}{mud::::}%
-  {% Manual Underline
-   \StrBehind{#1}{mud::::}[\string]%
-   \item \string
-  }%
-  {% Automatic Underline
-   \item \StrSubstitute{#1}{\l_hanzi_tl}{\underline{\l_hanzi_tl}}
-  }%
-}
+\makeatletter
+\NewDocumentCommand{\dictexamples}{m>{\SplitList{|}}m}
+ {%
+  \def\@theword{#1}%
+  \begin{enumerate}[nosep,label=(\roman*),left=0pt,mode=unboxed,font=\bfseries]
+   \ProcessList{#2}{\insertexample}
+  \end{enumerate}
+ }
+\NewDocumentCommand{\insertexample}{>{\TrimSpaces}m}
+ {
+  \IfSubStr{#1}{mud::::}
+   {% Sublinhado Manual
+    \item\StrBehind{#1}{mud::::}
+   }
+   {% Sublinhado Automático
+    \item\StrSubstitute{#1}{\@theword}{\underline{\@theword}}
+   }
+ }  
+\makeatother
 
 %%%%% EOF %%%%%

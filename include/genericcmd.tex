@@ -11,41 +11,42 @@
 
 %%% Cria e inicializa a lista "\seerefl", "Veja"
 \newcommand\seerefl{}
-\listadd{\seerefl}{}% Initialize list
+\listadd{\seerefl}{}% Inicializa a lista
 
 %%% Cria e inicializa a lista "\seealsorefl", "Veja também"
 \newcommand\seealsorefl{}
-\listadd{\seealsorefl}{}% Initialize list
+\listadd{\seealsorefl}{}% Inicializa a lista
 
 %%% Comando "\seeitem", adiciona um item "Veja" ou "Veja também" na lista,
 %%% com os pinyins abaixo dos caracteres
-\newcommand{\seeitem}[2]{\addstackgap{\stackunder{\small#1}{\footnotesize\dpy{#2}}}\ (p.~\pageref{#1:#2})}
+\newcommand{\seeitem}[2]{\addstackgap{\stackunder{\small#1}{\scriptsize\dpy{#2}}}\ (p.~\pageref{#1:#2})}
 
 %%% Comando "\definition", gera o texto da definição
 \NewDocumentCommand{\definition}{sommo}
  {%
-  \IfBooleanTF{#1}
-   {% Proper Name
+  \IfBooleanTF{#1}%
+   {% Substantivo Próprio
     {\small\ding{108}}\ (\textit{Substantivo\ Próprio})\IfValueT{#2}{\ [clas.:~#2]}{\ \dictenumerate{#4}}\par
    }%
    {%
     {\small\ding{108}}\ (\textit{#3})\IfValueT{#2}{\ [clas.: #2]}{\ \dictenumerate{#4}}\par
    }%
-  \IfValueT{#5}{%
-   \IfSubStr{#5}{|}{\textbf{Exemplos:}}{\textbf{Exemplo:}}%
-   \ \dictexamples{#5}}
+  \IfValueT{#5}%
+   {%
+    \IfSubStr{#5}{|}{\textbf{Exemplos: }}{\textbf{Exemplo: }}\dictexamples{\l_hanzi_tl}{#5}
+   }%
  }
 
 %%% Comando "Variante de"
 \NewDocumentCommand{\variantof}{sm}
- {%
-  \IfBooleanTF{#1}
+ {
+  \IfBooleanTF{#1}%
    {% Palavra Grande
+    {\small\ding{108}}\ Variante\ de\ #2\ \\(p.~\pageref{#2:\l_pinyin_tl})\par
+   }
+   {% Palavra Normal
     {\small\ding{108}}\ Variante\ de\ #2\ (p.~\pageref{#2:\l_pinyin_tl})\par
-   }%
-   {%
-    {\small\ding{108}}\ Variante\ de\ #2\ (p.~\pageref{#2:\l_pinyin_tl})\par
-   }%
+   }
  }
 
 %%% Comando "Veja"
