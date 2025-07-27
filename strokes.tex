@@ -18,7 +18,7 @@
 \usepackage[inline]{enumitem}
 \usepackage{zhnumber}
 \usepackage{tikz}
-\usepackage[hyperindex,hidelinks]{hyperref}
+\usepackage[hyperindex]{hyperref}
 \usepackage{pifont}
 \usepackage{xstring}
 \usepackage{tabularray}
@@ -108,6 +108,10 @@ agrupadas e ordenadas pelo pinyin em cada verbete.
 %\input{groups_by_strokes/030.tex}
 \onecolumn
 
+\ifdraftdoc 
+%%%
+\else
+
 \clearpage
 \pagestyle{plain}
 \chapter{Termos Gramaticais Chineses}
@@ -137,6 +141,8 @@ agrupadas e ordenadas pelo pinyin em cada verbete.
 \pagestyle{plain}
 \chapter{Radicais Kangxi}
 \input{include/radicais_kangxi.tex}
+
+\fi
 
 \end{document}
 

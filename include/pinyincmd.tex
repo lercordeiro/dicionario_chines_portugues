@@ -34,18 +34,18 @@
   \ifbool{f_see}%
    {% Processa as referências "Veja"
     \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \seeitem ##1}
-    \textbf{Veja:\ }%
-    \begin{itemize*}[label={}, before={\hspace{2sp}}, itemjoin={{,\ }}, itemjoin*={{\ e~}}]
+    \textbf{Veja:}%
+    \begin{seelist}
      \dolistloop{\seerefl}
-    \end{itemize*}\par
+    \end{seelist}\par
    }{}%
   \ifbool{f_seealso}%
    {% Processa as referências "Veja também"
     \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \seeitem ##1}
-    \textbf{Veja\ também:\ }%
-    \begin{itemize*}[label={}, before={\hspace{2sp}}, itemjoin={{,\ }}, itemjoin*={{\ e~}}]
+    \textbf{Veja\ também:}%
+    \begin{seealsolist}
      \dolistloop{\seealsorefl}
-    \end{itemize*}\par
+    \end{seealsolist}\par
    }{}%
   \end{minipage}
   \vspace{2mm}
@@ -78,18 +78,18 @@
   \ifbool{f_see}%
    {% Processa as referências "Veja"
     \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \seeitem ##1}
-    \textbf{Veja:\ }%
-    \begin{itemize*}[label={}, itemjoin={{,\ }}, itemjoin*={{\ e~}}]
+    \textbf{Veja:}%
+    \begin{seelist}
      \dolistloop{\seerefl}
-    \end{itemize*}\par
+    \end{seelist}\par
    }{}%
   \ifbool{f_seealso}%
    {% Processa as referências "Veja também"
     \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \seeitem ##1}
-    \textbf{Veja\ também:\ }%
-    \begin{itemize*}[label={}, itemjoin={{,\ }}, itemjoin*={{\ e~}}]
+    \textbf{Veja\ também:}%
+    \begin{seealsolist}
      \dolistloop{\seealsorefl}
-    \end{itemize*}\par
+    \end{seealsolist}\par
    }{}%
   \end{minipage}
   \vspace{2mm}

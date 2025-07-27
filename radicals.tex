@@ -293,6 +293,10 @@ ordenadas pelo pinyin em cada verbete.
 \input{groups_by_radicals/⿕.tex} % 214
 \onecolumn
 
+\ifdraftdoc
+%%%
+\else
+
 \clearpage
 \pagestyle{plain}
 \chapter{Termos Gramaticais Chineses}
@@ -322,6 +326,8 @@ ordenadas pelo pinyin em cada verbete.
 \pagestyle{plain}
 \chapter{Radicais Kangxi}
 \input{include/radicais_kangxi.tex}
+
+\fi
 
 \end{document}
 

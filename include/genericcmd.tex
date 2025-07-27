@@ -9,6 +9,13 @@
 
 \ExplSyntaxOn
 
+%%% Cria listas especializadas (seelist e seealsolist)
+\newlist{seelist}{itemize}{1}
+\newlist{seealsolist}{itemize}{1}
+
+\setlist[seelist]{label={},topsep=0pt,nosep,noitemsep,leftmargin=\parindent}
+\setlist[seealsolist]{label={},topsep=0pt,nosep,noitemsep,leftmargin=\parindent}
+
 %%% Cria e inicializa a lista "\seerefl", "Veja"
 \newcommand\seerefl{}
 \listadd{\seerefl}{}% Inicializa a lista
@@ -19,7 +26,7 @@
 
 %%% Comando "\seeitem", adiciona um item "Veja" ou "Veja também" na lista,
 %%% com os pinyins abaixo dos caracteres
-\newcommand{\seeitem}[2]{\addstackgap{\stackunder{\small#1}{\scriptsize\dpy{#2}}}\ (p.~\pageref{#1:#2})}
+\newcommand{\seeitem}[2]{#1\ {\small\dpy{#2}}\ (p.~\pageref{#1:#2})}
 
 %%% Comando "\definition", gera o texto da definição
 \NewDocumentCommand{\definition}{sommo}
@@ -55,7 +62,6 @@
   \booltrue{f_see}
   \listgadd{\seerefl}{#1:#2}
  }
-
 
 %%% Comando "Veja também"
 \NewDocumentCommand{\seealsoref}{mm}
