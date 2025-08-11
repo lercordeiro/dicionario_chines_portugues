@@ -26,7 +26,7 @@
 
 %%% Comando "\seeitem", adiciona um item "Veja" ou "Veja também" na lista,
 %%% com os pinyins abaixo dos caracteres
-\newcommand{\seeitem}[2]{#1\ {\small\dpy{#2}}\ (p.~\pageref{#1:#2})}
+\newcommand{\seeitem}[2]{#1\ \dpy{#2}\ (p.~\pageref{#1:#2})}
 
 %%% Comando "\definition", gera o texto da definição
 \NewDocumentCommand{\definition}{sommo}
@@ -45,15 +45,9 @@
  }
 
 %%% Comando "Variante de"
-\NewDocumentCommand{\variantof}{sm}
+\NewDocumentCommand{\variantof}{m}
  {
-  \IfBooleanTF{#1}%
-   {% Palavra Grande
-    {\small\ding{108}}\ Variante\ de\ #2\ \\(p.~\pageref{#2:\l_pinyin_tl})\par
-   }
-   {% Palavra Normal
-    {\small\ding{108}}\ Variante\ de\ #2\ (p.~\pageref{#2:\l_pinyin_tl})\par
-   }
+  {\small\ding{108}}\ Variante\ de\ #1\ (p.~\pageref{#1:\l_pinyin_tl})\par
  }
 
 %%% Comando "Veja"

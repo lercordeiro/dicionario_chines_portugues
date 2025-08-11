@@ -180,10 +180,25 @@
  {
   \IfSubStr{#1}{mud::::}
    {% Sublinhado Manual
-    \item\StrBehind{#1}{mud::::}
+    \StrBehind{#1}{mud::::}[output]%
+    \IfSubStr{\output}{___}
+    {% Com traducao
+     \StrCut{\output}{___}\csA\csB%
+     \item\csA\\{\small``\csB''}
+    }
+    {% Sem traducao
+     \item\output
+    }
    }
    {% Sublinhado Automático
-    \item\StrSubstitute{#1}{\@theword}{\underline{\@theword}}
+    \IfSubStr{#1}{___}
+    {% Com traducao
+      \StrCut{#1}{___}\csA\csB%
+      \item\StrSubstitute{\csA}{\@theword}{\underline{\@theword}}\\{\small``\csB''}
+    }
+    {% Sem traducao
+      \item\StrSubstitute{#1}{\@theword}{\underline{\@theword}}
+    }
    }
  }  
 \makeatother
