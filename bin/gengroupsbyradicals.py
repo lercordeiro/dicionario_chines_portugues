@@ -301,8 +301,7 @@ def write_radicals(readdir, writedir):
             file.write(f'%%% Radical "{r}"\n')
             file.write('%%%\n\n')
             file.write(f'\\section*{{{radical_str}}}')
-            file.write('\\addcontentsline{toc}{section}')
-            file.write(f'{{{radical_toc_str}}}\n\n')
+            file.write(f'\\addcontentsline{{toc}}{{section}}{{{radical_toc_str}}}\n\n')
 
             for e in radicals[r]:
                 get_entry_and_write(readdir + '/' + e, file)

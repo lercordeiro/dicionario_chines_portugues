@@ -53,8 +53,7 @@ def write_strokes(readdir, writedir):
             file.write(f'%%% {s_as_int:d}画\n')
             file.write('%%%\n\n')
             file.write(f'\\section*{{{s_as_int:d}画}}')
-            file.write(
-                f'\\addcontentsline{{toc}}{{section}}{{{s_as_int:d}画}}\n\n')
+            file.write(f'\\addcontentsline{{toc}}{{section}}{{{s_as_int:d}画}}\n\n')
 
             for e in strokes[s]:
                 get_entry_and_write(readdir + '/' + e, file)
