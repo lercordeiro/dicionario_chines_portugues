@@ -13,8 +13,7 @@ entries = []
 def get_entries(readdir):
     global entries
     only_files = [f for f in listdir(readdir) if isfile(join(readdir, f))]
-    all_entries = list(
-            map(lambda x: tuple(x.split('.', 1)[0].split('~')), only_files))
+    all_entries = list(map(lambda x: tuple(x.split('.', 1)[0].split('~')), only_files))
     entries = sorted(list(set(all_entries)))
 
 
@@ -48,12 +47,20 @@ def write_strokes(readdir, writedir):
         filename = writedir + '/' + s + '.tex'
         print(f'Writting Strokes {filename}')
         with open(filename, 'w', encoding='utf-8') as file:
-            s_as_int = int(s)
+            if s != '∅':
+                s_as_int = int(s)
             file.write('%%%\n')
-            file.write(f'%%% {s_as_int:d}画\n')
+            if s != '∅':
+                 file.write(f'%%% {s_as_int:d}画\n')
+            else:
+                 file.write('%%% ∅画\n')
             file.write('%%%\n\n')
-            file.write(f'\\section*{{{s_as_int:d}画}}')
-            file.write(f'\\addcontentsline{{toc}}{{section}}{{{s_as_int:d}画}}\n\n')
+            if s != '∅':
+                file.write(f'\\section*{{{s_as_int:d}画}}')
+                file.write(f'\\addcontentsline{{toc}}{{section}}{{{s_as_int:d}画}}\n\n')
+            else:
+                file.write(f'\\section*{{∅画}}')
+                file.write(f'\\addcontentsline{{toc}}{{section}}{{∅画}}\n\n')
 
             for e in strokes[s]:
                 get_entry_and_write(readdir + '/' + e, file)
@@ -66,12 +73,9 @@ def main():
         Processa arquivos verbete e
         separa cada verbete em arquivo próprio,
         pelo número de traços''')
-    parser.add_argument('--version', '-V',
-                        action='version', version=f'%(prog)s v{VERSION}')
-    parser.add_argument('--read', '--readdir', '-r',
-                        dest='read_dir', action='store')
-    parser.add_argument('--write', '--writedir', '-w',
-                        dest='write_dir', action='store')
+    parser.add_argument('--version', '-V', action='version', version=f'%(prog)s v{VERSION}')
+    parser.add_argument('--read', '--readdir', '-r', dest='read_dir', action='store')
+    parser.add_argument('--write', '--writedir', '-w', dest='write_dir', action='store')
     args = parser.parse_args()
     get_entries(args.read_dir)
     write_strokes(args.read_dir, args.write_dir)

@@ -133,7 +133,7 @@
 % Este comando realiza uma série de substituições antes
 \NewDocumentCommand{\dpy}{m}%
  {%
-  \StrSubstitute{#1}{r5}{r}[\result]%
+  \StrSubstitute{#1}{5}{}[\result]%
   \StrSubstitute{\result}{v}{ü}[\result]%
   \StrSubstitute{\result}{V}{Ü}[\result]%
   \edef\py{\dictpinyin{\result}}%

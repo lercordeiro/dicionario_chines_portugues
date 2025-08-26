@@ -10,6 +10,8 @@ VERSION = "0.0.1"
 entries = []
 
 kangxi = {
+    '∅': {'number': 0, 'meaning': 'não existe'},
+
     '⼀': {'number': 1, 'meaning': 'um'},
     '⼁': {'number': 2, 'meaning': 'linha'},
     '⼂': {'number': 3, 'meaning': 'ponto, indica um fim', 'variants': '乀,乁'},
@@ -251,8 +253,7 @@ kangxi = {
 def get_entries(readdir):
     global entries
     only_files = [f for f in listdir(readdir) if isfile(join(readdir, f))]
-    all_entries = list(
-            map(lambda x: tuple(x.split('.', 1)[0].split('~')), only_files))
+    all_entries = list(map(lambda x: tuple(x.split('.', 1)[0].split('~')), only_files))
     entries = sorted(list(set(all_entries)))
 
 
@@ -314,12 +315,9 @@ def main():
         Processa arquivos verbete e
         separa cada verbete em arquivo próprio,
         pelos radicais''')
-    parser.add_argument('--version', '-V',
-                        action='version', version=f'%(prog)s v{VERSION}')
-    parser.add_argument('--read', '--readdir', '-r',
-                        dest='read_dir', action='store')
-    parser.add_argument('--write', '--writedir', '-w',
-                        dest='write_dir', action='store')
+    parser.add_argument('--version', '-V', action='version', version=f'%(prog)s v{VERSION}')
+    parser.add_argument('--read', '--readdir', '-r', dest='read_dir', action='store')
+    parser.add_argument('--write', '--writedir', '-w', dest='write_dir', action='store')
     args = parser.parse_args()
     get_entries(args.read_dir)
     write_radicals(args.read_dir, args.write_dir)

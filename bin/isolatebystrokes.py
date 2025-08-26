@@ -64,7 +64,9 @@ def read_entries(filename):
                 begin_entry_found = True
 
                 substrings = extract_strings_between_delimiters('{', '}', line)
-                hanzis = find_chinese(substrings[1])
+                hanzis = substrings[1]
+                h_chars_to_remove = ["-", "…", "（", "）", "，"]
+                hanzis = "".join([c for c in substrings[1].lower() if c not in h_chars_to_remove])
                 print(hanzis)
                 strokes = substrings[2].split(',')
                 print(strokes)
@@ -72,22 +74,20 @@ def read_entries(filename):
                 print(radicals)
 
                 if len(hanzis) != len(strokes):
-                    print(f'***** ERROR: in {hanzis}: ' +
-                          'number of hanzis and strokes are different: ' +
-                          f'{len(hanzis)} != {len(strokes)}')
+                    print(f'***** ERROR: in {hanzis}: number of hanzis and strokes are different: {len(hanzis)} != {len(strokes)}')
                     sys.exit(1)
 
                 if len(hanzis) != len(radicals):
-                    print(f'***** ERROR: in {hanzis}: ' +
-                          'number of hanzis and radicals are different: ' +
-                          f'{len(hanzis)} != {len(radicals)}')
+                    print(f'***** ERROR: in {hanzis}: number of hanzis and radicals are different: {len(hanzis)} != {len(radicals)}')
                     sys.exit(1)
 
-                filename = ''
+                fn = ''
                 for i in range(len(hanzis)):
-                    filename += '{0:03d}~{1}~'.format(
-                            int(strokes[i]), hanzis[i])
-                entry_filename = filename.rstrip('~') + '.tex'
+                    if strokes[i] == '∅':
+                        fn += '∅~{0}~'.format(hanzis[i])
+                    else:
+                        fn += '{0:03d}~{1}~'.format(int(strokes[i]), hanzis[i])
+                entry_filename = fn.rstrip('~') + '.tex'
 
                 if entry_filename in entries:
                     print(f'***** ERROR: entry {entry_filename} exists')
@@ -129,10 +129,8 @@ def main():
         Processa arquivos verbete e
         separa cada verbete em arquivo próprio,
         ordenado por strokes e UTF-8''')
-    parser.add_argument('--version', '-V',
-                        action='version', version=f'%(prog)s v{VERSION}')
-    parser.add_argument('--write-dir', '-w',
-                        dest='write_dir', action='store')
+    parser.add_argument('--version', '-V', action='version', version=f'%(prog)s v{VERSION}')
+    parser.add_argument('--write-dir', '-w', dest='write_dir', action='store')
     parser.add_argument('filename')
     args = parser.parse_args()
 
