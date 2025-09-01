@@ -5,21 +5,21 @@ BOOK = pdfjam --a4paper --landscape --twoside --signature 20 --suffix booklet --
 
 INCDIR = ./include
 BKPDIR = ./backup
-DSTSITE = /var/www/ler.cordeiro.nom.br/dicionario
+DSTSITE = /var/www/download/dictionary
 DSTREPO = /var/www/repo.ler.cordeiro.nom.br/Dicionário
 
 PGENGRP = ./bin/gengroupsbypinyin.py
-PVERBTAR = ~/Documentos/Chinês/DCP/entries_by_pinyin.tar.gz
+PVERBTAR = ~/中文/DCP/entries_by_pinyin.tar.gz
 PVERBDIR = ./entries_by_pinyin
 PGRPDIR = ./groups_by_pinyin
 
 SGENGRP = ./bin/gengroupsbystrokes.py
-SVERBTAR = ~/Documentos/Chinês/DCP/entries_by_strokes.tar.gz
+SVERBTAR = ~/中文/DCP/entries_by_strokes.tar.gz
 SVERBDIR = ./entries_by_strokes
 SGRPDIR = ./groups_by_strokes
  
 RGENGRP = ./bin/gengroupsbyradicals.py
-RVERBTAR = ~/Documentos/Chinês/DCP/entries_by_radicals.tar.gz
+RVERBTAR = ~/中文/DCP/entries_by_radicals.tar.gz
 RVERBDIR = ./entries_by_radicals
 RGRPDIR = ./groups_by_radicals
  
