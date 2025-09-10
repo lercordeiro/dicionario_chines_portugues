@@ -193,9 +193,6 @@
   \fi%
  }
 
-% Comando "\dul{text}", sublinha o texto dado
-\NewDocumentCommand{\dul}{m}{\underline{#1}}
-
 % Ambiente "enumerate" especial utilizado no dicionário, coloca as definições 
 % do verbete em uma lista numerada em linha
 \NewDocumentCommand{\dictenumerate}{>{\SplitList{|}}m}
@@ -219,27 +216,13 @@
  }
 \NewDocumentCommand{\insertexample}{>{\TrimSpaces}m}
  {
-  \IfSubStr{#1}{mud::::}
-   {% Sublinhado Manual
-    \StrBehind{#1}{mud::::}[output]%
-    \IfSubStr{\output}{___}
-    {% Com traducao
-     \StrCut{\output}{___}\csA\csB%
-     \item\csA\\{\small``\csB''}
-    }
-    {% Sem traducao
-     \item\output
-    }
+   \IfSubStr{#1}{===}
+   {% Com traducao
+     \StrCut{#1}{===}\csA\csB%
+     \item\StrSubstitute{\csA}{\@theword}{\underline{\@theword}}\\{\small``\csB''}
    }
-   {% Sublinhado Automático
-    \IfSubStr{#1}{___}
-    {% Com traducao
-      \StrCut{#1}{___}\csA\csB%
-      \item\StrSubstitute{\csA}{\@theword}{\underline{\@theword}}\\{\small``\csB''}
-    }
-    {% Sem traducao
-      \item\StrSubstitute{#1}{\@theword}{\underline{\@theword}}
-    }
+   {% Sem traducao
+     \item\StrSubstitute{#1}{\@theword}{\underline{\@theword}}
    }
  }  
 \makeatother
