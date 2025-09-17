@@ -1,0 +1,420 @@
+﻿
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LuaLaTex
+%
+% Dicionário Chinês -> Português
+% Autor: Luiz Eduardo Roncato Cordeiro
+%
+% Licença:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper,9pt,twoside,openright,book]{memoir}
+
+\usepackage[brazilian]{babel}
+\usepackage{fontspec}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{imakeidx}
+\usepackage[inline]{enumitem}
+\usepackage{zhnumber}
+\usepackage{tikz}
+\usepackage[hyperindex]{hyperref}
+\usepackage{pifont}
+\usepackage{xstring}
+\usepackage{xifthen}
+\usepackage{tabularray}
+\usepackage[most]{tcolorbox}
+\usepackage{luacode}
+\usepackage{stackengine}
+
+% Meus Comandos
+\input{include/cmds.tex}
+
+% Ajustes do PDF
+\hypersetup{
+  linktoc=page,
+  colorlinks=true,
+  urlcolor=blue,
+  linkcolor=blue,
+  citecolor=blue,
+  pdftitle={汉葡词典 - Dicionário Chinês-Português},
+  pdfsubject={Dicionário Chinês-Português},
+  pdfauthor={罗学凯, Luiz Eduardo Roncato Cordeiro},
+  pdfkeywords={dicionário, chinês, português, instituto confúcio}
+}
+
+%%%
+%%% Documento começa aqui!
+%%%
+
+\begin{document}
+\addfontfeatures{CharacterWidth=Proportional}
+
+\input{title.tex}
+
+\clearpage
+\pagestyle{empty}
+\twocolumn
+\tableofcontents
+\onecolumn
+
+\clearpage
+\pagestyle{empty}
+\chapter{汉葡词典 --- Ordenado por Pinyin}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% https://en.wikipedia.org/wiki/Chinese_character_orders
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+Dicionário Chinês-Português ordenado primeiro pelo pinyin de cada
+caracter, depois pelo número de traços e, finalmente, pela ordem do
+caracter na tabela UTF-8.
+
+\clearpage
+\begin{DictionaryEntries}{pinyins}
+ \input{groups_by_pinyins/A.tex}
+ \input{groups_by_pinyins/B.tex}
+ \input{groups_by_pinyins/C.tex}
+ \input{groups_by_pinyins/D.tex}
+ \input{groups_by_pinyins/E.tex}
+ \input{groups_by_pinyins/F.tex}
+ \input{groups_by_pinyins/G.tex}
+ \input{groups_by_pinyins/H.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "I"
+ \input{groups_by_pinyins/J.tex}
+ \input{groups_by_pinyins/K.tex}
+ \input{groups_by_pinyins/L.tex}
+ \input{groups_by_pinyins/M.tex}
+ \input{groups_by_pinyins/N.tex}
+ \input{groups_by_pinyins/O.tex}
+ \input{groups_by_pinyins/P.tex}
+ \input{groups_by_pinyins/Q.tex}
+ \input{groups_by_pinyins/R.tex}
+ \input{groups_by_pinyins/S.tex}
+ \input{groups_by_pinyins/T.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "U"
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "V"
+ \input{groups_by_pinyins/W.tex}
+ \input{groups_by_pinyins/X.tex}
+ \input{groups_by_pinyins/Y.tex}
+ \input{groups_by_pinyins/Z.tex}
+\end{DictionaryEntries}
+
+\clearpage
+\pagestyle{empty}
+\chapter{汉葡词典 --- Ordenado por Número de Traços}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% https://en.wikipedia.org/wiki/Chinese_character_orders
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+Dicionário Chinês-Português ordenado primeiro pelo número de traços,
+depois pela ordem do caracter na tabela UTF-8.  As definições são
+agrupadas e ordenadas pelo pinyin em cada verbete.
+
+\clearpage
+\begin{DictionaryEntries}{strokes}
+ \input{groups_by_strokes/∅.tex}
+ \input{groups_by_strokes/001.tex}
+ \input{groups_by_strokes/002.tex}
+ \input{groups_by_strokes/003.tex}
+ \input{groups_by_strokes/004.tex}
+ \input{groups_by_strokes/005.tex}
+ \input{groups_by_strokes/006.tex}
+ \input{groups_by_strokes/007.tex}
+ \input{groups_by_strokes/008.tex}
+ \input{groups_by_strokes/009.tex}
+ \input{groups_by_strokes/010.tex}
+ \input{groups_by_strokes/011.tex}
+ \input{groups_by_strokes/012.tex}
+ \input{groups_by_strokes/013.tex}
+ \input{groups_by_strokes/014.tex}
+ \input{groups_by_strokes/015.tex}
+ \input{groups_by_strokes/016.tex}
+ \input{groups_by_strokes/017.tex}
+ \input{groups_by_strokes/018.tex}
+ \input{groups_by_strokes/019.tex}
+ \input{groups_by_strokes/020.tex}
+ \input{groups_by_strokes/021.tex}
+%\input{groups_by_strokes/022.tex}
+%\input{groups_by_strokes/023.tex}
+%\input{groups_by_strokes/024.tex}
+%\input{groups_by_strokes/025.tex}
+%\input{groups_by_strokes/026.tex}
+%\input{groups_by_strokes/027.tex}
+%\input{groups_by_strokes/028.tex}
+%\input{groups_by_strokes/029.tex}
+%\input{groups_by_strokes/030.tex}
+\end{DictionaryEntries}
+
+\clearpage
+\pagestyle{empty}
+\chapter{汉葡词典 --- Ordenado por Radical}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% https://en.wikipedia.org/wiki/Chinese_character_orders
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+Dicionário Chinês-Português ordenado primeiro pelo radical,
+depois pelo número de traços e, finalmente, pela ordem do
+caracter na tabela UTF-8.  As definições são agrupadas e
+ordenadas pelo pinyin em cada verbete.
+
+\clearpage
+\begin{DictionaryEntries}{radicals}
+ \input{groups_by_radicals/∅.tex} % ∅
+ \input{groups_by_radicals/⼀.tex} % 001
+ \input{groups_by_radicals/⼁.tex} % 002
+ \input{groups_by_radicals/⼂.tex} % 003
+ \input{groups_by_radicals/⼃.tex} % 004
+ \input{groups_by_radicals/⼄.tex} % 005
+ \input{groups_by_radicals/⼅.tex} % 006
+ \input{groups_by_radicals/⼆.tex} % 007
+ \input{groups_by_radicals/⼇.tex} % 008
+ \input{groups_by_radicals/⼈.tex} % 009
+ \input{groups_by_radicals/⼉.tex} % 010
+ \input{groups_by_radicals/⼊.tex} % 011
+ \input{groups_by_radicals/⼋.tex} % 012
+ \input{groups_by_radicals/⼌.tex} % 013
+ \input{groups_by_radicals/⼍.tex} % 014
+ \input{groups_by_radicals/⼎.tex} % 015
+ \input{groups_by_radicals/⼏.tex} % 016
+ \input{groups_by_radicals/⼐.tex} % 017
+ \input{groups_by_radicals/⼑.tex} % 018
+ \input{groups_by_radicals/⼒.tex} % 019
+ \input{groups_by_radicals/⼓.tex} % 020
+ \input{groups_by_radicals/⼔.tex} % 021
+ \input{groups_by_radicals/⼕.tex} % 022
+ \input{groups_by_radicals/⼖.tex} % 023
+ \input{groups_by_radicals/⼗.tex} % 024
+ \input{groups_by_radicals/⼘.tex} % 025
+ \input{groups_by_radicals/⼙.tex} % 026
+ \input{groups_by_radicals/⼚.tex} % 027
+ \input{groups_by_radicals/⼛.tex} % 028
+ \input{groups_by_radicals/⼜.tex} % 029
+ \input{groups_by_radicals/⼝.tex} % 030
+ \input{groups_by_radicals/⼞.tex} % 031
+ \input{groups_by_radicals/⼟.tex} % 032
+ \input{groups_by_radicals/⼠.tex} % 033
+ \input{groups_by_radicals/⼡.tex} % 034
+ \input{groups_by_radicals/⼢.tex} % 035
+ \input{groups_by_radicals/⼣.tex} % 036
+ \input{groups_by_radicals/⼤.tex} % 037
+ \input{groups_by_radicals/⼥.tex} % 038
+ \input{groups_by_radicals/⼦.tex} % 039
+ \input{groups_by_radicals/⼧.tex} % 040
+ \input{groups_by_radicals/⼨.tex} % 041
+ \input{groups_by_radicals/⼩.tex} % 042
+ \input{groups_by_radicals/⼪.tex} % 043
+ \input{groups_by_radicals/⼫.tex} % 044
+ \input{groups_by_radicals/⼬.tex} % 045
+ \input{groups_by_radicals/⼭.tex} % 046
+ \input{groups_by_radicals/⼮.tex} % 047
+ \input{groups_by_radicals/⼯.tex} % 048
+ \input{groups_by_radicals/⼰.tex} % 049
+ \input{groups_by_radicals/⼱.tex} % 050
+ \input{groups_by_radicals/⼲.tex} % 051
+ \input{groups_by_radicals/⼳.tex} % 052
+ \input{groups_by_radicals/⼴.tex} % 053
+ \input{groups_by_radicals/⼵.tex} % 054
+ \input{groups_by_radicals/⼶.tex} % 055
+ \input{groups_by_radicals/⼷.tex} % 056
+ \input{groups_by_radicals/⼸.tex} % 057
+ \input{groups_by_radicals/⼹.tex} % 058
+ \input{groups_by_radicals/⼺.tex} % 059
+ \input{groups_by_radicals/⼻.tex} % 060
+ \input{groups_by_radicals/⼼.tex} % 061
+ \input{groups_by_radicals/⼽.tex} % 062
+ \input{groups_by_radicals/⼾.tex} % 063
+ \input{groups_by_radicals/⼿.tex} % 064
+ \input{groups_by_radicals/⽀.tex} % 065
+ \input{groups_by_radicals/⽁.tex} % 066
+ \input{groups_by_radicals/⽂.tex} % 067
+ \input{groups_by_radicals/⽃.tex} % 068
+ \input{groups_by_radicals/⽄.tex} % 069
+ \input{groups_by_radicals/⽅.tex} % 070
+ \input{groups_by_radicals/⽆.tex} % 071
+ \input{groups_by_radicals/⽇.tex} % 072
+ \input{groups_by_radicals/⽈.tex} % 073
+ \input{groups_by_radicals/⽉.tex} % 074
+ \input{groups_by_radicals/⽊.tex} % 075
+ \input{groups_by_radicals/⽋.tex} % 076
+ \input{groups_by_radicals/⽌.tex} % 077
+ \input{groups_by_radicals/⽍.tex} % 078
+ \input{groups_by_radicals/⽎.tex} % 079
+ \input{groups_by_radicals/⽏.tex} % 080
+ \input{groups_by_radicals/⽐.tex} % 081
+ \input{groups_by_radicals/⽑.tex} % 082
+ \input{groups_by_radicals/⽒.tex} % 083
+ \input{groups_by_radicals/⽓.tex} % 084
+ \input{groups_by_radicals/⽔.tex} % 085
+ \input{groups_by_radicals/⽕.tex} % 086
+ \input{groups_by_radicals/⽖.tex} % 087
+ \input{groups_by_radicals/⽗.tex} % 088
+ \input{groups_by_radicals/⽘.tex} % 089
+ \input{groups_by_radicals/⽙.tex} % 090
+ \input{groups_by_radicals/⽚.tex} % 091
+ \input{groups_by_radicals/⽛.tex} % 092
+ \input{groups_by_radicals/⽜.tex} % 093
+ \input{groups_by_radicals/⽝.tex} % 094
+ \input{groups_by_radicals/⽞.tex} % 095
+ \input{groups_by_radicals/⽟.tex} % 096
+ \input{groups_by_radicals/⽠.tex} % 097
+ \input{groups_by_radicals/⽡.tex} % 098
+ \input{groups_by_radicals/⽢.tex} % 099
+ \input{groups_by_radicals/⽣.tex} % 100
+ \input{groups_by_radicals/⽤.tex} % 101
+ \input{groups_by_radicals/⽥.tex} % 102
+ \input{groups_by_radicals/⽦.tex} % 103
+ \input{groups_by_radicals/⽧.tex} % 104
+ \input{groups_by_radicals/⽨.tex} % 105
+ \input{groups_by_radicals/⽩.tex} % 106
+ \input{groups_by_radicals/⽪.tex} % 107
+ \input{groups_by_radicals/⽫.tex} % 108
+ \input{groups_by_radicals/⽬.tex} % 109
+ \input{groups_by_radicals/⽭.tex} % 110
+ \input{groups_by_radicals/⽮.tex} % 111
+ \input{groups_by_radicals/⽯.tex} % 112
+ \input{groups_by_radicals/⽰.tex} % 113
+ \input{groups_by_radicals/⽱.tex} % 114
+ \input{groups_by_radicals/⽲.tex} % 115
+ \input{groups_by_radicals/⽳.tex} % 116
+ \input{groups_by_radicals/⽴.tex} % 117
+ \input{groups_by_radicals/⽵.tex} % 118
+ \input{groups_by_radicals/⽶.tex} % 119
+ \input{groups_by_radicals/⽷.tex} % 120
+ \input{groups_by_radicals/⽸.tex} % 121
+ \input{groups_by_radicals/⽹.tex} % 122
+ \input{groups_by_radicals/⽺.tex} % 123
+ \input{groups_by_radicals/⽻.tex} % 124
+ \input{groups_by_radicals/⽼.tex} % 125
+ \input{groups_by_radicals/⽽.tex} % 126
+ \input{groups_by_radicals/⽾.tex} % 127
+ \input{groups_by_radicals/⽿.tex} % 128
+ \input{groups_by_radicals/⾀.tex} % 129
+ \input{groups_by_radicals/⾁.tex} % 130
+ \input{groups_by_radicals/⾂.tex} % 131
+ \input{groups_by_radicals/⾃.tex} % 132
+ \input{groups_by_radicals/⾄.tex} % 133
+ \input{groups_by_radicals/⾅.tex} % 134
+ \input{groups_by_radicals/⾆.tex} % 135
+ \input{groups_by_radicals/⾇.tex} % 136
+ \input{groups_by_radicals/⾈.tex} % 137
+ \input{groups_by_radicals/⾉.tex} % 138
+ \input{groups_by_radicals/⾊.tex} % 139
+ \input{groups_by_radicals/⾋.tex} % 140
+ \input{groups_by_radicals/⾌.tex} % 141
+ \input{groups_by_radicals/⾍.tex} % 142
+ \input{groups_by_radicals/⾎.tex} % 143
+ \input{groups_by_radicals/⾏.tex} % 144
+ \input{groups_by_radicals/⾐.tex} % 145
+ \input{groups_by_radicals/⾑.tex} % 146
+ \input{groups_by_radicals/⾒.tex} % 147
+ \input{groups_by_radicals/⾓.tex} % 148
+ \input{groups_by_radicals/⾔.tex} % 149
+ \input{groups_by_radicals/⾕.tex} % 150
+ \input{groups_by_radicals/⾖.tex} % 151
+ \input{groups_by_radicals/⾗.tex} % 152
+ \input{groups_by_radicals/⾘.tex} % 153
+ \input{groups_by_radicals/⾙.tex} % 154
+ \input{groups_by_radicals/⾚.tex} % 155
+ \input{groups_by_radicals/⾛.tex} % 156
+ \input{groups_by_radicals/⾜.tex} % 157
+ \input{groups_by_radicals/⾝.tex} % 158
+ \input{groups_by_radicals/⾞.tex} % 159
+ \input{groups_by_radicals/⾟.tex} % 160
+ \input{groups_by_radicals/⾠.tex} % 161
+ \input{groups_by_radicals/⾡.tex} % 162
+ \input{groups_by_radicals/⾢.tex} % 163
+ \input{groups_by_radicals/⾣.tex} % 164
+ \input{groups_by_radicals/⾤.tex} % 165
+ \input{groups_by_radicals/⾥.tex} % 166
+ \input{groups_by_radicals/⾦.tex} % 167
+ \input{groups_by_radicals/⾧.tex} % 168
+ \input{groups_by_radicals/⾨.tex} % 169
+ \input{groups_by_radicals/⾩.tex} % 170
+ \input{groups_by_radicals/⾪.tex} % 171
+ \input{groups_by_radicals/⾫.tex} % 172
+ \input{groups_by_radicals/⾬.tex} % 173
+ \input{groups_by_radicals/⾭.tex} % 174
+ \input{groups_by_radicals/⾮.tex} % 175
+ \input{groups_by_radicals/⾯.tex} % 176
+ \input{groups_by_radicals/⾰.tex} % 177
+ \input{groups_by_radicals/⾱.tex} % 178
+ \input{groups_by_radicals/⾲.tex} % 179
+ \input{groups_by_radicals/⾳.tex} % 180
+ \input{groups_by_radicals/⾴.tex} % 181
+ \input{groups_by_radicals/⾵.tex} % 182
+ \input{groups_by_radicals/⾶.tex} % 183
+ \input{groups_by_radicals/⾷.tex} % 184
+ \input{groups_by_radicals/⾸.tex} % 185
+ \input{groups_by_radicals/⾹.tex} % 186
+ \input{groups_by_radicals/⾺.tex} % 187
+ \input{groups_by_radicals/⾻.tex} % 188
+ \input{groups_by_radicals/⾼.tex} % 189
+ \input{groups_by_radicals/⾽.tex} % 190
+ \input{groups_by_radicals/⾾.tex} % 191
+ \input{groups_by_radicals/⾿.tex} % 192
+ \input{groups_by_radicals/⿀.tex} % 193
+ \input{groups_by_radicals/⿁.tex} % 194
+ \input{groups_by_radicals/⿂.tex} % 195
+ \input{groups_by_radicals/⿃.tex} % 196
+ \input{groups_by_radicals/⿄.tex} % 197
+ \input{groups_by_radicals/⿅.tex} % 198
+ \input{groups_by_radicals/⿆.tex} % 199
+ \input{groups_by_radicals/⿇.tex} % 200
+ \input{groups_by_radicals/⿈.tex} % 201
+ \input{groups_by_radicals/⿉.tex} % 202
+ \input{groups_by_radicals/⿊.tex} % 203
+ \input{groups_by_radicals/⿋.tex} % 204
+ \input{groups_by_radicals/⿌.tex} % 205
+ \input{groups_by_radicals/⿍.tex} % 206
+ \input{groups_by_radicals/⿎.tex} % 207
+ \input{groups_by_radicals/⿏.tex} % 208
+ \input{groups_by_radicals/⿐.tex} % 209
+ \input{groups_by_radicals/⿑.tex} % 210
+ \input{groups_by_radicals/⿒.tex} % 211
+ \input{groups_by_radicals/⿓.tex} % 212
+ \input{groups_by_radicals/⿔.tex} % 213
+ \input{groups_by_radicals/⿕.tex} % 214
+\end{DictionaryEntries}
+
+\ifdraftdoc 
+%%%
+\else
+
+\clearpage
+\chapter{Termos Gramaticais Chineses}
+\input{include/termos_gramaticais.tex}
+
+\clearpage
+\chapter{Classificadores Nominais}
+\input{include/classificadores_nominais.tex}
+
+\clearpage
+\chapter{Classificadores Verbais}
+\input{include/classificadores_verbais.tex}
+
+\clearpage
+\chapter{Verbos Direcionais}
+\input{include/verbos_direcionais.tex}
+
+\clearpage
+\chapter{Locativos}
+\input{include/locativos.tex}
+
+\clearpage
+\chapter{Radicais Kangxi}
+\input{include/radicais_kangxi.tex}
+
+\fi
+
+\end{document}
+
+%%%%% EOF %%%%

@@ -1,0 +1,135 @@
+﻿
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LuaLaTex
+%
+% Dicionário Chinês -> Português
+% Autor: Luiz Eduardo Roncato Cordeiro
+%
+% Licença:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper,9pt,twoside,openright,book]{memoir}
+
+\usepackage[brazilian]{babel}
+\usepackage{fontspec}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{imakeidx}
+\usepackage[inline]{enumitem}
+\usepackage{zhnumber}
+\usepackage{tikz}
+\usepackage[hyperindex]{hyperref}
+\usepackage{pifont}
+\usepackage{xstring}
+\usepackage{xifthen}
+\usepackage{tabularray}
+\usepackage[most]{tcolorbox}
+\usepackage{luacode}
+\usepackage{stackengine}
+
+% Meus Comandos
+\input{include/cmds.tex}
+
+% Ajustes do PDF
+\hypersetup{
+  linktoc=page,
+  colorlinks=true,
+  urlcolor=blue,
+  linkcolor=blue,
+  citecolor=blue,
+  pdftitle={汉葡词典 - Dicionário Chinês-Português},
+  pdfsubject={Dicionário Chinês-Português -- Ordenado por Pinyin},
+  pdfauthor={罗学凯, Luiz Eduardo Roncato Cordeiro},
+  pdfkeywords={dicionário, chinês, português, instituto confúcio}
+}
+
+%%%
+%%% Documento começa aqui!
+%%%
+
+\begin{document}
+\addfontfeatures{CharacterWidth=Proportional}
+
+\input{title.tex}
+
+\clearpage
+\pagestyle{empty}
+\tableofcontents
+
+\clearpage
+\pagestyle{empty}
+\chapter{汉葡词典}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% https://en.wikipedia.org/wiki/Chinese_character_orders
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+Dicionário Chinês-Português ordenado primeiro pelo pinyin de cada
+caracter, depois pelo número de traços e, finalmente, pela ordem do
+caracter na tabela UTF-8.
+
+\clearpage
+\begin{DictionaryEntries}{pinyins}
+ \input{groups_by_pinyins/A.tex}
+ \input{groups_by_pinyins/B.tex}
+ \input{groups_by_pinyins/C.tex}
+ \input{groups_by_pinyins/D.tex}
+ \input{groups_by_pinyins/E.tex}
+ \input{groups_by_pinyins/F.tex}
+ \input{groups_by_pinyins/G.tex}
+ \input{groups_by_pinyins/H.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "I"
+ \input{groups_by_pinyins/J.tex}
+ \input{groups_by_pinyins/K.tex}
+ \input{groups_by_pinyins/L.tex}
+ \input{groups_by_pinyins/M.tex}
+ \input{groups_by_pinyins/N.tex}
+ \input{groups_by_pinyins/O.tex}
+ \input{groups_by_pinyins/P.tex}
+ \input{groups_by_pinyins/Q.tex}
+ \input{groups_by_pinyins/R.tex}
+ \input{groups_by_pinyins/S.tex}
+ \input{groups_by_pinyins/T.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "U"
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Não existem palavras com pinyin iniciado em "V"
+ \input{groups_by_pinyins/W.tex}
+ \input{groups_by_pinyins/X.tex}
+ \input{groups_by_pinyins/Y.tex}
+ \input{groups_by_pinyins/Z.tex}
+\end{DictionaryEntries} 
+
+\ifdraftdoc
+%%%
+\else
+
+\clearpage
+\chapter{Termos Gramaticais Chineses}
+\input{include/termos_gramaticais.tex}
+
+\clearpage
+\chapter{Classificadores Nominais}
+\input{include/classificadores_nominais.tex}
+
+\clearpage
+\chapter{Classificadores Verbais}
+\input{include/classificadores_verbais.tex}
+
+\clearpage
+\chapter{Verbos Direcionais}
+\input{include/verbos_direcionais.tex}
+
+\clearpage
+\chapter{Locativos}
+\input{include/locativos.tex}
+
+\clearpage
+\chapter{Radicais Kangxi}
+\input{include/radicais_kangxi.tex}
+
+\fi
+
+\end{document}
+
+%%%%% EOF %%%%

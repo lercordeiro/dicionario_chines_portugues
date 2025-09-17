@@ -28,8 +28,7 @@
 \usepackage{stackengine}
 
 % Meus Comandos
-\input{include/genericcmd.tex}
-\input{include/strokescmd.tex}
+\input{include/cmds.tex}
 
 % Ajustes do PDF
 \hypersetup{
@@ -50,7 +49,6 @@
 
 \begin{document}
 \addfontfeatures{CharacterWidth=Proportional}
-\let\clearforchapter\par % saves some space
 
 \input{title.tex}
 
@@ -73,30 +71,29 @@ depois pela ordem do caracter na tabela UTF-8.  As definições são
 agrupadas e ordenadas pelo pinyin em cada verbete.
 
 \clearpage
-\pagestyle{dictionary}
-\twocolumn
-\input{groups_by_strokes/∅.tex}
-\input{groups_by_strokes/001.tex}
-\input{groups_by_strokes/002.tex}
-\input{groups_by_strokes/003.tex}
-\input{groups_by_strokes/004.tex}
-\input{groups_by_strokes/005.tex}
-\input{groups_by_strokes/006.tex}
-\input{groups_by_strokes/007.tex}
-\input{groups_by_strokes/008.tex}
-\input{groups_by_strokes/009.tex}
-\input{groups_by_strokes/010.tex}
-\input{groups_by_strokes/011.tex}
-\input{groups_by_strokes/012.tex}
-\input{groups_by_strokes/013.tex}
-\input{groups_by_strokes/014.tex}
-\input{groups_by_strokes/015.tex}
-\input{groups_by_strokes/016.tex}
-\input{groups_by_strokes/017.tex}
-\input{groups_by_strokes/018.tex}
-\input{groups_by_strokes/019.tex}
-\input{groups_by_strokes/020.tex}
-\input{groups_by_strokes/021.tex}
+\begin{DictionaryEntries}{strokes}
+ \input{groups_by_strokes/∅.tex}
+ \input{groups_by_strokes/001.tex}
+ \input{groups_by_strokes/002.tex}
+ \input{groups_by_strokes/003.tex}
+ \input{groups_by_strokes/004.tex}
+ \input{groups_by_strokes/005.tex}
+ \input{groups_by_strokes/006.tex}
+ \input{groups_by_strokes/007.tex}
+ \input{groups_by_strokes/008.tex}
+ \input{groups_by_strokes/009.tex}
+ \input{groups_by_strokes/010.tex}
+ \input{groups_by_strokes/011.tex}
+ \input{groups_by_strokes/012.tex}
+ \input{groups_by_strokes/013.tex}
+ \input{groups_by_strokes/014.tex}
+ \input{groups_by_strokes/015.tex}
+ \input{groups_by_strokes/016.tex}
+ \input{groups_by_strokes/017.tex}
+ \input{groups_by_strokes/018.tex}
+ \input{groups_by_strokes/019.tex}
+ \input{groups_by_strokes/020.tex}
+ \input{groups_by_strokes/021.tex}
 %\input{groups_by_strokes/022.tex}
 %\input{groups_by_strokes/023.tex}
 %\input{groups_by_strokes/024.tex}
@@ -106,39 +103,33 @@ agrupadas e ordenadas pelo pinyin em cada verbete.
 %\input{groups_by_strokes/028.tex}
 %\input{groups_by_strokes/029.tex}
 %\input{groups_by_strokes/030.tex}
-\onecolumn
+\end{DictionaryEntries}
 
 \ifdraftdoc 
 %%%
 \else
 
 \clearpage
-\pagestyle{plain}
 \chapter{Termos Gramaticais Chineses}
 \input{include/termos_gramaticais.tex}
 
 \clearpage
-\pagestyle{plain}
 \chapter{Classificadores Nominais}
 \input{include/classificadores_nominais.tex}
 
 \clearpage
-\pagestyle{plain}
 \chapter{Classificadores Verbais}
 \input{include/classificadores_verbais.tex}
 
 \clearpage
-\pagestyle{plain}
 \chapter{Verbos Direcionais}
 \input{include/verbos_direcionais.tex}
 
 \clearpage
-\pagestyle{plain}
 \chapter{Locativos}
 \input{include/locativos.tex}
 
 \clearpage
-\pagestyle{plain}
 \chapter{Radicais Kangxi}
 \input{include/radicais_kangxi.tex}
 
