@@ -97,7 +97,7 @@ def read_entries(filename):
                 else:
                     entries[entry_filename] = [line]
 
-            elif '\\end' in line and 'entry' in line:
+            elif '\\end' in line and 'Entry' in line:
                 begin_entry_found = False
                 entries[entry_filename].append(line)
 

@@ -60,7 +60,7 @@ def read_entries(filename):
         for line in file:
             line = line.rstrip()
 
-            if '\\begin' in line and 'Entry' in line:
+            if 'begin' in line and 'Entry' in line:
                 begin_entry_found = True
 
                 substrings = extract_strings_between_delimiters('{', '}', line)
@@ -68,16 +68,16 @@ def read_entries(filename):
                 hanzis = substrings[1]
                 h_chars_to_remove = ["-", "…", "（", "）", "，"]
                 hanzis = "".join([c for c in substrings[1].lower() if c not in h_chars_to_remove])
-                print(hanzis)
-                p_chars_to_remove = [" ", "·", "'", "-", "(", ")"]
+                #print(hanzis)
+                p_chars_to_remove = [" ", "·", "'", "-", "(", ")", "/"]
                 pinyin_str = "".join([c for c in substrings[2].lower() if c not in p_chars_to_remove])
-                print(pinyin_str)
+                #print(pinyin_str)
                 pinyin_strs = re.split(r'(?:\[(.*)\]|([a-zA-Z]+[1-5]))', pinyin_str)
-                print(pinyin_strs)
+                #print(pinyin_strs)
                 pinyins = [x for x in pinyin_strs if x != '' and x is not None]
-                print(pinyins)
+                #print(pinyins)
                 strokes = substrings[3].split(',')
-                print(strokes)
+                #print(strokes)
 
                 if len(hanzis) != len(strokes):
                     print(f'***** ERROR: in {hanzis}: number of hanzis and strokes are different: {len(hanzis)} != {len(strokes)}')
@@ -101,7 +101,7 @@ def read_entries(filename):
                 else:
                     entries[entry_filename] = [line]
 
-            elif '\\end' in line and 'entry' in line:
+            elif 'end' in line and 'Entry' in line:
                 begin_entry_found = False
                 entries[entry_filename].append(line)
 

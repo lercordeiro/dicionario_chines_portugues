@@ -103,10 +103,14 @@ group.by.radicals.done : group.by.radicals
 pinyins.pdf : pinyins.tex group.by.pinyins.done $(GENINC)
 	$(TEX) pinyins.tex
 	$(TEX) pinyins.tex
+	$(TEX) pinyins.tex
+	$(TEX) pinyins.tex
 	echo -n "Verbetes: "
 	@grep begin $(PVERBDIR)/* | grep entries | wc -l
 
 strokes.pdf : strokes.tex group.by.strokes.done $(GENINC)
+	$(TEX) strokes.tex
+	$(TEX) strokes.tex
 	$(TEX) strokes.tex
 	$(TEX) strokes.tex
 	echo -n "Verbetes: "
@@ -115,10 +119,13 @@ strokes.pdf : strokes.tex group.by.strokes.done $(GENINC)
 radicals.pdf : radicals.tex group.by.radicals.done $(GENINC) 
 	$(TEX) radicals.tex
 	$(TEX) radicals.tex
+	$(TEX) radicals.tex
+	$(TEX) radicals.tex
 	echo -n "Verbetes: "
 	@grep begin $(RVERBDIR)/* | grep entries | wc -l
 
 full.pdf : full.tex group.by.pinyins.done group.by.strokes.done group.by.radicals.done $(GENINC)
+	$(TEX) full.tex
 	$(TEX) full.tex
 	$(TEX) full.tex
 
