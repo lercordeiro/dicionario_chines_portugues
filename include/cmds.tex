@@ -285,17 +285,17 @@
  }
 
 %%% Comando "Veja"
-\NewDocumentCommand{\seeref}{mm}
+\NewDocumentCommand{\seeref}{m}
  {%
   \booltrue{f_see}
-  \listgadd{\seerefl}{#1:#2}
+  \listgadd{\seerefl}{\l_hanzi_tl : #1}
  }
 
 %%% Comando "Veja também"
 \NewDocumentCommand{\seealsoref}{mm}
  {%
   \booltrue{f_seealso}
-  \listgadd{\seealsorefl}{#1:#2}
+  \listgadd{\seealsorefl}{#1 : #2}
  }
 
 %%% Ambiente "DictionaryEntries" para definir o início das entradas dos verbetes

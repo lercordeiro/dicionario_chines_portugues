@@ -205,5 +205,5 @@ clean :
 	rm -f $(PVERBDIR)/*.tex $(PGRPDIR)/*.tex
 	rm -f $(SVERBDIR)/*.tex $(SGRPDIR)/*.tex
 	rm -f $(RVERBDIR)/*.tex $(RGRPDIR)/*.tex
-	rm -f *.aux *.idx *.ilg *.ind *.log *.toc *.out *.done *.tar.gz
+	rm -f *.aux *.idx *.ilg *.ind *.log *.toc *.out *.done 
 
