@@ -106,7 +106,7 @@ pinyins.pdf : pinyins.tex group.by.pinyins.done $(GENINC)
 	$(TEX) pinyins.tex
 	$(TEX) pinyins.tex
 	echo -n "Verbetes: "
-	@grep begin $(PVERBDIR)/* | grep entries | wc -l
+	@grep begin $(PGRPDIR)/* | grep Entry | wc -l
 
 strokes.pdf : strokes.tex group.by.strokes.done $(GENINC)
 	$(TEX) strokes.tex
@@ -114,7 +114,7 @@ strokes.pdf : strokes.tex group.by.strokes.done $(GENINC)
 	$(TEX) strokes.tex
 	$(TEX) strokes.tex
 	echo -n "Verbetes: "
-	@grep begin $(SVERBDIR)/* | grep entries | wc -l
+	@grep begin $(SGRPDIR)/* | grep Entry | wc -l
 
 radicals.pdf : radicals.tex group.by.radicals.done $(GENINC) 
 	$(TEX) radicals.tex
@@ -122,7 +122,7 @@ radicals.pdf : radicals.tex group.by.radicals.done $(GENINC)
 	$(TEX) radicals.tex
 	$(TEX) radicals.tex
 	echo -n "Verbetes: "
-	@grep begin $(RVERBDIR)/* | grep entries | wc -l
+	@grep begin $(RGRPDIR)/* | grep Entry | wc -l
 
 full.pdf : full.tex group.by.pinyins.done group.by.strokes.done group.by.radicals.done $(GENINC)
 	$(TEX) full.tex
@@ -192,18 +192,17 @@ deploy-full : dicionario_combinado.pdf dicionario_combinado_livreto.pdf
 deploy : deploy-pinyins deploy-strokes deploy-radicals deploy-full
 
 total:
-	@echo -n "***** Verbetes Pinyin: "
-	@grep begin $(PVERBDIR)/* | grep entries | wc -l
-	@echo -n "\***** Verbetes Tracos: "
-	@grep begin $(SVERBDIR)/* | grep entries | wc -l
-	@echo -n "\***** Verbetes Radicais: "
-	@grep begin $(RVERBDIR)/* | grep entries | wc -l
+	@echo -n "***** Verbetes Pinyin..: "
+	@grep begin $(PGRPDIR)/* | grep Entry | wc -l
+	@echo -n "***** Verbetes Tracos..: "
+	@grep begin $(SGRPDIR)/* | grep Entry | wc -l
+	@echo -n "***** Verbetes Radicais: "
+	@grep begin $(RGRPDIR)/* | grep Entry | wc -l
 
 
 clean :
-	rm -f $(ALLDIR)/*.tex
-	rm -f $(PVERBDIR)/*.tex $(PGRPDIR)/*.tex
-	rm -f $(SVERBDIR)/*.tex $(SGRPDIR)/*.tex
-	rm -f $(RVERBDIR)/*.tex $(RGRPDIR)/*.tex
+	find $(PVERBDIR) -name "*.tex" -type f -delete
+	find $(SVERBDIR) -name "*.tex" -type f -delete
+	find $(RVERBDIR) -name "*.tex" -type f -delete
 	rm -f *.aux *.idx *.ilg *.ind *.log *.toc *.out *.done 
 
