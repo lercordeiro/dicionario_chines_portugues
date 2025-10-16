@@ -33,31 +33,40 @@ GENINV = $(INCDIR)/cmds.tex \
          $(INCDIR)/hyphenation.tex \
          $(INCDIR)/tex-sx-pinyin-tonemarks.lua
  
-all : dicionario_por_pinyins dicionario_por_tracos dicionario_por_radicais dicionario_combinado
+all : dicionario_pinyins dicionario_tracos dicionario_radicais dicionario_combinado
 
-dicionario_por_pinyins : dicionario_por_pinyins.pdf dicionario_por_pinyins_livreto.pdf
+dicionario_pinyins : dicionario_pinyins.pdf livreto_pinyins.pdf
 
-dicionario_por_tracos : dicionario_por_tracos.pdf dicionario_por_tracos_livreto.pdf
+dicionario_tracos : dicionario_tracos.pdf livreto_tracos.pdf
 
-dicionario_por_radicais : dicionario_por_radicais.pdf dicionario_por_radicais_livreto.pdf
+dicionario_radicais : dicionario_radicais.pdf livreto_radicais.pdf
 
-dicionario_combinado : dicionario_combinado.pdf dicionario_combinado_livreto.pdf
+dicionario_combinado : dicionario_combinado.pdf livreto_combinado.pdf
 
-entries_by_pinyins.tar.gz :
+$(PVERBTAR) :
+	ls -l $(PVERBTAR)
+
+entries_by_pinyins.tar.gz : $(PVERBTAR)
 	cp $(PVERBTAR) .
 	rm -f ${PVERBDIR}/* ${PGRPDIR}/*
 
 entries_by_pinyins.tar.gz.done : entries_by_pinyins.tar.gz
 	touch entries_by_pinyins.tar.gz.done
 
-entries_by_strokes.tar.gz :
+$(SVERBTAR) :
+	ls -l $(SVERBTAR)
+
+entries_by_strokes.tar.gz : $(SVERBTAR)
 	cp $(SVERBTAR) .
 	rm -f ${SVERBDIR}/* ${SGRPDIR}/*
+
+$(RVERBTAR) :
+	ls -l $(RVERBTAR)
 
 entries_by_strokes.tar.gz.done : entries_by_strokes.tar.gz
 	touch entries_by_strokes.tar.gz.done
 
-entries_by_radicals.tar.gz :
+entries_by_radicals.tar.gz : $(RVERBTAR)
 	cp $(RVERBTAR) .
 	rm -f ${RVERBDIR}/* ${RGRPDIR}/*
 
@@ -141,53 +150,53 @@ radicals-booklet.pdf : radicals.pdf
 full-booklet.pdf : full.pdf
 	$(BOOK) full.pdf
 
-dicionario_por_pinyins.pdf : pinyins.pdf
-	cp pinyins.pdf dicionario_por_pinyins.pdf
+dicionario_pinyins.pdf : pinyins.pdf
+	cp pinyins.pdf dicionario_pinyins.pdf
 
-dicionario_por_tracos.pdf : strokes.pdf
-	cp strokes.pdf dicionario_por_tracos.pdf
+dicionario_tracos.pdf : strokes.pdf
+	cp strokes.pdf dicionario_tracos.pdf
 
-dicionario_por_radicais.pdf : radicals.pdf
-	cp radicals.pdf dicionario_por_radicais.pdf
+dicionario_radicais.pdf : radicals.pdf
+	cp radicals.pdf dicionario_radicais.pdf
 
 dicionario_combinado.pdf : full.pdf
 	cp full.pdf dicionario_combinado.pdf
 
-dicionario_por_pinyins_livreto.pdf : pinyins-booklet.pdf
-	cp pinyins-booklet.pdf dicionario_por_pinyins_livreto.pdf
+livreto_pinyins.pdf : pinyins-booklet.pdf
+	cp pinyins-booklet.pdf livreto_pinyins.pdf
 
-dicionario_por_tracos_livreto.pdf : strokes-booklet.pdf
-	cp strokes-booklet.pdf dicionario_por_tracos_livreto.pdf
+livreto_tracos.pdf : strokes-booklet.pdf
+	cp strokes-booklet.pdf livreto_tracos.pdf
 
-dicionario_por_radicais_livreto.pdf : radicals-booklet.pdf
-	cp radicals-booklet.pdf dicionario_por_radicais_livreto.pdf
+livreto_radicais.pdf : radicals-booklet.pdf
+	cp radicals-booklet.pdf livreto_radicais.pdf
 
-dicionario_combinado_livreto.pdf : full-booklet.pdf
-	cp full-booklet.pdf dicionario_combinado_livreto.pdf
+livreto_combinado.pdf : full-booklet.pdf
+	cp full-booklet.pdf livreto_combinado.pdf
 
-deploy-pinyins : dicionario_por_pinyins.pdf dicionario_por_pinyins_livreto.pdf
-	cp dicionario_por_pinyins.pdf         $(DSTSITE)
-	cp dicionario_por_pinyins_livreto.pdf $(DSTSITE)
-	cp dicionario_por_pinyins.pdf         $(DSTREPO)
-	cp dicionario_por_pinyins_livreto.pdf $(DSTREPO)
+deploy-pinyins : dicionario_pinyins.pdf livreto_pinyins.pdf
+	cp dicionario_pinyins.pdf         $(DSTSITE)
+	cp livreto_pinyins.pdf $(DSTSITE)
+	cp dicionario_pinyins.pdf         $(DSTREPO)
+	cp livreto_pinyins.pdf $(DSTREPO)
 
-deploy-strokes : dicionario_por_tracos.pdf dicionario_por_tracos_livreto.pdf
-	cp dicionario_por_tracos.pdf         $(DSTSITE)
-	cp dicionario_por_tracos_livreto.pdf $(DSTSITE)
-	cp dicionario_por_tracos.pdf         $(DSTREPO)
-	cp dicionario_por_tracos_livreto.pdf $(DSTREPO)
+deploy-strokes : dicionario_tracos.pdf livreto_tracos.pdf
+	cp dicionario_tracos.pdf         $(DSTSITE)
+	cp livreto_tracos.pdf $(DSTSITE)
+	cp dicionario_tracos.pdf         $(DSTREPO)
+	cp livreto_tracos.pdf $(DSTREPO)
 
-deploy-radicals : dicionario_por_radicais.pdf dicionario_por_radicais_livreto.pdf
-	cp dicionario_por_radicais.pdf         $(DSTSITE)
-	cp dicionario_por_radicais_livreto.pdf $(DSTSITE)
-	cp dicionario_por_radicais.pdf         $(DSTREPO)
-	cp dicionario_por_radicais_livreto.pdf $(DSTREPO)
+deploy-radicals : dicionario_radicais.pdf livreto_radicais.pdf
+	cp dicionario_radicais.pdf         $(DSTSITE)
+	cp livreto_radicais.pdf $(DSTSITE)
+	cp dicionario_radicais.pdf         $(DSTREPO)
+	cp livreto_radicais.pdf $(DSTREPO)
 
-deploy-full : dicionario_combinado.pdf dicionario_combinado_livreto.pdf
+deploy-full : dicionario_combinado.pdf livreto_combinado.pdf
 	cp dicionario_combinado.pdf         $(DSTSITE)
-	cp dicionario_combinado_livreto.pdf $(DSTSITE)
+	cp livreto_combinado.pdf $(DSTSITE)
 	cp dicionario_combinado.pdf         $(DSTREPO)
-	cp dicionario_combinado_livreto.pdf $(DSTREPO)
+	cp livreto_combinado.pdf $(DSTREPO)
 
 deploy : deploy-pinyins deploy-strokes deploy-radicals deploy-full
 
