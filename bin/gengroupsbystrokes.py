@@ -32,6 +32,7 @@ def write_strokes(readdir, writedir):
     allentries = []
     strokes = {}
     last_strokes = ''
+    last_first_hanzi = ''
     for entry in entries:
         print(f'Processing entry {entry[0]}')
         filename = '~'.join(list(entry)) + '.tex'
@@ -54,7 +55,7 @@ def write_strokes(readdir, writedir):
                  file.write(f'%%% {s_as_int:d}画\n')
             else:
                  file.write('%%% ∅画\n')
-            file.write('%%%\n\n')
+            file.write('%%%\n')
             if s != '∅':
                 file.write(f'\\section*{{{s_as_int:d}画}}')
                 file.write(f'\\addcontentsline{{toc}}{{section}}{{{s_as_int:d}画}}\n\n')
@@ -63,6 +64,11 @@ def write_strokes(readdir, writedir):
                 file.write(f'\\addcontentsline{{toc}}{{section}}{{∅画}}\n\n')
 
             for e in strokes[s]:
+                first_hanzi = e.split('.', 1)[0].split('~')[1]
+                if last_first_hanzi != first_hanzi:
+                    last_first_hanzi = first_hanzi
+                    file.write(f'%%%%%%%%%% {first_hanzi} %%%%%%%%%%\n')
+                    file.write(f'\\subsection*{{{first_hanzi.upper()}}}\n\n')
                 get_entry_and_write(readdir + '/' + e, file)
                 file.write('\n')
             file.write('%%%%% EOF %%%%%\n\n')
