@@ -25,7 +25,7 @@
 \usepackage{tabularray}
 \usepackage[most]{tcolorbox}
 \usepackage{luacode}
-\usepackage{stackengine}
+\usepackage{multicol}
 
 % Meus Comandos
 \input{include/cmds.tex}
@@ -52,12 +52,16 @@
 
 \input{title.tex}
 
-\clearpage
-\pagestyle{empty}
-\tableofcontents
+\pagestyle{plain}
 
 \clearpage
-\pagestyle{empty}
+\chapter{Sumário}
+\begin{KeepFromToc}
+ \renewcommand{\contentsname}{}% Remove \tableofcontents' title/name
+ \tableofcontents
+\end{KeepFromToc}
+
+\clearpage
 \chapter{汉葡词典}
 
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -71,6 +75,7 @@ caracter, depois pelo número de traços e, finalmente, pela ordem do
 caracter na tabela UTF-8.
 
 \clearpage
+\pagestyle{dictionary}
 \begin{DictionaryEntries}{pinyins}
  \input{groups_by_pinyins/A.tex}
  \input{groups_by_pinyins/B.tex}
@@ -100,11 +105,13 @@ caracter na tabela UTF-8.
  \input{groups_by_pinyins/Z.tex}
 \end{DictionaryEntries} 
 
-\ifdraftdoc
-%%%
-\else
-
 \pagestyle{plain}
+
+\ifdraftdoc
+%
+%
+%
+\else
 
 \clearpage
 \chapter{Termos Gramaticais Chineses}
@@ -131,6 +138,14 @@ caracter na tabela UTF-8.
 \input{include/radicais_kangxi.tex}
 
 \fi
+
+\clearpage
+\chapter{Lista de Hanzis (somente o primeiro caracter)}
+\begin{multicols}{5}
+ \begin{KeepFromToc}
+  \listoffirsthanzis
+ \end{KeepFromToc}
+\end{multicols}
 
 \end{document}
 

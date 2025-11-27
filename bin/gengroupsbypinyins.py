@@ -52,14 +52,17 @@ def write_groups(readdir, writedir):
             file.write(f'%%% {c}\n')
             file.write('%%%\n')
             file.write(f'\\section*{{{c}}}')
-            file.write(f'\\addcontentsline{{toc}}{{section}}{{{c}}}\n\n')
+            file.write(f'\\addcontentsline{{toc}}{{section}}{{{c}}}')
+            file.write(f'\\addcontentsline{{loh}}{{figure}}{{\#\#\#\#\#\#\#\# {c}}}\n\n')
             for e in group[c]:
                 first_hanzi = e.split('.', 1)[0].split('~')[2]
                 if last_first_hanzi != first_hanzi:
                     last_first_hanzi = first_hanzi
                     if not ('a' <= last_first_hanzi <= 'z'):
+                        npinyin = e.split('.', 1)[0].split('~')[0]
                         file.write(f'%%%%%%%%%% {first_hanzi} %%%%%%%%%%\n')
-                        file.write(f'\\subsection*{{{first_hanzi}}}\n\n')
+                        file.write(f'\\subsection*{{{first_hanzi}}}')
+                        file.write(f'\\addcontentsline{{loh}}{{figure}}{{{first_hanzi} \\dpy{{{npinyin}}}}}\n\n')
                 get_entry_and_write(readdir + '/' + e, file)
                 file.write('\n')
             file.write('%%%%% EOF %%%%%\n\n')

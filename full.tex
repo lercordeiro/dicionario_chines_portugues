@@ -25,7 +25,7 @@
 \usepackage{tabularray}
 \usepackage[most]{tcolorbox}
 \usepackage{luacode}
-\usepackage{stackengine}
+\usepackage{multicol}
 
 % Meus Comandos
 \input{include/cmds.tex}
@@ -54,9 +54,13 @@
 
 \clearpage
 \pagestyle{empty}
-\twocolumn
-\tableofcontents
-\onecolumn
+\chapter{Sumário}
+\begin{multicols}{2}
+ \begin{KeepFromToc}
+  \renewcommand{\contentsname}{}% Remove \tableofcontents' title/name
+  \tableofcontents
+ \end{KeepFromToc}
+\end{multicols}
 
 \clearpage
 \pagestyle{empty}
@@ -73,6 +77,7 @@ caracter, depois pelo número de traços e, finalmente, pela ordem do
 caracter na tabela UTF-8.
 
 \clearpage
+\pagestyle{dictionary}
 \begin{DictionaryEntries}{pinyins}
  \input{groups_by_pinyins/A.tex}
  \input{groups_by_pinyins/B.tex}
@@ -117,6 +122,7 @@ depois pela ordem do caracter na tabela UTF-8.  As definições são
 agrupadas e ordenadas pelo pinyin em cada verbete.
 
 \clearpage
+\pagestyle{dictionary}
 \begin{DictionaryEntries}{strokes}
  \input{groups_by_strokes/∅.tex}
  \input{groups_by_strokes/001.tex}
@@ -140,8 +146,8 @@ agrupadas e ordenadas pelo pinyin em cada verbete.
  \input{groups_by_strokes/019.tex}
  \input{groups_by_strokes/020.tex}
  \input{groups_by_strokes/021.tex}
-% \input{groups_by_strokes/022.tex}
-% \input{groups_by_strokes/023.tex}
+ \input{groups_by_strokes/022.tex}
+ \input{groups_by_strokes/023.tex}
 % \input{groups_by_strokes/024.tex}
 % \input{groups_by_strokes/025.tex}
 % \input{groups_by_strokes/026.tex}
@@ -167,6 +173,7 @@ caracter na tabela UTF-8.  As definições são agrupadas e
 ordenadas pelo pinyin em cada verbete.
 
 \clearpage
+\pagestyle{dictionary}
 \begin{DictionaryEntries}{radicals}
  \input{groups_by_radicals/∅.tex} % ∅
  \input{groups_by_radicals/⼀.tex} % 001
@@ -385,11 +392,13 @@ ordenadas pelo pinyin em cada verbete.
  \input{groups_by_radicals/⿕.tex} % 214
 \end{DictionaryEntries}
 
-\ifdraftdoc 
-%%%
-\else
-
 \pagestyle{plain}
+
+\ifdraftdoc 
+%
+%
+%
+\else
 
 \clearpage
 \chapter{Termos Gramaticais Chineses}

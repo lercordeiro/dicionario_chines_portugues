@@ -291,11 +291,13 @@ def write_radicals(readdir, writedir):
         number = kangxi[r]['number']
         radical_str = f"Radical {number:d}: ``{r}''"
         radical_toc_str = f"Radical {number:d}: {r}"
+        radical_loh_str = f"{number:d}: {r}"
         if 'variants' in kangxi[r]:
             print(f'Writting Radicals {filename}')
             variants = kangxi[r]['variants']
             radical_str += f" ({variants})"
             radical_toc_str += f"、{variants}"
+            #radical_loh_str += f"、{variants}"
 
         print(f'Writting Radicals {filename}')
         with open(filename, 'w', encoding='utf-8') as file:
@@ -303,14 +305,17 @@ def write_radicals(readdir, writedir):
             file.write(f'%%% Radical "{r}"\n')
             file.write('%%%\n')
             file.write(f'\\section*{{{radical_str}}}')
-            file.write(f'\\addcontentsline{{toc}}{{section}}{{{radical_toc_str}}}\n\n')
+            file.write(f'\\addcontentsline{{toc}}{{section}}{{{radical_toc_str}}}')
+            file.write(f'\\addcontentsline{{loh}}{{figure}}{{\#\#\#\# {radical_loh_str}}}\n\n')
 
             for e in radicals[r]:
                 first_hanzi = e.split('.', 1)[0].split('~')[2]
                 if last_first_hanzi != first_hanzi:
                     last_first_hanzi = first_hanzi
-                    file.write(f'%%%%%%%%%% {first_hanzi} %%%%%%%%%%\n')
-                    file.write(f'\\subsection*{{{first_hanzi.upper()}}}\n\n')
+                    if not ('a' <= last_first_hanzi <= 'z'):
+                        file.write(f'%%%%%%%%%% {first_hanzi} %%%%%%%%%%\n')
+                        file.write(f'\\subsection*{{{first_hanzi}}}')
+                        file.write(f'\\addcontentsline{{loh}}{{figure}}{{{first_hanzi}}}\n\n')
                 get_entry_and_write(readdir + '/' + e, file)
                 file.write('\n')
             file.write('%%%%% EOF %%%%%\n\n')

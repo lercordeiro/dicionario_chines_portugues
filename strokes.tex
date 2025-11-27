@@ -25,7 +25,7 @@
 \usepackage{tabularray}
 \usepackage[most]{tcolorbox}
 \usepackage{luacode}
-\usepackage{stackengine}
+\usepackage{multicol}
 
 % Meus Comandos
 \input{include/cmds.tex}
@@ -54,7 +54,11 @@
 
 \clearpage
 \pagestyle{empty}
-\tableofcontents
+\chapter{Sumário}                                                           
+\begin{KeepFromToc}
+ \renewcommand{\contentsname}{}% Remove \tableofcontents' title/name
+ \tableofcontents
+\end{KeepFromToc}
 
 \clearpage
 \pagestyle{empty}
@@ -71,6 +75,7 @@ depois pela ordem do caracter na tabela UTF-8.  As definições são
 agrupadas e ordenadas pelo pinyin em cada verbete.
 
 \clearpage
+\pagestyle{dictionary}
 \begin{DictionaryEntries}{strokes}
  \input{groups_by_strokes/∅.tex}
  \input{groups_by_strokes/001.tex}
@@ -105,11 +110,13 @@ agrupadas e ordenadas pelo pinyin em cada verbete.
 % \input{groups_by_strokes/030.tex}
 \end{DictionaryEntries}
 
-\ifdraftdoc 
-%%%
-\else
-
 \pagestyle{plain}
+
+\ifdraftdoc 
+%
+%
+%
+\else
 
 \clearpage
 \chapter{Termos Gramaticais Chineses}
@@ -136,6 +143,14 @@ agrupadas e ordenadas pelo pinyin em cada verbete.
 \input{include/radicais_kangxi.tex}
 
 \fi
+
+\clearpage
+\chapter{Lista de Hanzis (somente o primeiro caracter)}                                                           
+\begin{multicols}{5}
+ \begin{KeepFromToc}
+  \listoffirsthanzis
+ \end{KeepFromToc}
+\end{multicols}
 
 \end{document}
 

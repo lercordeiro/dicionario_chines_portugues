@@ -25,7 +25,7 @@
 \usepackage{tabularray}
 \usepackage[most]{tcolorbox}
 \usepackage{luacode}
-\usepackage{stackengine}
+\usepackage{multicol}
 
 % Meus Comandos
 \input{include/cmds.tex}
@@ -54,9 +54,13 @@
 
 \clearpage
 \pagestyle{empty}
-\twocolumn
-\tableofcontents
-\onecolumn
+\chapter{Sumário}
+\begin{multicols}{2}
+ \begin{KeepFromToc}
+  \renewcommand{\contentsname}{}% Remove \tableofcontents' title/name
+  \tableofcontents
+ \end{KeepFromToc}
+\end{multicols}
 
 \clearpage
 \pagestyle{empty}
@@ -74,6 +78,7 @@ caracter na tabela UTF-8.  As definições são agrupadas e
 ordenadas pelo pinyin em cada verbete.
 
 \clearpage
+\pagestyle{dictionary}
 \begin{DictionaryEntries}{radicals}
  \input{groups_by_radicals/∅.tex} % ∅
  \input{groups_by_radicals/⼀.tex} % 001
@@ -292,11 +297,13 @@ ordenadas pelo pinyin em cada verbete.
  \input{groups_by_radicals/⿕.tex} % 214
 \end{DictionaryEntries}
 
-\ifdraftdoc
-%%%
-\else
-
 \pagestyle{plain}
+
+\ifdraftdoc
+%
+%
+%
+\else
 
 \clearpage
 \chapter{Termos Gramaticais Chineses}
@@ -323,6 +330,14 @@ ordenadas pelo pinyin em cada verbete.
 \input{include/radicais_kangxi.tex}
 
 \fi
+
+\clearpage
+\chapter{Lista de Hanzis (somente o primeiro caracter)}
+\begin{multicols}{5}
+ \begin{KeepFromToc}
+  \listoffirsthanzis
+ \end{KeepFromToc}
+\end{multicols}
 
 \end{document}
 
