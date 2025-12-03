@@ -9,17 +9,17 @@ DSTSITE = /var/www/download/dictionary
 DSTREPO = /var/www/repo.ler.cordeiro.nom.br/Dicionário
 
 PGENGRP = ./bin/gengroupsbypinyins.py
-PVERBTAR = ~/中文/DCP/entries_by_pinyins.tar.gz
+PVERBTAR = ~/中文/Entries/entries_by_pinyins.tar.gz
 PVERBDIR = ./entries_by_pinyins
 PGRPDIR = ./groups_by_pinyins
 
 SGENGRP = ./bin/gengroupsbystrokes.py
-SVERBTAR = ~/中文/DCP/entries_by_strokes.tar.gz
+SVERBTAR = ~/中文/Entries/entries_by_strokes.tar.gz
 SVERBDIR = ./entries_by_strokes
 SGRPDIR = ./groups_by_strokes
  
 RGENGRP = ./bin/gengroupsbyradicals.py
-RVERBTAR = ~/中文/DCP/entries_by_radicals.tar.gz
+RVERBTAR = ~/中文/Entries/entries_by_radicals.tar.gz
 RVERBDIR = ./entries_by_radicals
 RGRPDIR = ./groups_by_radicals
 
@@ -46,47 +46,47 @@ dicionario_combinado : dicionario_combinado.pdf livreto_combinado.pdf
 $(PVERBTAR) :
 	ls -l $(PVERBTAR)
 
+$(SVERBTAR) :
+	ls -l $(SVERBTAR)
+
+$(RVERBTAR) :
+	ls -l $(RVERBTAR)
+
 entries_by_pinyins.tar.gz : $(PVERBTAR)
 	cp $(PVERBTAR) .
 	rm -f ${PVERBDIR}/* ${PGRPDIR}/*
-
-entries_by_pinyins.tar.gz.done : entries_by_pinyins.tar.gz
-	touch entries_by_pinyins.tar.gz.done
-
-$(SVERBTAR) :
-	ls -l $(SVERBTAR)
 
 entries_by_strokes.tar.gz : $(SVERBTAR)
 	cp $(SVERBTAR) .
 	rm -f ${SVERBDIR}/* ${SGRPDIR}/*
 
-$(RVERBTAR) :
-	ls -l $(RVERBTAR)
-
-entries_by_strokes.tar.gz.done : entries_by_strokes.tar.gz
-	touch entries_by_strokes.tar.gz.done
-
 entries_by_radicals.tar.gz : $(RVERBTAR)
 	cp $(RVERBTAR) .
 	rm -f ${RVERBDIR}/* ${RGRPDIR}/*
 
+entries_by_pinyins.tar.gz.done : entries_by_pinyins.tar.gz
+	touch entries_by_pinyins.tar.gz.done
+
 entries_by_radicals.tar.gz.done : entries_by_radicals.tar.gz
 	touch entries_by_radicals.tar.gz.done
+
+entries_by_strokes.tar.gz.done : entries_by_strokes.tar.gz
+	touch entries_by_strokes.tar.gz.done
 
 extract.entries_by_pinyins.tar.gz : entries_by_pinyins.tar.gz.done
 	tar xvzf entries_by_pinyins.tar.gz
 
-extract.entries_by_pinyins.tar.gz.done : extract.entries_by_pinyins.tar.gz
-	touch extract.entries_by_pinyins.tar.gz.done
-
 extract.entries_by_strokes.tar.gz : entries_by_strokes.tar.gz.done
 	tar xvzf entries_by_strokes.tar.gz
 
-extract.entries_by_strokes.tar.gz.done : extract.entries_by_strokes.tar.gz
-	touch extract.entries_by_strokes.tar.gz.done
-
 extract.entries_by_radicals.tar.gz : entries_by_radicals.tar.gz.done
 	tar xvzf entries_by_radicals.tar.gz
+
+extract.entries_by_pinyins.tar.gz.done : extract.entries_by_pinyins.tar.gz
+	touch extract.entries_by_pinyins.tar.gz.done
+
+extract.entries_by_strokes.tar.gz.done : extract.entries_by_strokes.tar.gz
+	touch extract.entries_by_strokes.tar.gz.done
 
 extract.entries_by_radicals.tar.gz.done : extract.entries_by_radicals.tar.gz
 	touch extract.entries_by_radicals.tar.gz.done
@@ -94,17 +94,17 @@ extract.entries_by_radicals.tar.gz.done : extract.entries_by_radicals.tar.gz
 group.by.pinyins : extract.entries_by_pinyins.tar.gz.done
 	$(PGENGRP) -r $(PVERBDIR) -w $(PGRPDIR)
 
-group.by.pinyins.done : group.by.pinyins
-	touch group.by.pinyins.done
-
 group.by.strokes : extract.entries_by_strokes.tar.gz.done
 	$(SGENGRP) -r $(SVERBDIR) -w $(SGRPDIR)
 
-group.by.strokes.done : group.by.strokes
-	touch group.by.strokes.done
-
 group.by.radicals : extract.entries_by_radicals.tar.gz.done
 	$(RGENGRP) -r $(RVERBDIR) -w $(RGRPDIR)
+
+group.by.pinyins.done : group.by.pinyins
+	touch group.by.pinyins.done
+
+group.by.strokes.done : group.by.strokes
+	touch group.by.strokes.done
 
 group.by.radicals.done : group.by.radicals
 	touch group.by.radicals.done
@@ -175,28 +175,28 @@ livreto_combinado.pdf : full-booklet.pdf
 	cp full-booklet.pdf livreto_combinado.pdf
 
 deploy-pinyins : dicionario_pinyins.pdf livreto_pinyins.pdf
-	cp dicionario_pinyins.pdf         $(DSTSITE)
-	cp livreto_pinyins.pdf $(DSTSITE)
-	cp dicionario_pinyins.pdf         $(DSTREPO)
-	cp livreto_pinyins.pdf $(DSTREPO)
+	cp dicionario_pinyins.pdf	$(DSTSITE)
+	cp livreto_pinyins.pdf		$(DSTSITE)
+	cp dicionario_pinyins.pdf	$(DSTREPO)
+	cp livreto_pinyins.pdf		$(DSTREPO)
 
 deploy-strokes : dicionario_tracos.pdf livreto_tracos.pdf
-	cp dicionario_tracos.pdf         $(DSTSITE)
-	cp livreto_tracos.pdf $(DSTSITE)
-	cp dicionario_tracos.pdf         $(DSTREPO)
-	cp livreto_tracos.pdf $(DSTREPO)
+	cp dicionario_tracos.pdf	$(DSTSITE)
+	cp livreto_tracos.pdf		$(DSTSITE)
+	cp dicionario_tracos.pdf	$(DSTREPO)
+	cp livreto_tracos.pdf		$(DSTREPO)
 
 deploy-radicals : dicionario_radicais.pdf livreto_radicais.pdf
-	cp dicionario_radicais.pdf         $(DSTSITE)
-	cp livreto_radicais.pdf $(DSTSITE)
-	cp dicionario_radicais.pdf         $(DSTREPO)
-	cp livreto_radicais.pdf $(DSTREPO)
+	cp dicionario_radicais.pdf	$(DSTSITE)
+	cp livreto_radicais.pdf		$(DSTSITE)
+	cp dicionario_radicais.pdf	$(DSTREPO)
+	cp livreto_radicais.pdf		$(DSTREPO)
 
 deploy-full : dicionario_combinado.pdf livreto_combinado.pdf
-	cp dicionario_combinado.pdf         $(DSTSITE)
-	cp livreto_combinado.pdf $(DSTSITE)
-	cp dicionario_combinado.pdf         $(DSTREPO)
-	cp livreto_combinado.pdf $(DSTREPO)
+	cp dicionario_combinado.pdf	$(DSTSITE)
+	cp livreto_combinado.pdf	$(DSTSITE)
+	cp dicionario_combinado.pdf	$(DSTREPO)
+	cp livreto_combinado.pdf	$(DSTREPO)
 
 deploy : deploy-pinyins deploy-strokes deploy-radicals deploy-full
 
