@@ -1,7 +1,7 @@
 backup/
-entries_by_pinyins/
-entries_by_strokes/
-entries_by_radicals/
+groups.by.pinyins/
+groups.by.strokes/
+groups.by.radicals/
 log/
 tmp/
 .kile/
