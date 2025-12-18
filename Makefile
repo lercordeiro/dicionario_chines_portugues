@@ -27,7 +27,7 @@ GENINV = $(INCDIR)/cmds.tex \
          $(INCDIR)/tex-sx-pinyin-tonemarks.lua
  
 
-all: dicionario_pinyins dicionario_tracos dicionario_radicais dicionario_combinado
+all: dicionario_pinyins dicionario_tracos dicionario_radicais 
 
 deploy: deploy-pinyins deploy-strokes deploy-radicals deploy-full
 
@@ -135,32 +135,6 @@ groups.by.radicals.tar.gz: $(RGRPTAR)
 	cp $(RGRPTAR) .
 
 $(RGRPTAR):
-
-
-dicionario_combinado: deploy-full
-
-deploy-full: dicionario_combinado.pdf livreto_combinado.pdf
-	cp dicionario_combinado.pdf	$(DSTSITE)
-	cp livreto_combinado.pdf	$(DSTSITE)
-	cp dicionario_combinado.pdf	$(DSTREPO)
-	cp livreto_combinado.pdf	$(DSTREPO)
-
-dicionario_combinado.pdf: full.pdf
-	cp full.pdf dicionario_combinado.pdf
-
-livreto_combinado.pdf: full-booklet.pdf
-	cp full-booklet.pdf livreto_combinado.pdf
-
-full-booklet.pdf: full.pdf
-	$(BOOK) full.pdf
-
-full.pdf: full.tex extract.groups.by.pinyins.done extract.groups.by.strokes.done extract.groups.by.radicals.done $(GENINC)
-	$(TEX) full.tex
-	$(TEX) full.tex
-	$(TEX) full.tex
-	$(TEX) full.tex
-	$(TEX) full.tex
-	$(TEX) full.tex
 
 
 total:

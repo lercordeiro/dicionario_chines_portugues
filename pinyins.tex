@@ -9,9 +9,9 @@
 % CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[a4paper,9pt,twoside,openright,book]{memoir}
+\documentclass[a4paper,9pt,twoside,openright,draft]{memoir}
 
-\usepackage[brazilian]{babel}
+\usepackage[brazilian,chinese-hans,provide=*]{babel}
 \usepackage{fontspec}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{imakeidx}
@@ -29,6 +29,8 @@
 
 % Meus Comandos
 \input{include/cmds.tex}
+
+% Definições de hifenações
 \input{include/hyphenation.tex}
 
 % Ajustes do PDF
@@ -50,6 +52,7 @@
 
 \begin{document}
 \addfontfeatures{CharacterWidth=Proportional}
+\selectlanguage{brazilian} % Start in Brazilian
 
 \input{title.tex}
 

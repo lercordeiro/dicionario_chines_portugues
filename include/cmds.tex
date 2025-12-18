@@ -12,15 +12,16 @@
 %%% Hyperref em modo 'draft' não gera os hiperlinks
 \hypersetup{final}
 
-%%% Largura da entrada do verbete
-\def\entrywidth{.485\textwidth}
+%%% Ajustes da separação das colunas quando em modo texto de 2 colunas
+\setlength{\columnsep}{1.2em}
+\setlength{\columnseprule}{0.1mm}
 
 %%% Estilo do capítulo, o melhor que encontrei
 \chapterstyle{dash}
 
 %%% Sem identação
 \setlength{\parindent}{0cm}
-\setlength{\parskip}{0.6\baselineskip}
+\setlength{\parskip}{0.15\baselineskip}
 
 %%% Ajuste das margens do documento
 \setlrmarginsandblock{3cm}{2cm}{*}
@@ -34,19 +35,18 @@
 
 %%% Usando a fonte NoTofu do Google.
 \babelfont{rm}[
- Renderer=Node,
+ Renderer=Harfbuzz,
  Ligatures=TeX,
- BoldFont={NotoSerifCJKsc-SemiBold},
- BoldSlantedFont={NotoSerifCJKsc-SemiBold},
+ BoldFont={NotoSerifCJKsc-Bold},
+ BoldSlantedFont={NotoSansCJKsc-Regular},
  AutoFakeSlant=0.25,
  SlantedFeatures={FakeSlant=0.25},
- BoldSlantedFeatures={FakeSlant=0.25}]
- {Noto Serif CJK SC Light}
-\babelfont{sf}[Renderer=Harfbuzz,Ligatures=TeX]{Noto Sans CJK SC Light}
+ BoldSlantedFeatures={FakeSlant=0.25}]{Noto Serif CJK SC}
+\babelfont{sf}[Renderer=Harfbuzz,Ligatures=TeX]{Noto Sans CJK SC}
 \babelfont{tt}[Renderer=Harfbuzz,Ligatures=TeX]{Noto Sans Mono CJK SC}
 
 %%% Ajustes do MultiCol: parar com a indentação do primeiro parágrafo
-\AddToHook{env/multicols/begin}{\AddToHookNext{para/begin}{\OmitIndent}}
+%\AddToHook{env/multicols/begin}{\AddToHookNext{para/begin}{\OmitIndent}}
 
 %%% Ajustes do Sumário
 \setcounter{secnumdepth}{2}
@@ -59,10 +59,6 @@
 %%% Cria 'Lista de Hanzis'
 \newcommand{\listlohname}{Primeiros Hanzis}
 \newlistof{listoffirsthanzis}{loh}{\listlohname}
-
-%%% Ajustes da separação das colunas quando em modo texto de 2 colunas
-\setlength{\columnsep}{0.8em}
-\setlength{\columnseprule}{0.1mm}
 
 %%% Ajustes de Cabeçalhos e Rodapés
 \setheadfoot{14pt}{28pt}
@@ -101,7 +97,7 @@
     nobeforeafter,%
     before={\noindent},%
     colframe=black,%
-    colback=black!15!white,%
+    colback=black!20!white,%
     boxrule=2pt,%
     leftrule=4mm,%
     left=0mm,%
@@ -113,19 +109,17 @@
   \end{tcolorbox}
  }
 \setsecheadstyle{\boxedsec}
-\setbeforesecskip{1ex plus .25ex minus .25ex}
-\setaftersecskip{.25ex plus .25ex minus .25ex}
 \newcommand{\sectionbreak}{\phantomsection}
 
-\newcommand{\boxedsubsec}[1]                                                                                                          
- {%                                                                                                                                
-  \begin{tcolorbox}%                                                                                                               
+\newcommand{\boxedsubsec}[1]
+ {%
+  \begin{tcolorbox}%
    [%
     enhanced,%
     nobeforeafter,%
     before={\noindent},%
     colframe=black,%
-    colback=black!5!white,%
+    colback=black!10!white,%
     boxrule=2pt,%
     leftrule=2mm,%
     left=0mm,%
@@ -136,9 +130,7 @@
    \hfill\Large#1
   \end{tcolorbox}
  }
-\setsubsecheadstyle{\boxedsubsec}                                                                                                        
-\setbeforesubsecskip{1ex plus .25ex minus .25ex}
-\setaftersubsecskip{.25ex plus .25ex minus .25ex}
+\setsubsecheadstyle{\boxedsubsec}
 
 %%% Estilo das caixas dos verbetes
 \newtcolorbox{lightbox}%
@@ -178,9 +170,12 @@
 
 
 %%% Variáveis tipo "bool" para dizer se tem ou não os campos
-%%% "Veja" e "Veja também" nas definições dos verbetes
-\newbool{f_see}
-\newbool{f_seealso}
+%%% "Veja", "Veja também", "Synonym"" e "Antonym"
+%%% nas definições dos verbetes
+\newbool{hassee}
+\newbool{hasseealso}
+\newbool{hassynonym}
+\newbool{hasantonym}
 
 %%% Converte os pinyins numéricos em pinyins com marcação de tom
 \directlua{dofile "include/tex-sx-pinyin-tonemarks.lua"}
@@ -188,9 +183,7 @@
 %%% Comandos genéricos usados no Dicionário
 
 % Função "\pinyin" faz a conversão
-\protected\def\pinyin#1{%
- \directlua{packagedata.pinyintones.convert ([==[#1]==])}%
-}
+\protected\def\pinyin#1{\directlua{packagedata.pinyintones.convert ([==[#1]==])}}
 
 \ExplSyntaxOn
 
@@ -208,15 +201,28 @@
   \mbox{}\py
  }
 
+% Yin, Yang e Os Oito Trigramas
+\newfontfamily\dejavusans{DejaVu Sans}
+\DeclareRobustCommand{\Yin}{{\dejavusans\symbol{"268A}}}
+\DeclareRobustCommand{\Yang}{{\dejavusans\symbol{"268B}}}
+\DeclareRobustCommand{\TrigramHeaven}{{\dejavusans\symbol{"2630}}}
+\DeclareRobustCommand{\TrigramLake}{{\dejavusans\symbol{"2631}}}
+\DeclareRobustCommand{\TrigramFire}{{\dejavusans\symbol{"2632}}}
+\DeclareRobustCommand{\TrigramThunder}{{\dejavusans\symbol{"2633}}}
+\DeclareRobustCommand{\TrigramWind}{{\dejavusans\symbol{"2634}}}
+\DeclareRobustCommand{\TrigramWater}{{\dejavusans\symbol{"2635}}}
+\DeclareRobustCommand{\TrigramMountain}{{\dejavusans\symbol{"2636}}}
+\DeclareRobustCommand{\TrigramEarth}{{\dejavusans\symbol{"2637}}}
+
 % Comando "\&", insere o caracgter "&"
-\DeclareRobustCommand{\&}%
- {%
-  \ifdim\fontdimen1\font>0pt%
-   \textsl{\symbol{`\&}}%
-  \else%
-   \symbol{`\&}%
-  \fi%
- }
+%\DeclareRobustCommand{\&}%
+% {%
+%  \ifdim\fontdimen1\font>0pt%
+%   \textsl{\symbol{`\&}}%
+%  \else%
+%   \symbol{`\&}%
+%  \fi%
+% }
 
 \NewDocumentCommand{\setvar}{mm}
  {
@@ -236,7 +242,7 @@
 % do verbete em uma lista numerada em linha
 \NewDocumentCommand{\dictenumerate}{>{\SplitList{|}}m}
  {%
-  \begin{enumerate*}[nosep,label=(\arabic*),left=0pt,mode=unboxed,font=\bfseries]
+  \begin{enumerate*}[nosep,label={\arabic*},left=0pt,mode=boxed,font=\bfseries]
    \ProcessList{#1}{\insertitem}
   \end{enumerate*}
  }
@@ -248,78 +254,96 @@
 \makeatletter
 \NewDocumentCommand{\dictexamples}{m>{\SplitList{|}}m}
  {%
-  \def\@theword{#1}%
-  \begin{enumerate}[nosep,label=(\roman*),left=0pt,mode=unboxed,font=\bfseries]
-   \ProcessList{#2}{\insertexample}
-  \end{enumerate}
+  \def\@theword{#1}% 
+  \begin{sloppypar}
+   \begin{enumerate}[nosep,label=\alph*),left=0pt,mode=boxed,font=\bfseries]
+    \ProcessList{#2}{\insertexample}
+   \end{enumerate}
+  \end{sloppypar}
  }
 \NewDocumentCommand{\insertexample}{>{\TrimSpaces}m}
- {
+ {%
    \IfSubStr{#1}{===}
    {% Com traducao
-     \StrCut{#1}{===}\csA\csB%
-     \item\StrSubstitute{\csA}{\@theword}{\underline{\@theword}}\\{\small``\csB''}
+     \StrCut{#1}{===}\csH\csP%
+     \StrSubstitute{\csH}{\@theword}{\underline{\@theword}}[\csHUL]%
+     \item\foreignlanguage{chinese-hans}{\csHUL}\\*\textit{\footnotesize``\csP''}
    }
    {% Sem traducao
-     \item\StrSubstitute{#1}{\@theword}{\underline{\@theword}}
+     \StrSubstitute{#1}{\@theword}{\underline{\@theword}}[\csHUL]%
+     \item\foreignlanguage{chinese-hans}{\csHUL}
    }
  }  
 \makeatother
 
-%%% Cria listas especializadas (seelist e seealsolist)
+%%% Cria listas especializadas (seelist, seealsolist, synonymlist e antonymlist)
 \newlist{seelist}{enumerate}{1}
 \newlist{seealsolist}{enumerate}{1}
+\newlist{synonymlist}{enumerate}{1}
+\newlist{antonymlist}{enumerate}{1}
 
-\setlist[seelist]{label={(\alph*)},topsep=0pt,nosep,noitemsep}%,leftmargin=\parindent}
-\setlist[seealsolist]{label={(\alph*)},topsep=0pt,nosep,noitemsep}%,leftmargin=\parindent}
+\setlist[seelist]{label={\roman*)},topsep=0pt,nosep,noitemsep,font=\bfseries}
+\setlist[seealsolist]{label={\roman*)},topsep=0pt,nosep,noitemsep,font=\bfseries}
+\setlist[synonymlist]{label={\roman*)},topsep=0pt,nosep,noitemsep,font=\bfseries}
+\setlist[antonymlist]{label={\roman*)},topsep=0pt,nosep,noitemsep,font=\bfseries}
 
-%%% Cria e inicializa a lista "\seerefl", "Veja"
+%%% Cria e inicializa a lista "Veja", "Veja também", "Sinônimo(s)" e "Antônimo(s)"
 \newcommand\seerefl{}
-\listadd{\seerefl}{}% Inicializa a lista
-
-%%% Cria e inicializa a lista "\seealsorefl", "Veja também"
 \newcommand\seealsorefl{}
-\listadd{\seealsorefl}{}% Inicializa a lista
+\newcommand\synonymrefl{}
+\newcommand\antonymrefl{}
 
-%%% Comando "\seeitem", adiciona um item "Veja" ou "Veja também" na lista,
+%%% Comando "\areference", adiciona um item "Veja", "Veja também", "Antônimo(s)" ou "Sinônimo(s)" na lista,
 %%% com os pinyins abaixo dos caracteres
-\newcommand{\seeitem}[2]{#1~\dpy{#2}\ (p.~\pageref{\l_label_tl : #1 : #2})}
+\newcommand{\areference}[2]
+ {
+  \StrLen{#1}[\hlen]%
+  \StrLen{#2}[\plen]%
+  \ifnumcomp{\hlen+\plen}{>}{24}
+   {%
+    \foreignlanguage{chinese-hans}{#1}\ (pág.~\pageref{\l_label_tl : #1 : #2})\\*
+    \dpy{#2}
+   }
+   {%
+    \foreignlanguage{chinese-hans}{#1}\ \dpy{#2}\ (pág.~\pageref{\l_label_tl : #1 : #2})
+   }
+ }
 
 %%% Comando "\definition", gera o texto da definição
 \NewDocumentCommand{\definition}{sommo}
  {%
-  \IfBooleanTF{#1}%
-   {% Substantivo Próprio
-    {\small\ding{108}}\ (\textit{S.P.})\IfValueT{#2}{~[clas.:~#2]}{\ \dictenumerate{#4}}\par
-   }%
-   {%
-    {\small\ding{108}}\ (\textit{#3})\IfValueT{#2}{~[clas.: #2]}{\ \dictenumerate{#4}}\par
-   }%
+  \begin{midsloppypar}
+   \IfBooleanTF{#1}%
+    {% Substantivo Próprio
+     {\small\ding{108}}\ (\textit{S.P.})\IfValueT{#2}{~[clas.:~#2]}{\ \dictenumerate{#4}}\par
+    }%
+    {%
+     {\small\ding{108}}\ (\textit{#3})\IfValueT{#2}{~[clas.:~#2]}{\ \dictenumerate{#4}}\par
+    }%
+  \end{midsloppypar}
   \IfValueT{#5}%
    {%
-    \IfSubStr{#5}{|}{\textbf{Exemplos:}}{\textbf{Exemplo:}}\dictexamples{\l_hanzi_tl}{#5}
+    \IfSubStr{#5}{|}{\textbf{Exemplos:}}{\textbf{Exemplo:}}\dictexamples{\l_hanzi_tl}{#5}\par
    }%
  }
 
 %%% Comando "Variante de"
 \NewDocumentCommand{\variantof}{m}
  {
-  {\small\ding{108}}\ Variante\ de\ #1\ (p.~\pageref{\l_label_tl : #1 : \l_pinyin_tl})\par
+  {\small\ding{108}}\ Variante\ de\ \foreignlanguage{chinese-hans}{#1}\ (p.~\pageref{\l_label_tl : #1 : \l_pinyin_tl})\par
  }
 
 %%% Comando "Veja"
-\NewDocumentCommand{\seeref}{m}
- {%
-  \booltrue{f_see}
-  \listgadd{\seerefl}{\l_hanzi_tl : #1}
- }
+\NewDocumentCommand{\seeref}{m}{\booltrue{hassee}\listgadd{\seerefl}{\l_hanzi_tl : #1}}
 
 %%% Comando "Veja também"
-\NewDocumentCommand{\seealsoref}{mm}
- {%
-  \booltrue{f_seealso}
-  \listgadd{\seealsorefl}{#1 : #2}
- }
+\NewDocumentCommand{\seealsoref}{mm}{\booltrue{hasseealso}\listgadd{\seealsorefl}{#1 : #2}}
+
+%%% Comando "Sinônimo(s)"
+\NewDocumentCommand{\synonymref}{mm}{\booltrue{hassynonym}\listgadd{\synonymrefl}{#1 : #2}}
+
+%%% Comando "Antônimo(s)"
+\NewDocumentCommand{\antonymref}{mm}{\booltrue{hasantonym}\listgadd{\antonymrefl}{#1 : #2}}
 
 %%% Ambiente "DictionaryEntries" para definir o início das entradas dos verbetes
 \NewDocumentEnvironment{DictionaryEntries}{m}%
@@ -340,81 +364,69 @@
   \tl_set:Nn \l_hanzi_tl {#1}
   \tl_set:Nn \l_pinyin_tl {#3}
   \tl_set:Nn \l_strokes_tl {#5}
-  \boolfalse{f_see}\renewcommand\seerefl{}\listadd{\seerefl}{}% Inicializa a lista
-  \boolfalse{f_seealso}\renewcommand\seealsorefl{}\listadd{\seealsorefl}{}% Inicializa a lista
-  \begin{minipage}[t][][t]{\entrywidth}
-   \label{\l_label_tl : #1 : #3}
-   \begin{lightbox}
-    {\Large#1}\hfill\textsuperscript{\tiny(#5画)}
-    \tcblower
-    {\footnotesize#2\ \dpy{#3}\ #4}%
-    \IfValueT{#7}{\mbox{}\hfill{\tiny#7}}{}%
-    \IfValueT{#8}{\mbox{}\hfill{\tiny#8}}{}%
-    \IfValueT{#9}{\mbox{}\hfill{\tiny#9}}{}%
-    \mbox{}\hfill\IfSubStr{#6}{、}{\tiny Radicais\ #6}{\tiny Radical\ #6}
-   \end{lightbox}
+  \boolfalse{hassee}\renewcommand\seerefl{}
+  \boolfalse{hasseealso}\renewcommand\seealsorefl{}
+  \boolfalse{hassynonym}\renewcommand\synonymrefl{}
+  \boolfalse{hasantonym}\renewcommand\antonymrefl{}
+  \label{\l_label_tl : #1 : #3}
+  \StrLen{#1}[\hlen]%
+  \StrLen{#3}[\plen]%
+  \begin{lightbox}
+   \ifnumcomp{\hlen}{>}{10}
+    {%
+     \mbox{}\hfill\textsuperscript{\tiny(#5画)}\\
+     {\Large\foreignlanguage{chinese-hans}{#1}}
+    }
+    {%
+     {\Large\foreignlanguage{chinese-hans}{#1}}\hfill\textsuperscript{\tiny(#5画)}
+    }
+   \tcblower
+   \ifnumcomp{\plen}{>}{25}
+    {%
+     {\footnotesize#2\ \dpy{#3}\ #4}\\
+    }
+    {%
+      {\footnotesize#2\ \dpy{#3}\ #4}
+    }
+   \IfValueT{#7}{\mbox{}\hfill{\tiny#7}}{}%
+   \IfValueT{#8}{\mbox{}\hfill{\tiny#8}}{}%
+   \IfValueT{#9}{\mbox{}\hfill{\tiny#9}}{}%
+   \mbox{}\hfill\IfSubStr{#6}{、}{\tiny Radicais\ #6}{\tiny Radical\ #6}
+  \end{lightbox}
  }%
  {%
-  \ifbool{f_see}%
+  \ifbool{hassee}%
    {% Processa as referências "Veja"
-    \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \seeitem ##1}
+    \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \areference ##1}
     \textbf{Veja:}%
     \begin{seelist}
      \dolistloop{\seerefl}
     \end{seelist}
    }{}%
-  \ifbool{f_seealso}%
+  \ifbool{hasseealso}%
    {% Processa as referências "Veja também"
-    \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \seeitem ##1}
+    \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \areference ##1}
     \textbf{Veja\ também:}%
     \begin{seealsolist}
      \dolistloop{\seealsorefl}
     \end{seealsolist}
    }{}%
-  \end{minipage}
- }
-
-%%% Ambiente "EntryWithPhonetic*", para os verbetes muito compridos
-\NewDocumentEnvironment{EntryWithPhonetic*}{mO{}mO{}mmooo}%
- {%
-  \leavevmode
-  \markboth{#1{\tiny\dpy{#3}}}{#1{\tiny\dpy{#3}}}
-  \tl_set:Nn \l_hanzi_tl {#1}
-  \tl_set:Nn \l_pinyin_tl {#3}
-  \tl_set:Nn \l_strokes_tl {#5}
-  \boolfalse{f_see} \renewcommand\seerefl{} \listadd{\seerefl}{}% Inicializa a lista
-  \boolfalse{f_seealso} \renewcommand\seealsorefl{} \listadd{\seealsorefl}{}% Inicializa a lista
-  \begin{minipage}[t][][t]{\entrywidth}
-   \label{\l_label_tl : #1 : #3}
-   \begin{lightbox}
-    \mbox{}\hfill\textsuperscript{\tiny(#5画)}\\
-    {\LARGE#1}
-    \tcblower
-    {\footnotesize#2\ \dpy{#3}\ #4}\\
-    \IfValueT{#7}{\mbox{}\hfill{\tiny#7}}{}%
-    \IfValueT{#8}{\mbox{}\hfill{\tiny#8}}{}%
-    \IfValueT{#9}{\mbox{}\hfill{\tiny#9}}{}%
-    \mbox{}\hfill\IfSubStr{#6}{、}{\tiny Radicais\ #6}{\tiny Radical\ #6}                                      
-   \end{lightbox}
- }%
- {%
-  \ifbool{f_see}%
-   {% Processa as referências "Veja"
-    \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \seeitem ##1}
-    \textbf{Veja:}%
-    \begin{seelist}
-     \dolistloop{\seerefl}
-    \end{seelist}
+  \ifbool{hassynonym}%
+   {% Processa as referências "Sinônimo"
+    \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \areference ##1}
+    \textbf{Sinônimo(s):}%
+    \begin{synonymlist}
+     \dolistloop{\synonymrefl}
+    \end{synonymlist}
    }{}%
-  \ifbool{f_seealso}%
-   {% Processa as referências "Veja também"
-    \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \seeitem ##1}
-    \textbf{Veja\ também:}%
-    \begin{seealsolist}
-     \dolistloop{\seealsorefl}
-    \end{seealsolist}
+  \ifbool{hasantonym}%
+   {% Processa as referências "Antônimo"
+    \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \areference ##1}
+    \textbf{Antônimo(s):}%
+    \begin{antonymlist}
+     \dolistloop{\antonymrefl}
+    \end{antonymlist}
    }{}%
-  \end{minipage}
  }
 
 %%% Ambiente "Entry", para os verbetes
@@ -424,68 +436,67 @@
   \markboth{#1{\tiny(#2画)}}{#1{\tiny(#2画)}}
   \tl_set:Nn \l_hanzi_tl {#1}
   \tl_set:Nn \l_strokes_tl {#2}
-  \begin{minipage}[t][][t]{\entrywidth}
-   \begin{lightbox}
-    {\LARGE#1}\hfill\textsuperscript{\tiny(#2画)}
-    \tcblower
-    \IfValueT{#4}{\mbox{}\hfill{\tiny#4}}{}%
-    \IfValueT{#5}{\mbox{}\hfill{\tiny#5}}{}%
-    \IfValueT{#5}{\mbox{}\hfill{\tiny#6}}{}%
-    \mbox{}\hfill\IfSubStr{#3}{、}{\tiny Radicais\ #3}{\tiny Radical\ #3}
-   \end{lightbox}
- }%
- {%
-  \end{minipage}
- }
-
- %%% Ambiente "Entry*", para os verbetes muito compridos
-\NewDocumentEnvironment{Entry*}{mmmooo}%
- {%
-  \leavevmode
-  \markboth{#1{\tiny(#2画)}}{#1{\tiny(#2画)}}
-  \tl_set:Nn \l_hanzi_tl {#1}
-  \tl_set:Nn \l_strokes_tl {#2}
-  \begin{minipage}[t][][t]{\entrywidth}
-   \begin{lightbox}
-    \mbox{}\hfill\textsuperscript{\tiny(#2画)}\\
-    {\LARGE#1}
-    \tcblower
-    \IfValueT{#4}{\mbox{}\hfill{\tiny#4}}{}%
-    \IfValueT{#5}{\mbox{}\hfill{\tiny#5}}{}%
-    \IfValueT{#6}{\mbox{}\hfill{\tiny#6}}{}%
-    \mbox{}\hfill\IfSubStr{#3}{、}{\tiny Radicais\ #3}{\tiny Radical\ #3}
-   \end{lightbox}
- }%
- {%
-  \end{minipage}
- }
-
+  \StrLen{#1}[\hlen]%
+  \begin{lightbox}
+   \ifnumcomp{\hlen}{>}{10}
+    {%
+     \mbox{}\hfill\textsuperscript{\tiny(#2画)}\\
+     {\Large\foreignlanguage{chinese-hans}{#1}}
+    }
+    {%
+     {\LARGE#1}\hfill\textsuperscript{\tiny(#2画)}
+    }
+   \tcblower
+   \IfValueT{#4}{\mbox{}\hfill{\tiny#4}}{}%
+   \IfValueT{#5}{\mbox{}\hfill{\tiny#5}}{}%
+   \IfValueT{#6}{\mbox{}\hfill{\tiny#6}}{}%
+   \mbox{}\hfill\IfSubStr{#3}{,}{\tiny Radicais\ #3}{\tiny Radical\ #3}
+  \end{lightbox}\par
+ }{}
 
 %%% Ambiente "Phonetics", para as diversas entradas de fonética da palavra
 \NewDocumentEnvironment{Phonetics}{mO{}mO{}O{}}%
  {%
   \tl_set:Nn \l_pinyin_tl {#3}
-  \boolfalse{f_see} \renewcommand\seerefl{} \listadd{\seerefl}{}% Inicializa a lista
-  \boolfalse{f_seealso} \renewcommand\seealsorefl{} \listadd{\seealsorefl}{}% Inicializa a lista
+  \boolfalse{hassee}\renewcommand\seerefl{}
+  \boolfalse{hasseealso}\renewcommand\seealsorefl{}
+  \boolfalse{hassynonym}\renewcommand\synonymrefl{}
+  \boolfalse{hasantonym}\renewcommand\antonymrefl{}
   \label{\l_label_tl : #1 : #3}
-  \ding{93}\ #2\ \dpy{#3}\ #4\ \ding{93}\hfill \textbf{#5}\\
+   \ding{93}\ #2\ \dpy{#3}\ #4\ \ding{93}\hfill \textbf{#5}
  }%
  {%  
-  \ifbool{f_see}%
+  \ifbool{hassee}%
    {% Processa as referências "Veja"
-    \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \seeitem ##1}
+    \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \areference ##1}
     \textbf{Veja:}%
     \begin{seelist}
      \dolistloop{\seerefl}
     \end{seelist}
    }{}%
-  \ifbool{f_seealso}%
+  \ifbool{hasseealso}%
    {% Processa as referências "Veja também"
-    \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \seeitem ##1}
+    \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \areference ##1}
     \textbf{Veja\ também:}%
     \begin{seealsolist}
      \dolistloop{\seealsorefl}
     \end{seealsolist}
+   }{}%
+  \ifbool{hassynonym}%
+   {% Processa as referências "Sinônimo"
+    \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \areference ##1}
+    \textbf{Sinônimo(s):}%
+    \begin{synonymlist}
+     \dolistloop{\synonymrefl}
+    \end{synonymlist}
+  }{}%
+  \ifbool{hasantonym}%
+   {% Processa as referências "Antônimo"
+    \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \areference ##1}
+    \textbf{Antônimo(s):}%
+    \begin{antonymlist}
+     \dolistloop{\antonymrefl}
+    \end{antonymlist}
    }{}%
  }
 
