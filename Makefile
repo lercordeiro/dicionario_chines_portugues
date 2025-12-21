@@ -27,12 +27,12 @@ GENINV = $(INCDIR)/cmds.tex \
          $(INCDIR)/tex-sx-pinyin-tonemarks.lua
  
 
-all: dicionario_pinyins dicionario_tracos dicionario_radicais 
+all: dictionary-pinyins dictionary-strokes dicrionary-radicals 
 
-deploy: deploy-pinyins deploy-strokes deploy-radicals deploy-full
+deploy: deploy-pinyins deploy-strokes deploy-radicals
 
 
-dicionario_pinyins: dicionario_pinyins.pdf livreto_pinyins.pdf
+dictuinary_pinyins: dicionario_pinyins.pdf livreto_pinyins.pdf
 
 deploy-pinyins: dicionario_pinyins.pdf livreto_pinyins.pdf
 	cp dicionario_pinyins.pdf	$(DSTSITE)
@@ -67,7 +67,7 @@ groups.by.pinyins.tar.gz: $(PGRPTAR)
 $(PGRPTAR):
 
 
-dicionario_tracos: dicionario_tracos.pdf livreto_tracos.pdf
+dictionary-strokes: dicionario_tracos.pdf livreto_tracos.pdf
 
 deploy-strokes: dicionario_tracos.pdf livreto_tracos.pdf
 	cp dicionario_tracos.pdf	$(DSTSITE)
@@ -102,7 +102,7 @@ groups.by.strokes.tar.gz: $(SGRPTAR)
 $(SGRPTAR):
 
 
-dicionario_radicais: dicionario_radicais.pdf livreto_radicais.pdf
+dictionary-radicals: dicionario_radicais.pdf livreto_radicais.pdf
 
 deploy-radicals: dicionario_radicais.pdf livreto_radicais.pdf
 	cp dicionario_radicais.pdf	$(DSTSITE)
@@ -110,11 +110,11 @@ deploy-radicals: dicionario_radicais.pdf livreto_radicais.pdf
 	cp dicionario_radicais.pdf	$(DSTREPO)
 	cp livreto_radicais.pdf		$(DSTREPO)
 
-dicionario_radicais.pdf: pinyins.pdf
-	cp radicals.pdf dicionario_tracos.pdf
+dicionario_radicais.pdf: radicals.pdf
+	cp radicals.pdf dicionario_radicais.pdf
 
 livreto_radicais.pdf: radicals-booklet.pdf
-	cp radicals-booklet.pdf livreto_tracos.pdf
+	cp radicals-booklet.pdf livreto_radicais.pdf
 
 radicals-booklet.pdf: radicals.pdf
 	$(BOOK) radicals.pdf
