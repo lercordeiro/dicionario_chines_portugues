@@ -66,8 +66,8 @@
 % Estilo "plain"
 \makefootrule{plain}{\textwidth}{\normalrulethickness}{2pt}
 \ifdraftdoc
- \makeevenfoot{plain}{\thepage}{汉葡词典}{Draft}
- \makeoddfoot{plain}{Draft}{汉葡词典}{\thepage}
+ \makeevenfoot{plain}{\thepage}{汉葡词典}{Rascunho}
+ \makeoddfoot{plain}{Rascunho}{汉葡词典}{\thepage}
 \else
  \makeevenfoot{plain}{\thepage}{汉葡词典}{}
  \makeoddfoot{plain}{}{汉葡词典}{\thepage}
@@ -78,10 +78,10 @@
 \makeheadrule{dictionary}{\textwidth}{\normalrulethickness}
 \makefootrule{dictionary}{\textwidth}{\normalrulethickness}{2pt}
 \ifdraftdoc
- \makeevenhead{dictionary}{\rightmark}{Draft}{\leftmark}
- \makeoddhead{dictionary}{\rightmark}{Draft}{\leftmark}
- \makeevenfoot{dictionary}{\thepage}{汉葡词典}{Draft}
- \makeoddfoot{dictionary}{Draft}{汉葡词典}{\thepage}
+ \makeevenhead{dictionary}{\rightmark}{Rascunho}{\leftmark}
+ \makeoddhead{dictionary}{\rightmark}{Rascunho}{\leftmark}
+ \makeevenfoot{dictionary}{\thepage}{汉葡词典}{Rascunho}
+ \makeoddfoot{dictionary}{Rascunho}{汉葡词典}{\thepage}
 \else
  \makeevenhead{dictionary}{\rightmark}{}{\leftmark}
  \makeoddhead{dictionary}{\rightmark}{}{\leftmark}
