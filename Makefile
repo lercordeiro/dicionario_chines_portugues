@@ -12,9 +12,9 @@ PGRPDIR = ./groups.by.pinyins
 SGRPDIR = ./groups.by.strokes
 RGRPDIR = ./groups.by.radicals
 
-PGRPTAR = ~/中文/Entries/groups.by.pinyins.tar.gz
-SGRPTAR = ~/中文/Entries/groups.by.strokes.tar.gz
-RGRPTAR = ~/中文/Entries/groups.by.radicals.tar.gz
+PGRPTAR = /home/lercordeiro/Chinês/Entries/groups.by.pinyins.tar.gz
+SGRPTAR = /home/lercordeiro/Chinês/Entries/groups.by.strokes.tar.gz
+RGRPTAR = /home/lercordeiro/Chinês/Entries/groups.by.radicals.tar.gz
 
 GENINV = $(INCDIR)/cmds.tex \
          $(INCDIR)/classificadores.nominais.tex \

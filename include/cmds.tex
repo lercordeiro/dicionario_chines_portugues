@@ -6,6 +6,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%% Adiciona os antônumos e sinônimos ao dicionário
+\newbool{withexamples}
+\newbool{withantonyms}
+\newbool{withsynonyms}
+
+\booltrue{withexamples}
+\booltrue{withantonyms}
+\booltrue{withsynonyms}
+
 %%% Espaçamento das linhas normal
 \SingleSpacing
 
@@ -323,7 +332,10 @@
   \end{midsloppypar}
   \IfValueT{#5}%
    {%
-    \IfSubStr{#5}{|}{\textbf{Exemplos:}}{\textbf{Exemplo:}}\dictexamples{\l_hanzi_tl}{#5}\par
+    \ifbool{withexamples}%
+     {
+      \IfSubStr{#5}{|}{\textbf{Exemplos:}}{\textbf{Exemplo:}}\dictexamples{\l_hanzi_tl}{#5}\par
+     }{}%
    }%
  }
 
@@ -411,21 +423,27 @@
      \dolistloop{\seealsorefl}
     \end{seealsolist}
    }{}%
-  \ifbool{hassynonym}%
-   {% Processa as referências "Sinônimo"
-    \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \areference ##1}
-    \textbf{Sinônimo(s):}%
-    \begin{synonymlist}
-     \dolistloop{\synonymrefl}
-    \end{synonymlist}
+  \ifbool{withsynonyms}%
+   {
+    \ifbool{hassynonym}%
+     {% Processa as referências "Sinônimo"
+      \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \areference ##1}
+      \textbf{Sinônimo(s):}%
+      \begin{synonymlist}
+       \dolistloop{\synonymrefl}
+      \end{synonymlist}
+     }{}%
    }{}%
-  \ifbool{hasantonym}%
-   {% Processa as referências "Antônimo"
-    \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \areference ##1}
-    \textbf{Antônimo(s):}%
-    \begin{antonymlist}
-     \dolistloop{\antonymrefl}
-    \end{antonymlist}
+  \ifbool{withantonyms}%
+   {
+    \ifbool{hasantonym}%
+     {% Processa as referências "Antônimo"
+      \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \areference ##1}
+      \textbf{Antônimo(s):}%
+      \begin{antonymlist}
+       \dolistloop{\antonymrefl}
+      \end{antonymlist}
+     }{}%
    }{}%
  }
 
@@ -482,21 +500,27 @@
      \dolistloop{\seealsorefl}
     \end{seealsolist}
    }{}%
-  \ifbool{hassynonym}%
-   {% Processa as referências "Sinônimo"
-    \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \areference ##1}
-    \textbf{Sinônimo(s):}%
-    \begin{synonymlist}
-     \dolistloop{\synonymrefl}
-    \end{synonymlist}
-  }{}%
-  \ifbool{hasantonym}%
-   {% Processa as referências "Antônimo"
-    \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \areference ##1}
-    \textbf{Antônimo(s):}%
-    \begin{antonymlist}
-     \dolistloop{\antonymrefl}
-    \end{antonymlist}
+  \ifbool{withsynonyms}%
+   {
+    \ifbool{hassynonym}%
+     {% Processa as referências "Sinônimo"
+      \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \areference ##1}
+      \textbf{Sinônimo(s):}%
+      \begin{synonymlist}
+       \dolistloop{\synonymrefl}
+      \end{synonymlist}
+     }{}%
+   }{}%
+  \ifbool{withantonyms}%
+   {
+    \ifbool{hasantonym}%
+     {% Processa as referências "Antônimo"
+      \RenewDocumentCommand\do{>{\SplitArgument{1}{:}}m}{\item \areference ##1}
+      \textbf{Antônimo(s):}%
+      \begin{antonymlist}
+       \dolistloop{\antonymrefl}
+      \end{antonymlist}
+     }{}%
    }{}%
  }
 
