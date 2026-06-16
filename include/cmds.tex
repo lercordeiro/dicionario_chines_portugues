@@ -66,7 +66,7 @@
 \renewcommand\cftbeforechapterskip{5pt plus 1pt}
 
 %%% Cria 'Lista de Hanzis'
-\newcommand{\listlohname}{Primeiros Hanzis}
+\newcommand{\listlohname}{Hanzis}
 \newlistof{listoffirsthanzis}{loh}{\listlohname}
 
 %%% Ajustes de Cabeçalhos e Rodapés
@@ -223,16 +223,6 @@
 \DeclareRobustCommand{\TrigramMountain}{{\dejavusans\symbol{"2636}}}
 \DeclareRobustCommand{\TrigramEarth}{{\dejavusans\symbol{"2637}}}
 
-% Comando "\&", insere o caracgter "&"
-%\DeclareRobustCommand{\&}%
-% {%
-%  \ifdim\fontdimen1\font>0pt%
-%   \textsl{\symbol{`\&}}%
-%  \else%
-%   \symbol{`\&}%
-%  \fi%
-% }
-
 \NewDocumentCommand{\setvar}{mm}
  {
   % clear an existing variable or allocate a new one
@@ -257,9 +247,7 @@
  }
 \NewDocumentCommand{\insertitem}{>{\TrimSpaces}m}{\item #1}
 
-% Ambiente "enumerate" especial utilizado no dicionário, coloca os exemplos
-% das definições do verbete em uma lista numerada em linha, utilizando
-% algarismos romanos
+% Cria a lista de Exemplos como uma lista numerada com letras de a-z
 \makeatletter
 \NewDocumentCommand{\dictexamples}{m>{\SplitList{|}}m}
  {%
@@ -291,10 +279,10 @@
 \newlist{synonymlist}{enumerate}{1}
 \newlist{antonymlist}{enumerate}{1}
 
-\setlist[seelist]{label={\roman*)},topsep=0pt,nosep,noitemsep,font=\bfseries}
-\setlist[seealsolist]{label={\roman*)},topsep=0pt,nosep,noitemsep,font=\bfseries}
-\setlist[synonymlist]{label={\roman*)},topsep=0pt,nosep,noitemsep,font=\bfseries}
-\setlist[antonymlist]{label={\roman*)},topsep=0pt,nosep,noitemsep,font=\bfseries}
+\setlist[seelist]{label={\roman*)},left=0pt,topsep=0pt,font=\bfseries,itemjoin={, },itemjoin*={ e },nosep}
+\setlist[seealsolist]{label={\roman*)},left=0pt,topsep=0pt,font=\bfseries,itemjoin={, },itemjoin*={ e },nosep}
+\setlist[synonymlist]{label={\roman*)},left=0pt,topsep=0pt,font=\bfseries,itemjoin={, },itemjoin*={ e },nosep}
+\setlist[antonymlist]{label={\roman*)},left=0pt,topsep=0pt,font=\bfseries,itemjoin={, },itemjoin*={ e },nosep}
 
 %%% Cria e inicializa a lista "Veja", "Veja também", "Sinônimo(s)" e "Antônimo(s)"
 \newcommand\seerefl{}
@@ -303,19 +291,19 @@
 \newcommand\antonymrefl{}
 
 %%% Comando "\areference", adiciona um item "Veja", "Veja também", "Antônimo(s)" ou "Sinônimo(s)" na lista,
-%%% com os pinyins abaixo dos caracteres
+%%% com os pinyins ao lado dos caracteres
 \newcommand{\areference}[2]
  {
+%  \hyperref[\l_label_tl : #1 : #2]{#1\ \dpy{#2}\ (p.~\pageref*{\l_label_tl : #1 : #2})}
   \StrLen{#1}[\hlen]%
   \StrLen{#2}[\plen]%
-  \ifnumcomp{\hlen+\plen}{>}{24}
-   {%
-    \foreignlanguage{chinese-hans}{#1}\ (pág.~\pageref{\l_label_tl : #1 : #2})\\*
-    \dpy{#2}
-   }
-   {%
-    \foreignlanguage{chinese-hans}{#1}\ \dpy{#2}\ (pág.~\pageref{\l_label_tl : #1 : #2})
-   }
+   \ifnumcomp{\hlen+\plen}{>}{24}
+    {%
+     \hyperref[\l_label_tl : #1 : #2]{\foreignlanguage{chinese-hans}{#1} (\pageref*{\l_label_tl : #1 : #2})\newline\dpy{#2}}
+    }
+    {%
+     \hyperref[\l_label_tl : #1 : #2]{\foreignlanguage{chinese-hans}{#1}\ \dpy{#2} (\pageref*{\l_label_tl : #1 : #2})}
+    }
  }
 
 %%% Comando "\definition", gera o texto da definição
@@ -332,7 +320,7 @@
   \end{midsloppypar}
   \IfValueT{#5}%
    {%
-    \ifbool{withexamples}%
+    \ifbool{withexamples}
      {
       \IfSubStr{#5}{|}{\textbf{Exemplos:}}{\textbf{Exemplo:}}\dictexamples{\l_hanzi_tl}{#5}\par
      }{}%

@@ -27,12 +27,12 @@ GENINV = $(INCDIR)/cmds.tex \
          $(INCDIR)/tex-sx-pinyin-tonemarks.lua
  
 
-all: dictionary-pinyins dictionary-strokes dicrionary-radicals 
+all: dictionary-pinyins dictionary-strokes dictionary-radicals 
 
 deploy: deploy-pinyins deploy-strokes deploy-radicals
 
 
-dictuinary_pinyins: dicionario_pinyins.pdf livreto_pinyins.pdf
+dictionary-pinyins: dicionario_pinyins.pdf livreto_pinyins.pdf
 
 deploy-pinyins: dicionario_pinyins.pdf livreto_pinyins.pdf
 	cp dicionario_pinyins.pdf	$(DSTSITE)
