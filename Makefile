@@ -5,16 +5,16 @@ BOOK = pdfjam --a4paper --landscape --twoside --signature 20 --suffix booklet --
 
 INCDIR = ./include
 BKPDIR = ./backup
-DSTSITE = /var/www/download/dictionary
+DSTSITE = /var/www/download/final
 DSTREPO = /var/www/repo.ler.cordeiro.nom.br/Dicionário
 
 PGRPDIR = ./groups.by.pinyins
 SGRPDIR = ./groups.by.strokes
 RGRPDIR = ./groups.by.radicals
 
-PGRPTAR = /home/dicionarista/Entries/groups.by.pinyins.tar.gz
-SGRPTAR = /home/dicionarista/Entries/groups.by.strokes.tar.gz
-RGRPTAR = /home/dicionarista/Entries/groups.by.radicals.tar.gz
+PGRPTAR = /home/dicionarista/Verbetes/groups.by.pinyins.tar.gz
+SGRPTAR = /home/dicionarista/Verbetes/groups.by.strokes.tar.gz
+RGRPTAR = /home/dicionarista/Verbetes/groups.by.radicals.tar.gz
 
 GENINV = $(INCDIR)/cmds.tex \
          $(INCDIR)/classificadores.nominais.tex \
@@ -53,7 +53,7 @@ pinyins.pdf: pinyins.tex extract.groups.by.pinyins.done $(GENINC)
 	$(TEX) pinyins.tex
 	$(TEX) pinyins.tex
 	$(TEX) pinyins.tex
-	$(TEX) pinyins.tex
+	$(TEX) pinyins.tex | tee ./log/make.pinyins.log
 	echo -n "Verbetes: "
 	@grep begin $(PGRPDIR)/* | grep Entry | wc -l
 
@@ -88,7 +88,7 @@ strokes.pdf: strokes.tex extract.groups.by.strokes.done $(GENINC)
 	$(TEX) strokes.tex
 	$(TEX) strokes.tex
 	$(TEX) strokes.tex
-	$(TEX) strokes.tex
+	$(TEX) strokes.tex | tee ./log/make.strokes.log
 	echo -n "Verbetes: "
 	@grep begin $(SGRPDIR)/* | grep Entry | wc -l
 
@@ -123,7 +123,7 @@ radicals.pdf: radicals.tex extract.groups.by.radicals.done $(GENINC)
 	$(TEX) radicals.tex
 	$(TEX) radicals.tex
 	$(TEX) radicals.tex
-	$(TEX) radicals.tex
+	$(TEX) radicals.tex | tee ./log/make.radicals.log
 	echo -n "Verbetes: "
 	@grep begin $(RGRPDIR)/* | grep Entry | wc -l
 
