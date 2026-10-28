@@ -1,6 +1,6 @@
 TIMESTAMP != date "+%FT%T%z"
 
-TEX = lualatex -halt-on-error -8bit # -papersize=A4 -interaction=batchmode
+TEX = lualatex --halt-on-error --utc # -papersize=A4 -interaction=batchmode
 BOOK = pdfjam --a4paper --landscape --twoside --signature 16 --suffix booklet --otheredge --
 
 INCDIR = ./include
