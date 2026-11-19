@@ -9,7 +9,7 @@
 % CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[a4paper,9pt,twoside,openright,showtrims,final]{memoir}
+\documentclass[a4paper,9pt,twoside,openright,book]{memoir}
 
 \usepackage[brazilian,chinese-hans,provide=*]{babel}
 \usepackage{fontspec}
@@ -80,7 +80,11 @@ caracter na tabela UTF-8.
 
 \clearpage
 \pagestyle{dictionary}
+\ifdraftdoc
+\input{include/draft.entries.pinyins.tex}
+\else
 \input{include/entries.pinyins.tex}
+\fi
 
 \pagestyle{plain}
 

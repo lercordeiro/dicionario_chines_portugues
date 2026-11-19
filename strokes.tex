@@ -9,7 +9,7 @@
 % CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[a4paper,9pt,twoside,openright,showtrims,final]{memoir}
+\documentclass[a4paper,9pt,twoside,openright,book]{memoir}
 
 \usepackage[brazilian,chinese-hans,provide=*]{babel}
 \usepackage{fontspec}
@@ -80,7 +80,11 @@ agrupadas e ordenadas pelo pinyin em cada verbete.
 
 \clearpage
 \pagestyle{dictionary}
+\ifdraftdoc 
+\input{include/draft.entries.strokes.tex}
+\else
 \input{include/entries.strokes.tex}
+\fi
 
 \pagestyle{plain}
 
